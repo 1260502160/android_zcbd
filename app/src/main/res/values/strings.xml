@@ -20,6 +20,7 @@
     <string name="text_new_phone_num">输入新的手机号码</string>
     <string name="text_yan_code">请输入验证码</string>
     <string name="btn_submit">提交</string>
+    <string name="btn_submit_success">提交成功</string>
     <string name="text_person_infomation">个人资料</string>
     <string name="text_head">头像</string>
     <string name="text_name">姓名</string>
@@ -61,6 +62,9 @@
     <string name="text_time">时间:</string>
     <string name="text_lianxiren">联系人:</string>
     <string name="text_phone">电话:</string>
+    <string name="text_worklianxi">工作人员会尽快与您联系</string>
+    <string name="text_lookdeail">查看详情</string>
+    <string name="text_backhome">返回首页</string>
 
 
 </resources>

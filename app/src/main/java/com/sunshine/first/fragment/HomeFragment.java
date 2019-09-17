@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.sunshine.first.R;
 import com.sunshine.first.activity.BaoXiuActivity;
+import com.sunshine.first.activity.FangKeDengJiActivity;
 import com.sunshine.first.activity.YeZhuRenZhengActivity;
 
 import butterknife.BindView;
@@ -66,6 +67,8 @@ public class HomeFragment extends Fragment {
             case R.id.icon_shequstore:
                 break;
             case R.id.icon_fangkedengji:
+                intent = new Intent(getContext(), FangKeDengJiActivity.class);
+                startActivity(intent);
                 break;
             case R.id.icon_baoxiu:
                 intent = new Intent(getContext(), BaoXiuActivity.class);

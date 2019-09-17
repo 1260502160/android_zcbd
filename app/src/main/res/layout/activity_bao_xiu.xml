@@ -242,6 +242,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btn_baoxiu_submit"
         android:layout_width="@dimen/dp_300"
         android:layout_height="@dimen/dp_40"
         android:text="@string/btn_submit"

@@ -1,13 +1,17 @@
 package com.sunshine.first.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Selection;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.sunshine.first.R;
@@ -39,7 +43,9 @@ public class BaoXiuActivity extends AppCompatActivity {
     TextView text_time;
     @BindView(R.id.textnumber)
     TextView textnumber;
-
+    @BindView(R.id.btn_baoxiu_submit)
+    TextView btnbaoxiusubmit;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +54,15 @@ public class BaoXiuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.icon_back, R.id.edit_descrip, R.id.icon_descrip, R.id.re_add, R.id.rela_time, R.id.re_lianxiren, R.id.re_phone, R.id.text_time, R.id.textnumber})
+    @OnClick({R.id.icon_back, R.id.edit_descrip, R.id.icon_descrip, R.id.re_add, R.id.rela_time, R.id.re_lianxiren, R.id.re_phone, R.id.text_time, R.id.textnumber, R.id.btn_baoxiu_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
                 break;
             case R.id.edit_descrip:
-                new TextWatcher();
+                editDescrip.addTextChangedListener(new TextWatcher());
+
                 break;
             case R.id.icon_descrip:
                 break;
@@ -95,6 +102,10 @@ public class BaoXiuActivity extends AppCompatActivity {
                 break;
             case R.id.re_phone:
                 break;
+            case R.id.btn_baoxiu_submit:
+                intent = new Intent(BaoXiuActivity.this, BaoXiuTiShiActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -107,6 +118,7 @@ public class BaoXiuActivity extends AppCompatActivity {
 
     class TextWatcher implements android.text.TextWatcher {
 
+
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
         }
@@ -116,10 +128,11 @@ public class BaoXiuActivity extends AppCompatActivity {
         }
 
         public void afterTextChanged(Editable s) {
-
+            textnumber = (TextView) findViewById(R.id.textnumber);
             int num = s.length();
-            num = 300 - num;
-            textnumber.setText(num + "/300");
+            num = 200 - num;
+            textnumber.setText(num + "/200");
+
         }
     }
 }

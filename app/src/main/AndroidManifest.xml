@@ -31,7 +31,10 @@
         <activity android:name=".activity.UpdatePassActivity" />
         <activity android:name=".activity.SfrzActivity" />
         <activity android:name=".activity.YeZhuRenZhengActivity" />
-        <activity android:name=".activity.BaoXiuActivity"></activity>
+        <activity android:name=".activity.BaoXiuActivity" />
+        <activity android:name=".activity.FangKeDengJiActivity" />
+        <activity android:name=".activity.BaoXiuTiShiActivity" />
+        <activity android:name=".activity.BaoLookDeatilActivity"></activity>
     </application>
 
 </manifest>
