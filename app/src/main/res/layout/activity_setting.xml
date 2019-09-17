@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SettingActivity"
+    android:background="#CCCCCC"
+    >
+
+    <RelativeLayout
+        android:id="@+id/relative_change"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:background="#ffffff"
+        >
+
+        <ImageView
+            android:id="@+id/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_back"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_30"
+            android:padding="@dimen/dp_10"
+            />
+        <TextView
+            android:id="@+id/text_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_setting"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_25"
+            android:textSize="@dimen/sp_20"
+            />
+    </RelativeLayout>
+    <View
+        android:id="@+id/view_fangzhurenzheng_one"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_15"
+        android:layout_below="@+id/relative_change"
+        />
+    <RelativeLayout
+        android:id="@+id/relative_setting_safe"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:layout_below="@+id/view_fangzhurenzheng_one"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/text_dingdan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_safe"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_18"
+            />
+
+        <ImageView
+            android:id="@+id/icon_mydingdan"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_17"
+            android:src="@mipmap/next"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_19"
+            />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_setting_two"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@+id/relative_setting_safe"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relative_setting_qchc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:layout_below="@+id/view_setting_two"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/text_qchc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="@string/text_qchn"
+            android:textSize="@dimen/sp_16" />
+
+        <ImageView
+            android:id="@+id/icon_next"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_17"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_19"
+            android:layout_marginRight="@dimen/dp_12"
+            android:src="@mipmap/next" />
+    </RelativeLayout>
+
+    <View
+    android:id="@+id/view_setting_three"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_1"
+    android:layout_below="@+id/relative_setting_qchc"
+    />
+    <RelativeLayout
+        android:id="@+id/relative_setting_banbengengxin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:layout_below="@+id/view_setting_three"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/text_banbengengxin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_banben"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_18"
+            />
+
+        <ImageView
+            android:id="@+id/icon_banbengengxin"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_17"
+            android:src="@mipmap/next"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_19"
+            />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_setting_four"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@+id/relative_setting_banbengengxin"
+        />
+    <RelativeLayout
+        android:id="@+id/relative_setting_aboutus"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:layout_below="@+id/view_setting_four"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:id="@+id/text_aboutus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_aboutus"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_18"
+            />
+
+        <ImageView
+            android:id="@+id/icon_aboutus"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_17"
+            android:src="@mipmap/next"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_19"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

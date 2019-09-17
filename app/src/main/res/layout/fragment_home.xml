@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCCCCC"
+    >
+
+
+    <com.stx.xhb.xbanner.XBanner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:layout_marginTop="@dimen/dp_15"
+        >
+    </com.stx.xhb.xbanner.XBanner>
+
+    <ImageView
+        android:id="@+id/icon_yezhurenzheng"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/banner"
+        android:background="@mipmap/textselector"
+        android:layout_marginTop="@dimen/dp_15"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/linear_home_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_below="@+id/icon_yezhurenzheng"
+        >
+        <ImageView
+            android:id="@+id/icon_shequstore"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            />
+        <ImageView
+            android:id="@+id/icon_fangkedengji"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="@dimen/dp_20"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+       android:id="@+id/linear_home_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_below="@+id/linear_home_one"
+        >
+        <ImageView
+            android:id="@+id/icon_baoxiu"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            />
+        <ImageView
+            android:id="@+id/icon_bianminjiaofei"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="@dimen/dp_20"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
