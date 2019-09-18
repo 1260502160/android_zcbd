@@ -40,6 +40,7 @@
     <string name="text_baoxiujilu">报修记录</string>
     <string name="text_onlinebaoxiu">在线报修</string>
     <string name="text_jiaofeijilu">缴费记录</string>
+    <string name="text_bianminjiaofei">便民缴费</string>
     <string name="text_yijianfankui">意见反馈</string>
     <string name="text_lianxikefu">联系客服</string>
     <string name="text_xiaoqu">小区</string>
@@ -64,7 +65,20 @@
     <string name="text_phone">电话:</string>
     <string name="text_worklianxi">工作人员会尽快与您联系</string>
     <string name="text_lookdeail">查看详情</string>
+    <string name="text_baoxiudeail">报修订单详情</string>
     <string name="text_backhome">返回首页</string>
+    <string name="btn_textcancle">取消</string>
+    <string name="text_fixcar">固定车位</string>
+    <string name="text_linshicar">临时停车</string>
+    <string name="text_carnumber">车牌号</string>
+    <string name="text_yucunzhouqi">预存周期</string>
+    <string name="text_money">金额</string>
+    <string name="text_paymoney">支付金额</string>
+    <string name="text_rightpay">立即支付</string>
+    <string name="text_choosecar">选择车辆</string>
+    <string name="text_cometime">进入时间</string>
+    <string name="text_livetime">离开时间</string>
+    <string name="text_paytype">支付方式</string>
 
 
 </resources>

@@ -91,7 +91,7 @@ public class BaoXiuActivity extends AppCompatActivity {
 //                .setBgColor(0xFF333333)//滚轮背景颜色 Night mode
 ////                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
 ////                .setRangDate(startDate,endDate)//起始终止年月日设定
-//                //.setLabel("年","月","日","时","分","秒")//默认设置为年月日时分秒
+                .setLabel("年","月","日","时","分","秒")
                         .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                         //.isDialog(true)//是否显示为对话框样式
                         .build();

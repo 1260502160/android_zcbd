@@ -34,7 +34,11 @@
         <activity android:name=".activity.BaoXiuActivity" />
         <activity android:name=".activity.FangKeDengJiActivity" />
         <activity android:name=".activity.BaoXiuTiShiActivity" />
-        <activity android:name=".activity.BaoLookDeatilActivity"></activity>
+        <activity android:name=".activity.BaoLookDeatilActivity" />
+        <activity android:name=".activity.BianMinJiaoFeiActivity" />
+        <activity android:name=".activity.StopCarActivity" />
+        <activity android:name=".activity.PayActivity" />
+        <activity android:name=".PaySucceActivity"></activity>
     </application>
 
 </manifest>

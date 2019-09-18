@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.sunshine.first.R;
 import com.sunshine.first.activity.BaoXiuActivity;
+import com.sunshine.first.activity.BianMinJiaoFeiActivity;
 import com.sunshine.first.activity.FangKeDengJiActivity;
 import com.sunshine.first.activity.YeZhuRenZhengActivity;
 
@@ -75,6 +76,8 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.icon_bianminjiaofei:
+                intent = new Intent(getContext(), BianMinJiaoFeiActivity.class);
+                startActivity(intent);
                 break;
         }
     }
