@@ -1,10 +1,10 @@
 package com.sunshine.first.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.sunshine.first.R;
@@ -13,36 +13,35 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BianMinJiaoFeiActivity extends AppCompatActivity {
+public class FeedbackActivity extends AppCompatActivity {
 
     @BindView(R.id.icon_back)
     ImageView iconBack;
-    @BindView(R.id.btn_stopcar)
-    Button btnStopcar;
-    @BindView(R.id.btn_wuyefei)
-    Button btnWuyefei;
-    private Intent intent;
+    @BindView(R.id.edit_feedback)
+    EditText editFeedback;
+    @BindView(R.id.icon_add)
+    ImageView iconAdd;
+    @BindView(R.id.btn_feedback_submit)
+    Button btnFeedbackSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bian_min_jiao_fei);
+        setContentView(R.layout.activity_advice);
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.icon_back, R.id.btn_stopcar, R.id.btn_wuyefei})
+    @OnClick({R.id.icon_back, R.id.edit_feedback, R.id.icon_add, R.id.btn_feedback_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
                 break;
-            case R.id.btn_stopcar:
-                intent = new Intent(BianMinJiaoFeiActivity.this, StopCarActivity.class);
-                startActivity(intent);
+            case R.id.edit_feedback:
                 break;
-            case R.id.btn_wuyefei:
-                intent = new Intent(BianMinJiaoFeiActivity.this, ChooseHouse.class);
-                startActivity(intent);
+            case R.id.icon_add:
+                break;
+            case R.id.btn_feedback_submit:
                 break;
         }
     }

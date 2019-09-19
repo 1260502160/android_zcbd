@@ -38,7 +38,9 @@
         <activity android:name=".activity.BianMinJiaoFeiActivity" />
         <activity android:name=".activity.StopCarActivity" />
         <activity android:name=".activity.PayActivity" />
-        <activity android:name=".PaySucceActivity"></activity>
+        <activity android:name=".activity.ChooseHouse" />
+        <activity android:name=".activity.PayTypeActivity" />
+        <activity android:name=".activity.FeedbackActivity"></activity>
     </application>
 
 </manifest>

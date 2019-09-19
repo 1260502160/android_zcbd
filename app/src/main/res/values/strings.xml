@@ -65,6 +65,7 @@
     <string name="text_phone">电话:</string>
     <string name="text_worklianxi">工作人员会尽快与您联系</string>
     <string name="text_lookdeail">查看详情</string>
+    <string name="text_lookmx">查看明细</string>
     <string name="text_baoxiudeail">报修订单详情</string>
     <string name="text_backhome">返回首页</string>
     <string name="btn_textcancle">取消</string>
@@ -74,11 +75,25 @@
     <string name="text_yucunzhouqi">预存周期</string>
     <string name="text_money">金额</string>
     <string name="text_paymoney">支付金额</string>
+    <string name="text_payresult">支付结果</string>
     <string name="text_rightpay">立即支付</string>
     <string name="text_choosecar">选择车辆</string>
     <string name="text_cometime">进入时间</string>
     <string name="text_livetime">离开时间</string>
     <string name="text_paytype">支付方式</string>
+    <string name="text_paystatus">支付状态:</string>
+    <string name="text_paysuccess">支付成功</string>
+    <string name="text_wyfjn">物业费缴纳</string>
+    <string name="text_wyf">物业费</string>
+    <string name="text_nopay">未缴账单</string>
+    <string name="text_payzq">账单周期:</string>
+    <string name="text_shouldpaytime">应交日期:</string>
+    <string name="text_alerdpay">已缴账单</string>
+    <string name="text_shouldpaymoney">应缴金额:</string>
+    <string name="text_all">全选</string>
+    <string name="text_pay">付款</string>
+    <string name="text_feedback">意见反馈</string>
+    <string name="text_feedbackcontent">反馈内容</string>
 
 
 </resources>

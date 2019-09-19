@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.BaoXiuJiLuActivity;
 import com.sunshine.first.activity.FangKeJiLuActivity;
+import com.sunshine.first.activity.FeedbackActivity;
 import com.sunshine.first.activity.HostmanRenActivity;
 import com.sunshine.first.activity.JiaoFeiJiLuActivity;
 import com.sunshine.first.activity.PersonalActivity;
@@ -93,6 +94,8 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.rel_my_yijianfankui:
+                intent = new Intent(getContext(), FeedbackActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rel_my_lianxikefu:
                 break;

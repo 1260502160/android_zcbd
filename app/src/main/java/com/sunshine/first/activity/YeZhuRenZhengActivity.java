@@ -1,5 +1,6 @@
 package com.sunshine.first.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class YeZhuRenZhengActivity extends AppCompatActivity {
     RelativeLayout clrz;
     @BindView(R.id.mjrz)
     RelativeLayout mjrz;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class YeZhuRenZhengActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.relative_fzrz:
+                intent = new Intent(YeZhuRenZhengActivity.this, HostmanRenActivity.class);
+                startActivity(intent);
                 break;
             case R.id.zhgl:
                 break;
