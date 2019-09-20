@@ -22,7 +22,7 @@ public class BaoLookDeatilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bao_look_deatil);
+        setContentView(R.layout.activity_repairs_detail);
         ButterKnife.bind(this);
     }
 

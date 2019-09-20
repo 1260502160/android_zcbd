@@ -40,7 +40,9 @@
         <activity android:name=".activity.PayActivity" />
         <activity android:name=".activity.ChooseHouse" />
         <activity android:name=".activity.PayTypeActivity" />
-        <activity android:name=".activity.FeedbackActivity"></activity>
+        <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.AddHoueseHoldActivity" />
+        <activity android:name=".activity.HouseHoldIdentity"></activity>
     </application>
 
 </manifest>

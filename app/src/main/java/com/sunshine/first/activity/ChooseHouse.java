@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -19,6 +20,8 @@ public class ChooseHouse extends AppCompatActivity {
     ImageView iconBack;
     @BindView(R.id.relative_choose_home_pay)
     RelativeLayout relativeChooseHomePay;
+    @BindView(R.id.btn_add_household_info)
+    Button btnAddHouseholdInfo;
     private Intent intent;
 
     @Override
@@ -28,7 +31,7 @@ public class ChooseHouse extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.icon_back, R.id.relative_choose_home_pay})
+    @OnClick({R.id.icon_back, R.id.relative_choose_home_pay,R.id.btn_add_household_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
@@ -38,6 +41,12 @@ public class ChooseHouse extends AppCompatActivity {
                 intent = new Intent(ChooseHouse.this, PayTypeActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.btn_add_household_info:
+                intent = new Intent(ChooseHouse.this, AddHoueseHoldActivity.class);
+                startActivity(intent);
+                break;
         }
     }
+
+
 }

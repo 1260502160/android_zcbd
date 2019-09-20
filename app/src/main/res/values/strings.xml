@@ -93,6 +93,8 @@
     <string name="text_all">全选</string>
     <string name="text_pay">付款</string>
     <string name="text_feedback">意见反馈</string>
+    <string name="text_authenticated">已认证</string>
+    <string name="text_dsp">待审批</string>
     <string name="text_feedbackcontent">反馈内容</string>
 
 

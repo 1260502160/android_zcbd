@@ -23,7 +23,7 @@ public class BaoXiuTiShiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bao_xiu_ti_shi);
+        setContentView(R.layout.activity_repair_hint);
         ButterKnife.bind(this);
     }
 
