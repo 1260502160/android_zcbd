@@ -39,12 +39,24 @@
         android:layout_below="@+id/relative_change"
         android:layout_marginTop="@dimen/dp_15"
         />
+    <LinearLayout
+        android:id="@+id/lin_change_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/view_change_phone_one"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        >
+
+
     <RelativeLayout
         android:id="@+id/relative_change_two"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
         android:background="#ffffff"
-        android:layout_below="@+id/view_change_phone_one"
+
         >
         <TextView
             android:id="@+id/text_phone_number"
@@ -60,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/text_phone_number"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_20"
             android:hint="@string/text_new_phone_num"
             android:background="@null"
             />
@@ -69,9 +81,9 @@
     <View
         android:id="@+id/view_change_phone_two"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
+        android:layout_height="@dimen/dp_1"
         android:layout_below="@+id/relative_change_two"
-        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_1"
         />
 
     <RelativeLayout
@@ -89,6 +101,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_25"
             android:textSize="@dimen/sp_14"
+            android:textColor="#000000"
             />
         <EditText
             android:id="@+id/edit_code"
@@ -101,22 +114,31 @@
             />
         <Button
             android:id="@+id/btn_huo_code"
-            android:layout_width="@dimen/dp_150"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_40"
             android:layout_alignParentRight="true"
             android:text="@string/text_huocode"
+            android:background="@drawable/shape_blue"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/blue"
             />
 
     </RelativeLayout>
+
+    </LinearLayout>
     <Button
         android:id="@+id/btn_submit"
-        android:layout_width="@dimen/dp_320"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
-        android:text="@string/btn_submit"
-        android:layout_below="@+id/relative_change_three"
+        android:text="@string/text_sure"
+        android:background="@drawable/renzheng_shape"
+        android:layout_below="@+id/lin_change_phone"
         android:layout_marginTop="@dimen/dp_40"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
 
         />
 

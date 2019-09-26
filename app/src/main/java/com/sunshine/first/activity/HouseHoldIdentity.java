@@ -69,14 +69,14 @@ public class HouseHoldIdentity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.authenticated:
-                        authenticated.setTextColor(getResources().getColor(R.color.black));
-                        waitApprove.setTextColor(getResources().getColor(R.color.transparent));
+                        authenticated.setTextColor(getResources().getColor(R.color.blue));
+                        waitApprove.setTextColor(getResources().getColor(R.color.black));
                         circleFragmentViewpager.setCurrentItem(0);
                         onTabViewSelected(0);
                         break;
 
                     case R.id.wait_approve:
-                        waitApprove.setTextColor(getResources().getColor(R.color.black));
+                        waitApprove.setTextColor(getResources().getColor(R.color.blue));
                         authenticated.setTextColor(getResources().getColor(R.color.black));
                         circleFragmentViewpager.setCurrentItem(1);
                         onTabViewSelected(1);

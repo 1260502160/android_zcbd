@@ -9,19 +9,42 @@
     tools:context=".activity.PaySucceActivity">
 
     <RelativeLayout
+        android:id="@+id/relative_change"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
+        android:layout_height="@dimen/dp_70"
         android:background="#ffffff"
         >
-        <TextView
+
+        <ImageView
+            android:id="@+id/icon_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_payresult"
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/sp_16"
-            android:textColor="#333333"
+            android:src="@mipmap/icon_back"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_30"
+            android:padding="@dimen/dp_10"
+            />
+        <TextView
+            android:id="@+id/text_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_paysuccess"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_25"
+            android:textSize="@dimen/sp_20"
             />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        android:orientation="vertical"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_15"
+        >
+
 
     <ImageView
         android:layout_width="@dimen/dp_30"
@@ -33,10 +56,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_paysuccess"
+        android:text="支付成功！"
         android:layout_centerInParent="true"
         android:textSize="@dimen/sp_16"
-        android:textColor="#333333"
+        android:textColor="@color/blue"
         android:layout_marginTop="@dimen/dp_40"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -53,6 +76,7 @@
         android:visibility="gone"
         />
 
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,18 +86,20 @@
             android:id="@+id/btn_lookdeail"
             android:layout_width="@dimen/dp_150"
             android:layout_height="@dimen/dp_40"
-            android:background="@drawable/shape_orange"
-            android:text="@string/text_lookmx"
+            android:background="@drawable/renzheng_shape"
+            android:text="@string/btn_submit"
             android:layout_marginTop="@dimen/dp_100"
+            android:textColor="@color/white"
             android:layout_marginLeft="@dimen/dp_25"
             />
         <Button
             android:id="@+id/btn_homeback"
             android:layout_width="@dimen/dp_150"
             android:layout_height="@dimen/dp_40"
-            android:background="@drawable/shape_login"
+            android:background="@drawable/shape_blue"
             android:text="@string/text_backhome"
             android:layout_marginLeft="@dimen/dp_25"
+            android:textColor="@color/blue"
             android:layout_marginTop="@dimen/dp_100"
             />
 

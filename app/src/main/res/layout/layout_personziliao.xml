@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/relative_one"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_89"
+        android:layout_height="@dimen/dp_60"
         android:background="#ffffff"
         >
 
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_back"
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
             android:padding="@dimen/dp_10"
             />
         <TextView
@@ -39,11 +39,20 @@
         android:layout_below="@+id/relative_one"
         />
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_one"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/shape_login"
+        >
+
+
+    <RelativeLayout
         android:id="@+id/relative_two"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
-        android:layout_below="@+id/view_one"
-        android:background="#ffffff"
+
         >
 
         <TextView
@@ -59,7 +68,7 @@
             android:layout_height="@dimen/dp_30"
             android:src="@drawable/ic_launcher_background"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_39"
+            android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_10"
             />
 
@@ -68,6 +77,7 @@
         android:id="@+id/view_two"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
+        android:background="@color/transparent"
         android:layout_below="@+id/relative_two"
         />
     <RelativeLayout
@@ -75,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
         android:layout_below="@+id/view_two"
-        android:background="#ffffff"
+
         >
         <TextView
             android:id="@+id/text_name"
@@ -86,14 +96,15 @@
             android:layout_marginLeft="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_18"
             />
-        <TextView
+        <EditText
             android:id="@+id/my_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_hint_name"
+            android:hint="@string/text_hint_name"
             android:textSize="@dimen/sp_14"
+            android:background="@null"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_39"
+            android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_19"
             />
     </RelativeLayout>
@@ -101,6 +112,7 @@
         android:id="@+id/view_three"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
+        android:background="@color/transparent"
         android:layout_below="@+id/relative_three"
         />
     <RelativeLayout
@@ -108,85 +120,44 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
         android:layout_below="@+id/view_three"
-        android:background="#ffffff"
+
         >
         <TextView
             android:id="@+id/text_dingdan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_dianhua"
+            android:text="@string/text_phone_num"
             android:textSize="@dimen/sp_14"
             android:layout_marginLeft="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_18"
             />
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_phone_number"
+            android:hint="请输入手机号码"
+            android:background="@null"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_80"
+            android:layout_marginRight="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_15"
             />
 
-        <ImageView
-            android:id="@+id/icon_mydingdan"
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_17"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_19"
-            />
     </RelativeLayout>
 
-    <View
-        android:id="@+id/view"
-        android:layout_above="@id/relative_sfrz"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_25"
-        android:layout_height="@dimen/dp_1"
-        android:background="#ececec"
-        />
 
-    <RelativeLayout
-        android:id="@+id/relative_sfrz"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
-        android:layout_below="@+id/relative_four"
-        android:background="#ffffff"
-        >
-        <TextView
-            android:id="@+id/text_shenfenrenzheng"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_shenfenrenz"
-            android:textSize="@dimen/sp_14"
-            android:layout_marginLeft="@dimen/dp_12"
-            android:layout_marginTop="@dimen/dp_18"
-            />
 
-        <ImageView
-            android:id="@+id/icon_shenfenrenzheng"
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_17"
-            android:src="@mipmap/next"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_19"
-            />
-    </RelativeLayout>
     <View
         android:id="@+id/view_four"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_12"
-        android:layout_below="@+id/relative_sfrz"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/transparent"
+        android:layout_below="@+id/relative_four"
         />
     <RelativeLayout
         android:id="@+id/relative_five"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
         android:layout_below="@+id/view_four"
-        android:background="#ffffff"
+
         >
         <TextView
             android:id="@+id/text_setting"
@@ -204,11 +175,12 @@
             android:layout_height="@dimen/dp_17"
             android:src="@mipmap/next"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_19"
 
             />
     </RelativeLayout>
 
+    </RelativeLayout>
 
 </RelativeLayout>

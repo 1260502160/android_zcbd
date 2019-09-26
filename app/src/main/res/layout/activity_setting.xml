@@ -40,18 +40,27 @@
         android:layout_height="@dimen/dp_15"
         android:layout_below="@+id/relative_change"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_fangzhurenzheng_one"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        >
+
+
     <RelativeLayout
         android:id="@+id/relative_setting_safe"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
-        android:layout_below="@+id/view_fangzhurenzheng_one"
-        android:background="#ffffff"
         >
         <TextView
             android:id="@+id/text_dingdan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_safe"
+            android:text="@string/text_phone_num"
             android:textSize="@dimen/sp_16"
             android:layout_marginLeft="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_18"
@@ -72,6 +81,7 @@
         android:id="@+id/view_setting_two"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
+        android:background="@color/transparent"
         android:layout_below="@+id/relative_setting_safe"
         />
 
@@ -82,7 +92,7 @@
         android:layout_below="@+id/view_setting_two"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:background="#ffffff">
+       >
 
         <TextView
             android:id="@+id/text_qchc"
@@ -90,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_18"
-            android:text="@string/text_qchn"
+            android:text="@string/text_update_pass"
             android:textSize="@dimen/sp_16" />
 
         <ImageView
@@ -107,6 +117,7 @@
     android:id="@+id/view_setting_three"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_1"
+        android:background="@color/transparent"
     android:layout_below="@+id/relative_setting_qchc"
     />
     <RelativeLayout
@@ -114,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
         android:layout_below="@+id/view_setting_three"
-        android:background="#ffffff"
+
         >
         <TextView
             android:id="@+id/text_banbengengxin"
@@ -141,6 +152,7 @@
         android:id="@+id/view_setting_four"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
+        android:background="@color/transparent"
         android:layout_below="@+id/relative_setting_banbengengxin"
         />
     <RelativeLayout
@@ -148,7 +160,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
         android:layout_below="@+id/view_setting_four"
-        android:background="#ffffff"
         >
         <TextView
             android:id="@+id/text_aboutus"
@@ -170,5 +181,22 @@
             android:layout_marginTop="@dimen/dp_19"
             />
     </RelativeLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_back"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_15"
+        android:text="@string/text_back"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/shape_grey"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_height="@dimen/dp_50"/>
 
 </RelativeLayout>

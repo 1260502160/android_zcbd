@@ -20,9 +20,6 @@
         </activity>
         <activity android:name=".Select" />
         <activity android:name=".activity.HostmanRenActivity" />
-        <activity android:name=".activity.FangKeJiLuActivity" />
-        <activity android:name=".activity.BaoXiuJiLuActivity" />
-        <activity android:name=".activity.JiaoFeiJiLuActivity" />
         <activity android:name=".activity.ZhuHuGuanLiActivity" />
         <activity android:name=".activity.PersonalActivity" />
         <activity android:name=".activity.SettingActivity" />
@@ -33,16 +30,23 @@
         <activity android:name=".activity.YeZhuRenZhengActivity" />
         <activity android:name=".activity.BaoXiuActivity" />
         <activity android:name=".activity.FangKeDengJiActivity" />
+        <activity android:name=".activity.MyIndentActivity" />
         <activity android:name=".activity.BaoXiuTiShiActivity" />
         <activity android:name=".activity.BaoLookDeatilActivity" />
+        <activity android:name=".activity.RepairRecordActivity" />
         <activity android:name=".activity.BianMinJiaoFeiActivity" />
         <activity android:name=".activity.StopCarActivity" />
+        <activity android:name=".activity.PayRecordActivity" />
         <activity android:name=".activity.PayActivity" />
         <activity android:name=".activity.ChooseHouse" />
+        <activity android:name=".activity.PropertyChargesActivity"/>
+        <activity android:name=".activity.VisitorInvitationActivity" />
         <activity android:name=".activity.PayTypeActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AddHoueseHoldActivity" />
-        <activity android:name=".activity.HouseHoldIdentity"></activity>
+        <activity android:name=".activity.HouseHoldIdentity" />
+        <activity android:name=".activity.VisitorRecordActivity" />
+        <activity android:name=".activity.PayDeatilActivity"></activity>
     </application>
 
 </manifest>

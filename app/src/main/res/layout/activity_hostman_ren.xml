@@ -44,7 +44,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
         android:layout_below="@+id/view_fangzhurenzheng_one"
         >
         <RelativeLayout
@@ -91,8 +93,7 @@
             android:layout_height="@dimen/dp_1"
             android:background="#ececec"
             android:layout_below="@+id/rel_xiaoqu"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_9"
+
             />
 
 
@@ -107,7 +108,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_shenfen"
+                android:text="@string/text_louhao"
                 android:layout_toRightOf="@+id/icon_fangkejilu"
                 android:layout_marginTop="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_20"
@@ -118,7 +119,7 @@
                 android:id="@+id/text_shenfen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="请选择您的身份"
+                android:hint="请选择您的楼号"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_40"
@@ -142,8 +143,7 @@
             android:layout_height="@dimen/dp_1"
             android:background="#ececec"
             android:layout_below="@+id/rel_zhurenzheng_shenfen"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_9"
+
             />
 
 
@@ -158,7 +158,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_louhao"
+                android:text="@string/text_danyuanhao"
                 android:layout_toRightOf="@+id/icon_fangkejilu"
                 android:layout_marginTop="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_20"
@@ -169,7 +169,7 @@
                 android:id="@+id/text_louhao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="请选择您的楼号"
+                android:hint="请选择您的单元号"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_40"
@@ -195,8 +195,7 @@
             android:layout_height="@dimen/dp_1"
             android:background="#ececec"
             android:layout_below="@+id/rel_zhurenzheng_louhao"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_9"
+
             />
 
 
@@ -211,7 +210,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_danyuanhao"
+                android:text="@string/text_menpaihao"
                 android:layout_toRightOf="@+id/icon_fangkejilu"
                 android:layout_marginTop="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_20"
@@ -222,7 +221,7 @@
                 android:id="@+id/text_danyuanhao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="请选择您的单元号"
+                android:hint="请选择您的门牌号"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_40"
@@ -246,8 +245,7 @@
             android:layout_height="@dimen/dp_1"
             android:background="#ececec"
             android:layout_below="@+id/rel_zhurenzheng_danyuanhao"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_9"
+
             />
 
 
@@ -262,7 +260,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_menpaihao"
+                android:text="@string/text_shenfen"
                 android:layout_toRightOf="@+id/icon_fangkejilu"
                 android:layout_marginTop="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_20"
@@ -273,7 +271,7 @@
                 android:id="@+id/text_menpaihao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="请选择您的门牌号"
+                android:hint="请选择您的身份"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_40"
@@ -294,4 +292,16 @@
         </RelativeLayout>
 
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@drawable/renzheng_shape"
+        android:text="@string/btn_submit"
+        android:textColor="#ffffff"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_20"
+        />
 </RelativeLayout>

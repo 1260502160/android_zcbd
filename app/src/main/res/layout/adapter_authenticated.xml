@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_100"
-    android:background="@drawable/shape_login"
-    android:layout_marginLeft="@dimen/dp_20"
-    android:layout_marginRight="@dimen/dp_20"
-    android:layout_marginTop="@dimen/dp_15"
+    android:layout_height="match_parent"
     >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_15">
+
 
     <ImageView
         android:id="@+id/icon_authenticaed"
@@ -45,7 +51,7 @@
         android:background="@drawable/shape_small_origin"
         android:layout_toRightOf="@+id/text_name"
         android:layout_marginTop="@dimen/dp_30"
-        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_15"
         android:text="业主"
         android:gravity="center"
         />
@@ -57,4 +63,7 @@
         android:layout_marginRight="@dimen/dp_20"
         android:layout_centerVertical="true"
         />
+    </RelativeLayout>
+
+
 </RelativeLayout>

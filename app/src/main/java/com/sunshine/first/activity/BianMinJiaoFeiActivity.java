@@ -41,7 +41,7 @@ public class BianMinJiaoFeiActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.btn_wuyefei:
-                intent = new Intent(BianMinJiaoFeiActivity.this, ChooseHouse.class);
+               intent = new Intent(BianMinJiaoFeiActivity.this, PropertyChargesActivity.class);
                 startActivity(intent);
                 break;
         }

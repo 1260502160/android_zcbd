@@ -89,7 +89,7 @@
           android:layout_marginTop="@dimen/dp_10"
           android:layout_width="@dimen/dp_80"
           android:background="@drawable/selector_line_location"
-          android:layout_marginLeft="@dimen/dp_100"
+          android:layout_marginLeft="@dimen/dp_90"
           android:layout_height="@dimen/dp_2"/>
       <ImageView
           android:id="@+id/iv_line2"

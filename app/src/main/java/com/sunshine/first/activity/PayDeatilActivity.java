@@ -10,7 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BaoXiuJiLuActivity extends AppCompatActivity {
+public class PayDeatilActivity extends AppCompatActivity {
 
     @BindView(R.id.icon_back)
     ImageView iconBack;
@@ -18,7 +18,7 @@ public class BaoXiuJiLuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repair_records);
+        setContentView(R.layout.activity_pay_deatil);
         ButterKnife.bind(this);
     }
 

@@ -91,9 +91,10 @@
         android:layout_marginBottom="@dimen/dp_100"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
-        android:text="添加住户信息"
+        android:text="添加房屋认证"
         android:textSize="@dimen/sp_12"
-        android:textColor="#000000"
+        android:background="@drawable/renzheng_shape"
+        android:textColor="@color/white"
         />
 
 </RelativeLayout>

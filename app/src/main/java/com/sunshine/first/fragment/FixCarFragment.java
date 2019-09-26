@@ -1,6 +1,5 @@
 package com.sunshine.first.fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunshine.first.R;
-import com.sunshine.first.activity.PayActivity;
 
 import java.util.ArrayList;
 
@@ -27,27 +25,27 @@ import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 
 public class FixCarFragment extends Fragment {
-    @BindView(R.id.text_car_number)
-    TextView textCarNumber;
-    @BindView(R.id.icon_carnumber)
-    ImageView iconCarnumber;
-    @BindView(R.id.icon_yczhouqi)
-    ImageView iconYczhouqi;
+
+
+    @BindView(R.id.text_carnumber)
+    TextView textCarnumber;
+    @BindView(R.id.text_cycle)
+    TextView textcycle;
+    @BindView(R.id.icon_cycle)
+    ImageView iconCycle;
     @BindView(R.id.btn_right_pay)
     Button btnRightPay;
-    @BindView(R.id.text_yczhouqi)
-    TextView textyczhouqi;
-
     Unbinder unbinder;
-    private Intent intent;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fixcar, container, false);
+
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
+
 
     @Override
     public void onDestroyView() {
@@ -55,14 +53,12 @@ public class FixCarFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.text_car_number, R.id.icon_carnumber, R.id.icon_yczhouqi, R.id.btn_right_pay})
+    @OnClick({R.id.text_carnumber, R.id.icon_cycle, R.id.btn_right_pay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.text_car_number:
+            case R.id.text_carnumber:
                 break;
-            case R.id.icon_carnumber:
-                break;
-            case R.id.icon_yczhouqi:
+            case R.id.icon_cycle:
                 ArrayList<String> list = new ArrayList<>();
                 list.add("月");
                 list.add("季");
@@ -84,20 +80,18 @@ public class FixCarFragment extends Fragment {
                 picker.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override
                     public void onWheeled(int index, String item) {
-                        textyczhouqi.setText(item);
+                        textcycle.setText(item);
                     }
                 });
                 picker.setOnItemPickListener(new OnItemPickListener<String>() {
                     @Override
                     public void onItemPicked(int index, String item) {
-                        textyczhouqi.setText(item);
+                        textcycle.setText(item);
                     }
                 });
                 picker.show();
                 break;
             case R.id.btn_right_pay:
-                intent = new Intent(getContext(), PayActivity.class);
-                startActivity(intent);
                 break;
         }
     }

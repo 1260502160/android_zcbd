@@ -43,11 +43,20 @@
         />
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_below="@+id/view_fangzhurenzheng_one"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        >
+
+
+    <RelativeLayout
         android:id="@+id/relative_phone_number"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70"
-        android:layout_below="@+id/view_fangzhurenzheng_one"
-        android:background="#ffffff"
+        android:layout_height="@dimen/dp_50"
+
         >
         <TextView
             android:id="@+id/text_dingdan"
@@ -80,11 +89,11 @@
     <RelativeLayout
         android:id="@+id/relative_safe_password"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70"
+        android:layout_height="@dimen/dp_50"
         android:layout_below="@+id/view_setting_two"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:background="#ffffff">
+       >
 
         <TextView
             android:id="@+id/text_qchc"
@@ -105,15 +114,6 @@
             android:src="@mipmap/next" />
     </RelativeLayout>
 
-    <Button
-        android:layout_width="@dimen/dp_320"
-        android:layout_height="@dimen/dp_50"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_25"
-        android:layout_marginRight="@dimen/dp_20"
-        android:text="@string/text_back"
-        android:textSize="@dimen/sp_16"
-        />
+    </RelativeLayout>
 
 </RelativeLayout>

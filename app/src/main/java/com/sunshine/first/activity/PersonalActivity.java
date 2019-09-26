@@ -23,8 +23,6 @@ public class PersonalActivity extends AppCompatActivity {
     RelativeLayout relativeThree;
     @BindView(R.id.relative_four)
     RelativeLayout relativeFour;
-    @BindView(R.id.relative_sfrz)
-    RelativeLayout relativesfrz;
     @BindView(R.id.relative_five)
     RelativeLayout relativeFive;
 
@@ -36,7 +34,7 @@ public class PersonalActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.icon_back, R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_sfrz, R.id.relative_five})
+    @OnClick({R.id.icon_back, R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_five})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
@@ -47,10 +45,6 @@ public class PersonalActivity extends AppCompatActivity {
             case R.id.relative_three:
                 break;
             case R.id.relative_four:
-                break;
-            case R.id.relative_sfrz:
-                intent = new Intent(PersonalActivity.this, SfrzActivity.class);
-                startActivity(intent);
                 break;
             case R.id.relative_five:
                 intent = new Intent(PersonalActivity.this, SettingActivity.class);

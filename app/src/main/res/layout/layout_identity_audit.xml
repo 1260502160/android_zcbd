@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#CCCCCC"
     >
 
     <RelativeLayout
@@ -42,7 +43,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
         android:layout_below="@+id/view_fangzhurenzheng_one"
         >
     <RelativeLayout
@@ -62,16 +65,17 @@
             android:textColor="#333333"
             android:textSize="@dimen/sp_16"
             />
-        <TextView
-            android:id="@+id/tv_name"
+        <EditText
+            android:id="@+id/edit_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="丁一"
+            android:layout_height="match_parent"
+            android:text="请填写您的姓名"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_40"
             android:textColor="#333333"
             android:textSize="@dimen/sp_14"
+            android:background="@null"
             />
 
     </RelativeLayout>
@@ -81,10 +85,8 @@
         android:layout_height="@dimen/dp_1"
         android:background="#ececec"
         android:layout_below="@+id/rel_name"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_9"
-        />
 
+        />
 
     <RelativeLayout
         android:id="@+id/rel_sex"
@@ -131,8 +133,7 @@
         android:layout_height="@dimen/dp_1"
         android:background="#ececec"
         android:layout_below="@+id/rel_sex"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_9"
+
         />
 
 
@@ -146,20 +147,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="手机"
+            android:text="@string/text_phone_num"
             android:layout_toRightOf="@+id/icon_fangkejilu"
             android:layout_marginTop="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_20"
             android:textColor="#333333"
             android:textSize="@dimen/sp_16"
             />
-        <TextView
+        <EditText
             android:id="@+id/tv_phone_number"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="13112341234"
+            android:layout_height="match_parent"
+            android:text="请填写您的号码"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp_20"
+            android:background="@null"
             android:layout_marginRight="@dimen/dp_40"
             android:textColor="#333333"
             android:textSize="@dimen/sp_14"
@@ -173,8 +175,7 @@
         android:layout_height="@dimen/dp_1"
         android:background="#ececec"
         android:layout_below="@+id/rel_phone"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_9"
+
         />
 
     <RelativeLayout
@@ -187,7 +188,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="身份"
+            android:text="与房主关系"
             android:layout_toRightOf="@+id/icon_fangkejilu"
             android:layout_marginTop="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_20"
@@ -254,8 +255,7 @@
         android:layout_height="@dimen/dp_1"
         android:background="#ececec"
         android:layout_below="@+id/rel_relationship"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_9"
+
         />
 
 
@@ -282,7 +282,7 @@
             android:layout_height="wrap_content"
             android:hint="110110*********1234"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_40"
             android:textColor="#333333"
             android:textSize="@dimen/sp_14"
@@ -294,19 +294,29 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60">
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/shape_blue"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        >
 
-        <Button
-            android:layout_width="@dimen/dp_200"
+        <TextView
+            android:layout_width="@dimen/dp_160"
             android:layout_height="match_parent"
             android:text="拒绝"
-            android:background="#ffffff"
+            android:textColor="@color/blue"
+            android:gravity="center_vertical"
+            android:layout_centerInParent="true"
             />
-        <Button
-            android:layout_width="@dimen/dp_200"
+        <TextView
+            android:layout_width="@dimen/dp_160"
             android:layout_height="match_parent"
             android:text="通过"
-            android:background="@color/transparent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:background="@drawable/renzheng_shape"
             android:layout_alignParentRight="true"
             />
 

@@ -9,7 +9,9 @@
         android:id="@+id/rela_car"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
-        android:background="#ffffff"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -56,10 +58,19 @@
         />
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_car"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        >
+
+
+    <RelativeLayout
         android:id="@+id/relative_phone_number"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
-        android:layout_below="@+id/view_car"
         android:background="#ffffff"
         >
         <TextView
@@ -129,7 +140,7 @@
     <View
         android:id="@+id/view_stop_two"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_15"
+        android:layout_height="@dimen/dp_1"
         android:layout_below="@+id/relative_safe_password"
         />
 
@@ -144,7 +155,7 @@
             android:id="@+id/text_stop_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_livetime"
+            android:text="@string/text_stoptime"
             android:textSize="@dimen/sp_16"
             android:layout_marginLeft="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_18"
@@ -198,12 +209,14 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp_19"
             android:layout_marginRight="@dimen/dp_12"
-            android:textColor="#BCBCBC"
+            android:textColor="#FE5555"
             android:textSize="@dimen/sp_12"
             />
 
     </RelativeLayout>
 
+
+    </RelativeLayout>
 
     <Button
         android:layout_width="match_parent"
@@ -211,6 +224,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dp_40"
         android:text="@string/text_rightpay"
+        android:background="@drawable/renzheng_shape"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
         />
 
 </RelativeLayout>
