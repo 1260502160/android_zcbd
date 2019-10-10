@@ -142,7 +142,7 @@
 
             >
             <ImageView
-                android:id="@+id/icon_cheliangxingxi"
+                android:id="@+id/icon_carinfo"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
                 android:src="@mipmap/ic_launcher"

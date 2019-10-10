@@ -30,12 +30,14 @@
             android:textSize="@dimen/sp_20"
             />
         <TextView
+            android:id="@+id/tv_visitor_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="访客记录"
             android:textColor="@color/transparent"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_20"
+            android:padding="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             />
     </RelativeLayout>
@@ -53,6 +55,7 @@
         android:background="#EFD5D6"
         >
         <TextView
+            android:id="@+id/tv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="填写访客车牌号可自动识别开闸，无需下车登记"
@@ -93,7 +96,7 @@
         android:layout_marginTop="@dimen/dp_10"
         >
     <RelativeLayout
-        android:id="@+id/relative_rz_name"
+        android:id="@+id/relative_visitor_time"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60">
         <TextView
@@ -136,15 +139,16 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relative_rz_phonenumber"
+        android:id="@+id/relative_visitor_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60">
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请输入访客姓名"
+            android:hint="请输入访客姓名"
             android:textColor="@color/transparent"
             android:textSize="@dimen/sp_14"
+            android:background="@null"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_20"
             />
@@ -167,15 +171,16 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relative_rz_Idcarnumber"
+        android:id="@+id/relative_visitor_phonenumber"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60">
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请输入访客手机号"
+            android:hint="请输入访客手机号"
             android:textColor="@color/transparent"
             android:textSize="@dimen/sp_14"
+            android:background="@null"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_20"
             />
@@ -230,7 +235,7 @@
             <EditText
                     android:layout_width="@dimen/dp_35"
                     android:layout_height="@dimen/dp_50"
-                    android:background="@null"
+                    android:background="@drawable/shape_line"
                     android:layout_marginLeft="@dimen/dp_20"
                     android:hint="省"
                     android:gravity="center"
@@ -238,54 +243,47 @@
             <EditText
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_50"
-                android:background="@null"
+                android:background="@drawable/shape_line"
                 android:paddingLeft="@dimen/dp_5"
                 android:gravity="center"
                 />
             <EditText
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_50"
-                android:background="@null"
+                android:background="@drawable/shape_line"
                 android:paddingLeft="@dimen/dp_5"
                 android:gravity="center"
                 />
             <EditText
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_50"
-                android:background="@null"
+                android:background="@drawable/shape_line"
                 android:gravity="center"
                 android:paddingLeft="@dimen/dp_5"
                 />
             <EditText
                 android:layout_width="@dimen/dp_35"
             android:layout_height="@dimen/dp_50"
-            android:background="@null"
+                android:background="@drawable/shape_line"
                 android:gravity="center"
                 android:paddingLeft="@dimen/dp_5"
             />
             <EditText
                 android:layout_width="@dimen/dp_35"
             android:layout_height="@dimen/dp_50"
-            android:background="@null"
+                android:background="@drawable/shape_line"
                 android:paddingLeft="@dimen/dp_5"
             />
             <EditText
                 android:layout_width="@dimen/dp_35"
             android:layout_height="@dimen/dp_50"
-            android:background="@null"
-                android:paddingLeft="@dimen/dp_5"
-            />
-            <EditText
-                android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_50"
-            android:background="@null"
-                android:gravity="center"
+                android:background="@drawable/shape_line"
                 android:paddingLeft="@dimen/dp_5"
             />
             <EditText
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_50"
-                android:background="@null"
+                android:background="@drawable/shape_line"
                 android:gravity="center"
             />
 
@@ -305,7 +303,7 @@
                 <EditText
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_50"
-                    android:background="@null"
+                    android:background="@drawable/shape_dash"
                     android:gravity="center"
                     android:hint="新能源"
 
@@ -343,6 +341,7 @@
 
         </LinearLayout>
         <RelativeLayout
+            android:id="@+id/relative_take_photo"
             android:layout_width="@dimen/dp_100"
             android:layout_height="@dimen/dp_90"
             android:background="@drawable/shape_grey"
@@ -361,6 +360,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_submit_visitor"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:background="@drawable/renzheng_shape"

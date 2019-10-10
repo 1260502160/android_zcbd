@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_150"
-    android:background="@drawable/shape_login"
-    android:layout_marginLeft="@dimen/dp_20"
-    android:layout_marginRight="@dimen/dp_20"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+         >
+
     <TextView
         android:id="@+id/tv_indent_number"
         android:layout_width="wrap_content"
@@ -88,7 +97,7 @@
         android:layout_height="@dimen/dp_30"
         android:text="查看详情"
         android:textColor="@color/blue"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_blue"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dp_100"
@@ -107,4 +116,5 @@
 
         />
 
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

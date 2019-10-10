@@ -23,8 +23,7 @@ public class YeZhuRenZhengActivity extends AppCompatActivity {
     RelativeLayout zhgl;
     @BindView(R.id.clrz)
     RelativeLayout clrz;
-    @BindView(R.id.mjrz)
-    RelativeLayout mjrz;
+
     private Intent intent;
 
     @Override
@@ -34,7 +33,7 @@ public class YeZhuRenZhengActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.icon_back, R.id.relative_fzrz, R.id.zhgl, R.id.clrz, R.id.mjrz})
+    @OnClick({R.id.icon_back, R.id.relative_fzrz, R.id.zhgl, R.id.clrz})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
@@ -48,8 +47,7 @@ public class YeZhuRenZhengActivity extends AppCompatActivity {
                 break;
             case R.id.clrz:
                 break;
-            case R.id.mjrz:
-                break;
+
         }
     }
 }

@@ -83,6 +83,7 @@
         android:id="@+id/view_setting_two"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
+        android:background="@color/transparent"
         android:layout_below="@+id/relative_phone_number"
         />
 

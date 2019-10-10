@@ -14,6 +14,6 @@ public class AlreadyMoneyFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_already_pay,container,false);
+        return inflater.inflate(R.layout.adapter_repair_all,container,false);
     }
 }

@@ -26,8 +26,6 @@ public class BaoXiuActivity extends AppCompatActivity {
     ImageView iconBack;
     @BindView(R.id.edit_descrip)
     EditText editDescrip;
-    @BindView(R.id.icon_descrip)
-    ImageView iconDescrip;
     @BindView(R.id.re_add)
     RelativeLayout reAdd;
     @BindView(R.id.rela_time)
@@ -51,7 +49,7 @@ public class BaoXiuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.icon_back, R.id.edit_descrip, R.id.icon_descrip, R.id.re_add, R.id.rela_time, R.id.re_lianxiren, R.id.re_phone, R.id.text_time, R.id.textnumber, R.id.btn_baoxiu_submit})
+    @OnClick({R.id.icon_back, R.id.edit_descrip,R.id.re_add, R.id.rela_time, R.id.re_lianxiren, R.id.re_phone, R.id.text_time, R.id.textnumber, R.id.btn_baoxiu_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
@@ -61,8 +59,7 @@ public class BaoXiuActivity extends AppCompatActivity {
                 editDescrip.addTextChangedListener(new TextWatcher());
 
                 break;
-            case R.id.icon_descrip:
-                break;
+
             case R.id.re_add:
                 break;
             case R.id.rela_time:

@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.sunshine.first.R;
 
@@ -23,26 +23,19 @@ import cn.addapp.pickers.picker.SinglePicker;
 public class FamilyIdentityActivity extends AppCompatActivity {
     @BindView(R.id.icon_back)
     ImageView iconBack;
-    @BindView(R.id.rel_name)
-    RelativeLayout relName;
-    @BindView(R.id.rel_sex)
-    RelativeLayout relSex;
-    @BindView(R.id.rel_phone)
-    RelativeLayout relPhone;
-    @BindView(R.id.rel_relationship)
-    RelativeLayout relRelationship;
-    @BindView(R.id.rel_ID_number)
-    RelativeLayout relIDNumber;
     @BindView(R.id.tv_name)
-    TextView tvName;
+    EditText tvName;
     @BindView(R.id.tv_sex)
-    TextView tvSex;
+    EditText tvSex;
     @BindView(R.id.tv_phone_number)
-    TextView tvPhoneNumber;
-    @BindView(R.id.tv_choose_sex)
-    TextView tvChooseSex;
+    EditText tvPhoneNumber;
+    @BindView(R.id.tv_choose_relation)
+    EditText tvChooseRelation;
     @BindView(R.id.tv_ID_number)
-    TextView tvIDNumber;
+    EditText tvIDNumber;
+    @BindView(R.id.btn_submit)
+    Button btnSubmit;
+
     private ArrayList<String> list;
     private SinglePicker<String> picker;
 
@@ -51,17 +44,18 @@ public class FamilyIdentityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_family_identity);
         ButterKnife.bind(this);
+
     }
 
-    @OnClick({R.id.icon_back, R.id.rel_name, R.id.rel_sex, R.id.rel_phone, R.id.rel_relationship, R.id.rel_ID_number})
+    @OnClick({R.id.icon_back, R.id.tv_name, R.id.tv_sex, R.id.tv_phone_number, R.id.tv_choose_relation, R.id.tv_ID_number, R.id.btn_rightpay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
                 break;
-            case R.id.rel_name:
+            case R.id.tv_name:
                 break;
-            case R.id.rel_sex:
+            case R.id.tv_sex:
                 ArrayList<String> list = new ArrayList<>();
                 list.add("男");
                 list.add("女");
@@ -91,9 +85,10 @@ public class FamilyIdentityActivity extends AppCompatActivity {
                 });
                 picker.show();
                 break;
-            case R.id.rel_phone:
+            case R.id.tv_phone_number:
                 break;
-            case R.id.rel_relationship:
+            case R.id.tv_choose_relation:
+
                 list = new ArrayList<>();
                 list.add("业主");
                 list.add("亲友");
@@ -114,19 +109,29 @@ public class FamilyIdentityActivity extends AppCompatActivity {
                 picker.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override
                     public void onWheeled(int index, String item) {
-                        tvSex.setText(item);
+                        tvChooseRelation.setText(item);
                     }
                 });
                 picker.setOnItemPickListener(new OnItemPickListener<String>() {
                     @Override
                     public void onItemPicked(int index, String item) {
-                        tvSex.setText(item);
+                        tvChooseRelation.setText(item);
                     }
                 });
                 picker.show();
                 break;
-            case R.id.rel_ID_number:
+            case R.id.tv_ID_number:
+                break;
+            case R.id.btn_rightpay:
                 break;
         }
     }
+
+
+
+
+
+
+
+
 }

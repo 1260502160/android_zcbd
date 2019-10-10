@@ -71,7 +71,7 @@
         android:id="@+id/relative_phone_number"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
-        android:background="#ffffff"
+
         >
         <TextView
             android:id="@+id/text_dingdan"
@@ -112,7 +112,7 @@
         android:layout_below="@+id/view_setting_two"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:background="#ffffff">
+        >
 
         <TextView
             android:id="@+id/text_qchc"
@@ -149,7 +149,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
         android:layout_below="@+id/view_stop_two"
-        android:background="#ffffff"
+
         >
         <TextView
             android:id="@+id/text_stop_time"
@@ -190,7 +190,7 @@
         android:layout_below="@+id/relative_stop_time"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:background="#ffffff">
+        >
 
         <TextView
             android:id="@+id/text_money"

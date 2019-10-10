@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sunshine.first">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -12,24 +15,32 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
+
+        </activity>
+        <activity android:name=".Select" />
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Select" />
+
+        <activity android:name=".activity.RegisterActivity"/>
+        <activity android:name=".activity.ForgetPassActivity"/>
         <activity android:name=".activity.HostmanRenActivity" />
         <activity android:name=".activity.ZhuHuGuanLiActivity" />
         <activity android:name=".activity.PersonalActivity" />
+        <activity android:name=".activity.PaymentCenterActivity"/>
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.SafeMangerActivity" />
+        <activity android:name=".activity.OnlineStoreActivity"/>
+        <activity android:name=".activity.VisitorRegistrationActivity"/>
         <activity android:name=".activity.PhoneNumeberActivity" />
         <activity android:name=".activity.UpdatePassActivity" />
         <activity android:name=".activity.SfrzActivity" />
         <activity android:name=".activity.YeZhuRenZhengActivity" />
         <activity android:name=".activity.BaoXiuActivity" />
-        <activity android:name=".activity.FangKeDengJiActivity" />
         <activity android:name=".activity.MyIndentActivity" />
         <activity android:name=".activity.BaoXiuTiShiActivity" />
         <activity android:name=".activity.BaoLookDeatilActivity" />
@@ -37,9 +48,15 @@
         <activity android:name=".activity.BianMinJiaoFeiActivity" />
         <activity android:name=".activity.StopCarActivity" />
         <activity android:name=".activity.PayRecordActivity" />
+        <activity android:name=".activity.FamilyIdentityActivity"/>
         <activity android:name=".activity.PayActivity" />
         <activity android:name=".activity.ChooseHouse" />
+        <activity android:name=".activity.ChooseHomeActivity" />
         <activity android:name=".activity.PropertyChargesActivity"/>
+        <activity android:name=".activity.ReceiveAddressActivity"/>
+        <activity android:name=".activity.AddReceviceAddressActivity"/>
+        <activity android:name=".activity.CarInfoActivity"/>
+        <activity android:name=".activity.GoodsDetailActivity"/>
         <activity android:name=".activity.VisitorInvitationActivity" />
         <activity android:name=".activity.PayTypeActivity" />
         <activity android:name=".activity.FeedbackActivity" />

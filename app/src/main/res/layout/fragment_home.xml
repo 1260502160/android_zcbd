@@ -10,22 +10,165 @@
     <com.stx.xhb.xbanner.XBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
-        android:layout_marginTop="@dimen/dp_15"
+        android:layout_height="@dimen/dp_200"
         >
     </com.stx.xhb.xbanner.XBanner>
 
+
+
+    <RelativeLayout
+        android:id="@+id/relative_home_two"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_below="@+id/icon_owner_certification"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_10"
+        >
+        <LinearLayout
+            android:id="@+id/linear_my_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+
+            >
+            <ImageView
+                android:id="@+id/icon_visitor_registration"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/ic_launcher"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_visitor_reg"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_my_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_100"
+            >
+            <ImageView
+                android:id="@+id/icon_store"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/ic_launcher"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_store"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_my_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_180"
+
+            >
+            <ImageView
+                android:id="@+id/icon_payment_center"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/ic_launcher"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_pay_center"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_my_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_250"
+
+            >
+            <ImageView
+                android:id="@+id/icon_online_repair"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/ic_launcher"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_onlinebaoxiu"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_hot_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_hot_store"
+        android:layout_below="@+id/relative_home_two"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#FE7C7C"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:padding="@dimen/dp_10"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更多》"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#FE7C7C"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/relative_home_two"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_30"
+        android:padding="@dimen/dp_10"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/home_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_hot_store"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_10"
+        >
+
+    </android.support.v7.widget.RecyclerView>
     <ImageView
-        android:id="@+id/icon_yezhurenzheng"
+        android:id="@+id/icon_owner_certification"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:layout_below="@+id/banner"
         android:background="@mipmap/textselector"
-        android:layout_marginTop="@dimen/dp_15"
+
 
         />
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/linear_home_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +218,7 @@
             android:src="@mipmap/ic_launcher"
             android:layout_marginLeft="@dimen/dp_20"
             />
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 </RelativeLayout>

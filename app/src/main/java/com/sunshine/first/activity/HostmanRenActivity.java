@@ -77,7 +77,7 @@ public class HostmanRenActivity extends AppCompatActivity {
                 //启用权重 setWeightWidth 才起作用
                 picker.setWeightEnable(true);
                 picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+                picker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
                 picker.setUnSelectedTextColor(Color.GRAY);
                 picker.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override
@@ -109,7 +109,7 @@ public class HostmanRenActivity extends AppCompatActivity {
                 //启用权重 setWeightWidth 才起作用
                 picker.setWeightEnable(true);
                 picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+                picker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
                 picker.setUnSelectedTextColor(Color.GRAY);
                 picker.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override
@@ -142,7 +142,7 @@ public class HostmanRenActivity extends AppCompatActivity {
                 //启用权重 setWeightWidth 才起作用
                 picker.setWeightEnable(true);
                 picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+                picker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
                 picker.setUnSelectedTextColor(Color.GRAY);
                 picker.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override
@@ -174,7 +174,7 @@ public class HostmanRenActivity extends AppCompatActivity {
                 //启用权重 setWeightWidth 才起作用
                 picker.setWeightEnable(true);
                 picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+                picker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
                 picker.setUnSelectedTextColor(Color.GRAY);
                 picker.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override

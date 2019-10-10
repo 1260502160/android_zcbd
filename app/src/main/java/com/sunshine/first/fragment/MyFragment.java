@@ -18,6 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.sunshine.first.R;
+import com.sunshine.first.activity.CarInfoActivity;
 import com.sunshine.first.activity.FeedbackActivity;
 import com.sunshine.first.activity.HostmanRenActivity;
 import com.sunshine.first.activity.MyIndentActivity;
@@ -37,8 +38,8 @@ public class MyFragment extends Fragment {
 
     @BindView(R.id.icon_zhuhuguanli)
     ImageView iconZhuhuguanli;
-    @BindView(R.id.icon_cheliangxingxi)
-    ImageView iconCheliangxingxi;
+    @BindView(R.id.icon_carinfo)
+    ImageView iconCarinfo;
     @BindView(R.id.icon_menjindengji)
     ImageView iconMenjindengji;
     @BindView(R.id.icon_fangzhurenzheng)
@@ -78,7 +79,7 @@ public class MyFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.icon_zhuhuguanli, R.id.icon_cheliangxingxi, R.id.icon_menjindengji, R.id.icon_fangzhurenzheng,R.id.rel_my_indent, R.id.rel_repair_record, R.id.rel_jiaofeijilu, R.id.rel_my_yijianfankui, R.id.rel_my_lianxikefu,R.id.relative_my_one,R.id.rel_visitor_record})
+    @OnClick({R.id.icon_zhuhuguanli, R.id.icon_carinfo, R.id.icon_menjindengji, R.id.icon_fangzhurenzheng,R.id.rel_my_indent, R.id.rel_repair_record, R.id.rel_jiaofeijilu, R.id.rel_my_yijianfankui, R.id.rel_my_lianxikefu,R.id.relative_my_one,R.id.rel_visitor_record})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_zhuhuguanli:
@@ -88,7 +89,9 @@ public class MyFragment extends Fragment {
                 intent = new Intent(getContext(), VisitorRecordActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.icon_cheliangxingxi:
+            case R.id.icon_carinfo:
+                intent= new Intent(getActivity(), CarInfoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.icon_menjindengji:
                 break;

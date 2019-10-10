@@ -1,81 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#CCCCCC"
+    >
 
-    <ImageView
-        android:id="@+id/icon_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/icon_back"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_30"
-        android:padding="@dimen/dp_10"
-        />
-    <TextView
-        android:id="@+id/text_forget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_forget"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_25"
-        android:textSize="@dimen/sp_20"
-        />
+    <RelativeLayout
+        android:id="@+id/relative_change"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:background="#ffffff"
+        >
+
+        <ImageView
+            android:id="@+id/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_back"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_30"
+            android:padding="@dimen/dp_10"
+            />
+        <TextView
+            android:id="@+id/text_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_forget"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_25"
+            android:textSize="@dimen/sp_20"
+            />
+    </RelativeLayout>
     <View
-        android:id="@+id/view_forget"
+        android:id="@+id/view_fangzhurenzheng_one"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:layout_below="@+id/text_forget"
-        android:layout_marginTop="@dimen/dp_5"
-        android:background="#cccccc"
+        android:layout_below="@+id/relative_change"
         />
-    <EditText
-        android:id="@+id/edit_forget_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_forget"
-        android:hint="@string/edit_phone"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_30"
-        />
+
     <RelativeLayout
+        android:id="@+id/rela_regist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_forget_phone"
+        android:layout_height="@dimen/dp_300"
+        android:layout_below="@+id/view_fangzhurenzheng_one"
+        android:background="@drawable/shape_login"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
         >
-        <EditText
-            android:id="@+id/edit_forget_password"
+
+        <TextView
+            android:id="@+id/tv_forget_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/text_code"
+            android:text="@string/edit_phone"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_30"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#000000"
+            />
+
+        <EditText
+            android:id="@+id/edit_forget_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:hint="输入手机号"
+            android:background="@null"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_20"
+            />
+        <View
+            android:id="@+id/view_reg_one"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/transparent"
+            android:layout_below="@+id/tv_forget_phone"
+            android:layout_marginTop="@dimen/dp_20"
             />
 
         <TextView
-            android:id="@+id/text_huocode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_huocode"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_40"
-            android:layout_marginRight="@dimen/dp_25"
-            />
-        <EditText
-            android:id="@+id/edit_login_password"
+            android:id="@+id/tv_forget_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/text_login_pass"
+            android:text="@string/text_yan_code"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_30"
             android:textSize="@dimen/sp_16"
-            android:layout_below="@+id/edit_forget_password"
+            android:textColor="#000000"
+            android:layout_below="@+id/view_reg_one"
+            />
+
+        <Button
+            android:id="@+id/btn_forget_yancode"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentRight="true"
+            android:text="获取验证码"
+            android:textColor="@color/blue"
+            android:background="@drawable/shape_blue"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_below="@+id/view_reg_one"
+            />
+
+        <View
+            android:id="@+id/view_reg_two"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/transparent"
+            android:layout_below="@+id/tv_forget_password"
+            android:layout_marginTop="@dimen/dp_20"
+            />
+        <TextView
+            android:id="@+id/edit_forget_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_new_pass"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_30"
+            android:textSize="@dimen/sp_16"
+            android:textColor="#000000"
+            android:layout_below="@+id/view_reg_two"
             />
         <EditText
+            android:id="@+id/edit_forget_newpass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:hint="输入新密码"
+            android:background="@null"
+            android:layout_below="@+id/view_reg_two"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_20"
+            />
+        <View
+            android:id="@+id/view_reg_three"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/transparent"
+            android:layout_below="@+id/edit_forget_newpass"
+            android:layout_marginTop="@dimen/dp_20"
+            />
+        <TextView
             android:id="@+id/edit_sure_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,33 +154,34 @@
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_30"
             android:textSize="@dimen/sp_16"
-            android:layout_below="@+id/edit_login_password"
+            android:layout_below="@+id/view_reg_three"
             />
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="@dimen/dp_300"
-            android:layout_height="@dimen/dp_50"
-            android:layout_below="@+id/edit_sure_password"
-            android:layout_marginTop="@dimen/dp_100"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_20"
-            android:background="@drawable/shape_login"
-            android:text="@string/text_right_register"
-            android:textColor="#333333"
-            android:textSize="@dimen/sp_16"
-            />
-
-        <TextView
+        <EditText
+            android:id="@+id/edit_surenewpass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_register_xieyi"
-            android:layout_below="@+id/btn_login"
-            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_alignParentRight="true"
+            android:hint="@string/text_sure_pass"
+            android:background="@null"
+            android:layout_below="@+id/view_reg_three"
+            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_15"
             />
-
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_reg_sure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/rela_regist"
+        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/renzheng_shape"
+        android:text="@string/text_sure"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        />
 
 </RelativeLayout>
