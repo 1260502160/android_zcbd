@@ -80,15 +80,16 @@
             android:layout_marginTop="@dimen/dp_20"
             />
 
-        <TextView
-            android:id="@+id/tv_forget_password"
+        <EditText
+            android:id="@+id/edit_forget_passwords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/text_yan_code"
+            android:hint="@string/text_yan_code"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_30"
             android:textSize="@dimen/sp_16"
+            android:background="@null"
             android:textColor="#000000"
             android:layout_below="@+id/view_reg_one"
             />
@@ -111,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
             android:background="@color/transparent"
-            android:layout_below="@+id/tv_forget_password"
+            android:layout_below="@+id/edit_forget_passwords"
             android:layout_marginTop="@dimen/dp_20"
             />
         <TextView

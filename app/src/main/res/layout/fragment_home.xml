@@ -6,7 +6,6 @@
     android:background="#CCCCCC"
     >
 
-
     <com.stx.xhb.xbanner.XBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
@@ -40,7 +39,7 @@
                 android:id="@+id/icon_visitor_registration"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/ivation"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +61,7 @@
                 android:id="@+id/icon_store"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/store"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -85,7 +84,7 @@
                 android:id="@+id/icon_payment_center"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/paymoneys"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -108,7 +107,7 @@
                 android:id="@+id/icon_online_repair"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/repair"
                 />
             <TextView
                 android:layout_width="wrap_content"

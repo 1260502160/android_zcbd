@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<BottomTabInfo> bottomTabViews = new ArrayList<>();
 
-        bottomTabViews.add(new BottomTabInfo(R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground, "首页", new HomeFragment()));
-        bottomTabViews.add(new BottomTabInfo(R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground, "微警务", new SmallPoliceFragment()));
-        bottomTabViews.add(new BottomTabInfo(R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground, "我的", new MyFragment()));
+        bottomTabViews.add(new BottomTabInfo(R.mipmap.home_grey, R.mipmap.home_blue, "首页", new HomeFragment()));
+        bottomTabViews.add(new BottomTabInfo(R.mipmap.smallpolice_grey, R.mipmap.smallpolice_blue, "微警务", new SmallPoliceFragment()));
+        bottomTabViews.add(new BottomTabInfo(R.mipmap.my_grey, R.mipmap.my_blue, "我的", new MyFragment()));
 
 
         bottomTabLayout.initData(bottomTabViews);

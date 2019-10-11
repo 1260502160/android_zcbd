@@ -1,20 +1,21 @@
 package com.sunshine.first.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class ForgetPwdBean implements Serializable{
+public class LouHaoBean implements Serializable{
 
     /**
      * success : true
      * error_code : 200
-     * message : 修改成功
-     * data : {}
+     * message : 获取成功
+     * data : [{"id":13,"name":"1号楼"}]
      */
 
     private boolean success;
     private String error_code;
     private String message;
-    private DataBean data;
+    private List<DataBean> data;
 
     public boolean isSuccess() {
         return success;
@@ -40,14 +41,37 @@ public class ForgetPwdBean implements Serializable{
         this.message = message;
     }
 
-    public DataBean getData() {
+    public List<DataBean> getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(List<DataBean> data) {
         this.data = data;
     }
 
     public static class DataBean {
+        /**
+         * id : 13
+         * name : 1号楼
+         */
+
+        private int id;
+        private String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

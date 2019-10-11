@@ -4,8 +4,10 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
+        android:networkSecurityConfig="@xml/network_config"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -39,6 +41,7 @@
         <activity android:name=".activity.PhoneNumeberActivity" />
         <activity android:name=".activity.UpdatePassActivity" />
         <activity android:name=".activity.SfrzActivity" />
+        <activity android:name=".activity.ChooseCommityActivity"/>
         <activity android:name=".activity.YeZhuRenZhengActivity" />
         <activity android:name=".activity.BaoXiuActivity" />
         <activity android:name=".activity.MyIndentActivity" />

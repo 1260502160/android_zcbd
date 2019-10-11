@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.abner.ming.base.BaseFragment;
+import com.abner.ming.base.model.Api;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.CarInfoActivity;
 import com.sunshine.first.activity.FeedbackActivity;
@@ -25,23 +28,26 @@ import com.sunshine.first.activity.MyIndentActivity;
 import com.sunshine.first.activity.PayRecordActivity;
 import com.sunshine.first.activity.PersonalActivity;
 import com.sunshine.first.activity.RepairRecordActivity;
-import com.sunshine.first.activity.VisitorInvitationActivity;
 import com.sunshine.first.activity.VisitorRecordActivity;
 import com.sunshine.first.activity.ZhuHuGuanLiActivity;
+import com.sunshine.first.bean.MyInfomationBean;
+import com.sunshine.first.utils.SharePreferenceHelper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MyFragment extends Fragment {
+public class MyFragment extends BaseFragment {
 
     @BindView(R.id.icon_zhuhuguanli)
     ImageView iconZhuhuguanli;
     @BindView(R.id.icon_carinfo)
     ImageView iconCarinfo;
-    @BindView(R.id.icon_menjindengji)
-    ImageView iconMenjindengji;
+
     @BindView(R.id.icon_fangzhurenzheng)
     ImageView iconfangzhurenzheng;
     Unbinder unbinder;
@@ -59,18 +65,38 @@ public class MyFragment extends Fragment {
     RelativeLayout relMyLianxikefu;
     @BindView(R.id.relative_my_one)
     RelativeLayout relativemyone;
+    @BindView(R.id.icon_my)
+    ImageView iconMy;
+    @BindView(R.id.text_admin)
+    TextView textAdmin;
+    Unbinder unbinder1;
     private View inflate;
     private Intent intent;
     private PopupWindow pop;
-    private Button btn_yes,btn_no;
+    private Button btn_yes, btn_no;
+    private String token;
+    private Gson gson;
+    private MyInfomationBean myInfomationBean;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void initData() {
 
-        inflate = inflater.inflate(R.layout.fragment_my, container, false);
-        unbinder = ButterKnife.bind(this, inflate);
-        return inflate;
+        token = SharePreferenceHelper.getInstance(getContext()).getString("token", "");
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
+        net(false, false).post(1, Api.GetUserInfo_URL, map);
+        Log.i("bbb", "net");
+    }
+
+    @Override
+    protected void initView(View view) {
+
+        unbinder = ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_my;
     }
 
     @Override
@@ -79,7 +105,7 @@ public class MyFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.icon_zhuhuguanli, R.id.icon_carinfo, R.id.icon_menjindengji, R.id.icon_fangzhurenzheng,R.id.rel_my_indent, R.id.rel_repair_record, R.id.rel_jiaofeijilu, R.id.rel_my_yijianfankui, R.id.rel_my_lianxikefu,R.id.relative_my_one,R.id.rel_visitor_record})
+    @OnClick({R.id.icon_zhuhuguanli, R.id.icon_carinfo, R.id.icon_fangzhurenzheng, R.id.rel_my_indent, R.id.rel_repair_record, R.id.rel_jiaofeijilu, R.id.rel_my_yijianfankui, R.id.rel_my_lianxikefu, R.id.relative_my_one, R.id.rel_visitor_record})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_zhuhuguanli:
@@ -90,10 +116,8 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.icon_carinfo:
-                intent= new Intent(getActivity(), CarInfoActivity.class);
+                intent = new Intent(getActivity(), CarInfoActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.icon_menjindengji:
                 break;
             case R.id.icon_fangzhurenzheng:
                 popwindow();
@@ -116,7 +140,7 @@ public class MyFragment extends Fragment {
                 });
                 break;
             case R.id.rel_my_indent:
-                intent= new Intent(getContext(), MyIndentActivity.class);
+                intent = new Intent(getContext(), MyIndentActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rel_repair_record:
@@ -124,7 +148,7 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.rel_jiaofeijilu:
-               intent = new Intent(getContext(), PayRecordActivity.class);
+                intent = new Intent(getContext(), PayRecordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rel_my_yijianfankui:
@@ -143,7 +167,7 @@ public class MyFragment extends Fragment {
     private void popwindow() {
 
         View bottomView = View.inflate(getActivity(), R.layout.dialog_authenticated, null);
-         btn_yes = bottomView.findViewById(R.id.btn_yes);
+        btn_yes = bottomView.findViewById(R.id.btn_yes);
         btn_no = bottomView.findViewById(R.id.btn_no);
         pop = new PopupWindow(bottomView, -1, -2);
         pop.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -165,6 +189,17 @@ public class MyFragment extends Fragment {
         pop.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
 
 
+    }
+
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (type == 1) {
+            gson = new Gson();
+            myInfomationBean = gson.fromJson(data, MyInfomationBean.class);
+            Glide.with(getContext()).load(myInfomationBean.getData().getPhoto());
+            textAdmin.setText(myInfomationBean.getData().getNickname()+"");
+        }
     }
 
 }

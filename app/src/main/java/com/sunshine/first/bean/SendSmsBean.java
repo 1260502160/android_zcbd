@@ -2,12 +2,13 @@ package com.sunshine.first.bean;
 
 import java.io.Serializable;
 
-public class ForgetPwdBean implements Serializable{
+public class SendSmsBean implements Serializable{
+
 
     /**
      * success : true
      * error_code : 200
-     * message : 修改成功
+     * message : 发送验证码成功,请注意查收
      * data : {}
      */
 

@@ -35,6 +35,7 @@
         >
 
         <ImageView
+            android:id="@+id/icon_my"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
             android:src="@mipmap/ic_launcher"
@@ -53,6 +54,7 @@
             android:layout_marginTop="@dimen/dp_25"
             />
         <TextView
+            android:id="@+id/tv_sf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="房主"
@@ -100,7 +102,7 @@
                 android:id="@+id/icon_fangzhurenzheng"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/homeren"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -122,7 +124,7 @@
                 android:id="@+id/icon_zhuhuguanli"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/hostrenzheng"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -145,7 +147,7 @@
                 android:id="@+id/icon_carinfo"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/car"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -162,20 +164,8 @@
             android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_250"
-
             >
-            <ImageView
-                android:id="@+id/icon_menjindengji"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="门禁认证"
-                android:layout_marginTop="@dimen/dp_8"
-                />
+
         </LinearLayout>
 
     </RelativeLayout>
@@ -201,7 +191,7 @@
                 android:id="@+id/icon_fangkejilu"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/myindent"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 />
@@ -244,7 +234,7 @@
                 android:id="@+id/icon_baoxiujilu"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/visitorrecord"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 />
@@ -289,7 +279,7 @@
                 android:id="@+id/icon_jiaofeijilu"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/repairrecord"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 />
@@ -337,7 +327,7 @@
                 android:id="@+id/icon_jfjl"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/paymoneyrecord"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 />
@@ -381,7 +371,7 @@
                 android:id="@+id/icon_yijianfankui"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/feedback"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 />
@@ -425,7 +415,7 @@
                 android:id="@+id/icon_lianxikefu"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/coustomersevice"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_20"
                 />

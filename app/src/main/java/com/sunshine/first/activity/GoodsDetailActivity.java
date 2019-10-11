@@ -52,18 +52,19 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
     @BindView(R.id.icon_goods_two)
     ImageView iconGoodsTwo;
     private String token;
-    private String id;
+    private int id;
     private Gson gson;
     private GoodsDeatilBean goodsDeatilBean;
+
 
     @Override
     protected void initData() {
 
         token = SharePreferenceHelper.getInstance(GoodsDetailActivity.this).getString("token", "");
-        id = getIntent().getStringExtra("id");
+        id= getIntent().getIntExtra("id", -1);
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
-        map.put("id", id);
+        map.put("id", id+"");
         net(false, false).post(1, Api.GoodsListDeatil_URL, map);
         Log.i("ssss", "net");
     }
