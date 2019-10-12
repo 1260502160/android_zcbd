@@ -3,15 +3,13 @@ package com.sunshine.first.bean;
 import java.io.Serializable;
 import java.util.List;
 
-public class GetCommunityBean implements Serializable{
+public class HousenumberBean implements Serializable{
 
-
-    private static final long serialVersionUID = -3878013371685554979L;
     /**
      * success : true
      * error_code : 200
      * message : 获取成功
-     * data : [{"id":4,"name":"11111111111111111111"},{"id":11,"name":"11111111111111111111"},{"id":14,"name":"11111111111111"},{"id":15,"name":"阳光和赢"},{"id":16,"name":"海淀区温泉镇"},{"id":17,"name":"东1区"},{"id":49,"name":"枫林小区"},{"id":50,"name":"枫林小区"},{"id":51,"name":"枫林小区"},{"id":52,"name":"青年公寓"}]
+     * data : [{"id":14,"name":"101"},{"id":15,"name":"111"},{"id":16,"name":"112"},{"id":17,"name":"113"}]
      */
 
     private boolean success;
@@ -51,11 +49,10 @@ public class GetCommunityBean implements Serializable{
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
-        private static final long serialVersionUID = -1636660503257124097L;
+    public static class DataBean {
         /**
-         * id : 4
-         * name : 11111111111111111111
+         * id : 14
+         * name : 101
          */
 
         private int id;

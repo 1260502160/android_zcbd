@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sunshine.first.R;
@@ -39,14 +40,16 @@ public class ChooseCummintyAdapter extends RecyclerView.Adapter<ChooseCummintyAd
     public void onBindViewHolder(@NonNull ChooseCummintyAdapter.Viewholder viewholder, final int i) {
 
         viewholder.tv_name_cumm.setText(list.get(i).getName());
-        viewholder.tv_name_cumm.setOnClickListener(new View.OnClickListener() {
+
+        viewholder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                intent = new Intent(context, HostmanRenActivity.class);
+                OnItemClick.OnItemClick(view,i);
+            //  onItemClickList.onItemClickList(i);
+              /*  intent = new Intent(context, HostmanRenActivity.class);
                 intent.putExtra("id",list.get(i).getId());
                 intent.putExtra("name",list.get(i).getName());
-                context.startActivity(intent);
+                context.startActivity(intent);*/
             }
         });
     }
@@ -62,24 +65,29 @@ public class ChooseCummintyAdapter extends RecyclerView.Adapter<ChooseCummintyAd
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-
-
         private TextView tv_name_cumm;
+        private LinearLayout ll;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             tv_name_cumm = itemView.findViewById(R.id.tv_name_cumm);
+            ll = itemView.findViewById(R.id.ll);
 
         }
     }
 
-    //首先定义一个接口
-    public interface OnItemClickListener {
-        void onItemClickListener(int type);
+
+
+    private onClick  OnItemClick;
+
+    public onClick getOnItemClick() {
+        return OnItemClick;
     }
-    //声明接口
-    private StoreAllAdapter.OnItemClickListener mClickListener;
-    //供外部使用
-    public void setOnItemClickListener(StoreAllAdapter.OnItemClickListener pListener) {
-        this.mClickListener = pListener;
+
+    public void setOnItemClick(onClick onItemClick) {
+        OnItemClick = onItemClick;
+    }
+
+    public interface onClick{
+        void OnItemClick(View view,int pos);
     }
 }

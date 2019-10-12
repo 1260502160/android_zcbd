@@ -15,6 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的"
+            android:textSize="@dimen/sp_16"
+            android:textColor="#fff"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_20"
 
@@ -27,7 +29,7 @@
         android:id="@+id/relative_my_one"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_50"
@@ -72,6 +74,15 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
             />
+        <ImageView
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:src="@mipmap/my_ewn"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_40"
+            />
+
     </RelativeLayout>
 
     <View
@@ -87,6 +98,7 @@
         android:layout_height="@dimen/dp_100"
         android:layout_below="@+id/view_my_one"
         android:background="#ffffff"
+        android:layout_marginTop="@dimen/dp_18"
         >
         <LinearLayout
             android:id="@+id/linear_my_one"

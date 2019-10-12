@@ -25,6 +25,12 @@ public class Api {
     public final static  String GetUserInfo_URL = BASE_URL+"getUserInfo";
     //获取小区
     public final static  String GetHosing_URL = BASE_URL+"getCommunity";
+    //房屋认证
+    public final static  String OwnerVerify_URL = BASE_URL+"ownerVerify";
+    //获取车辆列表
+    public final static  String GetCarList_URL = BASE_URL+"getCarList";
+    //获取车辆列表
+    public final static  String UploadImg = BASE_URL+"uploadImg";
 
 
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,8 +15,14 @@ import com.abner.ming.base.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.GetCommunityBean;
+import com.sunshine.first.bean.HousenumberBean;
 import com.sunshine.first.bean.LouHaoBean;
+import com.sunshine.first.bean.OwnerVerifyBean;
+import com.sunshine.first.bean.UnitNumber;
+import com.sunshine.first.utils.SharePreferenceHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,16 +57,26 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
     TextView textLouhao;
     @BindView(R.id.text_danyuanhao)
     TextView textDanyuanhao;
+    @BindView(R.id.btn_submit)
+    Button btnSubmit;
     @BindView(R.id.text_menpaihao)
     TextView textMenpaihao;
     private ArrayList<String> list;
-    private SinglePicker<String> picker;
+    private SinglePicker<String> picker,picker1,picker2,picker3;
     private Intent intent;
-    private String id,name;
+    private int id;
+    private String name;
     private Gson gson;
     private LouHaoBean louHaoBean;
     private List<LouHaoBean.DataBean> louHaoBeanData;
     private String name1;
+    private GetCommunityBean.DataBean extra;
+    private UnitNumber unitNumber;
+    private List<UnitNumber.DataBean> unitNumberData;
+    private HousenumberBean housenumberBean;
+    private List<HousenumberBean.DataBean> housenumberBeanData;
+    private int louId,danyuanId,menId;
+    private Intent intent1;
 
 
     @Override
@@ -69,20 +86,73 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
 
     @Override
     protected void initData() {
-
-        id = getIntent().getStringExtra("id");
+        extra = (GetCommunityBean.DataBean) getIntent().getSerializableExtra("ss");
+        final String ss = getIntent().getStringExtra("ss");//id
+        final String ss1 = getIntent().getStringExtra("ss1");//name
+        id = getIntent().getIntExtra("id",-1);  //null
         name = getIntent().getStringExtra("name");
-        tvChooseXiaoqu.setText(name);
+        if (extra!=null&&!extra.getName().isEmpty())
+         tvChooseXiaoqu.setText(extra.getName());
+        //小区
         relZhurenzhengShenfen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Map<String,String> map = new HashMap<>();
-                map.put("type","2");
-                map.put("id",id);
+                map.put("type",2+"");
+                map.put("id",extra.getId()+"");
                 net(false,false).post(1,Api.GetHosing_URL,map);
+
             }
         });
+
+        //单元号
+        textLouhao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Map<String,String> map = new HashMap<>();
+                map.put("type",3+"");
+                // TODO: 2019-10-11 louid提醒后台更新   现有id为0   值为空数组
+                map.put("id",1+"");  //错误   这里传入的是楼号的id
+                //Log.i("www",extra.getId()+"");
+                net(false,false).post(2,Api.GetHosing_URL,map);
+            }
+        });
+
+        //门牌号
+        textDanyuanhao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Map<String,String> map = new HashMap<>();
+                map.put("type",5+"");
+                map.put("id",danyuanId+""); //错误   这里传入的是单元号的id
+                net(false,false).post(3,Api.GetHosing_URL,map);
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (textMenpaihao.getText().equals("租户")){
+//                    OwnerVerifyBean ownerVerifyBean = new OwnerVerifyBean();
+//                    ownerVerifyBean.setBuilding_id(louId);
+//                    ownerVerifyBean.setCommunity_id(extra.getId());
+//                    ownerVerifyBean.setUnitdoor_id(danyuanId);
+//                    ownerVerifyBean.setToken(SharePreferenceHelper.getInstance(getApplicationContext()).getString("token",""));
+                    Intent intent = new Intent(HostmanRenActivity.this, FamilyIdentityActivity.class);
+//                    intent.putExtra("ownerVerifyBean",ownerVerifyBean);
+
+                    startActivity(intent);
+                }else if (textMenpaihao.getText().equals("业主")){
+                    /*Intent intent = new Intent(HostmanRenActivity.this, FamilyIdentityActivity.class);
+                    startActivity(intent);*/
+                }
+
+            }
+        });
+
     }
 
 
@@ -103,72 +173,12 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
                 startActivity(intent);
                 break;
             case R.id.rel_zhurenzheng_shenfen:
-                /*list = new ArrayList<>();
-                list.add("113#");
-                list.add("114#");
-                list.add("115#");
-                list.add("116#");
-                picker = new SinglePicker<>(HostmanRenActivity.this, list);
-                picker.setCanLoop(false);//不禁用循环
-                picker.setLineVisible(true);
-                picker.setTextSize(18);
-                picker.setTitleText("楼栋选择");
-                picker.setSelectedIndex(8);
-                picker.setWheelModeEnable(false);
-                //启用权重 setWeightWidth 才起作用
-                picker.setWeightEnable(true);
-                picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
-                picker.setUnSelectedTextColor(Color.GRAY);
-                picker.setOnSingleWheelListener(new OnSingleWheelListener() {
-                    @Override
-                    public void onWheeled(int index, String item) {
-                        textLouhao.setText(item);
-                    }
-                });
-                picker.setOnItemPickListener(new OnItemPickListener<String>() {
-                    @Override
-                    public void onItemPicked(int index, String item) {
-                        textLouhao.setText(item);
-                    }
-                });
-                picker.show();*/
                 break;
             case R.id.rel_zhurenzheng_louhao:
 
+
                 break;
             case R.id.rel_zhurenzheng_danyuanhao:
-                list = new ArrayList<>();
-                list.add("1单元");
-                list.add("2单元");
-                list.add("3单元");
-                list.add("4单元");
-                list.add("5单元");
-                picker = new SinglePicker<>(HostmanRenActivity.this, list);
-                picker.setCanLoop(false);//不禁用循环
-                picker.setLineVisible(true);
-                picker.setTextSize(18);
-                picker.setTitleText("单元选择");
-                picker.setSelectedIndex(8);
-                picker.setWheelModeEnable(false);
-                //启用权重 setWeightWidth 才起作用
-                picker.setWeightEnable(true);
-                picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
-                picker.setUnSelectedTextColor(Color.GRAY);
-                picker.setOnSingleWheelListener(new OnSingleWheelListener() {
-                    @Override
-                    public void onWheeled(int index, String item) {
-                        textDanyuanhao.setText(item);
-                    }
-                });
-                picker.setOnItemPickListener(new OnItemPickListener<String>() {
-                    @Override
-                    public void onItemPicked(int index, String item) {
-                        textDanyuanhao.setText(item);
-                    }
-                });
-                picker.show();
                 break;
             case R.id.rel_zhurenzheng_menpaihao:
                 list = new ArrayList<>();
@@ -189,13 +199,13 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
                 picker.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override
                     public void onWheeled(int index, String item) {
-                        textDanyuanhao.setText(item);
+                        textMenpaihao.setText(item);
                     }
                 });
                 picker.setOnItemPickListener(new OnItemPickListener<String>() {
                     @Override
                     public void onItemPicked(int index, String item) {
-                        textDanyuanhao.setText(item);
+                        textMenpaihao.setText(item);
                     }
                 });
                 picker.show();
@@ -210,41 +220,124 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
             gson = new Gson();
             louHaoBean = gson.fromJson(data, LouHaoBean.class);
             louHaoBeanData = louHaoBean.getData();
+            list = new ArrayList<>();
+            list.clear();
             for (LouHaoBean.DataBean louHaoBeanDatum : louHaoBeanData) {
-
-                list = new ArrayList<>();
                 list.add(louHaoBeanDatum.getName());
         }
-                picker = new SinglePicker<>(HostmanRenActivity.this, list);
-                picker.setCanLoop(false);//不禁用循环
-                picker.setLineVisible(true);
-                picker.setTextSize(18);
-                picker.setTitleText("楼号选择");
-                picker.setSelectedIndex(8);
-                picker.setWheelModeEnable(false);
+                picker1 = new SinglePicker<>(HostmanRenActivity.this, list);
+                picker1.setCanLoop(false);//不禁用循环
+                picker1.setLineVisible(true);
+                picker1.setTextSize(18);
+                picker1.setTitleText("楼号选择");
+                picker1.setSelectedIndex(8);
+                picker1.setWheelModeEnable(false);
                 //启用权重 setWeightWidth 才起作用
-                picker.setWeightEnable(true);
-                picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
-                picker.setUnSelectedTextColor(Color.GRAY);
-                picker.setOnSingleWheelListener(new OnSingleWheelListener() {
+                picker1.setWeightEnable(true);
+                picker1.setWeightWidth(1);
+                picker1.setSelectedTextColor(Color.BLUE);//前四位值是透明度
+                picker1.setUnSelectedTextColor(Color.GRAY);
+                picker1.setOnSingleWheelListener(new OnSingleWheelListener() {
                     @Override
                     public void onWheeled(int index, String item) {
                         textShenfen.setText(item);
                     }
                 });
-                picker.setOnItemPickListener(new OnItemPickListener<String>() {
+                picker1.setOnItemPickListener(new OnItemPickListener<String>() {
                     @Override
                     public void onItemPicked(int index, String item) {
                         textShenfen.setText(item);
+                        //  设置成员变量  保存 楼号的louId    = index
+                        louId = index;
                     }
                 });
-                picker.show();
+                picker1.show();
 
-//            }
+        }
 
+        if (type==2) {
+
+            gson = new Gson();
+            unitNumber = gson.fromJson(data, UnitNumber.class);
+            unitNumberData = unitNumber.getData();
+            list = new ArrayList<>();
+            list.clear();
+            for (UnitNumber.DataBean unitNumberDatum : unitNumberData) {
+
+                list.add(unitNumberDatum.getName());
+            }
+            picker2 = new SinglePicker<>(HostmanRenActivity.this, list);
+            picker2.setCanLoop(false);//不禁用循环
+            picker2.setLineVisible(true);
+            picker2.setTextSize(18);
+            picker2.setTitleText("单元号选择");
+            picker2.setSelectedIndex(8);
+            picker2.setWheelModeEnable(false);
+            //启用权重 setWeightWidth 才起作用
+            picker2.setWeightEnable(true);
+            picker2.setWeightWidth(1);
+            picker2.setSelectedTextColor(Color.BLUE);//前四位值是透明度
+            picker2.setUnSelectedTextColor(Color.GRAY);
+            picker2.setOnSingleWheelListener(new OnSingleWheelListener() {
+                @Override
+                public void onWheeled(int index, String item) {
+                    textLouhao.setText(item);
+                }
+            });
+            picker2.setOnItemPickListener(new OnItemPickListener<String>() {
+                @Override
+                public void onItemPicked(int index, String item) {
+                    textLouhao.setText(item);
+                    //  设置成员变量  保存 单元号的danyuanId    = index
+                    danyuanId = index;
+                }
+            });
+            picker2.show();
+
+        }
+
+        if(type==3){
+            gson = new Gson();
+            housenumberBean = gson.fromJson(data, HousenumberBean.class);
+            housenumberBeanData = housenumberBean.getData();
+            list = new ArrayList<>();
+            list.clear();
+            for (HousenumberBean.DataBean housenumberBeanDatum : housenumberBeanData) {
+
+                list.add(housenumberBeanDatum.getName());
+            }
+
+            picker3 = new SinglePicker<>(HostmanRenActivity.this, list);
+            picker3.setCanLoop(false);//不禁用循环
+            picker3.setLineVisible(true);
+            picker3.setTextSize(18);
+            picker3.setTitleText("门牌号选择");
+            picker3.setSelectedIndex(8);
+            picker3.setWheelModeEnable(false);
+            //启用权重 setWeightWidth 才起作用
+            picker3.setWeightEnable(true);
+            picker3.setWeightWidth(1);
+            picker3.setSelectedTextColor(Color.BLUE);//前四位值是透明度
+            picker3.setUnSelectedTextColor(Color.GRAY);
+            picker3.setOnSingleWheelListener(new OnSingleWheelListener() {
+                @Override
+                public void onWheeled(int index, String item) {
+                    textDanyuanhao.setText(item);
+                }
+            });
+            picker3.setOnItemPickListener(new OnItemPickListener<String>() {
+                @Override
+                public void onItemPicked(int index, String item) {
+                    textDanyuanhao.setText(item);
+                    //  设置成员变量  保存 门牌号的menId    = index
+                    menId = index;
+                }
+            });
+            picker3.show();
+        }
 
 
         }
-    }
+
+
 }

@@ -35,10 +35,11 @@ dependencies {
     //选择器
     implementation 'com.github.addappcn:android-pickers:1.0.3'
     //implementation 'com.airsaid.library:pickerview:1.0.3'
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
 
     //下面两个是RxJava 和RxAndroid
-    implementation 'io.reactivex:rxjava:1.2.1'
-    implementation 'io.reactivex:rxandroid:1.2.1'
+//    implementation 'io.reactivex:rxjava:1.2.1'
+//    implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     // 黄油刀依赖
@@ -48,6 +49,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.github.ybq:Android-SpinKit:1.2.0'
 
+
+    //七牛云依赖
+    implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
     //Banner轮播
     implementation 'com.xhb:xbanner:1.5.1'
 

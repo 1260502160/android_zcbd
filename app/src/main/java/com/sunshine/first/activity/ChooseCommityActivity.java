@@ -1,5 +1,6 @@
 package com.sunshine.first.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -88,14 +89,24 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
         chooseCummintyAdapter = new ChooseCummintyAdapter(ChooseCommityActivity.this);
         //设置Adapter
         recycleChooseCity.setAdapter(chooseCummintyAdapter);
+        chooseCummintyAdapter.setOnItemClick(new ChooseCummintyAdapter.onClick() {
+            @Override
+            public void OnItemClick(View view, int pos) {
+                Intent intent = new Intent(ChooseCommityActivity.this, HostmanRenActivity.class);
+                intent.putExtra("ss",getCommunityBeanData.get(pos));
 
+                startActivity(intent);
+            }
+        });
         map = new HashMap<>();
         map.put("type","1");
         net(false,false).post(1,Api.GetHosing_URL,map);
         iconSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 hosingname = editHosingname.getText().toString();
+
                 map.put("keyword",hosingname);
                 net(false,false).post(1,Api.GetHosing_URL,map);
             }
