@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.abner.ming.base.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PaymentCenterActivity extends AppCompatActivity {
+public class PaymentCenterActivity extends BaseAppCompatActivity{
     @BindView(R.id.icon_back)
     ImageView iconBack;
     @BindView(R.id.text_pay_record)
@@ -36,14 +37,15 @@ public class PaymentCenterActivity extends AppCompatActivity {
     private GridView gridview;
 
 
+
+    protected void initData() {
+    }
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_center);
+    protected void initView() {
         ButterKnife.bind(this);
         gridview = findViewById(R.id.gridview);
-        //初始化数据
-        initData();
+
         String[] from={"img","text"};
 
         int[] to={R.id.img,R.id.text};
@@ -60,9 +62,6 @@ public class PaymentCenterActivity extends AppCompatActivity {
                 builder.setTitle("提示").setMessage(dataList.get(arg2).get("text").toString()).create().show();
             }
         });
-    }
-
-    private void initData() {
 
         //图标
         int icno[] = { R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,
@@ -79,19 +78,10 @@ public class PaymentCenterActivity extends AppCompatActivity {
         }
     }
 
-
-    @OnClick({R.id.icon_back, R.id.text_pay_record, R.id.recycle_choose_home, R.id.gridview})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
-            case R.id.text_pay_record:
-                break;
-            case R.id.recycle_choose_home:
-                break;
-            case R.id.gridview:
-                break;
-        }
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_payment_center;
     }
+
+
 }

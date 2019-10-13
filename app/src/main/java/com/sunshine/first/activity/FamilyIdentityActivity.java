@@ -1,16 +1,13 @@
 package com.sunshine.first.activity;
 
 import android.Manifest;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -33,30 +30,28 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
-import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.utils.Json;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.UploadImgBean;
-import com.sunshine.first.utils.GlideUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -148,6 +143,12 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        iconBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         relSex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -405,23 +406,84 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity {
                 }
                 long duration = media.getDuration();
 //                getImgPath();
-                okHttpUpload("file", path, new UploadCallback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        String str = response.body().toString();
-                        Log.i("lfq", response.message() + " , body " + str);
-                    }
+//                okHttpUpload("file", path, new UploadCallback() {
+//                    @Override
+//                    public void onResponse(Call call, Response response) {
+//                        String str = response.body().toString();
+//                        Log.i("lfq", response.message() + " , body " + str);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        Log.i("IOException",e.getMessage());
+//                    }
+//                });
+                Uri uri = Uri.parse(path);
+//                GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
 
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.i("IOException",e.getMessage());
-                    }
-                });
-                //GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,ivTouXiang);
+                iconHead.setImageURI(uri);
+                try {
+                    iconHead.setDrawingCacheEnabled(true);
+                    Log.e("bitmap","bitmap 1");
+                    Bitmap bitmap=iconHead.getDrawingCache();
+                    Log.e("bitmap","bitmap 2"+bitmap);
+
+
+//                    Bitmap bitmap = getBitmapFormUri(this,uri);
+//                    GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
+//                    iconHead.setImageBitmap(bitmap);
+                    String file = bitmapToBase64(bitmap);
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("image",file);
+                    map.put("folder","xier");
+                    map.put("disk","xier");
+                    map.put("isApp","1");
+//                    ge(map);
+                    net(false, false).post(2, Api.UploadImg, map);
+//                    iconHead.setDrawingCacheEnabled(false);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
             }
         }
     }
 
+
+    /**
+     * bitmap转为base64
+     * @param bitmap
+     * @return
+     */
+    public String bitmapToBase64(Bitmap bitmap) {
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+                baos.flush();
+                baos.close();
+
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
     private void getImgPath() {
         File file = new File(path);
         Toast.makeText(this,file.getAbsolutePath(),Toast.LENGTH_SHORT).show();
@@ -436,90 +498,6 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity {
         }
     }
 
-    public static void okHttpUpload(String partName, String path, final UploadCallback callback){
-        File file = new File(path);             // 需要上传的文件
-        RequestBody requestFile =               // 根据文件格式封装文件
-                RequestBody.create(MediaType.parse("image/*"), file);
-
-        // 初始化请求体对象，设置Content-Type以及文件数据流
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)            // multipart/form-data
-                .addFormDataPart(partName, file.getName(), requestFile)
-                .build();
-
-        // 封装OkHttp请求对象，初始化请求参数
-        Request request = new Request.Builder()
-                .url(Api.UploadImg)                // 上传url地址
-                .post(requestBody)              // post请求体
-                .build();
-
-        final okhttp3.OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-        OkHttpClient okHttpClient  = httpBuilder
-                .connectTimeout(100, TimeUnit.SECONDS)          // 设置请求超时时间
-                .writeTimeout(150, TimeUnit.SECONDS)
-                .build();
-        // 发起异步网络请求
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, okhttp3.Response response) throws IOException {
-                if (callback != null){
-                    callback.onResponse(call, response);
-                }
-            }
-            @Override
-            public void onFailure(Call call, IOException e) {
-                if (callback != null){
-                    callback.onFailure(call, e);
-                }
-            }
-        });
-    }
-
-    public  File uriToFile(Uri uri, Context context) {
-        String path = null;
-        if ("file".equals(uri.getScheme())) {
-            path = uri.getEncodedPath();
-            if (path != null) {
-                path = Uri.decode(path);
-                ContentResolver cr = context.getContentResolver();
-                StringBuffer buff = new StringBuffer();
-                buff.append("(").append(MediaStore.Images.ImageColumns.DATA).append("=").append("'" + path + "'").append(")");
-                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[] { MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA }, buff.toString(), null, null);
-                int index = 0;
-                int dataIdx = 0;
-                for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
-                    index = cur.getColumnIndex(MediaStore.Images.ImageColumns._ID);
-                    index = cur.getInt(index);
-                    dataIdx = cur.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                    path = cur.getString(dataIdx);
-                }
-                cur.close();
-                if (index == 0) {
-                } else {
-                    Uri u = Uri.parse("content://media/external/images/media/" + index);
-                    System.out.println("temp uri is :" + u);
-                }
-            }
-            if (path != null) {
-                return new File(path);
-            }
-        } else if ("content".equals(uri.getScheme())) {
-            // 4.2.2以后
-            String[] proj = { MediaStore.Images.Media.DATA };
-            Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
-            if (cursor.moveToFirst()) {
-                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                path = cursor.getString(columnIndex);
-            }
-            cursor.close();
-
-            return new File(path);
-        } else {
-            //Log.i(TAG, "Uri Scheme:" + uri.getScheme());
-        }
-        return null;
-    }
-
     @Override
     public void success(int type, String data) {
         super.success(type, data);
@@ -528,11 +506,5 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity {
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
             String imgUrl = uploadImgBean.getData().getImgUrl();
         }
-    }
-
-    private  interface UploadCallback {
-        void onResponse(Call call, Response response);
-
-        void onFailure(Call call, IOException e);
     }
 }

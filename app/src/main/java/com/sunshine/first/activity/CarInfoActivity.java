@@ -34,8 +34,8 @@ public class CarInfoActivity extends BaseAppCompatActivity{
     ImageView iconBack;
     @BindView(R.id.recycle_carinfo)
     RecyclerView recycleCarinfo;
-    @BindView(R.id.btn_add_home_authen)
-    Button btnAddHomeAuthen;
+    @BindView(R.id.btn_add_car_info)
+    Button btnaAddCarInfo;
     private Intent intent;
     private String token;
     private Gson gson;
@@ -76,13 +76,13 @@ public class CarInfoActivity extends BaseAppCompatActivity{
         return R.layout.layout_car_list;
     }
 
-    @OnClick({R.id.icon_back, R.id.btn_add_home_authen})
+    @OnClick({R.id.icon_back, R.id.btn_add_car_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
                 break;
-            case R.id.btn_add_home_authen:
+            case R.id.btn_add_car_info:
                 intent = new Intent(CarInfoActivity.this, ChooseHomeActivity.class);
                 startActivity(intent);
                 break;

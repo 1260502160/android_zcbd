@@ -10,40 +10,54 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.abner.ming.base.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FeedbackActivity extends AppCompatActivity {
+public class FeedbackActivity extends BaseAppCompatActivity{
 
     @BindView(R.id.icon_back)
     ImageView iconBack;
-    @BindView(R.id.edit_feedback)
-    EditText editFeedback;
     @BindView(R.id.icon_add)
     ImageView iconAdd;
     @BindView(R.id.text_feedback_number)
     TextView textFeedbackNumber;
     @BindView(R.id.btn_feedback_submit)
     Button btnFeedbackSubmit;
+    private EditText editFeedback;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_advice);
-        ButterKnife.bind(this);
+    protected void initData() {
+        editFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editFeedback.addTextChangedListener(new TextWatcher());
+            }
+        });
     }
 
-    @OnClick({R.id.icon_back, R.id.edit_feedback, R.id.icon_add, R.id.btn_feedback_submit, R.id.text_feedback_number})
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+        editFeedback = (EditText) get(R.id.edit_feedback);
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_advice;
+    }
+
+   /* @OnClick({R.id.icon_back, R.id.edit_feedback, R.id.icon_add, R.id.btn_feedback_submit, R.id.text_feedback_number})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
                 break;
             case R.id.edit_feedback:
-                editFeedback.addTextChangedListener(new TextWatcher());
                 break;
             case R.id.icon_add:
                 break;
@@ -52,7 +66,7 @@ public class FeedbackActivity extends AppCompatActivity {
             case R.id.text_feedback_number:
                 break;
         }
-    }
+    }*/
 
 
     class TextWatcher implements android.text.TextWatcher {

@@ -1,21 +1,21 @@
 package com.sunshine.first.bean;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class RegisterBean implements Serializable{
 
+
     /**
-     * success : false
-     * error_code : error
-     * message : 该手机号已注册
-     * data : []
+     * success : true
+     * error_code : 200
+     * message : 注册成功
+     * data : {"token":"0fc7e4c77217b8afee2d9f2e735741f6","is_verify":0}
      */
 
     private boolean success;
     private String error_code;
     private String message;
-    private List<?> data;
+    private DataBean data;
 
     public boolean isSuccess() {
         return success;
@@ -41,11 +41,37 @@ public class RegisterBean implements Serializable{
         this.message = message;
     }
 
-    public List<?> getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(List<?> data) {
+    public void setData(DataBean data) {
         this.data = data;
+    }
+
+    public static class DataBean {
+        /**
+         * token : 0fc7e4c77217b8afee2d9f2e735741f6
+         * is_verify : 0
+         */
+
+        private String token;
+        private int is_verify;
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+
+        public int getIs_verify() {
+            return is_verify;
+        }
+
+        public void setIs_verify(int is_verify) {
+            this.is_verify = is_verify;
+        }
     }
 }

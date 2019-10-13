@@ -66,7 +66,6 @@ public class StoreAllAdapter extends RecyclerView.Adapter<StoreAllAdapter.Viewho
     }
 
 
-
     public void setDataList(List<GoodsListBean.DataBean.ListBean> listBean) {
         this.list = listBean;
         notifyDataSetChanged();

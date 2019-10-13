@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCCCCC"
+    >
+
+    <com.stx.xhb.xbanner.XBanner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        >
+    </com.stx.xhb.xbanner.XBanner>
+
+
+
+    <RelativeLayout
+        android:id="@+id/relative_home_two"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_below="@+id/banner"
+        android:background="@drawable/shape_white"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_10"
+        >
+        <LinearLayout
+            android:id="@+id/linear_my_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+
+            >
+            <ImageView
+                android:id="@+id/icon_visitor_registration"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/fangkedengji"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="访客登记"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_my_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_100"
+            >
+            <ImageView
+                android:id="@+id/icon_store"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/paymoneys"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="便民缴费"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_my_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_180"
+
+            >
+            <ImageView
+                android:id="@+id/icon_payment_center"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/repair"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我要报修"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_my_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_250"
+
+            >
+            <ImageView
+                android:id="@+id/icon_owner_certification"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/yezhurenzheng"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="业主认证"
+                android:layout_marginTop="@dimen/dp_8"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_hot_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="物业通知"
+        android:layout_below="@+id/relative_home_two"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#FE7C7C"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:padding="@dimen/dp_10"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/tv_hot_store"
+        >
+
+    <RelativeLayout
+        android:layout_width="@dimen/dp_345"
+        android:layout_height="@dimen/dp_70"
+        android:background="@drawable/shape_grey"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一小时前"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp_345"
+            android:layout_height="@dimen/dp_70"
+            android:layout_below="@+id/tv_hot_store"
+            android:background="@drawable/shape_grey"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述文本描述"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09月20日"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+    <!--<ImageView
+        android:id="@+id/icon_owner_certification"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/banner"
+        android:background="@mipmap/yezhurenzheng"
+
+
+        />-->
+
+    <!--<LinearLayout
+        android:id="@+id/linear_home_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_below="@+id/icon_yezhurenzheng"
+        >
+        <ImageView
+            android:id="@+id/icon_shequstore"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            />
+        <ImageView
+            android:id="@+id/icon_fangkedengji"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="@dimen/dp_20"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+       android:id="@+id/linear_home_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_below="@+id/linear_home_one"
+        >
+        <ImageView
+            android:id="@+id/icon_baoxiu"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            />
+        <ImageView
+            android:id="@+id/icon_bianminjiaofei"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="@dimen/dp_20"
+            />
+    </LinearLayout>-->
+
+
+</RelativeLayout>

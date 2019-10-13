@@ -60,8 +60,6 @@ public class HomeFragment extends BaseFragment{
     ImageView iconStore;
     @BindView(R.id.icon_payment_center)
     ImageView iconPaymentCenter;
-    @BindView(R.id.icon_owner_certification)
-    ImageView iconOwnerCertification;
     @BindView(R.id.icon_online_repair)
     ImageView iconOnlineRepair;
     @BindView(R.id.tv_hot_store)
@@ -134,35 +132,35 @@ public class HomeFragment extends BaseFragment{
 
     }
 
-    @OnClick({R.id.banner, R.id.icon_visitor_registration, R.id.icon_store, R.id.icon_payment_center, R.id.icon_online_repair, R.id.tv_hot_store, R.id.home_recycle, R.id.icon_owner_certification})
+    @OnClick({R.id.banner, R.id.icon_visitor_registration, R.id.icon_store, R.id.icon_payment_center, R.id.icon_online_repair, R.id.tv_hot_store, R.id.home_recycle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.banner:
                 break;
             case R.id.icon_visitor_registration:
+                /*intent = new Intent(getContext(), VisitorRegistrationActivity.class);
+                startActivity(intent);*/
+                break;
+            case R.id.icon_store:
+              /*  intent = new Intent(getContext(), OnlineStoreActivity.class);
+                startActivity(intent);*/
+                break;
+            case R.id.icon_payment_center:
                 intent = new Intent(getContext(), VisitorRegistrationActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.icon_store:
-                intent = new Intent(getContext(), OnlineStoreActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.icon_payment_center:
-                intent = new Intent(getContext(), PaymentCenterActivity.class);
-                startActivity(intent);
-                break;
             case R.id.icon_online_repair:
-                intent = new Intent(getContext(), BaoXiuActivity.class);
+                intent = new Intent(getContext(), OnlineStoreActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_hot_store:
                 break;
             case R.id.home_recycle:
                 break;
-            case R.id.icon_owner_certification:
-                intent = new Intent(getContext(), YeZhuRenZhengActivity.class);
-                startActivity(intent);
-                break;
+          /*  case R.id.icon_owner_certification:
+               *//* intent = new Intent(getContext(), YeZhuRenZhengActivity.class);
+                startActivity(intent);*//*
+                break;*/
         }
     }
 /*
