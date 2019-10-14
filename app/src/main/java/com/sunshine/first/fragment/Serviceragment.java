@@ -18,8 +18,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class Serviceragment extends BaseFragment {
-    @BindView(R.id.banner)
-    XBanner banner;
     @BindView(R.id.icon_visitor_registration)
     ImageView iconVisitorRegistration;
     @BindView(R.id.icon_store)

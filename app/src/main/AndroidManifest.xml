@@ -60,6 +60,7 @@
         <activity android:name=".activity.BaoLookDeatilActivity" />
         <activity android:name=".activity.RepairRecordActivity" />
         <activity android:name=".activity.BianMinJiaoFeiActivity" />
+        <activity android:name=".activity.TenementActivity"/>
         <activity android:name=".activity.StopCarActivity" />
         <activity android:name=".activity.PayRecordActivity" />
         <activity android:name=".activity.FamilyIdentityActivity"/>

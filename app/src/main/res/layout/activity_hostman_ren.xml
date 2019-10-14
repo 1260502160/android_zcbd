@@ -137,6 +137,7 @@
 
         </RelativeLayout>
 
+
         <View
             android:id="@+id/view_zhurenzheng_two"
             android:layout_width="match_parent"
@@ -148,10 +149,56 @@
 
 
         <RelativeLayout
-            android:id="@+id/rel_zhurenzheng_louhao"
+            android:id="@+id/relative_louceng"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_70"
             android:layout_below="@+id/view_zhurenzheng_two"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:text="楼层"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:id="@+id/text_louCengId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请选择您的楼层"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_40"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_14"
+                />
+            <ImageView
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:src="@mipmap/next"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_20"
+                />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_danyuanhao"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="#ececec"
+            android:layout_below="@+id/relative_louceng"
+
+            />
+        <RelativeLayout
+            android:id="@+id/rel_zhurenzheng_louhao"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_70"
+            android:layout_below="@+id/view_danyuanhao"
             >
 
             <TextView
@@ -195,47 +242,45 @@
             android:layout_height="@dimen/dp_1"
             android:background="#ececec"
             android:layout_below="@+id/rel_zhurenzheng_louhao"
-
             />
-
 
         <RelativeLayout
             android:id="@+id/rel_zhurenzheng_danyuanhao"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_70"
             android:layout_below="@+id/view_zhurenzheng_three"
-            >
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="0dp">
 
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_menpaihao"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
-                android:layout_marginTop="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:text="@string/text_menpaihao"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_16"
-                />
+                android:textSize="@dimen/sp_16" />
+
             <TextView
                 android:id="@+id/text_danyuanhao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="请选择您的门牌号"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginRight="@dimen/dp_40"
+                android:hint="请选择您的门牌号"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
-                />
+                android:textSize="@dimen/sp_14" />
+
             <ImageView
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
-                android:src="@mipmap/next"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_20"
-                />
+                android:layout_marginRight="@dimen/dp_8"
+                android:src="@mipmap/next" />
 
         </RelativeLayout>
 
@@ -289,8 +334,8 @@
 
         </RelativeLayout>
 
-        </RelativeLayout>
 
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_submit"

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:layout_width="@dimen/dp_170"
-    android:layout_height="@dimen/dp_200"
-    app:cardCornerRadius="@dimen/dp_8"
-    android:padding="@dimen/dp_20"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/dp_10"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/dp_10">
 
     <LinearLayout
         android:id="@+id/linear_goods"
-        android:layout_width="@dimen/dp_200"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
         <ImageView
             android:id="@+id/icon_goods"
             android:layout_width="@dimen/dp_200"
+            android:layout_gravity="center"
             android:layout_height="@dimen/dp_150"
             android:src="@mipmap/ic_launcher"
             />
@@ -40,7 +40,8 @@
 
         <TextView
             android:id="@+id/tv_store_price"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="￥9.9"
             android:textColor="#FE2727"
@@ -51,14 +52,14 @@
 
             <TextView
                 android:id="@+id/tv_trade_price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="批发价8.8"
                 android:background="@drawable/shape_pink"
                 android:textColor="#FE2727"
                 android:textSize="@dimen/sp_12"
                 android:layout_marginTop="@dimen/dp_5"
-                android:layout_marginLeft="@dimen/dp_100"
                 />
 
         </LinearLayout>

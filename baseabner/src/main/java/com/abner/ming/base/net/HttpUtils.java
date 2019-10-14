@@ -13,11 +13,15 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -226,10 +230,35 @@ public class HttpUtils {
 
     //获取请求接口
     private HttpService getHttpService() {
+
+       OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(getInterceptor())//日志拦截器
+                .connectTimeout(10, TimeUnit.SECONDS)//连接超时
+                .readTimeout(10,TimeUnit.SECONDS)//读取超时
+                .writeTimeout(10,TimeUnit.SECONDS)//写入超时
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
                 .baseUrl(base_url).build();
         return retrofit.create(HttpService.class);
+    }
+
+
+    /**
+     * 设置拦截器
+     *
+     * @return
+     */
+    private Interceptor getInterceptor() {
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        //显示日志
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        return interceptor;
     }
 
 }

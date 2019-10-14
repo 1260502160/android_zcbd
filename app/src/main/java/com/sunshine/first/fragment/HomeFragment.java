@@ -54,8 +54,8 @@ public class HomeFragment extends BaseFragment{
     public static final String AAAA = "aaaa";
     @BindView(R.id.banner)
     XBanner banner;
-    @BindView(R.id.icon_visitor_registration)
-    ImageView iconVisitorRegistration;
+   /* @BindView(R.id.icon_visitor_registration)
+    ImageView iconVisitorRegistration;*/
     @BindView(R.id.icon_store)
     ImageView iconStore;
     @BindView(R.id.icon_payment_center)
@@ -67,7 +67,7 @@ public class HomeFragment extends BaseFragment{
     @BindView(R.id.home_recycle)
     RecyclerView homeRecycle;
     Unbinder unbinder;
-    /* @BindView(R.id.icon_yezhurenzheng)
+   /* *//* @BindView(R.id.icon_yezhurenzheng)
         ImageView iconYezhurenzheng;
         @BindView(R.id.icon_shequstore)
         ImageView iconShequstore;

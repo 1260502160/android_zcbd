@@ -54,7 +54,7 @@
                 android:id="@+id/icon_search"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/iconsearch"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_15"
                 />

@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,31 +15,23 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abner.ming.base.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
-import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
-import com.qiniu.android.utils.Json;
 import com.sunshine.first.R;
-import com.sunshine.first.bean.OwnerVerifyBean;
-import com.sunshine.first.bean.ShowOwnerVerifyBean;
-import com.sunshine.first.bean.UploadImgBean;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,210 +43,119 @@ import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
-public class FamilyIdentityActivity extends BaseAppCompatActivity implements View.OnClickListener {
-
+public class TenementActivity extends BaseAppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.icon_back)
     ImageView iconBack;
     @BindView(R.id.text_forget)
     TextView textForget;
-    @BindView(R.id.relative_change)
-    RelativeLayout relativeChange;
+    @BindView(R.id.view_fangzhurenzheng_one)
+    View viewFangzhurenzhengOne;
     @BindView(R.id.text_name)
     TextView textName;
     @BindView(R.id.tv_name)
     EditText tvName;
-    @BindView(R.id.rel_name)
-    RelativeLayout relName;
     @BindView(R.id.view_my_fangkejilu)
     View viewMyFangkejilu;
     @BindView(R.id.tv_sex)
-    EditText tvSex;
-    @BindView(R.id.rel_sex)
-    RelativeLayout relSex;
+    TextView tvSex;
     @BindView(R.id.view_zhurenzheng_two)
     View viewZhurenzhengTwo;
     @BindView(R.id.tv_phone_number)
     EditText tvPhoneNumber;
-    @BindView(R.id.rel_phone)
-    RelativeLayout relPhone;
     @BindView(R.id.view_zhurenzheng_three)
     View viewZhurenzhengThree;
     @BindView(R.id.tv_choose_relation)
     TextView tvChooseRelation;
-    @BindView(R.id.rel_relationship)
-    RelativeLayout relRelationship;
     @BindView(R.id.view_zhurenzheng_four)
     View viewZhurenzhengFour;
     @BindView(R.id.tv_ID_number)
     EditText tvIDNumber;
-    @BindView(R.id.rel_ID_number)
-    RelativeLayout relIDNumber;
-    @BindView(R.id.relative_id)
-    RelativeLayout relativeId;
-    @BindView(R.id.tv_photos)
-    TextView tvPhotos;
-    @BindView(R.id.tv_grey)
-    TextView tvGrey;
+    @BindView(R.id.view_family_two)
+    View viewFamilyTwo;
     @BindView(R.id.icon_head)
     ImageView iconHead;
-    @BindView(R.id.rela_photo)
-    RelativeLayout relaPhoto;
-    @BindView(R.id.view_line)
-    View viewLine;
-    @BindView(R.id.linear_id)
-    LinearLayout linearId;
-    @BindView(R.id.icon_head_found)
-    ImageView iconHeadFound;
-    @BindView(R.id.rela_head_takephoto)
-    RelativeLayout relaHeadTakephoto;
     @BindView(R.id.icon_china)
     ImageView iconChina;
-    @BindView(R.id.rela_back_takephoto)
-    RelativeLayout relaBackTakephoto;
-    @BindView(R.id.relative_two)
-    RelativeLayout relativeTwo;
+    @BindView(R.id.icon_tenement)
+    ImageView iconTenement;
+    @BindView(R.id.icon_house_prove)
+    ImageView iconHouseProve;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
 
     private PopupWindow pop;
     private int maxSelectNum = 1;
     private String path;
-    private String face;
-    private int fz;
-    private SinglePicker<String> picker;
-    private ArrayList<String> list;
-
+    private  int bb;
     private boolean isImgOne = false;
     private boolean isImgTwo = false;
     private boolean isImgThree = false;
     private String iconOne = "";
     private String iconTwo = "";
     private String iconThree = "";
-    private  int aa;
-    private int cc;
+    private String iconFour = "";
+    private RxPermissions rxPermissions;
     private String relationship;
+    private int dd;
 
     @Override
     protected void initData() {
 
+        iconBack.setOnClickListener(this);
+        tvName.setOnClickListener(this);
+        tvSex.setOnClickListener(this);
+        tvPhoneNumber.setOnClickListener(this);
+        tvChooseRelation.setOnClickListener(this);
+        tvIDNumber.setOnClickListener(this);
+        iconHead.setOnClickListener(this);
+        iconChina.setOnClickListener(this);
+        iconTenement.setOnClickListener(this);
+        iconHouseProve.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         relationship = getIntent().getStringExtra("relationship");
         tvChooseRelation.setText(relationship);
         if (tvChooseRelation.equals("房主")){
-
-            cc=1;
+            dd=1;
 
         }else if (tvChooseRelation.equals("租客")){
-
-            cc=2;
+            dd=2;
         }
+
+
     }
 
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.layout_tenement;
+    }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_submit:
-                OwnerVerifyBean ownerVerifyBean =(OwnerVerifyBean) getIntent().getSerializableExtra("ownerVerifyBean");
-                int building_id = ownerVerifyBean.getBuilding_id();
-                int community_id = ownerVerifyBean.getCommunity_id();
-                int floors_id = ownerVerifyBean.getFloors_id();
-                int houses_id = ownerVerifyBean.getHouses_id();
-                int unitdoor_id = ownerVerifyBean.getUnitdoor_id();
-                String token = ownerVerifyBean.getToken();
-                String name = tvName.getText().toString();
-                String sex =tvSex.getText().toString();
-
-                if (sex.equals("男")){
-                    aa=0;
-                }else if(sex.equals("女")){
-                    aa=1;
-                }
-                String phoneNumber = tvPhoneNumber.getText().toString();
-
-                String IDNumber = tvIDNumber.getText().toString();
-                Map<String,String> map = new HashMap<>();
-                map.put("sex",aa+"");
-                map.put("token",token);
-                map.put("community_id",1+"");
-                map.put("building_id",1+"");
-                map.put("unitdoor_id",1+"");
-                map.put("floors_id",1+"");
-                map.put("houses_id",10+"");
-                map.put("type",cc+"");
-                map.put("residents_name",name);
-                map.put("residents_mobile",phoneNumber);
-                map.put("identity_card_number",IDNumber);
-                map.put("face_recognition","http://47.93.50.224/storage/xier/ccb2eb682bccb871b2e704b8f9cccd972565.jpg");
-                map.put("card_img_a","http://47.93.50.224/storage/xier/3f7aaf52e921271c48e907cb184596aa446.jpg");
-                map.put("card_img_b","http://47.93.50.224/storage/xier/3f7aaf52e921271c48e907cb184596aa446.jpg");
-                HashMap<String, String> headMap = new HashMap<>();
-                headMap.put("Content-Type","application/json");
-                setHead(headMap);
-                net(false,false).post(4,Api.OwnerVerify_URL,map);
-                setHead(headMap);
-                Log.i("ssss","net"+map);
-                break;
-        }
-    }
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-        iconBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            case R.id.icon_back:
                 finish();
-            }
-        });
-        relSex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.tv_name:
 
-                ArrayList<String> list = new ArrayList<>();
-                list.add("男");
-                list.add("女");
-                SinglePicker<String> picker = new SinglePicker<>(FamilyIdentityActivity.this, list);
-                picker.setCanLoop(false);//不禁用循环
-                picker.setLineVisible(true);
-                picker.setTextSize(18);
-                picker.setTitleText("性别");
-                picker.setSelectedIndex(8);
-                picker.setWheelModeEnable(false);
-                //启用权重 setWeightWidth 才起作用
-                picker.setWeightEnable(true);
-                picker.setWeightWidth(1);
-                picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
-                picker.setUnSelectedTextColor(Color.GRAY);
-                picker.setOnSingleWheelListener(new OnSingleWheelListener() {
-                    @Override
-                    public void onWheeled(int index, String item) {
-                        tvSex.setText(item);
-                    }
-                });
-                picker.setOnItemPickListener(new OnItemPickListener<String>() {
-                    @Override
-                    public void onItemPicked(int index, String item) {
-                        tvSex.setText(item);
-                    }
-                });
-                picker.show();
-            }
-        });
-        iconHead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.tv_sex:
+                break;
+            case R.id.tv_phone_number:
+                break;
+            case R.id.tv_choose_relation:
 
-                RxPermissions rxPermission = new RxPermissions(FamilyIdentityActivity.this);
+                break;
+            case R.id.tv_ID_number:
+                break;
+            case R.id.icon_head:
+                RxPermissions rxPermission = new RxPermissions(TenementActivity.this);
                 rxPermission.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(new Consumer<Permission>() {
                             @Override
@@ -266,22 +167,14 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                                     //第二种方式，直接进入相册，但是 是有拍照得按钮的
 //                                showAlbum();
                                 } else {
-                                    Toast.makeText(FamilyIdentityActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-                isImgOne =true;
-                isImgTwo = false;
-                isImgThree = false;
-            }
-        });
-
-        iconHeadFound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                RxPermissions rxPermission = new RxPermissions(FamilyIdentityActivity.this);
-                rxPermission.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                break;
+            case R.id.icon_china:
+                rxPermissions = new RxPermissions(TenementActivity.this);
+                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(new Consumer<Permission>() {
                             @Override
                             public void accept(Permission permission) {
@@ -292,22 +185,14 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                                     //第二种方式，直接进入相册，但是 是有拍照得按钮的
 //                                showAlbum();
                                 } else {
-                                    Toast.makeText(FamilyIdentityActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-                isImgOne =false;
-                isImgTwo = true;
-                isImgThree = false;
-            }
-        });
-
-
-        iconChina.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RxPermissions rxPermission = new RxPermissions(FamilyIdentityActivity.this);
-                rxPermission.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                break;
+            case R.id.icon_tenement:
+                rxPermissions = new RxPermissions(TenementActivity.this);
+                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(new Consumer<Permission>() {
                             @Override
                             public void accept(Permission permission) {
@@ -318,27 +203,56 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                                     //第二种方式，直接进入相册，但是 是有拍照得按钮的
 //                                showAlbum();
                                 } else {
-                                    Toast.makeText(FamilyIdentityActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-                isImgOne =false;
-                isImgTwo = false;
-                isImgThree = true;
-            }
-        });
+                break;
+            case R.id.icon_house_prove:
+                rxPermissions = new RxPermissions(TenementActivity.this);
+                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(new Consumer<Permission>() {
+                            @Override
+                            public void accept(Permission permission) {
+                                if (permission.granted) {// 用户已经同意该权限
+                                    //第一种方式，弹出选择和拍照的dialog
+                                    popwindow(4);
 
+                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
+//                                showAlbum();
+                                } else {
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
+            case R.id.btn_submit:
 
-    }
+                String name = tvName.getText().toString();
+                String sex =tvSex.getText().toString();
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.layout_family_identity;
+                if (sex.equals("男")){
+                    bb=0;
+                }else if(sex.equals("女")){
+                    bb=1;
+                }
+                String phonenumber = tvPhoneNumber.getText().toString();
+                String relation = tvChooseRelation.getText().toString();
+                String idnumber = tvIDNumber.getText().toString();
+                Map<String,String> map = new HashMap<>();
+                map.put("residents_name",name);
+                map.put("sex",sex);
+                map.put("residents_mobile",phonenumber);
+                map.put("type",1+"");
+                map.put("identity_card_number",idnumber);
+                break;
+
+        }
     }
 
     //弹出框的内容
     private void popwindow(final int pos) {
-        View bottomView = View.inflate(FamilyIdentityActivity.this, R.layout.layout_bottom_dialog, null);
+        View bottomView = View.inflate(TenementActivity.this, R.layout.layout_bottom_dialog, null);
         TextView mAlbum = bottomView.findViewById(R.id.tv_album);
         TextView mCamera = bottomView.findViewById(R.id.tv_camera);
         TextView mCancel = bottomView.findViewById(R.id.tv_cancel);
@@ -368,21 +282,21 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 switch (view.getId()) {
                     case R.id.tv_album:
                         //相册
-                        PictureSelector.create(FamilyIdentityActivity.this)
+                        PictureSelector.create(TenementActivity.this)
                                 .openGallery(PictureMimeType.ofImage())
                                 .maxSelectNum(maxSelectNum)
                                 .minSelectNum(1)
                                 .imageSpanCount(4)
                                 .selectionMode(PictureConfig.MULTIPLE)
                                 .forResult(pos);
-                               // .forResult(PictureConfig.CHOOSE_REQUEST);
+                        // .forResult(PictureConfig.CHOOSE_REQUEST);
                         break;
                     case R.id.tv_camera:
                         //拍照
-                        PictureSelector.create(FamilyIdentityActivity.this)
+                        PictureSelector.create(TenementActivity.this)
                                 .openCamera(PictureMimeType.ofImage())
                                 .forResult(pos);
-                               // .forResult(PictureConfig.CHOOSE_REQUEST);
+                        // .forResult(PictureConfig.CHOOSE_REQUEST);
                         break;
                     case R.id.tv_cancel:
                         //取消
@@ -457,49 +371,52 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 // 图片选择结果回调
 //                GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
                 iconHead.setImageURI(uri);
-//                iconOne = path;
+                iconOne = path;
 
-                getUpdateImagePath(iconHead,requestCode);
+
+                try {
+                    iconHead.setDrawingCacheEnabled(true);
+                    Log.e("bitmap","bitmap 1");
+                    Bitmap bitmap=iconHead.getDrawingCache();
+                    Log.e("bitmap","bitmap 2"+bitmap);
+
+
+//                    Bitmap bitmap = getBitmapFormUri(this,uri);
+//                    GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
+//                    iconHead.setImageBitmap(bitmap);
+                    String file = bitmapToBase64(bitmap);
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("image",file);
+                    map.put("folder","xier");
+                    map.put("disk","xier");
+                    map.put("isApp","1");
+//                    ge(map);
+                    net(false, false).post(2, Api.UploadImg, map);
+//                    iconHead.setDrawingCacheEnabled(false);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
 
             }else if (requestCode == 2){
 
-                iconHeadFound.setImageURI(uri);
-//                iconTwo = path;
-                getUpdateImagePath(iconHeadFound,requestCode);
+                iconChina.setImageURI(uri);
+                iconTwo = path;
+
             }else if (requestCode == 3){
 
-                iconChina.setImageURI(uri);
-//                iconThree = path;
-                getUpdateImagePath(iconChina,requestCode);
+                iconTenement.setImageURI(uri);
+                iconThree = path;
+
+            }else if (requestCode == 4){
+
+                iconHouseProve.setImageURI(uri);
+                iconFour = path;
+
             }
         }
     }
 
-    private void getUpdateImagePath(ImageView iconOne, int requestCode) {
-        try {
-            iconOne.setDrawingCacheEnabled(true);
-            Bitmap bitmap=iconOne.getDrawingCache();
-            String file = bitmapToBase64(bitmap);
-            HashMap<String, String> map = new HashMap<>();
-            map.put("image",file);
-            map.put("folder","xier");
-            map.put("disk","xier");
-            map.put("isApp","1");
-//                    ge(map);
-            net(false, false).post(requestCode, Api.UploadImg, map);
-//                    iconHead.setDrawingCacheEnabled(false);
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * bitmap转为base64
-     * @param bitmap
-     * @return
-     */
     public String bitmapToBase64(Bitmap bitmap) {
         String result = null;
         ByteArrayOutputStream baos = null;
@@ -528,43 +445,4 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
         }
         return result;
     }
-    private void getImgPath() {
-        File file = new File(path);
-        Toast.makeText(this,file.getAbsolutePath(),Toast.LENGTH_SHORT).show();
-        if (isImgOne == true){
-            iconHead.setBackground(Drawable.createFromPath(path));
-            Map<String,String> map = new HashMap<>();
-            map.put("isApp","1");
-            map.put("folder","xier");  //错误   这里传入的是楼号的id
-            map.put("disk","xier");  //错误   这里传入的是楼号的id
-
-            net(false,false).post(2,Api.UploadImg,map);
-        }
-    }
-
-    @Override
-    public void success(int type, String data) {
-        super.success(type, data);
-        if (type==1){
-            Gson gson = new Gson();
-            UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
-           iconOne = uploadImgBean.getData().getImgUrl();
-        }
-        if (type==2){
-            Gson gson = new Gson();
-            UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
-           iconTwo = uploadImgBean.getData().getImgUrl();
-        }
-        if (type==3){
-            Gson gson = new Gson();
-            UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
-            iconThree = uploadImgBean.getData().getImgUrl();
-        }
-        if (type==4){
-            Gson gson = new Gson();
-            ShowOwnerVerifyBean showOwnerVerifyBean = gson.fromJson(data, ShowOwnerVerifyBean.class);
-            Toast.makeText(FamilyIdentityActivity.this,showOwnerVerifyBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
-        }
-    }
-
 }
