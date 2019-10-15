@@ -109,8 +109,26 @@ public class MyFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_zhuhuguanli:
-                intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
-                startActivity(intent);
+                popwindow();
+                btn_yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getActivity().finish();
+                    }
+                });
+
+                btn_no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        intent = new Intent(getActivity(), HostmanRenActivity.class);
+                        startActivity(intent);
+
+
+                    }
+                });
+                /*intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
+                startActivity(intent);*/
             case R.id.rel_visitor_record:
                 intent = new Intent(getContext(), VisitorRecordActivity.class);
                 startActivity(intent);
@@ -120,24 +138,8 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.icon_fangzhurenzheng:
-                popwindow();
-               /* intent = new Intent(getContext(), HostmanRenActivity.class);
-                startActivity(intent);*/
-                btn_yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        intent = new Intent(getActivity(), HostmanRenActivity.class);
-                        startActivity(intent);
-                    }
-                });
-
-                btn_no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        getActivity().finish();
-                    }
-                });
+                intent = new Intent(getActivity(), HostmanRenActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rel_my_indent:
                 intent = new Intent(getContext(), MyIndentActivity.class);

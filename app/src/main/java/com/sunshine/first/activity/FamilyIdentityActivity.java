@@ -35,6 +35,7 @@ import com.sunshine.first.R;
 import com.sunshine.first.bean.OwnerVerifyBean;
 import com.sunshine.first.bean.ShowOwnerVerifyBean;
 import com.sunshine.first.bean.UploadImgBean;
+import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -171,7 +172,10 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 int floors_id = ownerVerifyBean.getFloors_id();
                 int houses_id = ownerVerifyBean.getHouses_id();
                 int unitdoor_id = ownerVerifyBean.getUnitdoor_id();
-                String token = ownerVerifyBean.getToken();
+                String tokens = ownerVerifyBean.getToken();
+                String token = SharePreferenceHelper.getInstance(this).getString("token", "");
+                Log.i("tokens",token);
+
                 String name = tvName.getText().toString();
                 String sex =tvSex.getText().toString();
 
@@ -199,7 +203,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 map.put("card_img_a","http://47.93.50.224/storage/xier/3f7aaf52e921271c48e907cb184596aa446.jpg");
                 map.put("card_img_b","http://47.93.50.224/storage/xier/3f7aaf52e921271c48e907cb184596aa446.jpg");
                 HashMap<String, String> headMap = new HashMap<>();
-                headMap.put("Content-Type","application/json");
+                headMap.put("Content-Type","application/json;charset=utf-8");
                 setHead(headMap);
                 net(false,false).post(4,Api.OwnerVerify_URL,map);
                 setHead(headMap);
