@@ -4,7 +4,9 @@ package com.abner.ming.base.net;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -43,4 +45,9 @@ public interface HttpService {
     Observable<ResponseBody> delete(@Url String url,
                                     @HeaderMap Map<String, String> headMap,
                                     @FieldMap Map<String, String> map);
+
+
+
+    @POST
+    Observable<ResponseBody> post(@Url String url,@HeaderMap Map<String, String> headMap,@Body RequestBody requestBody);
 }

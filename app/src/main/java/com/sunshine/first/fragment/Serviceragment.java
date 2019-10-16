@@ -9,9 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abner.ming.base.BaseFragment;
+import com.abner.ming.base.model.Api;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.stx.xhb.xbanner.XBanner;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.YeZhuRenZhengActivity;
+import com.sunshine.first.bean.XbannerBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,14 +33,18 @@ public class Serviceragment extends BaseFragment {
     ImageView iconPaymentCenter;
     @BindView(R.id.icon_owner_certification)
     ImageView iconOwnerCertification;
-    @BindView(R.id.tv_hot_store)
-    TextView tvHotStore;
+    @BindView(R.id.banner)
+    XBanner banner;
     Unbinder unbinder;
     private Intent intent;
+    private Gson gson;
+    private XbannerBean xbannerBean;
+    private List<XbannerBean.DataBean> xbannerBeanData;
 
     @Override
     protected void initData() {
 
+        net(false,false).get(1,Api.Xbanner_URL,null);
     }
 
     @Override
@@ -60,5 +71,31 @@ public class Serviceragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (type==1){
+
+            gson = new Gson();
+            xbannerBean = gson.fromJson(data, XbannerBean.class);
+            xbannerBeanData = xbannerBean.getData();
+            final ArrayList<String> images = new ArrayList<>();
+            if (xbannerBeanData != null) {
+                for (int i = 0; i < xbannerBeanData.size(); i++) {
+                    images.add(Api.BASE_URL + xbannerBeanData.get(i).getUrl());
+                }
+            }
+            // 为XBanner绑定数据
+            banner.setData(images, null);
+            // XBanner适配数据
+            banner.setmAdapter(new XBanner.XBannerAdapter() {
+                @Override
+                public void loadBanner(XBanner banner, Object model, View view, int position) {
+                    Glide.with(Serviceragment.this).load(images.get(position)).into((ImageView) view);
+                }
+            });
+        }
     }
 }

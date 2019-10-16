@@ -69,6 +69,8 @@ public class MyFragment extends BaseFragment {
     ImageView iconMy;
     @BindView(R.id.text_admin)
     TextView textAdmin;
+    @BindView(R.id.tv_sf)
+    TextView tvSf;
     Unbinder unbinder1;
     private View inflate;
     private Intent intent;
@@ -113,7 +115,7 @@ public class MyFragment extends BaseFragment {
                 btn_yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        getActivity().finish();
+
                     }
                 });
 
@@ -190,7 +192,6 @@ public class MyFragment extends BaseFragment {
         pop.setAnimationStyle(R.style.main_menu_photo_anim);
         pop.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
 
-
     }
 
     @Override
@@ -201,6 +202,16 @@ public class MyFragment extends BaseFragment {
             myInfomationBean = gson.fromJson(data, MyInfomationBean.class);
             Glide.with(getContext()).load(myInfomationBean.getData().getPhoto());
             textAdmin.setText(myInfomationBean.getData().getNickname()+"");
+            int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
+            if (is_verify==0){
+                tvSf.setText("未认证");
+            }else if (is_verify==1){
+                tvSf.setText("已认证");
+            }else if (is_verify==2){
+                tvSf.setText("拒绝");
+            }else if (is_verify==3){
+                tvSf.setText("待审核");
+            }
         }
     }
 

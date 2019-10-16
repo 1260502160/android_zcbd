@@ -66,6 +66,9 @@ public class HomeFragment extends BaseFragment{
     TextView tvHotStore;
     @BindView(R.id.home_recycle)
     RecyclerView homeRecycle;
+    @BindView(R.id.icon_owner_certification)
+    ImageView iconOwnerCertification;
+
     Unbinder unbinder;
    /* *//* @BindView(R.id.icon_yezhurenzheng)
         ImageView iconYezhurenzheng;
@@ -89,14 +92,34 @@ public class HomeFragment extends BaseFragment{
     private StoreAllAdapter storeAllAdapter;
     private GoodsListBean.DataBean goodsListBeanData;
     private String token;
+   // private int verity;
 
 
     @Override
     protected void initData() {
 
-
         net(false,false).get(1,Api.Xbanner_URL,null);
-      //创建布局管理器
+        int verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify",-1);
+        Log.d("verify", "onViewClicked: " +verify);
+        if (verify == 0){
+            iconOwnerCertification.setVisibility(View.VISIBLE);
+            iconOwnerCertification.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    intent = new Intent(getContext(), YeZhuRenZhengActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+        }else if (verify== 1){
+            iconOwnerCertification.setVisibility(View.GONE);
+        }else if (verify==2){
+            // verity=2;
+        }else if (verify==3){
+            //verity=3;
+        }
+
+        //创建布局管理器
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         //设置布局管理器
         homeRecycle.setLayoutManager(layoutManager);
@@ -157,10 +180,8 @@ public class HomeFragment extends BaseFragment{
                 break;
             case R.id.home_recycle:
                 break;
-          /*  case R.id.icon_owner_certification:
-               *//* intent = new Intent(getContext(), YeZhuRenZhengActivity.class);
-                startActivity(intent);*//*
-                break;*/
+           case R.id.icon_owner_certification:
+               break;
         }
     }
 /*

@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.RequestBody;
+
 /**
  * author:AbnerMing
  * date:2019/4/18
@@ -32,7 +34,46 @@ public class BaseModelIml implements BaseModel {
     public void post(int type, String url, Map<String, String> map, CallBackListener listener) {
         doHttp(1, type, url, map, listener);
     }
+    @Override
+    public void post(int type, String url, RequestBody requestBody, CallBackListener listener) {
+        doHttp(type, url, requestBody, listener);
+    }
 
+    private void doHttp(final int type, String url, RequestBody requestBody, final CallBackListener listener) {
+
+        HttpUtils httpUtils = new HttpUtils();//HttpUtils.getHttpUtils();
+
+        httpUtils.setContext(mContext);
+
+        httpUtils.isShowLoading(isShowLoading);//是否显示加载框
+
+        httpUtils.isReadCache(isReadCache);
+
+        httpUtils.setHead(headMap);//传递头参
+
+
+
+        httpUtils.post(url,requestBody);
+
+        httpUtils.result(new HttpUtils.HttpListener() {
+            @Override
+            public void success(String data) {
+                if (cls == null) {
+                    listener.success(type, data);
+                } else {
+                    Object bean = new Gson().fromJson(data, cls);
+                    listener.successBean(type, bean);
+                }
+
+            }
+
+            @Override
+            public void fail(String error) {
+                listener.fail(type, error);
+            }
+        });
+
+    }
     //put请求
     @Override
     public void put(int type, String url, Map<String, String> map, CallBackListener listener) {

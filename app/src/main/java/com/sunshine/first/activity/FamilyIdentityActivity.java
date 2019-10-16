@@ -32,6 +32,7 @@ import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.qiniu.android.utils.Json;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.CheckBean;
 import com.sunshine.first.bean.OwnerVerifyBean;
 import com.sunshine.first.bean.ShowOwnerVerifyBean;
 import com.sunshine.first.bean.UploadImgBean;
@@ -151,11 +152,11 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
         btnSubmit.setOnClickListener(this);
         relationship = getIntent().getStringExtra("relationship");
         tvChooseRelation.setText(relationship);
-        if (tvChooseRelation.equals("房主")){
+        if (relationship.equals("房主")){
 
             cc=1;
 
-        }else if (tvChooseRelation.equals("租客")){
+        }else if (relationship.equals("租客")){
 
             cc=2;
         }
@@ -187,29 +188,32 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 String phoneNumber = tvPhoneNumber.getText().toString();
 
                 String IDNumber = tvIDNumber.getText().toString();
-                Map<String,String> map = new HashMap<>();
-                map.put("sex",aa+"");
-                map.put("token",token);
-                map.put("community_id",1+"");
-                map.put("building_id",1+"");
-                map.put("unitdoor_id",1+"");
-                map.put("floors_id",1+"");
-                map.put("houses_id",10+"");
-                map.put("type",cc+"");
-                map.put("residents_name",name);
-                map.put("residents_mobile",phoneNumber);
-                map.put("identity_card_number",IDNumber);
-                map.put("face_recognition","http://47.93.50.224/storage/xier/ccb2eb682bccb871b2e704b8f9cccd972565.jpg");
-                map.put("card_img_a","http://47.93.50.224/storage/xier/3f7aaf52e921271c48e907cb184596aa446.jpg");
-                map.put("card_img_b","http://47.93.50.224/storage/xier/3f7aaf52e921271c48e907cb184596aa446.jpg");
-                HashMap<String, String> headMap = new HashMap<>();
-                headMap.put("Content-Type","application/json;charset=utf-8");
-                setHead(headMap);
-                net(false,false).post(4,Api.OwnerVerify_URL,map);
-                setHead(headMap);
-                Log.i("ssss","net"+map);
+                CheckBean checkBean = new CheckBean();
+                checkBean.setBuilding_id(building_id+"");
+                checkBean.setCard_img_a(iconOne);
+                checkBean.setCard_img_b(iconTwo);
+                checkBean.setFace_recognition(iconThree);
+                checkBean.setIdentity_card_number(IDNumber);
+                checkBean.setResidents_mobile(phoneNumber);
+                checkBean.setResidents_name(name);
+                checkBean.setType(cc+"");
+                checkBean.setHouses_id(houses_id+"");
+                checkBean.setFloors_id(floors_id+"");
+                checkBean.setUnitdoor_id(unitdoor_id+"");
+                checkBean.setCommunity_id(community_id+"");
+                checkBean.setToken(token);
+                checkBean.setSex(aa+"");
+                RequestBody body = (RequestBody) buildRequestBody(checkBean);
+                net(false,false).post(4,Api.OwnerVerify_URL,body);
                 break;
         }
+    }
+
+    public static RequestBody buildRequestBody(Object object) {
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(object);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonData);
+        return body;
     }
     @Override
     protected void initView() {

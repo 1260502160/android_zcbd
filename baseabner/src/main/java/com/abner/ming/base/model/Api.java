@@ -29,8 +29,12 @@ public class Api {
     public final static  String OwnerVerify_URL = BASE_URL+"ownerVerify";
     //获取车辆列表
     public final static  String GetCarList_URL = BASE_URL+"getCarList";
-    //获取车辆列表
+    //上传图片
     public final static  String UploadImg = BASE_URL+"uploadImg";
-
-
+    //修改头像,昵称
+    public final static  String UpdateUserInfo_URL = BASE_URL+"updateUserInfo";
+    //获取房屋列表
+    public final static  String HousesList_URL = BASE_URL+"housesList";
+    //访客登记
+    public final static  String VisitorAdd_URL = BASE_URL+"visitorAdd";
 }

@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 public class LoginBean implements Serializable{
 
+
     /**
      * success : true
      * error_code : 200
      * message : 登录成功
-     * data : {"token":"577a5ee85790475e0881638e11572d58"}
+     * data : {"token":"acbbf1aa987a9353c5d7cf9fdc2a0fd1","is_verify":3}
      */
 
     private boolean success;
@@ -50,10 +51,12 @@ public class LoginBean implements Serializable{
 
     public static class DataBean {
         /**
-         * token : 577a5ee85790475e0881638e11572d58
+         * token : acbbf1aa987a9353c5d7cf9fdc2a0fd1
+         * is_verify : 3
          */
 
         private String token;
+        private int is_verify;
 
         public String getToken() {
             return token;
@@ -61,6 +64,14 @@ public class LoginBean implements Serializable{
 
         public void setToken(String token) {
             this.token = token;
+        }
+
+        public int getIs_verify() {
+            return is_verify;
+        }
+
+        public void setIs_verify(int is_verify) {
+            this.is_verify = is_verify;
         }
     }
 }

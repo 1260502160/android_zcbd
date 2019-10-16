@@ -78,13 +78,97 @@
 
 
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_visitor_registration"
+
+    <RelativeLayout
+        android:id="@+id/relative_renz"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"
         android:layout_below="@+id/relative_red"
         >
-    </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/linear_home_ren"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_70"
+            android:orientation="vertical"
+            android:background="@drawable/shape_white"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_add"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加房屋认证"
+                android:textSize="@dimen/sp_16"
+                android:textColor="#07A0F0"
+                android:layout_gravity="center_horizontal"
+
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_70"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            android:background="@drawable/shape_white"
+            >
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="受访地址"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/blacks"
+                android:layout_marginLeft="@dimen/dp_15"
+                />
+
+            <View
+                android:id="@+id/view_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="#808080"
+                android:layout_below="@+id/tv_address"
+                android:layout_marginTop="@dimen/dp_10"
+                />
+
+            <TextView
+                android:id="@+id/tv_commiunty_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公祥街15号楼1-1302"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/blacks"
+                android:layout_below="@+id/view_address"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_15"
+                />
+
+            <ImageView
+                android:id="@+id/icon_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/next"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_35"
+                android:layout_marginRight="@dimen/dp_10"
+                android:padding="@dimen/dp_10"
+
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -93,7 +177,7 @@
         android:layout_height="@dimen/dp_165"
         android:orientation="vertical"
         android:background="@drawable/shape_white"
-        android:layout_below="@+id/recycle_visitor_registration"
+        android:layout_below="@+id/relative_renz"
         android:layout_marginLeft="@dimen/dp_15"
         android:layout_marginRight="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_10"
@@ -113,7 +197,7 @@
             android:layout_marginLeft="@dimen/dp_20"
             />
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="只限明天(2019-09-14)"
@@ -179,6 +263,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55">
         <EditText
+            android:id="@+id/edit_ivphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="请输入访客手机号"
@@ -239,6 +324,7 @@
             >
 
             <EditText
+                    android:id="@+id/edit_car_one"
                     android:layout_width="@dimen/dp_30"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/shape_line"
@@ -246,6 +332,7 @@
                     android:gravity="center"
                     />
             <EditText
+                android:id="@+id/edit_car_two"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
@@ -253,6 +340,7 @@
                 android:gravity="center"
                 />
             <EditText
+                android:id="@+id/edit_car_three"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
@@ -260,6 +348,7 @@
                 android:gravity="center"
                 />
             <EditText
+                android:id="@+id/edit_car_four"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
@@ -267,6 +356,7 @@
                 android:layout_marginLeft="@dimen/dp_6"
                 />
             <EditText
+                android:id="@+id/edit_car_five"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
@@ -274,18 +364,21 @@
                 android:layout_marginLeft="@dimen/dp_6"
             />
             <EditText
+                android:id="@+id/edit_car_six"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
                 android:layout_marginLeft="@dimen/dp_6"
             />
             <EditText
+                android:id="@+id/edit_car_seven"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
                 android:layout_marginLeft="@dimen/dp_6"
             />
             <EditText
+                android:id="@+id/edit_car_eight"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
@@ -310,6 +403,7 @@
 
                         />
                     <EditText
+                        android:id="@+id/edit_car_nine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -359,9 +453,9 @@
             >
             <ImageView
                 android:id="@+id/icon_head"
-                android:layout_width="@dimen/dp_10"
-                android:layout_height="@dimen/dp_10"
-                android:src="@mipmap/add"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="match_parent"
+                android:src="@mipmap/icon_add"
                 android:layout_centerInParent="true"
                 />
 

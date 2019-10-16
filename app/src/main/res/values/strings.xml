@@ -10,6 +10,7 @@
     <string name="text_forget">忘记密码</string>
     <string name="text_register">注册</string>
     <string name="text_weichat">微信登录</string>
+    <string name="text_notice_deatil">通知详情</string>
     <string name="text_weichats">微信</string>
     <string name="text_code">验证码</string>
     <string name="text_huocode">获取验证码</string>

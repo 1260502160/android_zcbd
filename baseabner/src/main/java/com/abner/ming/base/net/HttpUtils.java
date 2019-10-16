@@ -20,6 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -114,6 +115,14 @@ public class HttpUtils {
         return this;
     }
 
+    //post请求
+    public HttpUtils post(String url, RequestBody map) {
+        this.url = url;
+        HttpService service = getHttpService();
+        Observable<ResponseBody> ob = service.post(url, headMap, map);
+        send(ob);
+        return this;
+    }
     //put请求
     public HttpUtils put(String url, Map<String, String> map) {
         this.url = url;

@@ -92,7 +92,10 @@ public class LoginActivity extends BaseAppCompatActivity{
 
             if (loginBean.isSuccess()){
                 SharePreferenceHelper.getInstance(LoginActivity.this).put("token",loginBean.getData().getToken());
+                SharePreferenceHelper.getInstance(LoginActivity.this).put("is_verify",loginBean.getData().getIs_verify());
+                SharePreferenceHelper.getInstance(LoginActivity.this).put("phone",phone);
                 intent = new Intent(LoginActivity.this, MainActivity.class);
+                //intent.putExtra("phone",phone);
                 startActivity(intent);
                // Toast.makeText(LoginActivity.this,loginBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }else {

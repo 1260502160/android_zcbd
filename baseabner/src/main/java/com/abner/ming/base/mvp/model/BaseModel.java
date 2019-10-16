@@ -2,6 +2,8 @@ package com.abner.ming.base.mvp.model;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
+
 /**
  * author:AbnerMing
  * date:2019/4/18
@@ -23,6 +25,8 @@ public interface BaseModel {
     void get(int type, String url, Map<String, String> map, CallBackListener listener);
 
     void post(int type, String url, Map<String, String> map, CallBackListener listener);
+
+    void post(int type, String url, RequestBody requestBody , CallBackListener listener);
 
     void put(int type, String url, Map<String, String> map, CallBackListener listener);
 

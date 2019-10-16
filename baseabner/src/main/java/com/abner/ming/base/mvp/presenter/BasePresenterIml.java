@@ -8,6 +8,8 @@ import org.greenrobot.greendao.annotation.Id;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
+
 /**
  * author:AbnerMing
  * date:2019/4/18
@@ -30,6 +32,11 @@ public class BasePresenterIml implements BasePresenter, BaseModel.CallBackListen
     @Override
     public void post(int type, String url, Map<String, String> map) {
         baseModel.post(type, url, map, this);
+    }
+
+    @Override
+    public void post(int type, String url, RequestBody requestBody) {
+        baseModel.post(type, url, requestBody, this);
     }
 
     @Override

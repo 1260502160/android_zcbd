@@ -163,8 +163,7 @@
         android:layout_height="@dimen/dp_40"
         android:layout_below="@+id/banner"
         android:visibility="gone"
-        android:background="@mipmap/textselector"
-
+        android:background="@mipmap/yezhurenzheng"
 
         />
 
