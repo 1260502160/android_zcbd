@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/shape_grey"
     tools:context=".activity.FeedbackActivity">
 
     <RelativeLayout
         android:id="@+id/relative_change"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70"
+        android:layout_height="@dimen/dp_55"
         android:background="#ffffff"
         >
 
@@ -19,7 +20,6 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_back"
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_30"
             android:padding="@dimen/dp_10"
             />
         <TextView
@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:text="@string/text_feedback"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_25"
             android:textSize="@dimen/sp_20"
             />
     </RelativeLayout>
@@ -56,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
         android:layout_below="@+id/text_feedback"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
@@ -69,7 +68,8 @@
             android:background="@null"
             android:hint="感谢您的反馈，我们会第一时间处理"
             android:textSize="@dimen/sp_12"
-            android:textColor="#E4F5FF"
+            android:textColor="@color/blacks"
+            android:textColorHint="@color/blacks"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_15"
             />
@@ -108,7 +108,7 @@
                 android:id="@+id/icon_feedback_add"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/icon_add"
                 android:layout_centerInParent="true"
                 />
         </RelativeLayout>

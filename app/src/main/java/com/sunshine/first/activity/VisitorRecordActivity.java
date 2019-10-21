@@ -5,112 +5,98 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.abner.ming.base.BaseAppCompatActivity;
+import com.abner.ming.base.model.Api;
+import com.google.gson.Gson;
 import com.sunshine.first.R;
+import com.sunshine.first.adapter.StoreAllAdapter;
+import com.sunshine.first.adapter.VisitorRecoderAdapter;
+import com.sunshine.first.bean.VisitorRecodBean;
 import com.sunshine.first.fragment.AuthenticatedFragment;
 import com.sunshine.first.fragment.EmpowerFragment;
 import com.sunshine.first.fragment.GetGoFragment;
 import com.sunshine.first.fragment.WaitApproveFragment;
+import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VisitorRecordActivity extends AppCompatActivity {
+public class VisitorRecordActivity extends BaseAppCompatActivity{
 
     @BindView(R.id.icon_back)
     ImageView iconBack;
-    @BindView(R.id.empower)
-    RadioButton empower;
-    @BindView(R.id.get_go)
-    RadioButton getGo;
-    @BindView(R.id.radiogroup_visitor)
-    RadioGroup radiogroupVisitor;
-    @BindView(R.id.iv_line1)
-    ImageView ivLine1;
-    @BindView(R.id.iv_line2)
-    ImageView ivLine2;
-    @BindView(R.id.viewpager_visitor)
-    ViewPager viewpagerVisitor;
-    //写一个List集合，把每个页面，也就是Fragment,存进去
-    private List<Fragment> list;
+    @BindView(R.id.recycle_visitor_record)
+    RecyclerView recycleVisitorRecord;
+    private VisitorRecoderAdapter visitorRecoderAdapter;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visitor_record);
+    protected void initData() {
+
+
+        //创建布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(VisitorRecordActivity.this);
+        //设置布局管理器
+        recycleVisitorRecord.setLayoutManager(linearLayoutManager);
+        //设置为垂直布局，这也是默认的
+        linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        visitorRecoderAdapter = new VisitorRecoderAdapter(VisitorRecordActivity.this);
+        //设置Adapter
+        recycleVisitorRecord.setAdapter(visitorRecoderAdapter);
+
+        String token = SharePreferenceHelper.getInstance(VisitorRecordActivity.this).getString("token", "");
+        Map<String,String> map = new HashMap<>();
+        map.put("token",token);
+        net(false,false).post(1,Api.VisitorRecord_URL,map);
+        iconBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                finish();
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void initView() {
+
         ButterKnife.bind(this);
-        //页面，数据源，里面是创建的三个页面（Fragment）
-        list = new ArrayList<>();
-        list.add(new EmpowerFragment());
-        list.add(new GetGoFragment());
-        viewpagerVisitor.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int i) {
-                return list.get(i);
-            }
-
-            @Override
-            public int getCount() {
-                return list.size();
-            }
-        });
-        viewpagerVisitor.setCurrentItem(0);
-        onTabViewSelected(0  );
-        radiogroupVisitor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.empower:
-                        empower.setTextColor(getResources().getColor(R.color.blue));
-                        getGo.setTextColor(getResources().getColor(R.color.black));
-                        viewpagerVisitor.setCurrentItem(0);
-                        onTabViewSelected(0);
-                        break;
-
-                    case R.id.get_go:
-                        getGo.setTextColor(getResources().getColor(R.color.blue));
-                        empower.setTextColor(getResources().getColor(R.color.black));
-                        viewpagerVisitor.setCurrentItem(1);
-                        onTabViewSelected(1);
-                        break;
-                }
-            }
-        });
     }
 
-    @OnClick(R.id.icon_back)
-    public void onViewClicked() {
-        finish();
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_visitor_record;
     }
 
-    /**
-     * 改变底栏图标选择状态
-     * @param position
-     * */
-    private void onTabViewSelected(int position) {
-        if(position<0 || position>3) {
-            return;
-        }
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (type==1){
+            Gson gson = new Gson();
+            VisitorRecodBean visitorRecodBean = gson.fromJson(data, VisitorRecodBean.class);
+            List<VisitorRecodBean.DataBean.ListBean> list = visitorRecodBean.getData().getList();
+            if (list!=null){
 
-        ivLine1.setSelected(false);
-        ivLine2.setSelected(false);
+                visitorRecoderAdapter.setDataList(list);
 
-        switch (position) {
-            case 0:
-                ivLine1.setSelected(true);
-                break;
-            case 1:
-                ivLine2.setSelected(true);
-                break;
-            default:
-                break;
+            }
         }
     }
 }

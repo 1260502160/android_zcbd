@@ -49,17 +49,22 @@ public class RegisterActivity extends BaseAppCompatActivity{
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 phone = editNum.getText().toString();
                 code = btnYancode.getText().toString();
                 newpass = editNewpass.getText().toString();
                 surepass = editSurenewpass.getText().toString();
-                Map<String,String> map = new HashMap<>();
-                map.put("mobile",phone);
-                map.put("code",code);
-                map.put("pwd",newpass);
-                map.put("repwd",surepass);
-                net(false,false).post(1,Api.Register_URL,map);
+                if (phone!=null&&code!=null&&newpass!=null&&surepass!=null){
+
+                    Map<String,String> map = new HashMap<>();
+                    map.put("mobile",phone);
+                    map.put("code",code);
+                    map.put("pwd",newpass);
+                    map.put("repwd",surepass);
+                    net(false,false).post(1,Api.Register_URL,map);
+
+                }else {
+                    Toast.makeText(RegisterActivity.this,"输入的内容不能为空！",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

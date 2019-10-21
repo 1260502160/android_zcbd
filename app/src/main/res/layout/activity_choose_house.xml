@@ -27,7 +27,7 @@
             android:id="@+id/text_forget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_choosedoor"
+            android:text="房屋列表"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_25"
             android:textSize="@dimen/sp_20"
@@ -39,7 +39,16 @@
         android:layout_height="@dimen/dp_15"
         android:layout_below="@+id/relative_change"
         />
-    <RelativeLayout
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reclcle_home_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_fangzhurenzheng_one"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+    <!--<RelativeLayout
         android:id="@+id/relative_choose_home_pay"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"
@@ -80,7 +89,7 @@
             android:layout_centerVertical="true"
             />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
     <Button

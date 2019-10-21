@@ -83,17 +83,65 @@ public class MyFragment extends BaseFragment {
     @Override
     protected void initData() {
 
+        iconfangzhurenzheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popwindow();
+                btn_yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
+                        if (is_verify==0){
+                            intent = new Intent(getActivity(), HostmanRenActivity.class);
+                            startActivity(intent);
+                        }else if (is_verify==1){
+                           intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
+                           startActivity(intent);
+                        }
+
+
+                    }
+                });
+
+                btn_no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getActivity().finish();
+
+                    }
+                });
+            }
+        });
+
+        iconfangzhurenzheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), ZhuHuGuanLiActivity.class);
+                startActivity(intent);
+            }
+        });
+
         token = SharePreferenceHelper.getInstance(getContext()).getString("token", "");
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         net(false, false).post(1, Api.GetUserInfo_URL, map);
         Log.i("bbb", "net");
+
+        relMyYijianfankui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getContext(), FeedbackActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected void initView(View view) {
 
         unbinder = ButterKnife.bind(this, view);
+
     }
 
     @Override
@@ -111,24 +159,7 @@ public class MyFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_zhuhuguanli:
-                popwindow();
-                btn_yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                    }
-                });
-
-                btn_no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        intent = new Intent(getActivity(), HostmanRenActivity.class);
-                        startActivity(intent);
-
-
-                    }
-                });
                 /*intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
                 startActivity(intent);*/
             case R.id.rel_visitor_record:
@@ -140,8 +171,8 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.icon_fangzhurenzheng:
-                intent = new Intent(getActivity(), HostmanRenActivity.class);
-                startActivity(intent);
+                /*intent = new Intent(getActivity(), HostmanRenActivity.class);
+                startActivity(intent);*/
                 break;
             case R.id.rel_my_indent:
                 intent = new Intent(getContext(), MyIndentActivity.class);
@@ -156,8 +187,7 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.rel_my_yijianfankui:
-                intent = new Intent(getContext(), FeedbackActivity.class);
-                startActivity(intent);
+
                 break;
             case R.id.rel_my_lianxikefu:
                 break;

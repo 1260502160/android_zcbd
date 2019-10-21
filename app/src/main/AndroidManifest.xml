@@ -79,6 +79,8 @@
         <activity android:name=".activity.HouseHoldIdentity" />
         <activity android:name=".activity.VisitorRecordActivity" />
         <activity android:name=".activity.PayDeatilActivity"></activity>
+        <activity android:name=".activity.RepairActivity"></activity>
+
     </application>
 
 </manifest>

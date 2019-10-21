@@ -33,14 +33,17 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.CheckBean;
 import com.sunshine.first.bean.HouseListBean;
 import com.sunshine.first.bean.UploadImgBean;
 import com.sunshine.first.bean.VisitorAddBean;
+import com.sunshine.first.bean.VisitorBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,6 +57,8 @@ import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class VisitorRegistrationActivity extends BaseAppCompatActivity {
 
@@ -112,11 +117,12 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     private String file;
     private Gson gson;
     private int community_id,building_id,unitdoor_id,floors_id,houses_id;
+    private List<HouseListBean.DataBean> houseListBeanData;
 
 
     @Override
     protected void initData() {
-        int verify = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getInt("is_verify",-1);
+        final int verify = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getInt("is_verify",-1);
         Log.d("verify", "onViewClicked: " +verify);
         if (verify == 0){
             linearHomeRen.setVisibility(View.VISIBLE);
@@ -151,15 +157,12 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
         btnSubmitVisitor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                VisitorBean visitorBean = new VisitorBean();
                 String token = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getString("token", "");
-                HashMap<String, String> map = new HashMap<>();
-                map.put("token","a597b578d3255c8cfdacbb061d229522");
                 String time = tvTime.getText().toString();
-                map.put("time ",time);
                 String name = editIvationame.getText().toString();
-                map.put("visi_name ",name);
                 String phone = editIvphone.getText().toString();
-                map.put("visi_mobile ",phone);
                 String carone = editCarOne.getText().toString();
                 String cartwo = editCarTwo.getText().toString();
                 String carthree = editCarThree.getText().toString();
@@ -169,14 +172,28 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 String carseven = editCarSeven.getText().toString();
                 String careight = editCarEight.getText().toString();
                 String carnine = editCarNine.getText().toString();
-                map.put("car_num",carone+cartwo+carthree+carfour+carfive+carsix+carseven+careight+carnine);
-                map.put("visi_imgs","http://47.93.50.224/storage/xier/ccb2eb682bccb871b2e704b8f9cccd972565.jpg");
-                map.put("community_id",1+"");
-                map.put("building_id",1+"");
-                map.put("unitdoor_id",10+"");
+
+              /*  map.put("community_id",1+"");*/
+                //map.put("building_id",1+"");
+               /* map.put("unitdoor_id",10+"");
                 map.put("floors_id",1+"");
-                map.put("houses_id",27+"");
-                net(false, false).post(3, Api.VisitorAdd_URL,map);
+                map.put("houses_id",27+"");*/
+
+                visitorBean.setToken("a597b578d3255c8cfdacbb061d229522");
+                visitorBean.setHouses_id("27");
+                visitorBean.setFloors_id("1");
+                visitorBean.setBuilding_id("1");
+                visitorBean.setUnitdoor_id("10");
+                visitorBean.setCommunity_id("1");
+                visitorBean.setVisi_imgs("http://47.93.50.224/storage/xier/ccb2eb682bccb871b2e704b8f9cccd972565.jpg");
+                visitorBean.setCar_num(carone+cartwo+carthree+carfour+carfive+carsix+carseven+careight+carnine);
+                visitorBean.setTime(time);
+                visitorBean.setVisi_name(name);
+                visitorBean.setVisi_mobile(phone);
+
+                RequestBody body = (RequestBody) buildRequestBody(visitorBean);
+                net(false,false).post(3,Api.VisitorAdd_URL,body);
+                //net(false, false).post(3, Api.VisitorAdd_URL,map);
 
             }
         });
@@ -281,6 +298,12 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
         }
     }
 
+    public static RequestBody buildRequestBody(Object object) {
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(object);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonData);
+        return body;
+    }
     private void getUpdateImagePath(ImageView iconOne, int requestCode) {
         try {
             iconOne.setDrawingCacheEnabled(true);
@@ -475,8 +498,8 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
         super.success(type, data);
         if (type==1){
             Gson gson = new Gson();
-            HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
-            List<HouseListBean.DataBean> houseListBeanData = houseListBean.getData();
+            final HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
+            houseListBeanData = houseListBean.getData();
             ArrayList<String> list = new ArrayList<>();
             for (HouseListBean.DataBean houseListBeanDatum : houseListBeanData) {
                 list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
@@ -504,6 +527,10 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 @Override
                 public void onItemPicked(int index, String item) {
                     tvCommiuntyName.setText(item);
+                    //楼号选择的忘了？
+                   community_id = houseListBean.getData().get(index).getCommunity_id();
+                   //houseListBean.getData().get(index)
+
                 }
             });
             picker.show();
@@ -514,6 +541,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
             iconTwo = uploadImgBean.getData().getImgUrl();
         }
         if (type==3){
+            Log.i("VISITORREGISTRATION",data.toString());
             Gson gson = new Gson();
             VisitorAddBean visitorAddBean = gson.fromJson(data, VisitorAddBean.class);
             Log.i("visitorAddBean",visitorAddBean.toString());

@@ -179,7 +179,7 @@
         android:background="#ececec"
         android:layout_below="@+id/rel_phone"
         />
-
+<!--
     <RelativeLayout
         android:id="@+id/rel_relationship"
         android:layout_width="match_parent"
@@ -219,23 +219,23 @@
             android:layout_marginTop="@dimen/dp_20"
             />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
-    <View
+    <!--<View
         android:id="@+id/view_zhurenzheng_four"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
         android:background="#ececec"
         android:layout_below="@+id/rel_relationship"
 
-        />
+        />-->
 
 
     <RelativeLayout
         android:id="@+id/rel_ID_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view_zhurenzheng_four"
+        android:layout_below="@+id/view_zhurenzheng_three"
         >
 
         <TextView
@@ -322,8 +322,8 @@
             >
             <ImageView
                 android:id="@+id/icon_head"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
                 android:src="@mipmap/icon_add"
                 android:layout_centerInParent="true"
                 />
@@ -386,8 +386,8 @@
             >
             <ImageView
                 android:id="@+id/icon_head_found"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
                 android:src="@mipmap/icon_add"
                 android:layout_centerInParent="true"
                 />
@@ -411,8 +411,8 @@
             >
             <ImageView
                 android:id="@+id/icon_china"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
                 android:src="@mipmap/icon_add"
                 android:layout_centerInParent="true"
                 />

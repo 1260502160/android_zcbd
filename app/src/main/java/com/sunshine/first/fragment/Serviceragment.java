@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.stx.xhb.xbanner.XBanner;
 import com.sunshine.first.R;
+import com.sunshine.first.activity.RepairActivity;
 import com.sunshine.first.activity.YeZhuRenZhengActivity;
 import com.sunshine.first.bean.XbannerBean;
 
@@ -45,6 +46,13 @@ public class Serviceragment extends BaseFragment {
     protected void initData() {
 
         net(false,false).get(1,Api.Xbanner_URL,null);
+        iconPaymentCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), RepairActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
