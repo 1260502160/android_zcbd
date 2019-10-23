@@ -7,8 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;

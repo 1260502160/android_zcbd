@@ -2,30 +2,21 @@ package com.sunshine.first.fragment;
 
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.abner.ming.base.BaseFragment;
+import com.sunshine.first.BaseFragment;
 import com.abner.ming.base.model.Api;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.stx.xhb.xbanner.XBanner;
 import com.sunshine.first.R;
-import com.sunshine.first.activity.BaoXiuActivity;
 import com.sunshine.first.activity.OnlineStoreActivity;
-import com.sunshine.first.activity.PaymentCenterActivity;
 import com.sunshine.first.activity.VisitorRegistrationActivity;
 import com.sunshine.first.activity.YeZhuRenZhengActivity;
 import com.sunshine.first.adapter.StoreAllAdapter;

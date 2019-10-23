@@ -6,11 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.R;
-import com.sunshine.first.bean.SendSmsBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +73,7 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
                 if (!TextUtils.isEmpty(phone)) {
 
                     Map<String, String> map = new HashMap<>();
-                    map.put("token",getToken() );
+                    map.put("token", getToken());
                     map.put("mobile", phone);
                     map.put("code", code);
                     map.put("type", "2");
@@ -89,11 +88,12 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type == 1) {
-            SendSmsBean sendSmsBean = gson.fromJson(data, SendSmsBean.class);
-            if (sendSmsBean != null && sendSmsBean.isSuccess()) {
 
-            }
+        if (type == 1) {
+//            SendSmsBean sendSmsBean = gson.fromJson(data, SendSmsBean.class);
+//            if (sendSmsBean != null && sendSmsBean.isSuccess()) {
+//
+//            }
 
         }
 

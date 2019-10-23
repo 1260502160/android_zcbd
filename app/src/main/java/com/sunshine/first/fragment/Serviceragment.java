@@ -1,14 +1,10 @@
 package com.sunshine.first.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.abner.ming.base.BaseFragment;
+import com.sunshine.first.BaseFragment;
 import com.abner.ming.base.model.Api;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;

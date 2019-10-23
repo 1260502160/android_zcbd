@@ -3,12 +3,9 @@ package com.sunshine.first.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,10 +13,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.abner.ming.base.BaseFragment;
+import com.sunshine.first.BaseFragment;
 import com.abner.ming.base.model.Api;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.CarInfoActivity;
 import com.sunshine.first.activity.FeedbackActivity;
@@ -92,12 +90,12 @@ public class MyFragment extends BaseFragment {
                     @Override
                     public void onClick(View view) {
                         int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
-                        if (is_verify==0){
+                        if (is_verify == 0) {
                             intent = new Intent(getActivity(), HostmanRenActivity.class);
                             startActivity(intent);
-                        }else if (is_verify==1){
-                           intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
-                           startActivity(intent);
+                        } else if (is_verify == 1) {
+                            intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
+                            startActivity(intent);
                         }
 
 
@@ -125,7 +123,7 @@ public class MyFragment extends BaseFragment {
 
         token = SharePreferenceHelper.getInstance(getContext()).getString("token", "");
         Map<String, String> map = new HashMap<>();
-        map.put("token", token);
+        map.put("token", token+"123");
         net(false, false).post(1, Api.GetUserInfo_URL, map);
         Log.i("bbb", "net");
 
@@ -240,17 +238,19 @@ public class MyFragment extends BaseFragment {
             gson = new Gson();
             myInfomationBean = gson.fromJson(data, MyInfomationBean.class);
             Glide.with(getContext()).load(myInfomationBean.getData().getPhoto());
-            textAdmin.setText(myInfomationBean.getData().getNickname()+"");
+            textAdmin.setText(myInfomationBean.getData().getNickname() + "");
             int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
-            if (is_verify==0){
+            if (is_verify == 0) {
                 tvSf.setText("未认证");
-            }else if (is_verify==1){
+            } else if (is_verify == 1) {
                 tvSf.setText("已认证");
-            }else if (is_verify==2){
+            } else if (is_verify == 2) {
                 tvSf.setText("拒绝");
-            }else if (is_verify==3){
+            } else if (is_verify == 3) {
                 tvSf.setText("待审核");
             }
+        } else if (type == -1) {
+            ToastManage.s(getActivity(), data + "");
         }
     }
 

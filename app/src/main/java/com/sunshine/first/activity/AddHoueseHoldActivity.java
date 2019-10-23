@@ -1,13 +1,10 @@
 package com.sunshine.first.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import butterknife.BindView;

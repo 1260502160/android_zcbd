@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,7 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -32,16 +31,12 @@ import com.sunshine.first.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.addapp.pickers.listeners.OnItemPickListener;
-import cn.addapp.pickers.listeners.OnSingleWheelListener;
-import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
 
 public class TenementActivity extends BaseAppCompatActivity implements View.OnClickListener{

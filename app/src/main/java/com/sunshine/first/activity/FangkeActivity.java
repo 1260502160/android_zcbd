@@ -1,6 +1,6 @@
 package com.sunshine.first.activity;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 public class FangkeActivity extends BaseAppCompatActivity{
