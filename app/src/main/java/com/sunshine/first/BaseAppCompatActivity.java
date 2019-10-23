@@ -18,10 +18,10 @@ import com.abner.ming.base.R;
 import com.abner.ming.base.mvp.model.BaseModelIml;
 import com.abner.ming.base.mvp.presenter.BasePresenterIml;
 import com.abner.ming.base.mvp.view.BaseView;
-import com.abner.ming.base.utils.SharePreferenceHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.sunshine.first.activity.LoginActivity;
+import com.sunshine.first.utils.SharePreferenceHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
