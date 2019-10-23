@@ -1,40 +1,25 @@
 package com.sunshine.first.activity;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.sunshine.first.R;
-import com.sunshine.first.adapter.StoreAllAdapter;
 import com.sunshine.first.adapter.VisitorRecoderAdapter;
 import com.sunshine.first.bean.VisitorRecodBean;
-import com.sunshine.first.fragment.AuthenticatedFragment;
-import com.sunshine.first.fragment.EmpowerFragment;
-import com.sunshine.first.fragment.GetGoFragment;
-import com.sunshine.first.fragment.WaitApproveFragment;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class VisitorRecordActivity extends BaseAppCompatActivity{
 

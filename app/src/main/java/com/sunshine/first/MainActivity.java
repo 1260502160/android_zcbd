@@ -1,7 +1,5 @@
 package com.sunshine.first;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.cafe.library.library.BottomTabInfo;
@@ -13,12 +11,15 @@ import com.sunshine.first.fragment.SmallPoliceFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseAppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
 
         BottomTabLayout bottomTabLayout = (BottomTabLayout) findViewById(R.id.id_bottom_tab_layout);
 
@@ -32,10 +33,18 @@ public class MainActivity extends AppCompatActivity {
         bottomTabLayout.initFragment((getSupportFragmentManager()));
 
 
+        //测试一下
+
+
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
     }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
 }

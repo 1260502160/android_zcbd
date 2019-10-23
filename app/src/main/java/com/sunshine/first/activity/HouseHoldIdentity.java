@@ -1,12 +1,9 @@
 package com.sunshine.first.activity;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +11,13 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.GetResidentsListBean;
 import com.sunshine.first.fragment.AuthenticatedFragment;
-import com.sunshine.first.fragment.FixCarFragment;
-import com.sunshine.first.fragment.LinShiCarFragment;
 import com.sunshine.first.fragment.WaitApproveFragment;
 import com.sunshine.first.utils.SharePreferenceHelper;
 

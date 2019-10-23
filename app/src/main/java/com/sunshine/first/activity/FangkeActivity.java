@@ -1,5 +1,6 @@
 package com.sunshine.first.activity;
 
+import com.sunshine.first.BaseAppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -25,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FangkeActivity extends BaseAppCompatActivity {
+public class FangkeActivity extends BaseAppCompatActivity{
 
     @BindView(R.id.icon_back)
     ImageView iconBack;

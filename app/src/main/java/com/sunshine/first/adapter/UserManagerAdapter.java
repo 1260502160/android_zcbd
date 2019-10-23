@@ -56,10 +56,10 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
             public void onClick(View view) {
 
                 int type = dataBean.getType();
-                if(1==type){//房主
+                if (1 == type) {//房主
                     Intent intent = new Intent(context, HouseHoldIdentity.class);
                     context.startActivity(intent);
-                }else{//房客
+                } else {//房客
 
                     Intent intent = new Intent(context, FangkeActivity.class);
                     context.startActivity(intent);

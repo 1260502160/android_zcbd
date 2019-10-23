@@ -1,13 +1,5 @@
 package com.sunshine.first.activity;
 
-import android.Manifest;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.util.Base64;
 import android.util.Log;
@@ -31,6 +23,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.ToastManage;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.AddFeedBackBean;
 import com.sunshine.first.utils.SharePreferenceHelper;

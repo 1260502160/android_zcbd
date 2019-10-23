@@ -1,10 +1,6 @@
 package com.sunshine.first.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.sunshine.first.R;
 import com.sunshine.first.adapter.GetCarListAdapter;
-import com.sunshine.first.adapter.StoreAllAdapter;
 import com.sunshine.first.bean.GetCarListBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
 

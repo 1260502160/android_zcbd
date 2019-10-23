@@ -1,28 +1,20 @@
 package com.sunshine.first.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 
-import com.abner.ming.base.BaseAppCompatActivity;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.sunshine.first.R;
 import com.sunshine.first.adapter.ChooseCummintyAdapter;
-import com.sunshine.first.adapter.StoreAllAdapter;
 import com.sunshine.first.bean.GetCommunityBean;
-import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,8 +101,8 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
 
                 map.put("keyword",hosingname);
                 net(false,false).post(1,Api.GetHosing_URL,map);
-            }
-        });
+    }
+});
 
     }
 
