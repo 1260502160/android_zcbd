@@ -109,8 +109,8 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
 
                 map.put("keyword",hosingname);
                 net(false,false).post(1,Api.GetHosing_URL,map);
-            }
-        });
+    }
+});
 
     }
 

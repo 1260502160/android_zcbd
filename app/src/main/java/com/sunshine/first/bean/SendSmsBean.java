@@ -2,7 +2,7 @@ package com.sunshine.first.bean;
 
 import java.io.Serializable;
 
-public class SendSmsBean implements Serializable{
+public class SendSmsBean implements Serializable {
 
 
     /**
@@ -50,5 +50,6 @@ public class SendSmsBean implements Serializable{
     }
 
     public static class DataBean {
+
     }
 }
