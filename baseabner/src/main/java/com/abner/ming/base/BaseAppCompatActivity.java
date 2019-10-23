@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -68,7 +69,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         titleRight = (TextView) findViewById(R.id.base_title_right);
 
         //创建用于添加子类传递的布局
-        LinearLayout baseView = (LinearLayout) findViewById(R.id.base_view);
+        FrameLayout baseView = (FrameLayout) findViewById(R.id.base_view);
         //拿到子类布局
         View childView = View.inflate(this, getLayoutId(), null);
 
@@ -185,4 +186,17 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     }
 
 
+    /**
+     * 设置标题
+     * 默认页面都这样展示特殊自己处理
+     */
+    protected void setDefaultTitle(String title) {
+        baseTitle.setText(title);
+        setShowTitle(false);
+        isShowBack(true);
+
+//        //设置状态栏上的字体为黑色-因为本页面是白色必须设置
+//        UtilsStyle.StatusBarLightMode(this,
+//                RomUtils.getLightStatusBarAvailableRomType());
+    }
 }

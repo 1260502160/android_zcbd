@@ -28,6 +28,7 @@ import com.sunshine.first.activity.MyIndentActivity;
 import com.sunshine.first.activity.PayRecordActivity;
 import com.sunshine.first.activity.PersonalActivity;
 import com.sunshine.first.activity.RepairRecordActivity;
+import com.sunshine.first.activity.UserMangerActivity;
 import com.sunshine.first.activity.VisitorRecordActivity;
 import com.sunshine.first.activity.ZhuHuGuanLiActivity;
 import com.sunshine.first.bean.MyInfomationBean;
@@ -132,6 +133,14 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 intent = new Intent(getContext(), FeedbackActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        iconZhuhuguanli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getContext(), UserMangerActivity.class);
                 startActivity(intent);
             }
         });

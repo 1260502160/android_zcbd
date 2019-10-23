@@ -39,4 +39,6 @@ public class Api {
     public final static  String VisitorAdd_URL = BASE_URL+"visitorAdd";
     //获取访客授权记录列表
     public final static  String VisitorRecord_URL = BASE_URL+"getAppVisitorList";
+    //获取住户列表
+    public final static  String GetResidentsList_URL = BASE_URL+"getResidentsList";
 }

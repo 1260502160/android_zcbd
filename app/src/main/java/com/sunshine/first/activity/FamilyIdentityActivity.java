@@ -91,12 +91,12 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
     RelativeLayout relPhone;
     @BindView(R.id.view_zhurenzheng_three)
     View viewZhurenzhengThree;
-    @BindView(R.id.tv_choose_relation)
-    TextView tvChooseRelation;
-    @BindView(R.id.rel_relationship)
-    RelativeLayout relRelationship;
-    @BindView(R.id.view_zhurenzheng_four)
-    View viewZhurenzhengFour;
+    /*@BindView(R.id.tv_choose_relation)
+    TextView tvChooseRelation;*/
+   /* @BindView(R.id.rel_relationship)
+    RelativeLayout relRelationship;*/
+ /*   @BindView(R.id.view_zhurenzheng_four)
+    View viewZhurenzhengFour;*/
     @BindView(R.id.tv_ID_number)
     EditText tvIDNumber;
     @BindView(R.id.rel_ID_number)
@@ -151,12 +151,12 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
 
         btnSubmit.setOnClickListener(this);
         relationship = getIntent().getStringExtra("relationship");
-        tvChooseRelation.setText(relationship);
-        if (relationship.equals("房主")){
+        //tvChooseRelation.setText(relationship);
+        if ("房主".equals(relationship)){
 
             cc=1;
 
-        }else if (relationship.equals("租客")){
+        }else if ("租客".equals(relationship)){
 
             cc=2;
         }

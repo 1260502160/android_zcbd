@@ -17,6 +17,7 @@ import com.sunshine.first.MainActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.LoginBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +54,7 @@ public class LoginActivity extends BaseAppCompatActivity{
 
         ButterKnife.bind(this);
         btn_login = (Button)get(R.id.btn_login);
+
     }
 
 
@@ -132,6 +134,10 @@ public class LoginActivity extends BaseAppCompatActivity{
                 startActivity(intent);
                 break;
             case R.id.icon_wechat:
+               /* SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "wechat_sdk_demo_test";
+                api.sendReq(req);*/
                 break;
         }
     }
