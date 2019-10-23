@@ -41,4 +41,6 @@ public class Api {
     public final static  String VisitorRecord_URL = BASE_URL+"getAppVisitorList";
     //获取住户列表
     public final static  String GetResidentsList_URL = BASE_URL+"getResidentsList";
+    //解除绑定手机号 更换手机号
+    public final static String UPDATE_MOBILE_URL = BASE_URL + "updateMobile";
 }

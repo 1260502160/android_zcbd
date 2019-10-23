@@ -33,6 +33,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         return viewLayout;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

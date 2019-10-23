@@ -124,7 +124,7 @@ public class BaseModelIml implements BaseModel {
 
             @Override
             public void fail(String error) {
-                listener.fail(type, error);
+                listener.fail(-1, error);
             }
         });
 
