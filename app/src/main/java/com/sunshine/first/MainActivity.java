@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         bottomTabLayout.initFragment((getSupportFragmentManager()));
 
 
+        //测试一下
+
+
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
