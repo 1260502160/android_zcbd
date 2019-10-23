@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sunshine.first.R;
+import com.sunshine.first.activity.FangkeActivity;
 import com.sunshine.first.activity.HouseHoldIdentity;
 import com.sunshine.first.activity.IdentityAdfitActivity;
 import com.sunshine.first.bean.HouseListBean;
@@ -55,12 +56,12 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
             public void onClick(View view) {
 
                 int type = dataBean.getType();
-                if(1==type){//房主
+                if (1 == type) {//房主
                     Intent intent = new Intent(context, HouseHoldIdentity.class);
                     context.startActivity(intent);
-                }else{//房客
+                } else {//房客
 
-                    Intent intent = new Intent(context, IdentityAdfitActivity.class);
+                    Intent intent = new Intent(context, FangkeActivity.class);
                     context.startActivity(intent);
                 }
 
