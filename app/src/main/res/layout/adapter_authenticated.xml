@@ -34,6 +34,7 @@
         />
 
     <TextView
+        android:id="@+id/tv_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="手机:13112341234"
@@ -45,6 +46,7 @@
         android:layout_below="@+id/text_name"
         />
     <TextView
+        android:id="@+id/tv_sf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_small_origin"

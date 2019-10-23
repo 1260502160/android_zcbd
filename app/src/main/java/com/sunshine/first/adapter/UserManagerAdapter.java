@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sunshine.first.R;
+import com.sunshine.first.activity.FangkeActivity;
 import com.sunshine.first.activity.HouseHoldIdentity;
 import com.sunshine.first.activity.IdentityAdfitActivity;
 import com.sunshine.first.bean.HouseListBean;
@@ -60,7 +61,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
                     context.startActivity(intent);
                 }else{//房客
 
-                    Intent intent = new Intent(context, IdentityAdfitActivity.class);
+                    Intent intent = new Intent(context, FangkeActivity.class);
                     context.startActivity(intent);
                 }
 

@@ -86,6 +86,7 @@
         <activity android:name=".activity.RepairActivity"></activity>
         <activity android:name=".activity.UserMangerActivity"></activity>
         <activity android:name=".activity.IdentityAdfitActivity"></activity>
+        <activity android:name=".activity.FangkeActivity"></activity>
 
     </application>
 
