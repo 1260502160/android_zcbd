@@ -6,10 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abner.ming.base.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.bigkoo.pickerview.TimePickerView;
 import com.google.gson.Gson;
@@ -32,6 +28,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import java.io.ByteArrayOutputStream;

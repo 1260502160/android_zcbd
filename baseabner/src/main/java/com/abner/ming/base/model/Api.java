@@ -43,4 +43,7 @@ public class Api {
     public final static  String GetResidentsList_URL = BASE_URL+"getResidentsList";
     //添加意见反馈
     public final static  String AddFeedback_URL = BASE_URL+"addFeedback";
+
+    //解除绑定手机号 更换手机号
+    public final static String UPDATE_MOBILE_URL = BASE_URL + "updateMobile";
 }

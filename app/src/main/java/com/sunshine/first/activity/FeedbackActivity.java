@@ -1,5 +1,11 @@
 package com.sunshine.first.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.text.Editable;
 import android.util.Base64;
 import android.util.Log;
@@ -13,7 +19,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abner.ming.base.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
