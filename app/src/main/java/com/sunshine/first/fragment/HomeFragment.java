@@ -233,8 +233,8 @@ public class HomeFragment extends BaseFragment{
             goodsListBean = gson.fromJson(data, GoodsListBean.class);
             goodsListBeanData = goodsListBean.getData();
             List<GoodsListBean.DataBean.ListBean> listbean = goodsListBeanData.getList();
-            Log.i(AAAA,listbean.toString());
             if (listbean!=null){
+                Log.i(AAAA,listbean.toString());
                 storeAllAdapter.setDataList(listbean);
             }
 
