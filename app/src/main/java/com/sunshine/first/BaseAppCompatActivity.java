@@ -164,8 +164,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
             JSONObject jsonObject = new JSONObject(data);
             String error_code = jsonObject.optString("error_code");
             if ("403".equals(error_code)) {//重新登录
+                SharePreferenceHelper.getInstance(this).put("token", "");
                 Intent intent = new Intent(this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         } catch (JSONException e) {
