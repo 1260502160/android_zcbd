@@ -15,7 +15,6 @@ public class AddFeedBackBean implements Serializable{
     private boolean success;
     private String error_code;
     private String message;
-    private List<?> data;
 
     public boolean isSuccess() {
         return success;
@@ -41,11 +40,4 @@ public class AddFeedBackBean implements Serializable{
         this.message = message;
     }
 
-    public List<?> getData() {
-        return data;
-    }
-
-    public void setData(List<?> data) {
-        this.data = data;
-    }
 }

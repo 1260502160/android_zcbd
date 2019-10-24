@@ -123,7 +123,7 @@ public class MyFragment extends BaseFragment {
 
         token = SharePreferenceHelper.getInstance(getContext()).getString("token", "");
         Map<String, String> map = new HashMap<>();
-        map.put("token", token+"123");
+        map.put("token", token);
         net(false, false).post(1, Api.GetUserInfo_URL, map);
         Log.i("bbb", "net");
 

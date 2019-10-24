@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.stx.xhb.xbanner.XBanner;
 import com.sunshine.first.R;
+import com.sunshine.first.activity.BaoXiuActivity;
 import com.sunshine.first.activity.RepairActivity;
 import com.sunshine.first.activity.YeZhuRenZhengActivity;
 import com.sunshine.first.bean.XbannerBean;
@@ -45,7 +46,7 @@ public class Serviceragment extends BaseFragment {
         iconPaymentCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RepairActivity.class);
+                Intent intent = new Intent(getActivity(), BaoXiuActivity.class);
                 startActivity(intent);
             }
         });

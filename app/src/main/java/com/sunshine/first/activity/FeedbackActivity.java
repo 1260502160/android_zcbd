@@ -346,7 +346,6 @@ public class FeedbackActivity extends BaseAppCompatActivity {
             Gson gson = new Gson();
             AddFeedBackBean addFeedBackBean = gson.fromJson(data, AddFeedBackBean.class);
             Toast.makeText(FeedbackActivity.this, addFeedBackBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
-
         }
     }
 }
