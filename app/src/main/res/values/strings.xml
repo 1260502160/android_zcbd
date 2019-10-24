@@ -129,5 +129,8 @@
     <string name="text_feedbackcontent">反馈内容</string>
     <string name="text_face_authentica">添加人脸认证</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

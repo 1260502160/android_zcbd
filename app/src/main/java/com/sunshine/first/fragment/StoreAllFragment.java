@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 
 import com.sunshine.first.R;
 
-public class StoreAllFragment extends Fragment{
+/**
+ * 商品列表
+ */
+public class StoreAllFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_store_all,container,false);
+        return inflater.inflate(R.layout.fragment_store_all, container, false);
     }
 }
