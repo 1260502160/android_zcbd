@@ -22,7 +22,7 @@ public class AddReceviceAddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_shapping_address);
+        setContentView(R.layout.activity_add_shopping_address);
         ButterKnife.bind(this);
     }
 

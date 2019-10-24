@@ -96,15 +96,20 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
         }
     }
 
-    @OnClick({R.id.icon_back, R.id.btn_forget_yancode})
+    @OnClick({R.id.icon_back, R.id.btn_forget_yancode, R.id.ll_singleton_goods_details})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
                 break;
             case R.id.btn_forget_yancode:
-                Intent intent = new Intent(this, MerchantShopActivity.class);
+                intent = new Intent(this, MerchantShopActivity.class);
                 intent.putExtra("m_id", goodsDeatilBean.getData().getM_id());
+                startActivity(intent);
+                break;
+            case R.id.ll_singleton_goods_details:
+                intent = new Intent(this, PaymentActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -20,6 +20,7 @@
     <string name="text_register_xieyi">注册/登录即表示同意《服务协议》及《隐私政策》</string>
     <string name="text_change_phone">更换手机号</string>
     <string name="text_phone_num">手机号码</string>
+    <string name="text_address_area">所在地区</string>
     <string name="text_new_phone_num">输入新的手机号码</string>
     <string name="text_yan_code">输入验证码</string>
     <string name="btn_submit">提交</string>
