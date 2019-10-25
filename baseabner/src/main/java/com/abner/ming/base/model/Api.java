@@ -37,7 +37,7 @@ public class Api {
     //修改头像,昵称
     public final static  String UpdateUserInfo_URL = BASE_URL+"updateUserInfo";
     //获取房屋列表
-    public final static  String HousesList_URL = BASE_URL+"housesList";
+        public final static  String HousesList_URL = BASE_URL+"housesList";
     //访客登记
     public final static  String VisitorAdd_URL = BASE_URL+"visitorAdd";
     //获取访客授权记录列表
@@ -60,4 +60,6 @@ public class Api {
     public final static String GetShopInfoURL = BASE_URL + "getShopInfo";
     //获取收货列表
     public final static String GetAddressListURL = BASE_URL + "getAddressList";
+    //获取收货地址详情
+    public final static String GetAddressDetailURL = BASE_URL + "getAddressDetail";
 }

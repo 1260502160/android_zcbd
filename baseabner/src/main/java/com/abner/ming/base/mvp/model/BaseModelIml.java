@@ -119,12 +119,17 @@ public class BaseModelIml implements BaseModel {
         httpUtils.result(new HttpUtils.HttpListener() {
             @Override
             public void success(String data) {
-                if (cls == null) {
-                    listener.success(type, data);
-                } else {
-                    Object bean = new Gson().fromJson(data, cls);
-                    listener.successBean(type, bean);
+                try {
+                    if (cls == null) {
+                        listener.success(type, data);
+                    } else {
+                        Object bean = new Gson().fromJson(data, cls);
+                        listener.successBean(type, bean);
+                    }
+                } catch (Exception e) {
+                    Logger.e("网络请求报错 BaseModelIml", e.toString());
                 }
+
 
             }
 
