@@ -1,6 +1,7 @@
 package com.sunshine.first.activity;
 
 import com.sunshine.first.BaseAppCompatActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -19,13 +20,14 @@ import com.sunshine.first.bean.GetResidentsListBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FangkeActivity extends BaseAppCompatActivity{
+public class FangkeActivity extends BaseAppCompatActivity {
 
     @BindView(R.id.icon_back)
     ImageView iconBack;
@@ -56,7 +58,8 @@ public class FangkeActivity extends BaseAppCompatActivity{
         String token = SharePreferenceHelper.getInstance(this).getString("token", "");
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
-        map.put("id", "1");
+        int id = getIntent().getIntExtra("id", -1);
+        map.put("id", String.valueOf(id));
         map.put("status", "1");
         net(false, false).post(1, Api.GetResidentsList_URL, map);
 
@@ -72,7 +75,6 @@ public class FangkeActivity extends BaseAppCompatActivity{
     public int getLayoutId() {
         return R.layout.activity_sfrz;
     }
-
 
 
     @OnClick({R.id.icon_back, R.id.text_forget, R.id.relative_change, R.id.view_fangzhurenzheng_one, R.id.recycle_fangke})
@@ -95,9 +97,13 @@ public class FangkeActivity extends BaseAppCompatActivity{
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
             Gson gson = new Gson();
-            //GetResidentsListBean getResidentsListBean = gson.fromJson(data, GetResidentsListBean.class);
+            GetResidentsListBean getResidentsListBean = gson.fromJson(data, GetResidentsListBean.class);
+            if (getResidentsListBean != null) {
+                List<GetResidentsListBean.DataBean> getResidentsListBeanData = getResidentsListBean.getData();
+                fangKeAdapter.setData(getResidentsListBeanData);
+            }
         }
     }
 }

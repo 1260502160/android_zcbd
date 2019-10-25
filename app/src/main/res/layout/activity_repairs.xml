@@ -147,6 +147,16 @@
             android:textColor="#333333"
             android:textSize="@dimen/sp_14"
             />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dizhi"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_55"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14"
+            />
         <ImageView
             android:id="@+id/icon_add_next"
             android:layout_width="wrap_content"
@@ -182,10 +192,11 @@
                 android:textSize="@dimen/sp_14"
                 />
 
-            <EditText
+            <TextView
+                android:id="@+id/tv_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="请选择"
+                android:text="请选择"
                 android:background="@null"
                 android:textColor="@color/grey"
                 android:layout_alignParentRight="true"
@@ -226,12 +237,12 @@
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14"
                 />
-            <TextView
-                android:id="@+id/tv_names"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="丁一"
-                android:layout_marginTop="@dimen/dp_20"
+            <EditText
+                android:id="@+id/edit_names"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="丁一"
+                android:background="@null"
                 android:layout_marginLeft="@dimen/dp_55"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14"
@@ -272,12 +283,12 @@
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14"
                 />
-            <TextView
-                android:id="@+id/tv_phones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="13112341234"
-                android:layout_marginTop="@dimen/dp_20"
+            <EditText
+                android:id="@+id/edit_phones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="13112341234"
+                android:background="@null"
                 android:layout_marginLeft="@dimen/dp_55"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14"

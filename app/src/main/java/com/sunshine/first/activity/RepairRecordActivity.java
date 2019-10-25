@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.fragment.AllFragment;
 import com.sunshine.first.fragment.AlreadyMoneyFragment;
@@ -27,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RepairRecordActivity extends AppCompatActivity {
+public class RepairRecordActivity extends BaseAppCompatActivity{
     @BindView(R.id.icon_back)
     ImageView iconBack;
     @BindView(R.id.repair_all)
@@ -53,16 +54,15 @@ public class RepairRecordActivity extends AppCompatActivity {
 
     //写一个List集合，把每个页面，也就是Fragment,存进去
     private List<Fragment> list;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repair_records);
-        ButterKnife.bind(this);
+    protected void initData() {
+
         //页面，数据源，里面是创建的三个页面（Fragment）
         list = new ArrayList<>();
         list.add(new RepairAllFragment());
         list.add(new WaitAgencyFragment());
-        list.add(new WaitPayMoneyFragment());
+        list.add(new WaitPayFragment());
         list.add(new AlreadyMoneyFragment());
         viewpagerRepair.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -117,6 +117,16 @@ public class RepairRecordActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_repair_records;
     }
 
     @OnClick(R.id.icon_back)

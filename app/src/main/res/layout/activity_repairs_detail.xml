@@ -60,6 +60,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_repari_descrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="卧室空调不制冷。按遥控器无反应"
@@ -69,6 +70,7 @@
             android:layout_marginTop="@dimen/dp_15"
             />
         <ImageView
+            android:id="@+id/icon_repair"
             android:layout_width="@dimen/dp_70"
             android:layout_height="@dimen/dp_70"
             android:src="@mipmap/ic_launcher"
@@ -105,6 +107,7 @@
             android:textSize="@dimen/sp_14"
             />
         <TextView
+            android:id="@+id/tv_repair_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="公祥街15号楼1-1302"
@@ -141,7 +144,7 @@
                 android:textSize="@dimen/sp_14"
                 />
             <TextView
-                android:id="@+id/text_yytime"
+                android:id="@+id/text_reapir_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2019-09-11  12:20"
@@ -154,7 +157,7 @@
                 android:layout_height="@dimen/dp_1"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15"
-                android:layout_below="@+id/text_yytime"
+                android:layout_below="@+id/text_reapir_time"
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="#CCCCCC"
                 />
@@ -178,7 +181,7 @@
                 android:textSize="@dimen/sp_14"
                 />
             <TextView
-                android:id="@+id/text_zslxr"
+                android:id="@+id/tv_drscrip_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="丁一"
@@ -191,7 +194,7 @@
                 android:layout_height="@dimen/dp_1"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15"
-                android:layout_below="@+id/text_zslxr"
+                android:layout_below="@+id/tv_drscrip_name"
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="#CCCCCC"
                 />
@@ -214,7 +217,7 @@
                 android:textSize="@dimen/sp_14"
                 />
             <TextView
-                android:id="@+id/text_zsphone"
+                android:id="@+id/tv_descrip_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_phone_number"

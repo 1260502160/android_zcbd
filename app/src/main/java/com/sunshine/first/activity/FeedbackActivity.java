@@ -31,6 +31,7 @@ import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.AddFeedBackBean;
+import com.sunshine.first.bean.UploadImgBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.io.ByteArrayOutputStream;
@@ -345,7 +346,15 @@ public class FeedbackActivity extends BaseAppCompatActivity {
         } else if (type == 1) {
             Gson gson = new Gson();
             AddFeedBackBean addFeedBackBean = gson.fromJson(data, AddFeedBackBean.class);
+            if ("200".equals(addFeedBackBean.getError_code())){
+                finish();
+            }
             Toast.makeText(FeedbackActivity.this, addFeedBackBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
+        }else if (type == 2){
+            Gson gson = new Gson();
+            UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
+            iconTwo = uploadImgBean.getData().getImgUrl();
         }
+
     }
 }

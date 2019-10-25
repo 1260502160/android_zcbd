@@ -17,6 +17,8 @@ import com.abner.ming.base.mvp.view.BaseView;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+
 /**
  * author:AbnerMing
  * date:2019/6/7
@@ -29,6 +31,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewLayout = View.inflate(getActivity(), getLayoutId(), null);
+        ButterKnife.bind(this, viewLayout);
         initView(viewLayout);
         return viewLayout;
     }
