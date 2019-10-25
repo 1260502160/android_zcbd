@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sunshine.first">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="com.abner.ming.base.AbnerApplication"
-        android:networkSecurityConfig="@xml/network_config"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-       <!-- <provider
+        <activity android:name=".activity.AddressListActivity"></activity>
+        <activity android:name=".activity.PaymentActivity" />
+        <activity android:name=".activity.MerchantShopActivity" />
+        <!--
+         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.sunshine.first.fileProvider"
             android:grantUriPermissions="true"
@@ -28,12 +32,11 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>-->
+        </provider>
+        -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
-
-        </activity>
+            android:label="@string/app_name" />
         <activity android:name=".Select" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
@@ -42,21 +45,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.RegisterActivity"/>
-        <activity android:name=".activity.ForgetPassActivity"/>
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ForgetPassActivity" />
         <activity android:name=".activity.HostmanRenActivity" />
         <activity android:name=".activity.ZhuHuGuanLiActivity" />
         <activity android:name=".activity.PersonalActivity" />
-        <activity android:name=".activity.PaymentCenterActivity"/>
+        <activity android:name=".activity.PaymentCenterActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.SafeMangerActivity" />
-        <activity android:name=".activity.OnlineStoreActivity"/>
-        <activity android:name=".activity.VisitorRegistrationActivity"/>
+        <activity android:name=".activity.OnlineStoreActivity" />
+        <activity android:name=".activity.VisitorRegistrationActivity" />
         <activity android:name=".activity.PhoneNumeberActivity" />
         <activity android:name=".activity.UpdatePassActivity" />
         <activity android:name=".activity.SfrzActivity" />
-        <activity android:name=".activity.ChooseCommityActivity"/>
+        <activity android:name=".activity.ChooseCommityActivity" />
         <activity android:name=".activity.YeZhuRenZhengActivity" />
         <activity android:name=".activity.BaoXiuActivity" />
         <activity android:name=".activity.MyIndentActivity" />
@@ -64,24 +66,29 @@
         <activity android:name=".activity.BaoLookDeatilActivity" />
         <activity android:name=".activity.RepairRecordActivity" />
         <activity android:name=".activity.BianMinJiaoFeiActivity" />
-        <activity android:name=".activity.TenementActivity"/>
+        <activity android:name=".activity.TenementActivity" />
         <activity android:name=".activity.StopCarActivity" />
         <activity android:name=".activity.PayRecordActivity" />
-        <activity android:name=".activity.FamilyIdentityActivity"/>
+        <activity android:name=".activity.FamilyIdentityActivity" />
         <activity android:name=".activity.PayActivity" />
         <activity android:name=".activity.ChooseHouse" />
         <activity android:name=".activity.ChooseHomeActivity" />
-        <activity android:name=".activity.PropertyChargesActivity"/>
-        <activity android:name=".activity.ReceiveAddressActivity"/>
-        <activity android:name=".activity.AddReceviceAddressActivity"/>
-        <activity android:name=".activity.CarInfoActivity"/>
-        <activity android:name=".activity.GoodsDetailActivity"/>
+        <activity android:name=".activity.PropertyChargesActivity" />
+        <activity android:name=".activity.ReceiveAddressActivity" />
+        <activity android:name=".activity.AddReceviceAddressActivity" />
+        <activity android:name=".activity.CarInfoActivity" />
+        <activity android:name=".activity.GoodsDetailActivity" />
         <activity android:name=".activity.VisitorInvitationActivity" />
         <activity android:name=".activity.PayTypeActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.AddHoueseHoldActivity" />
         <activity android:name=".activity.HouseHoldIdentity" />
         <activity android:name=".activity.VisitorRecordActivity" />
+        <activity android:name=".activity.PayDeatilActivity" />
+        <activity android:name=".activity.RepairActivity" />
+        <activity android:name=".activity.UserMangerActivity" />
+        <activity android:name=".activity.IdentityAdfitActivity" />
+        <activity android:name=".activity.FangkeActivity" />
         <activity android:name=".activity.PayDeatilActivity"></activity>
         <activity android:name=".activity.RepairActivity"></activity>
         <activity android:name=".activity.UserMangerActivity"></activity>

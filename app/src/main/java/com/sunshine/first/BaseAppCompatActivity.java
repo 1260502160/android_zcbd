@@ -20,6 +20,7 @@ import com.abner.ming.base.mvp.presenter.BasePresenterIml;
 import com.abner.ming.base.mvp.view.BaseView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.activity.LoginActivity;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
@@ -28,6 +29,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import butterknife.ButterKnife;
 
 /**
  * author:AbnerMing
@@ -40,6 +43,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     private ImageView baseBack;
     private BasePresenterIml basePresenter;
     protected Gson gson = new Gson();
+    protected Map<String, String> hashMap = new HashMap<>();
+    protected int page = 1;
+    protected int perpage = 10;
 
     /**
      * 设置标题
@@ -65,6 +71,14 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         }
     }
 
+    //子类传递的一个layout
+    public abstract int getLayoutId();
+
+    //初始化View
+    protected abstract void initView();
+
+    //初始化View
+    protected abstract void initData();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +97,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
 
         baseView.addView(childView);
 
+        ButterKnife.bind(this);
+
         initView();
 
         initData();
@@ -96,16 +112,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         });
 
     }
-
-
-    //初始化View
-    protected abstract void initData();
-
-    //初始化View
-    protected abstract void initView();
-
-    //子类传递的一个layout
-    public abstract int getLayoutId();
 
     protected void toast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
@@ -168,6 +174,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
                 Intent intent = new Intent(this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            } else if (type == -1) {
+                ToastManage.s(this, data);
             }
         } catch (JSONException e) {
             e.printStackTrace();

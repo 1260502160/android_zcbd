@@ -20,8 +20,9 @@ public class ZhuHuGuanLiActivity extends BaseAppCompatActivity{
     ImageView iconBack;
     @BindView(R.id.btn_add_household_info)
     Button btnAddHouseholdInfo;
-    @BindView(R.id.recycle_home_list)
+    @BindView(R.id.reclcle_home_list)
     RecyclerView recycleHomeList;
+
     private Intent intent;
 
 
@@ -32,7 +33,6 @@ public class ZhuHuGuanLiActivity extends BaseAppCompatActivity{
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
     }
 
     @Override

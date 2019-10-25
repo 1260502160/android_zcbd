@@ -1,210 +1,98 @@
 package com.sunshine.first.activity;
 
-import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
+import com.abner.ming.base.model.Api;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
-import com.sunshine.first.fragment.AlreadyMoneyFragment;
-import com.sunshine.first.fragment.EntrieFragment;
-import com.sunshine.first.fragment.GriftFragment;
-import com.sunshine.first.fragment.HouseHoldFragment;
-import com.sunshine.first.fragment.OilFragment;
-import com.sunshine.first.fragment.RepairAllFragment;
-import com.sunshine.first.fragment.StoreAllFragment;
-import com.sunshine.first.fragment.WaitAgencyFragment;
-import com.sunshine.first.fragment.WaitPayMoneyFragment;
+import com.sunshine.first.bean.OnLineBean;
+import com.sunshine.first.fragment.GoodsFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OnlineStoreActivity extends AppCompatActivity {
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
-    @BindView(R.id.store_all)
-    RadioButton storeAll;
-    @BindView(R.id.entrie)
-    RadioButton entrie;
-    @BindView(R.id.household)
-    RadioButton household;
-    @BindView(R.id.oil)
-    RadioButton oil;
-    @BindView(R.id.grift)
-    RadioButton grift;
-    @BindView(R.id.store_radiogroup)
-    RadioGroup storeRadiogroup;
-    @BindView(R.id.iv_line1)
-    ImageView ivLine1;
-    @BindView(R.id.iv_line2)
-    ImageView ivLine2;
-    @BindView(R.id.iv_line3)
-    ImageView ivLine3;
-    @BindView(R.id.iv_line4)
-    ImageView ivLine4;
-    @BindView(R.id.iv_line5)
-    ImageView ivLine5;
+/**
+ * 在线商城
+ */
+public class OnlineStoreActivity extends BaseAppCompatActivity {
     @BindView(R.id.viewpager_store)
     ViewPager viewpagerStore;
+    @BindView(R.id.tab_online_store)
+    TabLayout tab_online_store;
 
     //写一个List集合，把每个页面，也就是Fragment,存进去
-    private List<Fragment> list;
+    private List<Fragment> fragmentList = new ArrayList<>();
+    private List<OnLineBean.OnLineDataBean> onLineBeanData;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_online_store);
-        ButterKnife.bind(this);
-        //页面，数据源，里面是创建的三个页面（Fragment）
-        list = new ArrayList<>();
-        list.add(new StoreAllFragment());
-        list.add(new EntrieFragment());
-        list.add(new HouseHoldFragment());
-        list.add(new OilFragment());
-        list.add(new GriftFragment());
-        viewpagerStore.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int i) {
-                return list.get(i);
-            }
-
-            @Override
-            public int getCount() {
-                return list.size();
-            }
-        });
-
-        viewpagerStore.setCurrentItem(0);
-        onTabViewSelected(0  );
-        storeRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.store_all:
-                        storeAll.setTextColor(getResources().getColor(R.color.blue));
-                        entrie.setTextColor(getResources().getColor(R.color.black));
-                        household.setTextColor(getResources().getColor(R.color.black));
-                        oil.setTextColor(getResources().getColor(R.color.black));
-                        grift.setTextColor(getResources().getColor(R.color.black));
-                        viewpagerStore.setCurrentItem(0);
-                        onTabViewSelected(0);
-                        break;
-
-                    case R.id.entrie:
-                        entrie.setTextColor(getResources().getColor(R.color.blue));
-                        storeAll.setTextColor(getResources().getColor(R.color.black));
-                        household.setTextColor(getResources().getColor(R.color.black));
-                        oil.setTextColor(getResources().getColor(R.color.black));
-                        grift.setTextColor(getResources().getColor(R.color.black));
-                        viewpagerStore.setCurrentItem(1);
-                        onTabViewSelected(1);
-                        break;
-                    case R.id.household:
-                        household.setTextColor(getResources().getColor(R.color.blue));
-                        storeAll.setTextColor(getResources().getColor(R.color.black));
-                        entrie.setTextColor(getResources().getColor(R.color.black));
-                        oil.setTextColor(getResources().getColor(R.color.black));
-                        grift.setTextColor(getResources().getColor(R.color.black));
-                        viewpagerStore.setCurrentItem(2);
-                        onTabViewSelected(2);
-                        break;
-                    case R.id.oil:
-                        oil.setTextColor(getResources().getColor(R.color.blue));
-                        storeAll.setTextColor(getResources().getColor(R.color.black));
-                        entrie.setTextColor(getResources().getColor(R.color.black));
-                        household.setTextColor(getResources().getColor(R.color.black));
-                        grift.setTextColor(getResources().getColor(R.color.black));
-                        viewpagerStore.setCurrentItem(3);
-                        onTabViewSelected(3);
-                        break;
-                    case R.id.grift:
-                        grift.setTextColor(getResources().getColor(R.color.blue));
-                        storeAll.setTextColor(getResources().getColor(R.color.black));
-                        entrie.setTextColor(getResources().getColor(R.color.black));
-                        household.setTextColor(getResources().getColor(R.color.black));
-                        oil.setTextColor(getResources().getColor(R.color.black));
-                        viewpagerStore.setCurrentItem(4);
-                        onTabViewSelected(4);
-                        break;
-                }
-            }
-        });
+    public int getLayoutId() {
+        return R.layout.activity_online_store;
     }
 
-    @OnClick({R.id.icon_back, R.id.store_all, R.id.entrie, R.id.household, R.id.oil, R.id.grift, R.id.store_radiogroup, R.id.iv_line1, R.id.iv_line2, R.id.iv_line3, R.id.iv_line4, R.id.viewpager_store, R.id.iv_line5})
+    @Override
+    protected void initView() {
+        tab_online_store.setupWithViewPager(viewpagerStore);
+        viewpagerStore.setCurrentItem(0);
+    }
+
+    @Override
+    protected void initData() {
+        Map<String, String> stringMap = new HashMap<>();
+        stringMap.put("token", getToken());
+        net(true, false).post(1, Api.GetClaList_URL, stringMap);
+    }
+
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (!TextUtils.isEmpty(data)) {
+            if (type == 1) {
+                OnLineBean onLineBean = gson.fromJson(data, OnLineBean.class);
+                if (onLineBean != null) {
+                    onLineBeanData = onLineBean.getData();
+                    for (int i = 0; i < onLineBeanData.size(); i++) {
+                        OnLineBean.OnLineDataBean onLineDataBean = onLineBeanData.get(i);
+                        fragmentList.add(GoodsFragment.newInstance(onLineDataBean.getId() + "", onLineDataBean.getName()));
+                    }
+                    viewpagerStore.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+                        @Override
+                        public Fragment getItem(int i) {
+                            return fragmentList.get(i);
+                        }
+
+                        @Override
+                        public int getCount() {
+                            return onLineBeanData == null ? 0 : onLineBeanData.size();
+                        }
+
+                        @Nullable
+                        @Override
+                        public CharSequence getPageTitle(int position) {
+                            return onLineBeanData.get(position).getName();
+                        }
+                    });
+                }
+            }
+
+        }
+    }
+
+    @OnClick({R.id.icon_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
-                break;
-            case R.id.store_all:
-                break;
-            case R.id.entrie:
-                break;
-            case R.id.household:
-                break;
-            case R.id.oil:
-                break;
-            case R.id.grift:
-                break;
-            case R.id.store_radiogroup:
-                break;
-            case R.id.iv_line1:
-                break;
-            case R.id.iv_line2:
-                break;
-            case R.id.iv_line3:
-                break;
-            case R.id.iv_line4:
-                break;
-            case R.id.iv_line5:
-                break;
-            case R.id.viewpager_store:
-                break;
-        }
-    }
-
-    /**
-     * 改变底栏图标选择状态
-     * @param position
-     * */
-    private void onTabViewSelected(int position) {
-        if(position<0 || position>4) {
-            return;
-        }
-
-        ivLine1.setSelected(false);
-        ivLine2.setSelected(false);
-        ivLine3.setSelected(false);
-        ivLine4.setSelected(false);
-        ivLine5.setSelected(false);
-
-        switch (position) {
-            case 0:
-                ivLine1.setSelected(true);
-                break;
-            case 1:
-                ivLine2.setSelected(true);
-                break;
-            case 2:
-                ivLine3.setSelected(true);
-                break;
-            case 3:
-                ivLine4.setSelected(true);
-                break;
-            case 4:
-                ivLine5.setSelected(true);
-                break;
-            default:
                 break;
         }
     }

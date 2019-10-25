@@ -54,9 +54,7 @@ public class LoginActivity extends BaseAppCompatActivity {
         btn_login = (Button) get(R.id.btn_login);
 
         if (!TextUtils.isEmpty(getToken())) {
-            SharePreferenceHelper.getInstance(this).put("token", "");
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
             startActivity(intent);
             finish();
         }
