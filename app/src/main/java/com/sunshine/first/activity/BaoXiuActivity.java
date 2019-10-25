@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -28,13 +29,19 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.AddRepairBean;
+import com.sunshine.first.bean.HouseListBean;
+import com.sunshine.first.bean.UploadImgBean;
+import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +49,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.addapp.pickers.listeners.OnItemPickListener;
+import cn.addapp.pickers.listeners.OnSingleWheelListener;
+import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -64,10 +74,18 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     RelativeLayout rePhone;
     @BindView(R.id.text_time)
     TextView text_time;
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
+    @BindView(R.id.tv_times)
+    TextView tvTimes;
     @BindView(R.id.textnumber)
     TextView textnumber;
+    @BindView(R.id.edit_names)
+    EditText editNames;
+    @BindView(R.id.edit_phones)
+    EditText editPhones;
     @BindView(R.id.btn_baoxiu_submit)
-    TextView btnbaoxiusubmit;
+    Button btnbaoxiusubmit;
     private Intent intent;
     private int maxSelectNum = 1;
     private String path;
@@ -75,6 +93,8 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     private boolean isImgOne = false;
     private String iconTwo = "";
     private String file;
+    private int community_id;
+    private List<HouseListBean.DataBean> houseListBeanData;
 
 
     @Override
@@ -116,6 +136,41 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+
+        reAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String token = SharePreferenceHelper.getInstance(BaoXiuActivity.this).getString("token", "");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("token",token);
+                map.put("type","1");
+                net(false, false).post(3, Api.HousesList_URL, map);
+            }
+        });
+
+
+        btnbaoxiusubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String token = SharePreferenceHelper.getInstance(BaoXiuActivity.this).getString("token", "");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("token", token);
+                String descrip = editDescrip.getText().toString();
+                map.put("explain",descrip);
+                map.put("img_url",iconTwo);
+                map.put("community_id",community_id+"");
+                map.put("houses_number_name", "1");
+                String times = tvTimes.getText().toString();
+                map.put("repair_time",times);
+                String names = editNames.getText().toString();
+                map.put("name",names);
+                String phones = editPhones.getText().toString();
+                map.put("mobile",phones);
+
+//                    ge(map);
+                net(false, false).post(1, Api.AddRepair_URL, map);
             }
         });
     }
@@ -331,12 +386,13 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
                 break;
 
             case R.id.re_add:
+
                 break;
             case R.id.rela_time:
                 TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
-                        text_time.setText((getTime(date)));
+                        tvTimes.setText((getTime(date)));
 
                     }
                 })
@@ -379,5 +435,63 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
         return format.format(date);
     }
 
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (type==-1){
+            ToastManage.s(BaoXiuActivity.this,data);
+        }else if (type==1){
+            Gson gson = new Gson();
+            AddRepairBean addRepairBean = gson.fromJson(data, AddRepairBean.class);
+            Toast.makeText(BaoXiuActivity.this,addRepairBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            if ("200".equals(addRepairBean.getError_code())){
+                Intent intent = new Intent(BaoXiuActivity.this, SubmitSuccActivity.class);
+                startActivity(intent);
+            }
+        }else if (type==2){
+            Gson gson = new Gson();
+            UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
+            iconTwo = uploadImgBean.getData().getImgUrl();
+        }else if (type==3){
+            Gson gson = new Gson();
+            final HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
+            houseListBeanData = houseListBean.getData();
+            ArrayList<String> list = new ArrayList<>();
+            for (HouseListBean.DataBean houseListBeanDatum : houseListBeanData) {
+                list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
+            }
 
+            SinglePicker<String> picker = new SinglePicker<>(BaoXiuActivity.this, list);
+            picker.setCanLoop(false);//不禁用循环
+            picker.setLineVisible(true);
+            picker.setTextSize(18);
+            picker.setTitleText("房屋选择");
+            picker.setSelectedIndex(8);
+            picker.setWheelModeEnable(false);
+            //启用权重 setWeightWidth 才起作用
+            picker.setWeightEnable(true);
+            picker.setWeightWidth(1);
+            picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+            picker.setUnSelectedTextColor(Color.GRAY);
+            picker.setOnSingleWheelListener(new OnSingleWheelListener() {
+                @Override
+                public void onWheeled(int index, String item) {
+                    tvAddress.setText(item);
+                }
+            });
+            picker.setOnItemPickListener(new OnItemPickListener<String>() {
+                @Override
+                public void onItemPicked(int index, String item) {
+                    tvAddress.setText(item);
+                    //楼号选择的忘了？
+                    community_id = houseListBean.getData().get(index).getCommunity_id();
+                    //houseListBean.getData().get(index)
+
+                }
+            });
+            picker.show();
+
+        }
+
+    }
 }

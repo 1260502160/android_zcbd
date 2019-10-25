@@ -43,7 +43,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserManagerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserManagerViewHolder holder, final int position) {
         final HouseListBean.DataBean dataBean = houseListBeanData.get(position);
         if (dataBean != null) {
 
@@ -62,6 +62,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
                 } else {//房客
 
                     Intent intent = new Intent(context, FangkeActivity.class);
+                    intent.putExtra("id",houseListBeanData.get(position).getId());
                     context.startActivity(intent);
                 }
 

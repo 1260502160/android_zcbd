@@ -50,6 +50,7 @@ public class FangKeAdapter extends RecyclerView.Adapter<FangKeAdapter.ViewHolder
 
             viewHolder.textName.setText(dataBean.getResidents_name());
             viewHolder.tvPhone.setText(dataBean.getResidents_mobile()+"");
+
             type = dataBean.getType();
             if (type==1){
                 viewHolder.tvSf.setText("房主");

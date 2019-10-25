@@ -27,7 +27,7 @@
             android:id="@+id/text_forget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="房屋列表"
+            android:text="选择房屋"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_25"
             android:textSize="@dimen/sp_20"
