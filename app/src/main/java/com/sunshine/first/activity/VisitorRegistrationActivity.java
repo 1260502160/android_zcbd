@@ -113,7 +113,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     private String file;
     private Gson gson;
     private int community_id,building_id,unitdoor_id,floors_id,houses_id;
-    private List<HouseListBean.DataBean> houseListBeanData;
+    private List<HouseListBean.DataListBean> houseListBeanData;
 
 
     @Override
@@ -495,9 +495,9 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
         if (type==1){
             Gson gson = new Gson();
             final HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
-            houseListBeanData = houseListBean.getData();
+            houseListBeanData = houseListBean.getData().getList();
             ArrayList<String> list = new ArrayList<>();
-            for (HouseListBean.DataBean houseListBeanDatum : houseListBeanData) {
+            for (HouseListBean.DataListBean houseListBeanDatum : houseListBeanData) {
                 list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
             }
 
@@ -524,7 +524,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 public void onItemPicked(int index, String item) {
                     tvCommiuntyName.setText(item);
                     //楼号选择的忘了？
-                   community_id = houseListBean.getData().get(index).getCommunity_id();
+                   community_id = houseListBean.getData().getList().get(index).getCommunity_id();
                    //houseListBean.getData().get(index)
 
                 }

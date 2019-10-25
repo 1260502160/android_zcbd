@@ -3,19 +3,20 @@ package com.sunshine.first.bean;
 import java.io.Serializable;
 import java.util.List;
 
-public class HouseListBean implements Serializable{
+public class HouseListBean implements Serializable {
+
 
     /**
      * success : true
      * error_code : 200
      * message : 获取成功
-     * data : [{"id":37,"community_id":1,"status":3,"type":2,"houses_number_name":"101","floors_name":"1层","unitdoor_name":"5单元","building_name":"5号楼","community_name":"东1区"}]
+     * data : {}
      */
 
     private boolean success;
     private String error_code;
     private String message;
-    private List<DataBean> data;
+    private DataBean data;
 
     public boolean isSuccess() {
         return success;
@@ -41,15 +42,15 @@ public class HouseListBean implements Serializable{
         this.message = message;
     }
 
-    public List<DataBean> getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataListBean {
         /**
          * id : 37
          * community_id : 1
@@ -142,6 +143,18 @@ public class HouseListBean implements Serializable{
 
         public void setCommunity_name(String community_name) {
             this.community_name = community_name;
+        }
+    }
+
+    public static class DataBean {
+        private List<DataListBean> list;
+
+        public List<DataListBean> getList() {
+            return list;
+        }
+
+        public void setList(List<DataListBean> list) {
+            this.list = list;
         }
     }
 }

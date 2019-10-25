@@ -25,13 +25,13 @@ import butterknife.ButterKnife;
  */
 public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.UserManagerViewHolder> {
     private Context context;
-    private List<HouseListBean.DataBean> houseListBeanData;
+    private List<HouseListBean.DataListBean> houseListBeanData;
 
     public UserManagerAdapter(Context context) {
         this.context = context;
     }
 
-    public void setData(List<HouseListBean.DataBean> houseListBeanData) {
+    public void setData(List<HouseListBean.DataListBean> houseListBeanData) {
         this.houseListBeanData = houseListBeanData;
         notifyDataSetChanged();
     }
@@ -44,7 +44,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull UserManagerViewHolder holder, final int position) {
-        final HouseListBean.DataBean dataBean = houseListBeanData.get(position);
+        final HouseListBean.DataListBean dataBean = houseListBeanData.get(position);
         if (dataBean != null) {
 
             holder.tv_name_home_list.setText(dataBean.getCommunity_name() + "");
@@ -62,7 +62,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
                 } else {//房客
 
                     Intent intent = new Intent(context, FangkeActivity.class);
-                    intent.putExtra("id",houseListBeanData.get(position).getId());
+                    intent.putExtra("id", houseListBeanData.get(position).getId());
                     context.startActivity(intent);
                 }
 

@@ -9,9 +9,13 @@ public class AddressListBean {
     public boolean success;
     public String error_code;
     public String message;
-    public List<AddressBean> data;
+    public AddressBean data;
 
     public static class AddressBean {
+        public List<ListAddressBean> list;
+    }
+
+    public static class ListAddressBean {
         public int id;//地址id
         public String name;//姓名
         public String mobile;//电话

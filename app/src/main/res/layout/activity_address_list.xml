@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.AddressListActivity">
+
+    <TextView
+        android:id="@+id/tv_add_address_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center"
+        android:text="添加收货地址" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_address_list"

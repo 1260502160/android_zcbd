@@ -89,7 +89,7 @@
         <activity android:name=".activity.UserMangerActivity" />
         <activity android:name=".activity.IdentityAdfitActivity" />
         <activity android:name=".activity.FangkeActivity" />
-        <activity android:name=".activity.SubmitSuccActivity"></activity>
+        <activity android:name=".activity.SubmitSuccActivity" />
 
     </application>
 

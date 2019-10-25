@@ -94,7 +94,7 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     private String iconTwo = "";
     private String file;
     private int community_id;
-    private List<HouseListBean.DataBean> houseListBeanData;
+    private List<HouseListBean.DataListBean> houseListBeanData;
 
 
     @Override
@@ -144,8 +144,8 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
             public void onClick(View view) {
                 String token = SharePreferenceHelper.getInstance(BaoXiuActivity.this).getString("token", "");
                 HashMap<String, String> map = new HashMap<>();
-                map.put("token",token);
-                map.put("type","1");
+                map.put("token", token);
+                map.put("type", "1");
                 net(false, false).post(3, Api.HousesList_URL, map);
             }
         });
@@ -158,16 +158,16 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("token", token);
                 String descrip = editDescrip.getText().toString();
-                map.put("explain",descrip);
-                map.put("img_url",iconTwo);
-                map.put("community_id",community_id+"");
+                map.put("explain", descrip);
+                map.put("img_url", iconTwo);
+                map.put("community_id", community_id + "");
                 map.put("houses_number_name", "1");
                 String times = tvTimes.getText().toString();
-                map.put("repair_time",times);
+                map.put("repair_time", times);
                 String names = editNames.getText().toString();
-                map.put("name",names);
+                map.put("name", names);
                 String phones = editPhones.getText().toString();
-                map.put("mobile",phones);
+                map.put("mobile", phones);
 
 //                    ge(map);
                 net(false, false).post(1, Api.AddRepair_URL, map);
@@ -438,27 +438,28 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==-1){
-            ToastManage.s(BaoXiuActivity.this,data);
-        }else if (type==1){
+        if (type == -1) {
+            ToastManage.s(BaoXiuActivity.this, data);
+        } else if (type == 1) {
             Gson gson = new Gson();
             AddRepairBean addRepairBean = gson.fromJson(data, AddRepairBean.class);
-            Toast.makeText(BaoXiuActivity.this,addRepairBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
-            if ("200".equals(addRepairBean.getError_code())){
+            Toast.makeText(BaoXiuActivity.this, addRepairBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            if ("200".equals(addRepairBean.getError_code())) {
                 Intent intent = new Intent(BaoXiuActivity.this, SubmitSuccActivity.class);
                 startActivity(intent);
             }
-        }else if (type==2){
+        } else if (type == 2) {
             Gson gson = new Gson();
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
             iconTwo = uploadImgBean.getData().getImgUrl();
-        }else if (type==3){
+        } else if (type == 3) {
             Gson gson = new Gson();
             final HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
-            houseListBeanData = houseListBean.getData();
+            houseListBeanData = houseListBean.getData().getList();
+
             ArrayList<String> list = new ArrayList<>();
-            for (HouseListBean.DataBean houseListBeanDatum : houseListBeanData) {
-                list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
+            for (HouseListBean.DataListBean houseListBeanDatum : houseListBeanData) {
+                list.add(houseListBeanDatum.getCommunity_name() + houseListBeanDatum.getBuilding_name() + houseListBeanDatum.getUnitdoor_name() + houseListBeanDatum.getFloors_name() + houseListBeanDatum.getHouses_number_name());
             }
 
             SinglePicker<String> picker = new SinglePicker<>(BaoXiuActivity.this, list);
@@ -484,7 +485,7 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
                 public void onItemPicked(int index, String item) {
                     tvAddress.setText(item);
                     //楼号选择的忘了？
-                    community_id = houseListBean.getData().get(index).getCommunity_id();
+                    community_id = houseListBean.getData().getList().get(index).getCommunity_id();
                     //houseListBean.getData().get(index)
 
                 }
