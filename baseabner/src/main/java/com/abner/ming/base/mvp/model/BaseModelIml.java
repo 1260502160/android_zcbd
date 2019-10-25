@@ -3,6 +3,7 @@ package com.abner.ming.base.mvp.model;
 import android.content.Context;
 
 import com.abner.ming.base.net.HttpUtils;
+import com.abner.ming.base.utils.Logger;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class BaseModelIml implements BaseModel {
     public void post(int type, String url, Map<String, String> map, CallBackListener listener) {
         doHttp(1, type, url, map, listener);
     }
+
     @Override
     public void post(int type, String url, RequestBody requestBody, CallBackListener listener) {
         doHttp(type, url, requestBody, listener);
@@ -52,18 +54,22 @@ public class BaseModelIml implements BaseModel {
         httpUtils.setHead(headMap);//传递头参
 
 
-
-        httpUtils.post(url,requestBody);
+        httpUtils.post(url, requestBody);
 
         httpUtils.result(new HttpUtils.HttpListener() {
             @Override
             public void success(String data) {
-                if (cls == null) {
-                    listener.success(type, data);
-                } else {
-                    Object bean = new Gson().fromJson(data, cls);
-                    listener.successBean(type, bean);
+                try {
+                    if (cls == null) {
+                        listener.success(type, data);
+                    } else {
+                        Object bean = new Gson().fromJson(data, cls);
+                        listener.successBean(type, bean);
+                    }
+                } catch (Exception e) {
+                    Logger.d(" httpUtils.result", "e:" + e.toString());
                 }
+
 
             }
 
@@ -74,6 +80,7 @@ public class BaseModelIml implements BaseModel {
         });
 
     }
+
     //put请求
     @Override
     public void put(int type, String url, Map<String, String> map, CallBackListener listener) {
@@ -97,7 +104,6 @@ public class BaseModelIml implements BaseModel {
         httpUtils.isReadCache(isReadCache);
 
         httpUtils.setHead(headMap);//传递头参
-
 
 
         if (state == 0) {//get
@@ -132,15 +138,18 @@ public class BaseModelIml implements BaseModel {
 
     //是否显示加载框
     private boolean isShowLoading;
-    public void isShowLoading(boolean isShowLoading){
-        this.isShowLoading=isShowLoading;
+
+    public void isShowLoading(boolean isShowLoading) {
+        this.isShowLoading = isShowLoading;
     }
+
     //是否读取缓存
     private boolean isReadCache;
 
     public void isReadCache(boolean isReadCache) {
         this.isReadCache = isReadCache;
     }
+
     //传递头参
     private Map<String, String> headMap = new HashMap<>();
 
@@ -150,10 +159,10 @@ public class BaseModelIml implements BaseModel {
 
     //传递上下文
     private Context mContext;
-    public void setContext(Context mContext){
-        this.mContext=mContext;
-    }
 
+    public void setContext(Context mContext) {
+        this.mContext = mContext;
+    }
 
 
 }

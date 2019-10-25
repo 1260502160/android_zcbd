@@ -6,7 +6,8 @@ package com.abner.ming.base.model;
  */
 public class Api {
     //接口
-    public final static  String BASE_URL = "http://47.93.50.224/api/app/";
+//    public final static  String BASE_URL = "http://47.93.50.224/api/app/";
+    public final static  String BASE_URL = "http://zc.zhongchengbd.com/api/app/";
     //登录
     public final static  String Login_URL = BASE_URL+"login";
     //发送验证码
@@ -19,6 +20,8 @@ public class Api {
     public final static  String Xbanner_URL = BASE_URL+"bannerList";
     //首页商品列表
     public final static  String GoodsList_URL = BASE_URL+"getGoodsList";
+    //获取商品分类
+    public final static  String GetClaList_URL = BASE_URL+"getClaList";
     //首页商品详情
     public final static  String GoodsListDeatil_URL = BASE_URL+"getGoodsDetail";
     //获取个人信息
@@ -46,4 +49,8 @@ public class Api {
 
     //解除绑定手机号 更换手机号
     public final static String UPDATE_MOBILE_URL = BASE_URL + "updateMobile";
+    //获取商家店铺详情
+    public final static String GetShopInfoURL = BASE_URL + "getShopInfo";
+    //获取收货列表
+    public final static String GetAddressListURL = BASE_URL + "getAddressList";
 }
