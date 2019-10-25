@@ -1,150 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCCCCC"
-    >
+    android:background="#CCCCCC">
 
     <com.stx.xhb.xbanner.XBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_200"
-        >
-    </com.stx.xhb.xbanner.XBanner>
+        android:layout_height="@dimen/dp_200" />
 
-
-
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relative_home_two"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100"
+        android:layout_height="@dimen/dp_80"
         android:layout_below="@+id/icon_owner_certification"
-        android:background="@drawable/shape_login"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginRight="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_10"
-        >
+        android:background="@drawable/shape_login"
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <LinearLayout
             android:id="@+id/linear_my_one"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            >
             <ImageView
                 android:id="@+id/icon_visitor_registration"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/smallpolice"
-                />
+                android:src="@mipmap/smallpolice" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="微警务"
                 android:layout_marginTop="@dimen/dp_8"
-                />
+                android:text="微警务" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_my_two"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_100"
-            >
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/icon_store"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/weixiaofang"
-                />
+                android:src="@mipmap/weixiaofang" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="微消防"
                 android:layout_marginTop="@dimen/dp_8"
-                />
+                android:text="微消防" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_my_three"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_180"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            >
             <ImageView
                 android:id="@+id/icon_payment_center"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/visitorrecord"
-                />
+                android:src="@mipmap/visitorrecord" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="访客登记"
                 android:layout_marginTop="@dimen/dp_8"
-                />
+                android:text="访客登记" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_my_four"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_250"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            >
             <ImageView
                 android:id="@+id/icon_online_repair"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/store"
-                />
+                android:src="@mipmap/store" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="在线商城"
                 android:layout_marginTop="@dimen/dp_8"
-                />
+                android:text="在线商城" />
         </LinearLayout>
 
-    </RelativeLayout>
-
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_hot_store"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_hot_store"
         android:layout_below="@+id/relative_home_two"
-        android:textSize="@dimen/sp_12"
-        android:textColor="#FE7C7C"
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
         android:padding="@dimen/dp_10"
-        />
+        android:text="@string/text_hot_store"
+        android:textColor="#FE7C7C"
+        android:textSize="@dimen/sp_12" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="更多》"
-        android:textSize="@dimen/sp_12"
-        android:textColor="#FE7C7C"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/relative_home_two"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_30"
         android:padding="@dimen/dp_10"
-        />
+        android:text="更多》"
+        android:textColor="#FE7C7C"
+        android:textSize="@dimen/sp_12" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_recycle"
@@ -152,20 +136,16 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/tv_hot_store"
         android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginRight="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_10"
-        >
+        android:layout_marginRight="@dimen/dp_15" />
 
-    </android.support.v7.widget.RecyclerView>
     <ImageView
         android:id="@+id/icon_owner_certification"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:layout_below="@+id/banner"
-        android:visibility="gone"
         android:background="@mipmap/yezhurenzheng"
-
-        />
+        android:visibility="gone" />
 
     <!--<LinearLayout
         android:id="@+id/linear_home_one"

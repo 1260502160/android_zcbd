@@ -1,6 +1,6 @@
 package com.sunshine.first.activity;
 
-
+import android.content.Intent;
 import android.view.View;
 
 import com.sunshine.first.BaseAppCompatActivity;
@@ -20,6 +20,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
+        setDefaultTitle("支付");
 
     }
 
@@ -33,6 +34,8 @@ public class PaymentActivity extends BaseAppCompatActivity {
         switch (view.getId()) {
             case R.id.rl_address://选择地址
 
+//                Intent intent = new Intent(this, );
+//                startActivity(intent);
                 break;
         }
     }

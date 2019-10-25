@@ -23,6 +23,8 @@ import com.google.gson.JsonObject;
 import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.activity.LoginActivity;
 import com.sunshine.first.utils.SharePreferenceHelper;
+import com.sunshine.first.utils.StatusBarUtil;
+import com.sunshine.first.utils.SystemBarTintManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -221,6 +223,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         baseTitle.setText(title);
         setShowTitle(false);
         isShowBack(true);
+        StatusBarUtil.setImmersiveStatusBar(this,true);
 
 //        //设置状态栏上的字体为黑色-因为本页面是白色必须设置
 //        UtilsStyle.StatusBarLightMode(this,
