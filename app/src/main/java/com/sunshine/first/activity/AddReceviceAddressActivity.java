@@ -13,6 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 添加收货地址
+ */
 public class AddReceviceAddressActivity extends AppCompatActivity {
     @BindView(R.id.icon_back)
     ImageView iconBack;

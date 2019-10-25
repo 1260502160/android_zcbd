@@ -33,9 +33,8 @@ public class PaymentActivity extends BaseAppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_address://选择地址
-
-//                Intent intent = new Intent(this, );
-//                startActivity(intent);
+                Intent intent = new Intent(this, AddressListActivity.class);
+                startActivity(intent);
                 break;
         }
     }

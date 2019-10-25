@@ -89,12 +89,7 @@
         <activity android:name=".activity.UserMangerActivity" />
         <activity android:name=".activity.IdentityAdfitActivity" />
         <activity android:name=".activity.FangkeActivity" />
-        <activity android:name=".activity.PayDeatilActivity"></activity>
-        <activity android:name=".activity.RepairActivity"></activity>
-        <activity android:name=".activity.UserMangerActivity"></activity>
-        <activity android:name=".activity.IdentityAdfitActivity"></activity>
-        <activity android:name=".activity.FangkeActivity"></activity>
-        <activity android:name=".activity.SubmitSuccActivity"></activity>
+        <activity android:name=".activity.SubmitSuccActivity" />
 
     </application>
 

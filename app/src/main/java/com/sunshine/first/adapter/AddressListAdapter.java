@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sunshine.first.R;
+import com.sunshine.first.activity.UpdateAddressActivity;
 import com.sunshine.first.bean.AddressListBean;
 
 import java.util.List;
@@ -21,14 +22,14 @@ import butterknife.ButterKnife;
  */
 public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListHolder> {
     private Context mContext;
-    private List<AddressListBean.AddressBean> data;
+    private List<AddressListBean.ListAddressBean> data;
 
     public AddressListAdapter(Context context) {
         this.mContext = context;
     }
 
-    public void addData(List<AddressListBean.AddressBean> data) {
-        this.data = data;
+    public void addData(List<AddressListBean.ListAddressBean> list) {
+        this.data = list;
     }
 
     @NonNull
@@ -39,7 +40,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull AddressListHolder holder, int position) {
-        AddressListBean.AddressBean addressBean = data.get(position);
+        final AddressListBean.ListAddressBean addressBean = data.get(position);
         if (addressBean != null) {
             holder.tv_name.setText(addressBean.name);
             holder.tv_phone_number.setText(addressBean.mobile);
@@ -48,7 +49,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             holder.tv_update_address.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    UpdateAddressActivity.startActivity(mContext, addressBean.id);
                 }
             });
         }

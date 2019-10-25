@@ -28,7 +28,6 @@ public class UserMangerActivity extends BaseAppCompatActivity {
     @BindView(R.id.btn_add_infomation)
     Button btnAddInfomation;
     private UserManagerAdapter userManagerAdapter;
-    private List<HouseListBean.DataBean> houseListBeanData;
 
     @Override
     protected void initData() {
@@ -46,8 +45,8 @@ public class UserMangerActivity extends BaseAppCompatActivity {
 
         String token = SharePreferenceHelper.getInstance(UserMangerActivity.this).getString("token", "");
         HashMap<String, String> map = new HashMap<>();
-        map.put("token",token);
-        map.put("type","1");
+        map.put("token", token);
+        map.put("type", "1");
         net(false, false).post(1, Api.HousesList_URL, map);
 
         btnAddInfomation.setOnClickListener(new View.OnClickListener() {
@@ -73,13 +72,12 @@ public class UserMangerActivity extends BaseAppCompatActivity {
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
 
             Gson gson = new Gson();
             HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
-            houseListBeanData = houseListBean.getData();
-            if (houseListBean!=null){
-                userManagerAdapter.setData(houseListBeanData);
+            if (houseListBean.getData() != null && houseListBean.getData().getList() != null && houseListBean.getData().getList().size() > 0) {
+                userManagerAdapter.setData(houseListBean.getData().getList());
             }
         }
     }
