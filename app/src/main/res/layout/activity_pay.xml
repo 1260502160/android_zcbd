@@ -225,6 +225,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         android:text="@string/text_rightpay"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@drawable/renzheng_shape"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dp_40"
         />

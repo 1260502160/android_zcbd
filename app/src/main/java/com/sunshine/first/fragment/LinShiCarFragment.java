@@ -8,12 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sunshine.first.BaseFragment;
 import com.sunshine.first.R;
 
-public class LinShiCarFragment extends Fragment{
-    @Nullable
+public class LinShiCarFragment extends BaseFragment{
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_linshicar,container,false);
+    public int getLayoutId() {
+        return R.layout.fragment_linshicar;
     }
+
+    @Override
+    protected void initView(View view) {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
 }

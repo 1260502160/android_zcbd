@@ -16,7 +16,9 @@ import com.sunshine.first.fragment.LinShiCarFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+停车费
+ */
 public class StopCarActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ImageView iconback,iv_line1,iv_line2;

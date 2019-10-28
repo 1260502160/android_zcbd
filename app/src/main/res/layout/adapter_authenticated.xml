@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_15">
@@ -56,10 +56,11 @@
             android:text="业主"
             android:gravity="center"
             />
-        <ImageView
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_10"
-            android:src="@mipmap/ic_launcher"
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="状态"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_centerVertical="true"

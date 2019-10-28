@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.FangkeActivity;
+import com.sunshine.first.activity.FangkeDeatil;
 import com.sunshine.first.activity.HouseHoldIdentity;
 import com.sunshine.first.bean.GetResidentsListBean;
 import com.sunshine.first.bean.HouseListBean;
@@ -26,6 +27,7 @@ public class FangKeAdapter extends RecyclerView.Adapter<FangKeAdapter.ViewHolder
     private Context context;
     private List<GetResidentsListBean.DataBean> residentsListBeanData;
     private int type;
+    private int status;
 
     public FangKeAdapter(Context context) {
         this.context = context;
@@ -59,7 +61,25 @@ public class FangKeAdapter extends RecyclerView.Adapter<FangKeAdapter.ViewHolder
             }else if(type==4){
                 viewHolder.tvSf.setText("家属");
             }
+            status = dataBean.getStatus();
+            if (status==1){
+                viewHolder.tvStatus.setText("已认证");
+            }else if (status==2){
+                viewHolder.tvStatus.setText("拒绝");
+            }else if (status==3){
+                viewHolder.tvStatus.setText("待审核");
+            }
 
+
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, FangkeDeatil.class);
+                    intent.putExtra("id", dataBean.getId());
+                    context.startActivity(intent);
+                }
+            });
 
         }
 
@@ -79,6 +99,8 @@ public class FangKeAdapter extends RecyclerView.Adapter<FangKeAdapter.ViewHolder
         TextView tvSf;
         @BindView(R.id.icon_authenticaed)
         ImageView iconAuthenticaed;
+        @BindView(R.id.tv_status)
+        TextView tvStatus;
 
 
         public ViewHolder(@NonNull View itemView) {

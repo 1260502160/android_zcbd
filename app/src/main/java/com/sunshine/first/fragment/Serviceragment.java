@@ -11,7 +11,9 @@ import com.google.gson.Gson;
 import com.stx.xhb.xbanner.XBanner;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.BaoXiuActivity;
+import com.sunshine.first.activity.BianMinJiaoFeiActivity;
 import com.sunshine.first.activity.RepairActivity;
+import com.sunshine.first.activity.VisitorRegistrationActivity;
 import com.sunshine.first.activity.YeZhuRenZhengActivity;
 import com.sunshine.first.bean.XbannerBean;
 
@@ -47,6 +49,22 @@ public class Serviceragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), BaoXiuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        iconVisitorRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), VisitorRegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        iconStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), BianMinJiaoFeiActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,7 +47,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         android:layout_below="@+id/view_fangzhurenzheng_one"
@@ -162,54 +165,13 @@
 
         </RelativeLayout>
 
-        <View
-            android:id="@+id/view_zhurenzheng_three"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:background="#ececec"
-            android:layout_below="@+id/rel_phone"
-
-            />
-
-
-        <RelativeLayout
-            android:id="@+id/rel_relationship"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_70"
-            android:layout_below="@+id/view_zhurenzheng_three"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="与房主关系"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
-                android:layout_marginTop="@dimen/dp_30"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:textColor="#333333"
-                android:textSize="@dimen/sp_16"
-                />
-            <TextView
-                android:id="@+id/tv_relationship"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/text_household"
-                android:layout_alignParentRight="true"
-                android:gravity="center_vertical"
-                android:layout_marginRight="@dimen/dp_40"
-                android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
-
-                />
-
-        </RelativeLayout>
 
         <View
             android:id="@+id/view_zhurenzheng_four"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
             android:background="#ececec"
-            android:layout_below="@+id/rel_relationship"
+            android:layout_below="@+id/rel_phone"
 
             />
 
@@ -245,6 +207,154 @@
                 />
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_300"
+            android:background="@drawable/shape_white"
+            android:layout_below="@+id/rel_ID_number"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:text="身份证照片"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B3B3B3"
+                    android:text="(选填)"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                >
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_90"
+                    android:background="@drawable/shape_grey"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    >
+                    <ImageView
+                        android:id="@+id/icon_head"
+                        android:layout_width="@dimen/dp_10"
+                        android:layout_height="@dimen/dp_10"
+                        android:src="@mipmap/icon_add"
+                        android:layout_centerInParent="true"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="头像页"
+                        android:layout_below="@+id/icon_head"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_90"
+                    android:background="@drawable/shape_grey"
+                    android:layout_marginLeft="@dimen/dp_10"
+
+                    >
+                    <ImageView
+                        android:id="@+id/icon_china"
+                        android:layout_width="@dimen/dp_10"
+                        android:layout_height="@dimen/dp_10"
+                        android:src="@mipmap/icon_add"
+                        android:layout_centerInParent="true"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="国徽苑"
+                        android:layout_below="@+id/icon_china"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:text="人脸照片"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B3B3B3"
+                    android:text="(选填)"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="@dimen/dp_90"
+                android:background="@drawable/shape_grey"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_10"
+
+                >
+                <ImageView
+                    android:id="@+id/icon_home_zm"
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="@dimen/dp_10"
+                    android:src="@mipmap/icon_add"
+                    android:layout_centerInParent="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="房屋证明"
+                    android:layout_below="@+id/icon_home_zm"
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>
+</ScrollView>

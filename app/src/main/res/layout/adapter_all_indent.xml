@@ -81,6 +81,7 @@
         android:layout_marginRight="@dimen/dp_20"
         />
     <TextView
+        android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="x1"
@@ -93,6 +94,7 @@
         />
 
     <Button
+        android:id="@+id/btn_lookdeatil_indent"
         android:layout_width="@dimen/dp_70"
         android:layout_height="@dimen/dp_30"
         android:text="查看详情"

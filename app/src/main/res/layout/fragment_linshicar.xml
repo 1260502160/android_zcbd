@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,7 +10,7 @@
         android:id="@+id/rela_car"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         >
@@ -22,13 +23,15 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_20"
             />
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="京Q123123"
+            android:hint="京Q123123"
+            android:background="@null"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_80"
            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp_16"
             />
         <ImageView
             android:id="@+id/icon_smallerror"
@@ -61,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_car"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         >
@@ -92,7 +95,7 @@
             android:layout_marginRight="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_19"
             android:textColor="#BCBCBC"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_16"
             />
     </RelativeLayout>
 
@@ -132,7 +135,7 @@
             android:layout_marginTop="@dimen/dp_19"
             android:layout_marginRight="@dimen/dp_12"
             android:textColor="#BCBCBC"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_16"
             />
 
     </RelativeLayout>
@@ -170,7 +173,7 @@
             android:layout_marginRight="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_19"
             android:textColor="#BCBCBC"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_16"
             />
     </RelativeLayout>
 
@@ -210,7 +213,7 @@
             android:layout_marginTop="@dimen/dp_19"
             android:layout_marginRight="@dimen/dp_12"
             android:textColor="#FE5555"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_16"
             />
 
     </RelativeLayout>
@@ -219,6 +222,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btn_right_pay"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         android:layout_alignParentBottom="true"
@@ -226,7 +230,7 @@
         android:text="@string/text_rightpay"
         android:background="@drawable/renzheng_shape"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp_16"
         android:layout_marginRight="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_10"
         />
