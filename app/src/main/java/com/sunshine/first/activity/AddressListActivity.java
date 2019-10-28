@@ -1,6 +1,7 @@
 package com.sunshine.first.activity;
 
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -49,8 +50,8 @@ public class AddressListActivity extends BaseAppCompatActivity {
     @OnClick(R.id.tv_add_address_list)
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_add_address_list:
-
+            case R.id.tv_add_address_list://添加收货地址
+                UpdateAddressActivity.nextStartActivity(this, 0, 0);
                 break;
         }
     }
