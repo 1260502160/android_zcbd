@@ -254,7 +254,6 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
         List<LocalMedia> images;
         if (resultCode == RESULT_OK) {
 
-
             images = PictureSelector.obtainMultipleResult(data);
 
             LocalMedia media = images.get(0);
