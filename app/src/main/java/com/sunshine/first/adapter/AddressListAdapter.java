@@ -49,7 +49,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             holder.tv_update_address.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    UpdateAddressActivity.startActivity(mContext, addressBean.id);
+                    UpdateAddressActivity.nextStartActivity(mContext, 1, addressBean.id);
                 }
             });
         }

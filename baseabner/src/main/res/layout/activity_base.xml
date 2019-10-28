@@ -20,7 +20,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:padding="@dimen/dp_margin_5"
-            android:src="@drawable/btn_back_pressed" />
+            android:src="@drawable/icon_back" />
 
         <TextView
             android:id="@+id/base_title"
