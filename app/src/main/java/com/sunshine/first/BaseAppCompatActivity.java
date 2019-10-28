@@ -15,13 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abner.ming.base.R;
+import com.abner.ming.base.model.Api;
 import com.abner.ming.base.mvp.model.BaseModelIml;
 import com.abner.ming.base.mvp.presenter.BasePresenterIml;
 import com.abner.ming.base.mvp.view.BaseView;
+import com.abner.ming.base.utils.Logger;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.activity.LoginActivity;
+import com.sunshine.first.bean.ProvinceBean;
+import com.sunshine.first.dialog.WheelDialog;
 import com.sunshine.first.utils.SharePreferenceHelper;
 import com.sunshine.first.utils.StatusBarUtil;
 import com.sunshine.first.utils.SystemBarTintManager;
@@ -29,7 +33,9 @@ import com.sunshine.first.utils.SystemBarTintManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -48,6 +54,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     protected Map<String, String> hashMap = new HashMap<>();
     protected int page = 1;
     protected int perpage = 10;
+    final protected WheelDialog wheelDialog = new WheelDialog();
+    protected List<ProvinceBean.ProvinceArrayBean> provinceArrayBeans1;
+    protected List<ProvinceBean.ProvinceArrayBean> provinceArrayBeans2;
+    protected List<ProvinceBean.ProvinceArrayBean> provinceArrayBeans3;
 
     /**
      * 设置标题
@@ -178,6 +188,65 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
                 startActivity(intent);
             } else if (type == -1) {
                 ToastManage.s(this, data);
+            } else if (type == 110) {//获取省
+                final ProvinceBean provinceBean = gson.fromJson(data, ProvinceBean.class);
+                if (provinceBean != null && provinceBean.data != null && provinceBean.data.size() > 0) {
+                    provinceArrayBeans1.clear();
+                    provinceArrayBeans1.addAll(provinceBean.data);
+                    wheelDialog.setData(provinceArrayBeans1, new WheelDialog.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(int position) {
+                            ProvinceBean.ProvinceArrayBean provinceArrayBean = provinceBean.data.get(position);
+                            if (provinceArrayBean != null) {
+                                hashMap.put("id", provinceArrayBean.id + "");
+                                net(false, false).post(111, Api.GetCityList_URL, hashMap);
+                            }
+                        }
+                    }, new WheelDialog.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(int position) {
+                            hashMap.put("id", provinceArrayBeans2.get(position).id + "");
+                            net(false, false).post(112, Api.GetCityList_URL, hashMap);
+                        }
+                    }, new WheelDialog.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(int position) {
+
+                        }
+                    }, new WheelDialog.OnItemAllSelectedListener() {
+                        @Override
+                        public void onItemSelected(int position1, int position2, int position3) {//点击事件
+                            try {
+                                if (provinceArrayBeans1 != null && provinceArrayBeans2 != null && provinceArrayBeans3 != null) {
+                                    ProvinceBean.ProvinceArrayBean provinceArrayBean1 = provinceArrayBeans1.get(position1);
+                                    ProvinceBean.ProvinceArrayBean provinceArrayBean2 = provinceArrayBeans2.get(position2);
+                                    ProvinceBean.ProvinceArrayBean provinceArrayBean3 = provinceArrayBeans3.get(position3);
+
+                                    onSelectIdName.onSelectIdName(provinceArrayBean1.id, provinceArrayBean1.name, provinceArrayBean2.id,
+                                            provinceArrayBean2.name, provinceArrayBean3.id, provinceArrayBean3.name);
+                                }
+                            } catch (Exception e) {
+                                Logger.e("选择地址", "选择地址失败:" + e.toString());
+                            }
+
+                        }
+                    }).show(getSupportFragmentManager(), "选择地址");
+                }
+            } else if (type == 111) {
+                final ProvinceBean provinceBean = gson.fromJson(data, ProvinceBean.class);
+                if (provinceBean != null && provinceBean.data != null && provinceBean.data.size() > 0) {
+                    provinceArrayBeans2.clear();
+                    provinceArrayBeans2.addAll(provinceBean.data);
+                    wheelDialog.setList2(provinceArrayBeans2);
+
+                }
+            } else if (type == 112) {
+                final ProvinceBean provinceBean = gson.fromJson(data, ProvinceBean.class);
+                if (provinceBean != null && provinceBean.data != null && provinceBean.data.size() > 0) {
+                    provinceArrayBeans3.clear();
+                    provinceArrayBeans3.addAll(provinceBean.data);
+                    wheelDialog.setList3(provinceArrayBeans3);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -223,7 +292,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         baseTitle.setText(title);
         setShowTitle(false);
         isShowBack(true);
-        StatusBarUtil.setImmersiveStatusBar(this,true);
+        StatusBarUtil.setImmersiveStatusBar(this, true);
 
 //        //设置状态栏上的字体为黑色-因为本页面是白色必须设置
 //        UtilsStyle.StatusBarLightMode(this,
@@ -233,5 +302,25 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     protected String getToken() {
         String token = SharePreferenceHelper.getInstance(this).getString("token", "");
         return TextUtils.isEmpty(token) ? "" : token;
+    }
+
+    /**
+     * 三级联动
+     */
+    protected void showProvince(OnSelectIdName onSelectIdName) {
+        this.onSelectIdName = onSelectIdName;
+        provinceArrayBeans1 = new ArrayList<>();
+        provinceArrayBeans2 = new ArrayList<>();
+        provinceArrayBeans3 = new ArrayList<>();
+
+        hashMap.put("id", "0");
+        net(true, false).post(110, Api.GetCityList_URL, hashMap);
+
+    }
+
+    private OnSelectIdName onSelectIdName;
+
+    public static interface OnSelectIdName {
+        void onSelectIdName(int provinceId, String provinceName, int cityId, String cityName, int areaId, String areaName);
     }
 }

@@ -74,4 +74,6 @@ public class Api {
     public final static String ParkingCharge_URL = BASE_URL + "parkingCharge";
     //app生成临时停车订单
     public final static String FindParkInfo_URL = BASE_URL + "findParkInfo";
+    //获取省市区 id	-0为获取所有省
+    public final static String GetCityList_URL = BASE_URL + "getCityList";
 }

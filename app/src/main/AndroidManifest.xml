@@ -96,6 +96,7 @@
         <activity android:name=".activity.PaySucceActivity" />
         <activity android:name=".activity.StopCarPayTypeActivity" />
         <activity android:name=".activity.IntentDetailActivity"></activity>
+        <activity android:name=".activity.UpdateAddressActivity"></activity>
     </application>
 
 </manifest>

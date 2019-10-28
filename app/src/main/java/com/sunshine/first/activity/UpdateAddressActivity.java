@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.abner.ming.base.model.Api;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.AddressDetailBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,6 +25,14 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
 
     @BindView(R.id.et_name_add_address)
     EditText et_name_add_address;
+    @BindView(R.id.et_phone_number)
+    EditText et_phone_number;
+    @BindView(R.id.et_shopping_addre)
+    EditText et_shopping_addre;
+    @BindView(R.id.tv_details_address_details)
+    TextView tv_details_address_details;
+
+    private int type;
 
     /**
      * @param activity
@@ -46,9 +58,8 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initData() {
-        int type = getIntent().getIntExtra("type", 0);
+        type = getIntent().getIntExtra("type", 0);
         if (type == 1) {
-
             int id = getIntent().getIntExtra("id", 0);
             hashMap.put("token", getToken());
             hashMap.put("id", id + "");
@@ -57,24 +68,37 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
 
     }
 
-    @OnClick(R.id.btn_save)
+    private List<String> list1 = new ArrayList<>();
+    private List<String> list2 = new ArrayList<>();
+    private List<String> list3 = new ArrayList<>();
+
+    @OnClick({R.id.btn_save, R.id.relative_address})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.relative_address://选择地址
+                showProvince(new OnSelectIdName() {
+                    @Override
+                    public void onSelectIdName(int provinceId, String provinceName, int cityId, String cityName, int areaId, String areaName) {
+                        tv_details_address_details.setText(provinceName + cityName + areaName + "");
+                    }
+                });
+                break;
             case R.id.btn_save://保存
                 String name = et_name_add_address.getText().toString().trim();
-
-
-
-//                hashMap.clear();
-//                hashMap.put("token", getToken());
-//                hashMap.put("name", );//收货人姓名
-//                hashMap.put("mobile", );//手机号
+                String phone = et_phone_number.getText().toString().trim();
+                String addressDetails = et_shopping_addre.getText().toString().trim();
+                hashMap.clear();
+                hashMap.put("token", getToken());
+                hashMap.put("name", name);//收货人姓名
+                hashMap.put("mobile", phone);//手机号
 //                hashMap.put("province_id", );//省id
 //                hashMap.put("city_id", );//市id
 //                hashMap.put("area_id", );//区id
-//                hashMap.put("detail", );//详细地址
-//                hashMap.put("id", );//地址id 修改用
-
+                hashMap.put("detail", addressDetails);//详细地址
+//                if (type == 1) {
+//                    hashMap.put("id", );//地址id 修改用
+//                } else {
+//                }
                 net(true, false).post(1, Api.GetAddressDetailURL, hashMap);
                 break;
         }
