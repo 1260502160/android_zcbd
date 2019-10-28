@@ -8,8 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.abner.ming.base.model.Api;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.AddAddressBean;
 import com.sunshine.first.bean.AddressDetailBean;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
     TextView tv_details_address_details;
 
     private int type;
+    private AddressDetailBean.AddressDetailListBean addressDetailListBean;
 
     /**
      * @param activity
@@ -61,6 +64,7 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
         type = getIntent().getIntExtra("type", 0);
         if (type == 1) {
             int id = getIntent().getIntExtra("id", 0);
+            hashMap.clear();
             hashMap.put("token", getToken());
             hashMap.put("id", id + "");
             net(true, false).post(1, Api.GetAddressDetailURL, hashMap);
@@ -71,6 +75,7 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     private List<String> list3 = new ArrayList<>();
+    private int provinceId, cityId, areaId;
 
     @OnClick({R.id.btn_save, R.id.relative_address})
     public void onClick(View view) {
@@ -80,6 +85,9 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
                     @Override
                     public void onSelectIdName(int provinceId, String provinceName, int cityId, String cityName, int areaId, String areaName) {
                         tv_details_address_details.setText(provinceName + cityName + areaName + "");
+                        UpdateAddressActivity.this.provinceId = provinceId;
+                        UpdateAddressActivity.this.cityId = cityId;
+                        UpdateAddressActivity.this.areaId = areaId;
                     }
                 });
                 break;
@@ -91,18 +99,20 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
                 hashMap.put("token", getToken());
                 hashMap.put("name", name);//收货人姓名
                 hashMap.put("mobile", phone);//手机号
-//                hashMap.put("province_id", );//省id
-//                hashMap.put("city_id", );//市id
-//                hashMap.put("area_id", );//区id
+                hashMap.put("province_id", UpdateAddressActivity.this.provinceId + "");//省id
+                hashMap.put("city_id", UpdateAddressActivity.this.cityId + "");//市id
+                hashMap.put("area_id", UpdateAddressActivity.this.areaId + "");//区id
                 hashMap.put("detail", addressDetails);//详细地址
-//                if (type == 1) {
-//                    hashMap.put("id", );//地址id 修改用
-//                } else {
-//                }
-                net(true, false).post(1, Api.GetAddressDetailURL, hashMap);
+                if (type == 1) {
+                    hashMap.put("id", addressId + "");//地址id 修改用
+                } else {
+                }
+                net(true, false).post(2, Api.ADD_AddressListURL, hashMap);
                 break;
         }
     }
+
+    private int addressId;
 
     @Override
     public void success(int type, String data) {
@@ -110,7 +120,22 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
         if (type == 1 && !TextUtils.isEmpty(data)) {
             AddressDetailBean addressDetailBean = gson.fromJson(data, AddressDetailBean.class);
             if (addressDetailBean != null && addressDetailBean.data != null) {
+                addressDetailListBean = addressDetailBean.data;
+                et_name_add_address.setText(addressDetailListBean.name + "");
+                et_phone_number.setText(addressDetailListBean.mobile + "");
+                et_shopping_addre.setText(addressDetailListBean.detail + "");
 
+                UpdateAddressActivity.this.provinceId = addressDetailListBean.province_id;
+                UpdateAddressActivity.this.cityId = addressDetailListBean.city_id;
+                UpdateAddressActivity.this.areaId = addressDetailListBean.area_id;
+                addressId = addressDetailListBean.id;
+                tv_details_address_details.setText(addressDetailListBean.province_name + addressDetailListBean.city_name + addressDetailListBean.area_name + "");
+            }
+        } else if (type == 2) {
+            AddAddressBean addressBean = gson.fromJson(data, AddAddressBean.class);
+            ToastManage.s(this, addressBean.message + "");
+            if (addressBean != null && "200".equals(addressBean.error_code)) {
+                finish();
             }
         }
     }

@@ -60,6 +60,8 @@ public class Api {
     public final static String GetShopInfoURL = BASE_URL + "getShopInfo";
     //获取收货列表
     public final static String GetAddressListURL = BASE_URL + "getAddressList";
+    //添加收货地址
+    public final static String ADD_AddressListURL = BASE_URL + "addAddress";
     //获取收货地址详情
     public final static String GetAddressDetailURL = BASE_URL + "getAddressDetail";
     //添加修改车辆///

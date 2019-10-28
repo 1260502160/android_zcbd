@@ -20,6 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Main2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.AddressListActivity" />
         <activity android:name=".activity.PaymentActivity" />
         <activity android:name=".activity.MerchantShopActivity" />
@@ -95,8 +102,8 @@
         <activity android:name=".activity.FangkeDeatil" />
         <activity android:name=".activity.PaySucceActivity" />
         <activity android:name=".activity.StopCarPayTypeActivity" />
-        <activity android:name=".activity.IntentDetailActivity"></activity>
-        <activity android:name=".activity.UpdateAddressActivity"></activity>
+        <activity android:name=".activity.IntentDetailActivity" />
+        <activity android:name=".activity.UpdateAddressActivity" />
     </application>
 
 </manifest>
