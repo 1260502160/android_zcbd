@@ -62,4 +62,16 @@ public class Api {
     public final static String GetAddressListURL = BASE_URL + "getAddressList";
     //获取收货地址详情
     public final static String GetAddressDetailURL = BASE_URL + "getAddressDetail";
+    //添加修改车辆///
+    public final static String AddCar_URL = BASE_URL + "addCar";
+    //获取车辆详情///
+    public final static String GetCarDetail_URL = BASE_URL + "getCarDetail";
+    //我的订单列表
+    public final static String GetGoodsOrderList_URL = BASE_URL + "getGoodsOrderList";
+    //获取住户详情
+    public final static String GetResidentsDetail_URL = BASE_URL + "getResidentsDetail";
+    //app生成固定停车订单
+    public final static String ParkingCharge_URL = BASE_URL + "parkingCharge";
+    //app生成临时停车订单
+    public final static String FindParkInfo_URL = BASE_URL + "findParkInfo";
 }
