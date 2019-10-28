@@ -449,6 +449,7 @@
         >
 
         <TextView
+            android:id="@+id/tv_no_pass"
             android:layout_width="@dimen/dp_160"
             android:layout_height="match_parent"
             android:text="拒绝"
@@ -457,6 +458,7 @@
             android:layout_centerInParent="true"
             />
         <TextView
+            android:id="@+id/tv_pass"
             android:layout_width="@dimen/dp_160"
             android:layout_height="match_parent"
             android:text="通过"

@@ -78,4 +78,11 @@ public class Api {
     public final static String FindParkInfo_URL = BASE_URL + "findParkInfo";
     //获取省市区 id	-0为获取所有省
     public final static String GetCityList_URL = BASE_URL + "getCityList";
+
+    //添加住户
+    public  final static String Add_Residents = BASE_URL+"addResidents";
+    //删除住户
+    public  final static String Del_Residents = BASE_URL+"delResidents";
+    //审核住户
+    public  final static String Owner_Check = BASE_URL+"ownerCheck";
 }
