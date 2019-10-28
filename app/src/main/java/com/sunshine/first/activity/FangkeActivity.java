@@ -2,11 +2,13 @@ package com.sunshine.first.activity;
 
 import com.sunshine.first.BaseAppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,7 +28,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/*
+房客房屋列表展示
+ */
 public class FangkeActivity extends BaseAppCompatActivity {
 
     @BindView(R.id.icon_back)
@@ -39,6 +43,8 @@ public class FangkeActivity extends BaseAppCompatActivity {
     View viewFangzhurenzhengOne;
     @BindView(R.id.recycle_fangke)
     RecyclerView recycleFangke;
+    @BindView(R.id.btn_add_home_info)
+    Button btnAddHomeInfo;
     private GetCarListAdapter getCarListAdapter;
     private FangKeAdapter fangKeAdapter;
 
@@ -53,7 +59,7 @@ public class FangkeActivity extends BaseAppCompatActivity {
         fangKeAdapter = new FangKeAdapter(FangkeActivity.this);
 
         //设置Adapter
-        recycleFangke.setAdapter(getCarListAdapter);
+        recycleFangke.setAdapter(fangKeAdapter);
 
         String token = SharePreferenceHelper.getInstance(this).getString("token", "");
         Map<String, String> map = new HashMap<>();
@@ -63,6 +69,13 @@ public class FangkeActivity extends BaseAppCompatActivity {
         map.put("status", "1");
         net(false, false).post(1, Api.GetResidentsList_URL, map);
 
+        btnAddHomeInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FangkeActivity.this, FamilyIdentityActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

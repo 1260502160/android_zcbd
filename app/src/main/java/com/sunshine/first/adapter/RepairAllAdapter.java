@@ -1,11 +1,13 @@
 package com.sunshine.first.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,7 +49,7 @@ public class RepairAllAdapter extends RecyclerView.Adapter<RepairAllAdapter.View
             viewHolder.tvDescript.setText(dataBean.getExplain());
             Glide.with(context).load(dataBean.getImg_url()).into(viewHolder.iconAllIndent);
             viewHolder.tvPayStatus.setText(dataBean.getPay_state());
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            viewHolder.btnLookDeatil.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -71,6 +73,8 @@ public class RepairAllAdapter extends RecyclerView.Adapter<RepairAllAdapter.View
         TextView tvAddress;
         @BindView(R.id.icon_all_indent)
         ImageView iconAllIndent;
+        @BindView(R.id.btn_lookdeatil)
+        Button btnLookDeatil;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

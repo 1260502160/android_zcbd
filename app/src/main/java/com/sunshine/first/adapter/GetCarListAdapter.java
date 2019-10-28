@@ -1,6 +1,7 @@
 package com.sunshine.first.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sunshine.first.R;
+import com.sunshine.first.activity.GetCarDeatilActivity;
 import com.sunshine.first.bean.GetCarListBean;
 import com.sunshine.first.bean.GoodsListBean;
 
@@ -36,6 +38,13 @@ public class GetCarListAdapter extends RecyclerView.Adapter<GetCarListAdapter.Vi
 
         viewholder.tv_hosingname.setText(list.get(i).getCommunity_name());
         viewholder.tv_carnamber.setText(list.get(i).getPlate_num()+"");
+        viewholder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, GetCarDeatilActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

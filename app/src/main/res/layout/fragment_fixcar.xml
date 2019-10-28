@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         >
@@ -29,14 +29,15 @@
             android:textColor="#333333"
             android:textSize="@dimen/sp_14"
             />
-        <TextView
+        <EditText
             android:id="@+id/text_car_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="京Q123123"
-            android:layout_marginTop="@dimen/dp_30"
+            android:hint="京Q123123"
+            android:layout_marginTop="@dimen/dp_20"
             android:textColor="#333333"
             android:textSize="@dimen/sp_14"
+            android:background="@null"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_60"
             />
@@ -60,7 +61,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_150"
-        android:background="@drawable/shape_login"
+        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         >

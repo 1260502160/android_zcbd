@@ -78,7 +78,7 @@ public class CarInfoActivity extends BaseAppCompatActivity{
                 finish();
                 break;
             case R.id.btn_add_car_info:
-                intent = new Intent(CarInfoActivity.this, ChooseHomeActivity.class);
+                intent = new Intent(CarInfoActivity.this, AddCarInfoActivity.class);
                 startActivity(intent);
                 break;
         }

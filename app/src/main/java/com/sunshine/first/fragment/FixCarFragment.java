@@ -1,5 +1,6 @@
 package com.sunshine.first.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunshine.first.BaseFragment;
 import com.sunshine.first.R;
+import com.sunshine.first.activity.StopCarPayTypeActivity;
 
 import java.util.ArrayList;
 
@@ -24,11 +28,11 @@ import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 
-public class FixCarFragment extends Fragment {
+public class FixCarFragment extends BaseFragment{
 
 
-    @BindView(R.id.text_carnumber)
-    TextView textCarnumber;
+    @BindView(R.id.text_car_number)
+    EditText textCarnumber;
     @BindView(R.id.text_cycle)
     TextView textcycle;
     @BindView(R.id.icon_cycle)
@@ -36,21 +40,35 @@ public class FixCarFragment extends Fragment {
     @BindView(R.id.btn_right_pay)
     Button btnRightPay;
     Unbinder unbinder;
+    private String carnumber;
+    private String cycle;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fixcar, container, false);
-
-        unbinder = ButterKnife.bind(this, view);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_fixcar;
     }
 
+    @Override
+    protected void initView(View view) {
+        unbinder = ButterKnife.bind(this, view);
+    }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    protected void initData() {
+
+        carnumber = textCarnumber.getText().toString();
+        cycle = textcycle.getText().toString();
+        btnRightPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getContext(), StopCarPayTypeActivity.class);
+                intent.putExtra("carnumber",carnumber);
+                intent.putExtra("cycle",cycle);
+
+                startActivity(intent);
+            }
+        });
     }
 
     @OnClick({R.id.text_carnumber, R.id.icon_cycle, R.id.btn_right_pay})

@@ -45,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_80"
         android:background="#ffffff"
+        android:visibility="gone"
         >
         <RadioGroup
             android:id="@+id/circle_radiogroup"
@@ -141,6 +142,12 @@
             android:layout_width="@dimen/dp_50"
             android:layout_height="@dimen/dp_2"/>
     </RelativeLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_repair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.design.widget.TabLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_repair"
         android:layout_width="match_parent"

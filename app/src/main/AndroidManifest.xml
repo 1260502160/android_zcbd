@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.AddressListActivity"></activity>
+        <activity android:name=".activity.AddressListActivity" />
         <activity android:name=".activity.PaymentActivity" />
         <activity android:name=".activity.MerchantShopActivity" />
         <!--
@@ -90,7 +90,12 @@
         <activity android:name=".activity.IdentityAdfitActivity" />
         <activity android:name=".activity.FangkeActivity" />
         <activity android:name=".activity.SubmitSuccActivity" />
-
+        <activity android:name=".activity.AddCarInfoActivity" />
+        <activity android:name=".activity.GetCarDeatilActivity" />
+        <activity android:name=".activity.FangkeDeatil" />
+        <activity android:name=".activity.PaySucceActivity" />
+        <activity android:name=".activity.StopCarPayTypeActivity" />
+        <activity android:name=".activity.IntentDetailActivity"></activity>
     </application>
 
 </manifest>

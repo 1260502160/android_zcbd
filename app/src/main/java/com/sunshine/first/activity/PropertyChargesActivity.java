@@ -8,13 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-public class PropertyChargesActivity extends AppCompatActivity {
+/*
+物业费
+ */
+public class PropertyChargesActivity extends BaseAppCompatActivity{
     @BindView(R.id.wexin_check_balance)
     RadioButton wexinCheckBalance;
     @BindView(R.id.zfpay_check_balance)
@@ -24,13 +27,22 @@ public class PropertyChargesActivity extends AppCompatActivity {
     private Intent intent;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_property_fee);
+    public int getLayoutId() {
+        return R.layout.activity_property_fee;
+    }
+
+    @Override
+    protected void initView() {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.wexin_check_balance, R.id.zfpay_check_balance, R.id.btn_feedback_submit, R.id.btn_rightpay})
+    @Override
+    protected void initData() {
+
+    }
+
+
+    @OnClick({R.id.wexin_check_balance, R.id.zfpay_check_balance,R.id.btn_rightpay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.wexin_check_balance:
