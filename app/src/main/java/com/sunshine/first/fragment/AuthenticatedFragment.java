@@ -8,9 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sunshine.first.BaseFragment;
 import com.sunshine.first.R;
 
-public class AuthenticatedFragment extends Fragment{
+public class AuthenticatedFragment extends BaseFragment{
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    protected void initView(View view) {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
