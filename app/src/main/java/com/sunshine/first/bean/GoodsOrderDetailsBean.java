@@ -96,7 +96,7 @@ public class GoodsOrderDetailsBean {
         private String express_number;
         private String refund_apply_time;
         private int refund_com_time;
-        private int close_time;
+        private String close_time;
         private int refund_status;
         private String order_status;
         private int order_status_type;
@@ -248,11 +248,11 @@ public class GoodsOrderDetailsBean {
             this.refund_com_time = refund_com_time;
         }
 
-        public int getClose_time() {
+        public String getClose_time() {
             return close_time;
         }
 
-        public void setClose_time(int close_time) {
+        public void setClose_time(String close_time) {
             this.close_time = close_time;
         }
 
