@@ -30,6 +30,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     public void addData(List<AddressListBean.ListAddressBean> list) {
         this.data = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -52,7 +53,25 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
                     UpdateAddressActivity.nextStartActivity(mContext, 1, addressBean.id);
                 }
             });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (selectAddress != null) {
+                        selectAddress.onSelectAddress(addressBean);
+                    }
+                }
+            });
         }
+    }
+
+    private SelectAddress selectAddress;
+
+    public void setSelectAddress(SelectAddress selectAddress) {
+        this.selectAddress = selectAddress;
+    }
+
+    public interface SelectAddress {
+        void onSelectAddress(AddressListBean.ListAddressBean addressBean);
     }
 
     @Override

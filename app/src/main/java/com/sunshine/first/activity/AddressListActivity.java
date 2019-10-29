@@ -39,6 +39,18 @@ public class AddressListActivity extends BaseAppCompatActivity {
         rv_address_list.setLayoutManager(new LinearLayoutManager(this));
         addressListAdapter = new AddressListAdapter(this);
         rv_address_list.setAdapter(addressListAdapter);
+        addressListAdapter.setSelectAddress(new AddressListAdapter.SelectAddress() {
+            @Override
+            public void onSelectAddress(AddressListBean.ListAddressBean addressBean) {
+                Intent intent = new Intent();
+                intent.putExtra("addressId", addressBean.id);
+                intent.putExtra("name", addressBean.name + "");
+                intent.putExtra("phoneNumber", addressBean.mobile + "");
+                intent.putExtra("addressDetails", addressBean.province_name + addressBean.city_name + addressBean.area_name + "");
+                setResult(101, intent);
+                finish();
+            }
+        });
     }
 
     @Override

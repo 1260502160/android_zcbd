@@ -85,4 +85,14 @@ public class Api {
     public  final static String Del_Residents = BASE_URL+"delResidents";
     //审核住户
     public  final static String Owner_Check = BASE_URL+"ownerCheck";
+    //生成商品订单接口
+    public final static String CreateGoodsOrder_URL = BASE_URL + "createGoodsOrder";
+    //获取订单详情
+    public final static String GetGoodsOrderDetail_URL = BASE_URL + "getGoodsOrderDetail";
+    //取消订单
+    public final static String CloseOrder_URL = BASE_URL + "closeOrder";
+    //申请退款订单
+    public final static String ApplyRefund_URL = BASE_URL + "applyRefund";
+    //缴费记录列表
+    public final static String GetFinanceList_URL = BASE_URL + "getFinanceList";
 }

@@ -1,28 +1,19 @@
 package com.sunshine.first.activity;
 
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
-import com.sunshine.first.fragment.AllFragment;
 import com.sunshine.first.fragment.AlreadyMoneyFragment;
-import com.sunshine.first.fragment.BackMoneyFragment;
-import com.sunshine.first.fragment.PayMoneyFragment;
 import com.sunshine.first.fragment.RepairAllFragment;
 import com.sunshine.first.fragment.WaitAgencyFragment;
 import com.sunshine.first.fragment.WaitPayFragment;
-import com.sunshine.first.fragment.WaitPayMoneyFragment;
 
 import java.util.ArrayList;
 import java.util.List;

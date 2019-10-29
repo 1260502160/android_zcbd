@@ -1,57 +1,240 @@
 package com.sunshine.first.activity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
+import android.content.Intent;
+import android.database.DataSetObserver;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.abner.ming.base.model.Api;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.PagRecordBean;
+
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class PayRecordActivity extends AppCompatActivity {
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
-    @BindView(R.id.icon_down)
-    ImageView iconDown;
-    @BindView(R.id.relative_info)
-    RelativeLayout relativeInfo;
-    @BindView(R.id.icon_up)
-    ImageView iconUp;
-    private Intent intent;
+
+/**
+ * 纳费记录页面
+ */
+public class PayRecordActivity extends BaseAppCompatActivity {
+    @BindView(R.id.elv_pay_record)
+    ExpandableListView elv_pay_record;
+    private List<PagRecordBean.DataBean.ListBeanX> listBeanXList;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_record);
-        ButterKnife.bind(this);
+    public int getLayoutId() {
+        return R.layout.activity_pay_record;
     }
 
-    @OnClick({R.id.icon_back, R.id.icon_down, R.id.icon_up,R.id.relative_info})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
-            case R.id.relative_info:
-                intent = new Intent(PayRecordActivity.this, PayDeatilActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.icon_down:
-                iconUp.setVisibility(View.VISIBLE);
-                iconDown.setVisibility(View.GONE);
-                relativeInfo.setVisibility(View.VISIBLE);
-                break;
-            case R.id.icon_up:
-                iconDown.setVisibility(View.VISIBLE);
-                iconUp.setVisibility(View.GONE);
-                relativeInfo.setVisibility(View.GONE);
-                break;
+    @Override
+    protected void initView() {
+        setDefaultTitle("纳费记录");
+        elv_pay_record.setGroupIndicator(null);
+    }
+
+    @Override
+    protected void initData() {
+        hashMap.clear();
+        hashMap.put("token", getToken());
+        hashMap.put("page", page + "");
+        hashMap.put("perpage", perpage + "");
+        net(true, false).post(1, Api.GetFinanceList_URL, hashMap);
+    }
+
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (type == 1) {
+            data = "{\n" +
+                    "    \"success\": true,\n" +
+                    "    \"error_code\": \"200\",\n" +
+                    "    \"message\": \"获取成功\",\n" +
+                    "    \"data\": {\n" +
+                    "        \"total\": 2,\n" +
+                    "        \"totalPage\": 1,\n" +
+                    "        \"list\": [\n" +
+                    "            {\n" +
+                    "                \"day\": \"09\",\n" +
+                    "                \"list\": [\n" +
+                    "                    {\n" +
+                    "                        \"id\": 1,\n" +
+                    "                        \"created_at\": \"2019-09-20\",\n" +
+                    "                        \"money\": \"112.35\",\n" +
+                    "                        \"order_type\": 1\n" +
+                    "                    },\n" +
+                    "                    {\n" +
+                    "                        \"id\": 3,\n" +
+                    "                        \"created_at\": \"2019-09-01\",\n" +
+                    "                        \"money\": \"280.23\",\n" +
+                    "                        \"order_type\": 1\n" +
+                    "                    }\n" +
+                    "                ]\n" +
+                    "            },\n" +
+                    "            {\n" +
+                    "                \"day\": \"08\",\n" +
+                    "                \"list\": [\n" +
+                    "                    {\n" +
+                    "                        \"id\": 2,\n" +
+                    "                        \"created_at\": \"2019-08-13\",\n" +
+                    "                        \"money\": \"37.30\",\n" +
+                    "                        \"order_type\": 1\n" +
+                    "                    }\n" +
+                    "                ]\n" +
+                    "            }\n" +
+                    "        ]\n" +
+                    "    }\n" +
+                    "}";
+            PagRecordBean pagRecordBean = gson.fromJson(data, PagRecordBean.class);
+            if (pagRecordBean != null && pagRecordBean.getData() != null) {
+                listBeanXList = pagRecordBean.getData().getList();
+                elv_pay_record.setAdapter(new PayRecordAdapter());
+            }
         }
+    }
+
+    class PayRecordAdapter implements ExpandableListAdapter {
+
+        @Override
+        public void registerDataSetObserver(DataSetObserver observer) {
+
+        }
+
+        @Override
+        public void unregisterDataSetObserver(DataSetObserver observer) {
+
+        }
+
+        @Override
+        public int getGroupCount() {
+            return listBeanXList.size();
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public Object getGroup(int groupPosition) {
+            return listBeanXList.get(groupPosition);
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return listBeanXList.get(groupPosition).getList().get(childPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            PayGroupHolder payGroupHolder;
+            if (convertView == null) {
+                payGroupHolder = new PayGroupHolder();
+                convertView = LayoutInflater.from(PayRecordActivity.this).inflate(R.layout.layout_pay_record_group, parent, false);
+                payGroupHolder.tv_pay_record_group = convertView.findViewById(R.id.tv_pay_record_group);
+                convertView.setTag(payGroupHolder);
+            } else {
+                payGroupHolder = (PayGroupHolder) convertView.getTag();
+            }
+            payGroupHolder.tv_pay_record_group.setText(listBeanXList.get(groupPosition).getDay() + "月");
+            return convertView;
+        }
+
+        @Override
+        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+            PayChildHolder payChildHolder;
+            if (convertView == null) {
+                payChildHolder = new PayChildHolder();
+                convertView = LayoutInflater.from(PayRecordActivity.this).inflate(R.layout.layout_pay_record_child, parent, false);
+                payChildHolder.iv_pay_record_child = convertView.findViewById(R.id.iv_pay_record_child);
+                payChildHolder.tv_money_pay_record_child = convertView.findViewById(R.id.tv_money_pay_record_child);
+                payChildHolder.tv_title_pay_record_child = convertView.findViewById(R.id.tv_title_pay_record_child);
+                payChildHolder.tv_time_pay_record_child = convertView.findViewById(R.id.tv_time_pay_record_child);
+                convertView.setTag(payChildHolder);
+            } else {
+                payChildHolder = (PayChildHolder) convertView.getTag();
+            }
+            PagRecordBean.DataBean.ListBeanX.ListBean listBean = listBeanXList.get(groupPosition).getList().get(childPosition);
+            payChildHolder.tv_money_pay_record_child.setText(listBean.getMoney());
+//            payChildHolder.tv_title_pay_record_child.setText(listBean.getCreated_at());
+            payChildHolder.tv_time_pay_record_child.setText(listBean.getCreated_at());
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PayRecordActivity.this, PayDeatilActivity.class);
+                    startActivity(intent);
+                }
+            });
+            return convertView;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return false;
+        }
+
+        @Override
+        public boolean areAllItemsEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public void onGroupExpanded(int groupPosition) {
+
+        }
+
+        @Override
+        public void onGroupCollapsed(int groupPosition) {
+
+        }
+
+        @Override
+        public long getCombinedChildId(long groupId, long childId) {
+            return 0;
+        }
+
+        @Override
+        public long getCombinedGroupId(long groupId) {
+            return 0;
+        }
+    }
+
+
+    class PayGroupHolder {
+        TextView tv_pay_record_group;
+    }
+
+    class PayChildHolder {
+        ImageView iv_pay_record_child;
+        TextView tv_title_pay_record_child;
+        TextView tv_time_pay_record_child;
+        TextView tv_money_pay_record_child;
     }
 }

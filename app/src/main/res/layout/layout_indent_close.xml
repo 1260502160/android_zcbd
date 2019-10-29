@@ -4,109 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.IntentDetailActivity">
+    tools:context=".activity.OrderCloseActivity">
 
-    <RelativeLayout
-        android:id="@+id/relative_change"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70"
-        android:background="#ffffff"
-        >
-
-        <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_back"
-            android:layout_marginLeft="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_30"
-            android:padding="@dimen/dp_10"
-            />
-        <TextView
-            android:id="@+id/text_forget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="订单详情页"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_25"
-            android:textSize="@dimen/sp_20"
-            />
-    </RelativeLayout>
     <View
         android:id="@+id/view_fangzhurenzheng_one"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/grey"
         android:layout_below="@+id/relative_change"
-        />
+        android:background="@color/grey" />
 
     <LinearLayout
         android:id="@+id/lin_indent_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@+id/view_fangzhurenzheng_one"
-        android:layout_marginTop="@dimen/dp_15"
         android:layout_marginLeft="@dimen/dp_15"
-        >
+        android:layout_marginTop="@dimen/dp_15"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/tvaddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="收获地址（必填）"
-            android:textSize="@dimen/sp_16"
             android:textColor="@color/blacks"
-            />
+            android:textSize="@dimen/sp_16" />
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="李晓明（必填）"
-            android:textSize="@dimen/sp_16"
             android:textColor="@color/blacks"
-            />
+            android:textSize="@dimen/sp_16" />
+
         <TextView
             android:id="@+id/tv_infact_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="北京市朝阳区北环花园2806"
-            android:textSize="@dimen/sp_16"
             android:textColor="@color/blacks"
-            />
+            android:textSize="@dimen/sp_16" />
 
     </LinearLayout>
+
     <View
         android:id="@+id/view_fangzhurenzheng_two"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/grey"
         android:layout_below="@+id/lin_indent_one"
         android:layout_marginLeft="@dimen/dp_15"
         android:layout_marginRight="@dimen/dp_15"
-        />
+        android:background="@color/grey" />
 
 
     <LinearLayout
         android:id="@+id/lin_indent_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/shape_login"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_below="@+id/view_fangzhurenzheng_two"
-        >
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@drawable/shape_login"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="商品信息"
             android:textColor="@color/blacks"
-            android:textSize="@dimen/sp_16"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_20"
-            />
+            android:textSize="@dimen/sp_16" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -118,166 +88,158 @@
                 android:id="@+id/icon_all_indent"
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
-                android:src="@mipmap/ic_launcher"
                 android:layout_below="@+id/view_indent"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
+                android:layout_marginTop="@dimen/dp_10"
+                android:src="@mipmap/ic_launcher" />
 
             <View
                 android:id="@+id/view_fangzhurenzheng_three"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/grey"
                 android:layout_below="@+id/icon_all_indent"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_15"
                 android:layout_marginTop="@dimen/dp_15"
-                />
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@color/grey" />
+
             <TextView
                 android:id="@+id/tv_pay_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订单信息"
                 android:layout_below="@+id/view_fangzhurenzheng_three"
-                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="订单信息" />
+
             <TextView
                 android:id="@+id/tv_indent_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已关闭"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/view_fangzhurenzheng_three"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_10"
-                />
+                android:text="已关闭" />
 
             <TextView
                 android:id="@+id/tv_indent_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订单编号:"
                 android:layout_below="@+id/tv_pay_info"
-                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="订单编号:" />
+
             <TextView
                 android:id="@+id/tv_indent_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="下单时间:"
                 android:layout_below="@+id/tv_indent_num"
-                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="下单时间:" />
+
             <TextView
                 android:id="@+id/tv_indenttime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2019-09-18 15:30"
                 android:layout_below="@+id/tv_indent_num"
-                android:layout_toRightOf="@+id/tv_indent_time"
-                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
-
-
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_toRightOf="@+id/tv_indent_time"
+                android:text="2019-09-18 15:30" />
 
 
             <TextView
                 android:id="@+id/tv_paymoney_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="关闭时间:"
                 android:layout_below="@+id/tv_indenttime"
-                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="关闭时间:" />
+
             <TextView
                 android:id="@+id/tv_paytime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2019-09-18 15:30"
                 android:layout_below="@+id/tv_indenttime"
-                android:layout_toRightOf="@+id/tv_paymoney_time"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_15"
-                />
+                android:layout_toRightOf="@+id/tv_paymoney_time"
+                android:text="2019-09-18 15:30" />
 
             <View
                 android:id="@+id/view_fangzhurenzheng_five"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/grey"
                 android:layout_below="@+id/tv_paytime"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_15"
                 android:layout_marginTop="@dimen/dp_10"
-                />
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@color/grey" />
 
 
             <View
                 android:id="@+id/view_fangzhurenzheng_four"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/grey"
                 android:layout_below="@+id/tv_need_pay_money"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_15"
                 android:layout_marginTop="@dimen/dp_10"
-                />
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@color/grey" />
 
             <TextView
                 android:id="@+id/tv_tishi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:layout_below="@+id/tv_indent_num"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_60"
-                />
+                android:text="" />
+
             <TextView
                 android:id="@+id/tv_indent_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="123123123123"
                 android:layout_below="@+id/tv_pay_info"
-                android:layout_toRightOf="@+id/tv_indent_num"
-                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_toRightOf="@+id/tv_indent_num"
+                android:text="123123123123" />
+
             <TextView
                 android:id="@+id/tv_wait_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="待付款"
                 android:layout_below="@+id/tv_buycount"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_10"
-                />
+                android:text="待付款" />
+
             <TextView
                 android:id="@+id/tv_descript"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="商品描述商品描述商品描述商品描述商品描述…………"
                 android:layout_below="@+id/view_indent"
-                android:layout_toRightOf="@+id/icon_all_indent"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_10"
-                />
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_toRightOf="@+id/icon_all_indent"
+                android:text="商品描述商品描述商品描述商品描述商品描述…………" />
+
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥49"
                 android:layout_below="@+id/view_indent"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="￥49"
 
                 />
 
@@ -285,36 +247,33 @@
                 android:id="@+id/tv_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="x1"
                 android:layout_below="@+id/tv_price"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginLeft="@dimen/dp_5"
-                />
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="x1" />
 
             <TextView
                 android:id="@+id/tv_counts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="需支付:"
                 android:layout_below="@+id/tv_indent_status"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_45"
                 android:layout_marginRight="@dimen/dp_45"
-                />
+                android:text="需支付:" />
 
             <TextView
                 android:id="@+id/tv_count_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥49"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/sp_16"
                 android:layout_below="@+id/tv_indent_status"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_45"
                 android:layout_marginRight="@dimen/dp_10"
-                />
+                android:text="￥49"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/sp_16" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -322,12 +281,11 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
-        android:text="重新购买"
-        android:textSize="@dimen/sp_16"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@drawable/shape_orange"
         android:layout_alignParentBottom="true"
-        />
+        android:background="@drawable/shape_orange"
+        android:text="重新购买"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold" />
 
 </RelativeLayout>

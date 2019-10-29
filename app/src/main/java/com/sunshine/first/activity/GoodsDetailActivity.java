@@ -110,6 +110,8 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
                 break;
             case R.id.ll_singleton_goods_details:
                 intent = new Intent(this, PaymentActivity.class);
+                intent.putExtra("retail_price", goodsDeatilBean.getData().getRetail_price() + "");
+                intent.putExtra("g_id", goodsDeatilBean.getData().getId() + "");
                 startActivity(intent);
                 break;
         }
