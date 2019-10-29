@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.IntentDetailActivity;
 import com.sunshine.first.bean.AllIndentBean;
-import com.sunshine.first.bean.GetCarListBean;
 
 import java.util.ArrayList;
 import java.util.List;

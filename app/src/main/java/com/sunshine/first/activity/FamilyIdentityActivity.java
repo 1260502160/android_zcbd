@@ -134,8 +134,8 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
     private String iconOne = "";
     private String iconTwo = "";
     private String iconThree = "";
-    private  int aa;
-    private int cc;
+    private int aa;
+    private int cc = 1;
     private String relationship;
 
     @Override
@@ -144,22 +144,22 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
         btnSubmit.setOnClickListener(this);
         relationship = getIntent().getStringExtra("relationship");
         //tvChooseRelation.setText(relationship);
-        if ("房主".equals(relationship)){
+        if ("房主".equals(relationship)) {
 
-            cc=1;
+            cc = 1;
 
-        }else if ("租客".equals(relationship)){
+        } else if ("租客".equals(relationship)) {
 
-            cc=2;
+            cc = 2;
         }
     }
 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_submit:
-                OwnerVerifyBean ownerVerifyBean =(OwnerVerifyBean) getIntent().getSerializableExtra("ownerVerifyBean");
+                OwnerVerifyBean ownerVerifyBean = (OwnerVerifyBean) getIntent().getSerializableExtra("ownerVerifyBean");
                 int building_id = ownerVerifyBean.getBuilding_id();
                 int community_id = ownerVerifyBean.getCommunity_id();
                 int floors_id = ownerVerifyBean.getFloors_id();
@@ -167,36 +167,39 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 int unitdoor_id = ownerVerifyBean.getUnitdoor_id();
                 String tokens = ownerVerifyBean.getToken();
                 String token = SharePreferenceHelper.getInstance(this).getString("token", "");
-                Log.i("tokens",token);
+                Log.i("tokens", token);
 
                 String name = tvName.getText().toString();
-                String sex =tvSex.getText().toString();
+                String sex = tvSex.getText().toString();
 
-                if (sex.equals("男")){
-                    aa=0;
-                }else if(sex.equals("女")){
-                    aa=1;
+                if (sex.equals("男")) {
+                    aa = 0;
+                } else if (sex.equals("女")) {
+                    aa = 1;
                 }
                 String phoneNumber = tvPhoneNumber.getText().toString();
 
                 String IDNumber = tvIDNumber.getText().toString();
                 CheckBean checkBean = new CheckBean();
-                checkBean.setBuilding_id(building_id+"");
+                checkBean.setBuilding_id(building_id + "");
                 checkBean.setCard_img_a(iconOne);
                 checkBean.setCard_img_b(iconTwo);
                 checkBean.setFace_recognition(iconThree);
                 checkBean.setIdentity_card_number(IDNumber);
                 checkBean.setResidents_mobile(phoneNumber);
                 checkBean.setResidents_name(name);
-                checkBean.setType(cc+"");
-                checkBean.setHouses_id(houses_id+"");
-                checkBean.setFloors_id(floors_id+"");
-                checkBean.setUnitdoor_id(unitdoor_id+"");
-                checkBean.setCommunity_id(community_id+"");
+                checkBean.setType(cc + "");
+                checkBean.setHouses_id(houses_id + "");
+                checkBean.setFloors_id(floors_id + "");
+                checkBean.setUnitdoor_id(unitdoor_id + "");
+                checkBean.setCommunity_id(community_id + "");
                 checkBean.setToken(token);
-                checkBean.setSex(aa+"");
+                checkBean.setSex(aa + "");
                 RequestBody body = (RequestBody) buildRequestBody(checkBean);
-                net(false,false).post(4,Api.OwnerVerify_URL,body);
+                if (cc == 2)
+                    net(false, false).post(4, Api.OwnerVerify_URL, body);
+                else
+                    net(false, false).post(5, Api.Add_Residents, body);
                 break;
         }
     }
@@ -207,6 +210,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonData);
         return body;
     }
+
     @Override
     protected void initView() {
         ButterKnife.bind(this);
@@ -270,7 +274,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                                 }
                             }
                         });
-                isImgOne =true;
+                isImgOne = true;
                 isImgTwo = false;
                 isImgThree = false;
             }
@@ -296,7 +300,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                                 }
                             }
                         });
-                isImgOne =false;
+                isImgOne = false;
                 isImgTwo = true;
                 isImgThree = false;
             }
@@ -322,7 +326,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                                 }
                             }
                         });
-                isImgOne =false;
+                isImgOne = false;
                 isImgTwo = false;
                 isImgThree = true;
             }
@@ -375,14 +379,14 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                                 .imageSpanCount(4)
                                 .selectionMode(PictureConfig.MULTIPLE)
                                 .forResult(pos);
-                               // .forResult(PictureConfig.CHOOSE_REQUEST);
+                        // .forResult(PictureConfig.CHOOSE_REQUEST);
                         break;
                     case R.id.tv_camera:
                         //拍照
                         PictureSelector.create(FamilyIdentityActivity.this)
                                 .openCamera(PictureMimeType.ofImage())
                                 .forResult(pos);
-                               // .forResult(PictureConfig.CHOOSE_REQUEST);
+                        // .forResult(PictureConfig.CHOOSE_REQUEST);
                         break;
                     case R.id.tv_cancel:
                         //取消
@@ -459,18 +463,18 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 iconHead.setImageURI(uri);
 //                iconOne = path;
 
-                getUpdateImagePath(iconHead,requestCode);
+                getUpdateImagePath(iconHead, requestCode);
 
-            }else if (requestCode == 2){
+            } else if (requestCode == 2) {
 
                 iconHeadFound.setImageURI(uri);
 //                iconTwo = path;
-                getUpdateImagePath(iconHeadFound,requestCode);
-            }else if (requestCode == 3){
+                getUpdateImagePath(iconHeadFound, requestCode);
+            } else if (requestCode == 3) {
 
                 iconChina.setImageURI(uri);
 //                iconThree = path;
-                getUpdateImagePath(iconChina,requestCode);
+                getUpdateImagePath(iconChina, requestCode);
             }
         }
     }
@@ -478,18 +482,18 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
     private void getUpdateImagePath(ImageView iconOne, int requestCode) {
         try {
             iconOne.setDrawingCacheEnabled(true);
-            Bitmap bitmap=iconOne.getDrawingCache();
+            Bitmap bitmap = iconOne.getDrawingCache();
             String file = bitmapToBase64(bitmap);
             HashMap<String, String> map = new HashMap<>();
-            map.put("image",file);
-            map.put("folder","xier");
-            map.put("disk","xier");
-            map.put("isApp","1");
+            map.put("image", file);
+            map.put("folder", "xier");
+            map.put("disk", "xier");
+            map.put("isApp", "1");
 //                    ge(map);
             net(false, false).post(requestCode, Api.UploadImg, map);
 //                    iconHead.setDrawingCacheEnabled(false);
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -497,6 +501,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
 
     /**
      * bitmap转为base64
+     *
      * @param bitmap
      * @return
      */
@@ -528,42 +533,43 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
         }
         return result;
     }
+
     private void getImgPath() {
         File file = new File(path);
-        Toast.makeText(this,file.getAbsolutePath(),Toast.LENGTH_SHORT).show();
-        if (isImgOne == true){
+        Toast.makeText(this, file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        if (isImgOne == true) {
             iconHead.setBackground(Drawable.createFromPath(path));
-            Map<String,String> map = new HashMap<>();
-            map.put("isApp","1");
-            map.put("folder","xier");  //错误   这里传入的是楼号的id
-            map.put("disk","xier");  //错误   这里传入的是楼号的id
+            Map<String, String> map = new HashMap<>();
+            map.put("isApp", "1");
+            map.put("folder", "xier");  //错误   这里传入的是楼号的id
+            map.put("disk", "xier");  //错误   这里传入的是楼号的id
 
-            net(false,false).post(2,Api.UploadImg,map);
+            net(false, false).post(2, Api.UploadImg, map);
         }
     }
 
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
             Gson gson = new Gson();
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
-           iconOne = uploadImgBean.getData().getImgUrl();
+            iconOne = uploadImgBean.getData().getImgUrl();
         }
-        if (type==2){
+        if (type == 2) {
             Gson gson = new Gson();
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
-           iconTwo = uploadImgBean.getData().getImgUrl();
+            iconTwo = uploadImgBean.getData().getImgUrl();
         }
-        if (type==3){
+        if (type == 3) {
             Gson gson = new Gson();
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
             iconThree = uploadImgBean.getData().getImgUrl();
         }
-        if (type==4){
+        if (type == 4 || type == 5) {
             Gson gson = new Gson();
             ShowOwnerVerifyBean showOwnerVerifyBean = gson.fromJson(data, ShowOwnerVerifyBean.class);
-            Toast.makeText(FamilyIdentityActivity.this,showOwnerVerifyBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(FamilyIdentityActivity.this, showOwnerVerifyBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
