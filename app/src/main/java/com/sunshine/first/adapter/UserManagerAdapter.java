@@ -58,6 +58,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
                 int type = dataBean.getType();
                 if (1 == type) {//房主
                     Intent intent = new Intent(context, HouseHoldIdentity.class);
+                    intent.putExtra("id", houseListBeanData.get(position).getId());
                     context.startActivity(intent);
                 } else {//房客
 
