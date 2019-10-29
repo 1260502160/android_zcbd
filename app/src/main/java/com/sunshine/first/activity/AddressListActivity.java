@@ -48,6 +48,7 @@ public class AddressListActivity extends BaseAppCompatActivity {
                 intent.putExtra("phoneNumber", addressBean.mobile + "");
                 intent.putExtra("addressDetails", addressBean.province_name + addressBean.city_name + addressBean.area_name + "");
                 setResult(101, intent);
+                finish();
             }
         });
     }

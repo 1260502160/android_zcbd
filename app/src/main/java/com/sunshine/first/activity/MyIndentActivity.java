@@ -1,30 +1,25 @@
 package com.sunshine.first.activity;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.fragment.AllFragment;
-import com.sunshine.first.fragment.BackMoneyFragment;
-import com.sunshine.first.fragment.PayMoneyFragment;
-import com.sunshine.first.fragment.WaitPayFragment;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
+/**
+ * 我的订单页面
+ */
 public class MyIndentActivity extends BaseAppCompatActivity {
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.viewpager_indent)
@@ -37,7 +32,8 @@ public class MyIndentActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
+        setDefaultTitle("我的订单");
+
     }
 
     @Override
@@ -48,10 +44,14 @@ public class MyIndentActivity extends BaseAppCompatActivity {
         title.add("已付款");
         title.add("退款");
         final ArrayList<Fragment> fragment = new ArrayList<>();
-        fragment.add(new AllFragment());
-        fragment.add(new WaitPayFragment());
-        fragment.add(new PayMoneyFragment());
-        fragment.add(new BackMoneyFragment());
+
+        for (int i = 0; i < title.size(); i++) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("status", i);
+            AllFragment allFragment = new AllFragment();
+            allFragment.setArguments(bundle);
+            fragment.add(allFragment);
+        }
         viewpagerIndent.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -78,15 +78,4 @@ public class MyIndentActivity extends BaseAppCompatActivity {
         tabs.setupWithViewPager(viewpagerIndent);
     }
 
-
-    @OnClick({R.id.icon_back, R.id.viewpager_indent})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
-            case R.id.viewpager_indent:
-                break;
-        }
-    }
 }

@@ -5,18 +5,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.abner.ming.base.model.Api;
-import com.google.gson.Gson;
 import com.sunshine.first.BaseFragment;
 import com.sunshine.first.R;
 import com.sunshine.first.adapter.AllIndentAdapter;
 import com.sunshine.first.bean.AllIndentBean;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * 我的订单
+ * 全部订单
+ */
 public class AllFragment extends BaseFragment {
     @BindView(R.id.reclcle_all_indent)
     RecyclerView reclcleAllIndent;
@@ -41,8 +42,12 @@ public class AllFragment extends BaseFragment {
         //设置Adapter
         reclcleAllIndent.setAdapter(allIndentAdapter);
 
+        int status = getArguments().getInt("status", 0);
         hashMap.clear();
         hashMap.put("token", getToken());
+        hashMap.put("status", status + "");//订单状态0全部1待付款2已付款3退款4已关闭
+        hashMap.put("page", page + "");//订单状态0全部1待付款2已付款3退款4已关闭
+        hashMap.put("perpage", perpage + "");//订单状态0全部1待付款2已付款3退款4已关闭
         net(false, false).post(2, Api.GetGoodsOrderList_URL, hashMap);
     }
 
@@ -51,9 +56,8 @@ public class AllFragment extends BaseFragment {
         super.success(type, data);
         if (type == 2) {
             AllIndentBean allIndentBean = gson.fromJson(data, AllIndentBean.class);
-            List<AllIndentBean.DataBean.ListBean> list = allIndentBean.getData().getList();
-            if (list != null) {
-                allIndentAdapter.setDataList(list);
+            if (allIndentBean.getData() != null && allIndentBean.getData().getList() != null) {
+                allIndentAdapter.setDataList(allIndentBean.getData().getList());
             }
         }
     }

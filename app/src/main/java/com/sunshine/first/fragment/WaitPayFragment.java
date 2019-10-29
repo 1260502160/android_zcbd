@@ -1,22 +1,16 @@
 package com.sunshine.first.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.abner.ming.base.model.Api;
-import com.google.gson.Gson;
 import com.sunshine.first.BaseFragment;
 import com.sunshine.first.R;
-import com.sunshine.first.adapter.RepairAgencyAdapter;
 import com.sunshine.first.adapter.RepairPayAdapter;
 import com.sunshine.first.bean.GetRepairListBean;
-import com.sunshine.first.utils.SharePreferenceHelper;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 
