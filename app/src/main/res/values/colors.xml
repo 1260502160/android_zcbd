@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-<!--    <color name="colorPrimaryDark">#75FFFFFF</color>-->
+    <!--    <color name="colorPrimaryDark">#75FFFFFF</color>-->
     <color name="colorPrimaryDark">#cfcfcfcf</color>
     <color name="colorAccent">#D81B60</color>
 
@@ -12,6 +12,7 @@
     <color name="white">#ffffff</color>
     <color name="blacks">#333</color>
     <color name="grey">#999</color>
+    <color name="divider">#ffd2d2d2</color>
 
 
 </resources>
