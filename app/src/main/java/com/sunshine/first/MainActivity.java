@@ -20,7 +20,9 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
+        setTransparentForWindow(this);
 
+//        setToolbar();
         BottomTabLayout bottomTabLayout = (BottomTabLayout) findViewById(R.id.id_bottom_tab_layout);
 
         ArrayList<BottomTabInfo> bottomTabViews = new ArrayList<>();

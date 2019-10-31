@@ -44,7 +44,7 @@ public class Serviceragment extends BaseFragment {
     @Override
     protected void initData() {
 
-        net(false,false).get(1,Api.Xbanner_URL,null);
+        net(false, false).get(1, Api.Xbanner_URL, null);
         iconPaymentCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +99,7 @@ public class Serviceragment extends BaseFragment {
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
 
             gson = new Gson();
             xbannerBean = gson.fromJson(data, XbannerBean.class);
@@ -107,7 +107,8 @@ public class Serviceragment extends BaseFragment {
             final ArrayList<String> images = new ArrayList<>();
             if (xbannerBeanData != null) {
                 for (int i = 0; i < xbannerBeanData.size(); i++) {
-                    images.add(Api.BASE_URL + xbannerBeanData.get(i).getUrl());
+//                    images.add(Api.BASE_URL + xbannerBeanData.get(i).getUrl());
+                    images.add(xbannerBeanData.get(i).getUrl());
                 }
             }
             // 为XBanner绑定数据

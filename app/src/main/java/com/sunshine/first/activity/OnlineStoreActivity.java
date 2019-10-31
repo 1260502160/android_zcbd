@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.View;
 
 import com.abner.ming.base.model.Api;
 import com.sunshine.first.BaseAppCompatActivity;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+
 
 /**
  * 在线商城
@@ -42,8 +41,7 @@ public class OnlineStoreActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
-        tab_online_store.setupWithViewPager(viewpagerStore);
-        viewpagerStore.setCurrentItem(0);
+        setDefaultTitle("在线商城");
     }
 
     @Override
@@ -82,18 +80,14 @@ public class OnlineStoreActivity extends BaseAppCompatActivity {
                             return onLineBeanData.get(position).getName();
                         }
                     });
+
+                    tab_online_store.setupWithViewPager(viewpagerStore);
+                    viewpagerStore.setCurrentItem(0);
+
                 }
             }
 
         }
     }
 
-    @OnClick({R.id.icon_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
-        }
-    }
 }

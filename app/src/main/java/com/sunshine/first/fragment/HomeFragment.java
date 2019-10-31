@@ -213,7 +213,8 @@ public class HomeFragment extends BaseFragment{
             final ArrayList<String> images = new ArrayList<>();
             if (xbannerBeanData != null) {
                 for (int i = 0; i < xbannerBeanData.size(); i++) {
-                    images.add(Api.BASE_URL + xbannerBeanData.get(i).getUrl());
+//                    images.add(Api.BASE_URL + xbannerBeanData.get(i).getUrl());
+                    images.add(xbannerBeanData.get(i).getUrl());
                 }
             }
             // 为XBanner绑定数据

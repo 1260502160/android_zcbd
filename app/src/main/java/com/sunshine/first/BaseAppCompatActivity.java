@@ -1,12 +1,21 @@
 package com.sunshine.first;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +42,7 @@ import com.sunshine.first.utils.SystemBarTintManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,9 +114,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
 
         //创建用于添加子类传递的布局
         FrameLayout baseView = (FrameLayout) findViewById(R.id.base_view);
-        //拿到子类布局
-        View childView = View.inflate(this, getLayoutId(), null);
 
+//        View childView = View.inflate(this, getLayoutId(), null);
+        View childView = LayoutInflater.from(this).inflate(getLayoutId(), null);
         baseView.addView(childView);
 
         ButterKnife.bind(this);
@@ -292,11 +302,45 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         baseTitle.setText(title);
         setShowTitle(false);
         isShowBack(true);
-        StatusBarUtil.setImmersiveStatusBar(this, true);
-
+        setToolbar();
 //        //设置状态栏上的字体为黑色-因为本页面是白色必须设置
 //        UtilsStyle.StatusBarLightMode(this,
 //                RomUtils.getLightStatusBarAvailableRomType());
+    }
+
+    protected void setToolbar() {
+
+        StatusBarUtil.setImmersiveStatusBar(this, true);
+    }
+
+    /**
+     * 设置透明
+     */
+    protected static void setTransparentForWindow(Activity activity) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+//            activity.getWindow()
+//                    .getDecorView()
+//                    .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            activity.getWindow()
+//                    .setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //5.0 全透明实现
+            //getWindow.setStatusBarColor(Color.TRANSPARENT)
+            Window window = activity.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //4.4 全透明状态栏
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
     }
 
     protected String getToken() {
@@ -323,4 +367,5 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     public static interface OnSelectIdName {
         void onSelectIdName(int provinceId, String provinceName, int cityId, String cityName, int areaId, String areaName);
     }
+
 }
