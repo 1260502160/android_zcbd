@@ -308,6 +308,21 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
 //                RomUtils.getLightStatusBarAvailableRomType());
     }
 
+    /**
+     * 设置右边文字和点击
+     *
+     * @param rightTitle
+     * @param onClickListener
+     */
+    protected void setRightTitle(String rightTitle, View.OnClickListener onClickListener) {
+        if (titleRight != null) {
+
+            titleRight.setText(rightTitle + "");
+            titleRight.setOnClickListener(onClickListener);
+            titleRight.setVisibility(View.VISIBLE);
+        }
+    }
+
     protected void setToolbar() {
 
         StatusBarUtil.setImmersiveStatusBar(this, true);

@@ -13,18 +13,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ZhuHuGuanLiActivity extends BaseAppCompatActivity{
+/**
+ * 选择房屋
+ */
+public class ZhuHuGuanLiActivity extends BaseAppCompatActivity {
 
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.btn_add_household_info)
     Button btnAddHouseholdInfo;
     @BindView(R.id.reclcle_home_list)
     RecyclerView recycleHomeList;
-
-    private Intent intent;
-
 
     @Override
     protected void initData() {
@@ -33,6 +31,8 @@ public class ZhuHuGuanLiActivity extends BaseAppCompatActivity{
 
     @Override
     protected void initView() {
+
+        setDefaultTitle("选择房屋");
     }
 
     @Override
@@ -41,20 +41,14 @@ public class ZhuHuGuanLiActivity extends BaseAppCompatActivity{
     }
 
 
-    @OnClick({R.id.icon_back, R.id.btn_add_household_info})
+    @OnClick({R.id.btn_add_household_info})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.btn_add_household_info:
                 intent = new Intent(ZhuHuGuanLiActivity.this, AddHoueseHoldActivity.class);
                 startActivity(intent);
                 break;
-         /*   case R.id.relative_choose_home_pay:
-                intent = new Intent(ZhuHuGuanLiActivity.this, HouseHoldIdentity.class);
-                startActivity(intent);
-                break;*/
         }
     }
 

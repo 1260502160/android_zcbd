@@ -26,16 +26,16 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 
-public class HostmanRenActivity extends BaseAppCompatActivity{
+/**
+ * 房主认证
+ */
+public class HostmanRenActivity extends BaseAppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.rel_xiaoqu)
     RelativeLayout relxiaoqu;
     @BindView(R.id.rel_zhurenzheng_shenfen)
@@ -63,7 +63,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
     @BindView(R.id.text_menpaihao)
     TextView textMenpaihao;
     private ArrayList<String> list;
-    private SinglePicker<String> picker,picker1,picker2,picker3,picker4;
+    private SinglePicker<String> picker, picker1, picker2, picker3, picker4;
     private Intent intent;
     private int id;
     private String name;
@@ -77,15 +77,19 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
     private HousenumberBean housenumberBean;
     private List<HousenumberBean.DataBean> housenumberBeanData;
 
-    private int louId,danyuanId,menId,getLouId,loucengId;
-    private Intent intent1;
+    private int louId, danyuanId, menId, getLouId, loucengId;
     private List<LouCengBean.DataBean> louCengBeanData;
     private String shenfen;
 
 
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_hostman_ren;
+    }
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
+        setDefaultTitle("房主认证");
     }
 
     @Override
@@ -93,19 +97,19 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
         extra = (GetCommunityBean.DataBean) getIntent().getSerializableExtra("ss");
         final String ss = getIntent().getStringExtra("ss");//id
         final String ss1 = getIntent().getStringExtra("ss1");//name
-        id = getIntent().getIntExtra("id",-1);  //null
+        id = getIntent().getIntExtra("id", -1);  //null
         name = getIntent().getStringExtra("name");
-        if (extra!=null&&!extra.getName().isEmpty())
-         tvChooseXiaoqu.setText(extra.getName());
+        if (extra != null && !extra.getName().isEmpty())
+            tvChooseXiaoqu.setText(extra.getName());
         //小区
         relZhurenzhengShenfen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Map<String,String> map = new HashMap<>();
-                map.put("type",2+"");
-                map.put("id",extra.getId()+"");
-                net(false,false).post(1,Api.GetHosing_URL,map);
+                Map<String, String> map = new HashMap<>();
+                map.put("type", 2 + "");
+                map.put("id", extra.getId() + "");
+                net(false, false).post(1, Api.GetHosing_URL, map);
 
             }
         });
@@ -115,12 +119,12 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                Map<String,String> map = new HashMap<>();
-                map.put("type",3+"");
+                Map<String, String> map = new HashMap<>();
+                map.put("type", 3 + "");
                 // TODO: 2019-10-11 louid提醒后台更新   现有id为0   值为空数组
-                map.put("id",10+"");  //错误   这里传入的是楼号的id
+                map.put("id", 10 + "");  //错误   这里传入的是楼号的id
                 //Log.i("www",extra.getId()+"");
-                net(false,false).post(2,Api.GetHosing_URL,map);
+                net(false, false).post(2, Api.GetHosing_URL, map);
             }
         });
 
@@ -129,10 +133,10 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                Map<String,String> map = new HashMap<>();
-                map.put("type",5+"");
-                map.put("id",17+""); //错误   这里传入的是单元号的id
-                net(false,false).post(3,Api.GetHosing_URL,map);
+                Map<String, String> map = new HashMap<>();
+                map.put("type", 5 + "");
+                map.put("id", 17 + ""); //错误   这里传入的是单元号的id
+                net(false, false).post(3, Api.GetHosing_URL, map);
             }
         });
 
@@ -140,17 +144,17 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
         textlouCengId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String,String> map = new HashMap<>();
-                map.put("type",4+"");
-                map.put("id",19+""); //错误   这里传入的是单元号的id
-                net(false,false).post(4,Api.GetHosing_URL,map);
+                Map<String, String> map = new HashMap<>();
+                map.put("type", 4 + "");
+                map.put("id", 19 + ""); //错误   这里传入的是单元号的id
+                net(false, false).post(4, Api.GetHosing_URL, map);
             }
         });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (textMenpaihao.getText().equals("租客")){
+                if (textMenpaihao.getText().equals("租客")) {
                     OwnerVerifyBean ownerVerifyBean = new OwnerVerifyBean();
                     ownerVerifyBean.setBuilding_id(louId);
                     ownerVerifyBean.setCommunity_id(extra.getId());
@@ -158,12 +162,12 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
                     ownerVerifyBean.setFloors_id(loucengId);
                     ownerVerifyBean.setHouses_id(menId);
 
-                    ownerVerifyBean.setToken(SharePreferenceHelper.getInstance(getApplicationContext()).getString("token",""));
+                    ownerVerifyBean.setToken(SharePreferenceHelper.getInstance(getApplicationContext()).getString("token", ""));
                     Intent intent = new Intent(HostmanRenActivity.this, FamilyIdentityActivity.class);
-                    intent.putExtra("ownerVerifyBean",ownerVerifyBean);
-                    intent.putExtra("relationship",shenfen);
+                    intent.putExtra("ownerVerifyBean", ownerVerifyBean);
+                    intent.putExtra("relationship", shenfen);
                     startActivity(intent);
-                }else if (textMenpaihao.getText().equals("房主")){
+                } else if (textMenpaihao.getText().equals("房主")) {
                     Intent intent = new Intent(HostmanRenActivity.this, TenementActivity.class);
                     startActivity(intent);
                 }
@@ -174,18 +178,9 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
     }
 
 
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_hostman_ren;
-    }
-
-    @OnClick({R.id.icon_back, R.id.rel_xiaoqu, R.id.rel_zhurenzheng_shenfen, R.id.rel_zhurenzheng_louhao, R.id.rel_zhurenzheng_danyuanhao, R.id.rel_zhurenzheng_menpaihao})
+    @OnClick({ R.id.rel_xiaoqu, R.id.rel_zhurenzheng_shenfen, R.id.rel_zhurenzheng_louhao, R.id.rel_zhurenzheng_danyuanhao, R.id.rel_zhurenzheng_menpaihao})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.rel_xiaoqu:
                 intent = new Intent(HostmanRenActivity.this, ChooseCommityActivity.class);
                 startActivity(intent);
@@ -235,7 +230,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1) {
+        if (type == 1) {
             gson = new Gson();
             louHaoBean = gson.fromJson(data, LouHaoBean.class);
             louHaoBeanData = louHaoBean.getData();
@@ -243,38 +238,38 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
             list.clear();
             for (LouHaoBean.DataBean louHaoBeanDatum : louHaoBeanData) {
                 list.add(louHaoBeanDatum.getName());
-        }
-                picker1 = new SinglePicker<>(HostmanRenActivity.this, list);
-                picker1.setCanLoop(false);//不禁用循环
-                picker1.setLineVisible(true);
-                picker1.setTextSize(18);
-                picker1.setTitleText("楼号选择");
-                picker1.setSelectedIndex(8);
-                picker1.setWheelModeEnable(false);
-                //启用权重 setWeightWidth 才起作用
-                picker1.setWeightEnable(true);
-                picker1.setWeightWidth(1);
-                picker1.setSelectedTextColor(Color.BLUE);//前四位值是透明度
-                picker1.setUnSelectedTextColor(Color.GRAY);
-                picker1.setOnSingleWheelListener(new OnSingleWheelListener() {
-                    @Override
-                    public void onWheeled(int index, String item) {
-                        textShenfen.setText(item);
-                    }
-                });
-                picker1.setOnItemPickListener(new OnItemPickListener<String>() {
-                    @Override
-                    public void onItemPicked(int index, String item) {
-                        textShenfen.setText(item);
-                        //  设置成员变量  保存 楼号的louId    = index
-                        louId = index;
-                    }
-                });
-                picker1.show();
+            }
+            picker1 = new SinglePicker<>(HostmanRenActivity.this, list);
+            picker1.setCanLoop(false);//不禁用循环
+            picker1.setLineVisible(true);
+            picker1.setTextSize(18);
+            picker1.setTitleText("楼号选择");
+            picker1.setSelectedIndex(8);
+            picker1.setWheelModeEnable(false);
+            //启用权重 setWeightWidth 才起作用
+            picker1.setWeightEnable(true);
+            picker1.setWeightWidth(1);
+            picker1.setSelectedTextColor(Color.BLUE);//前四位值是透明度
+            picker1.setUnSelectedTextColor(Color.GRAY);
+            picker1.setOnSingleWheelListener(new OnSingleWheelListener() {
+                @Override
+                public void onWheeled(int index, String item) {
+                    textShenfen.setText(item);
+                }
+            });
+            picker1.setOnItemPickListener(new OnItemPickListener<String>() {
+                @Override
+                public void onItemPicked(int index, String item) {
+                    textShenfen.setText(item);
+                    //  设置成员变量  保存 楼号的louId    = index
+                    louId = index;
+                }
+            });
+            picker1.show();
 
         }
 
-        if (type==2) {
+        if (type == 2) {
 
             gson = new Gson();
             unitNumber = gson.fromJson(data, UnitNumber.class);
@@ -315,7 +310,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
 
         }
 
-        if(type==3){
+        if (type == 3) {
             gson = new Gson();
             housenumberBean = gson.fromJson(data, HousenumberBean.class);
             housenumberBeanData = housenumberBean.getData();
@@ -355,7 +350,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
             picker3.show();
         }
 
-        if (type==4){
+        if (type == 4) {
             gson = new Gson();
             LouCengBean louCengBean = gson.fromJson(data, LouCengBean.class);
             louCengBeanData = louCengBean.getData();
@@ -393,7 +388,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity{
             picker4.show();
         }
 
-        }
+    }
 
 
 }

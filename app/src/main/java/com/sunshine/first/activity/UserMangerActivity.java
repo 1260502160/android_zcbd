@@ -56,7 +56,7 @@ public class UserMangerActivity extends BaseAppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UserMangerActivity.this, FamilyIdentityActivity.class);
-                intent.putExtra("relationship","房主");
+                intent.putExtra("relationship", "房主");
                 startActivity(intent);
             }
         });
@@ -97,10 +97,10 @@ public class UserMangerActivity extends BaseAppCompatActivity {
     /**
      * 在list的Item点击事件中传入item的索引  通过索引获取到当天item对应的user的id 然后请求接口执行删除操作
      */
-    public void deleUserInfo(int index){
+    public void deleUserInfo(int index) {
         HashMap<String, String> map = new HashMap<>();
         map.put("token", token);
-        map.put("id", houseListBean.getData().getList().get(index).getId()+"");
+        map.put("id", houseListBean.getData().getList().get(index).getId() + "");
         net(false, false).post(2, Api.Del_Residents, map);
     }
 }

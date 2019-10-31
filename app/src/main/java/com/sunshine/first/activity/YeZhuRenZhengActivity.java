@@ -1,22 +1,22 @@
 package com.sunshine.first.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class YeZhuRenZhengActivity extends AppCompatActivity {
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
+
+/**
+ * 业主认证页面
+ */
+public class YeZhuRenZhengActivity extends BaseAppCompatActivity {
+
+
     @BindView(R.id.relative_fzrz)
     RelativeLayout relativeFzrz;
     @BindView(R.id.zhgl)
@@ -24,28 +24,42 @@ public class YeZhuRenZhengActivity extends AppCompatActivity {
     @BindView(R.id.clrz)
     RelativeLayout clrz;
 
-    private Intent intent;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_yezhurenzheng);
-        ButterKnife.bind(this);
+    public int getLayoutId() {
+        return R.layout.layout_yezhurenzheng;
     }
 
-    @OnClick({R.id.icon_back, R.id.relative_fzrz, R.id.zhgl, R.id.clrz})
+    @Override
+    protected void initView() {
+        setDefaultTitle("业主认证");
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+
+    @OnClick({R.id.relative_fzrz, R.id.zhgl, R.id.clrz})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
-            case R.id.relative_fzrz:
+            case R.id.relative_fzrz://房主认证
+
                 intent = new Intent(YeZhuRenZhengActivity.this, HostmanRenActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.zhgl:
+            case R.id.zhgl://住户管理
+
+                intent = new Intent(YeZhuRenZhengActivity.this, UserMangerActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.clrz:
+            case R.id.clrz://车辆认证
+
+                intent = new Intent(YeZhuRenZhengActivity.this, CarInfoActivity.class);
+                startActivity(intent);
                 break;
 
         }

@@ -1,122 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_home_two"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-
-    >
+    android:layout_height="@dimen/dp_150"
+    android:layout_marginLeft="@dimen/dp_20"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_20"
+    android:background="@android:color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="12dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
-        android:background="@drawable/shape_login"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginRight="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_10"
-         >
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_indent_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="订单编号:123123123123"
-        android:layout_marginTop="@dimen/dp_5"
-        android:layout_marginLeft="@dimen/dp_10"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="25::35后自动关闭"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dp_5"
-        android:layout_marginRight="@dimen/dp_10"
-        />
-    <View
-        android:id="@+id/view_indent"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:background="#CCCCCC"
-        android:layout_below="@+id/tv_indent_number"
-        android:layout_marginTop="@dimen/dp_5"
-        />
-    <ImageView
-        android:id="@+id/icon_all_indent"
-        android:layout_width="@dimen/dp_60"
-        android:layout_height="@dimen/dp_60"
-        android:src="@mipmap/ic_launcher"
-        android:layout_below="@+id/view_indent"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_10"
-        />
-    <TextView
-        android:id="@+id/tv_descript"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="卧室空调启动异常、不制冷，按遥控器无反应"
-        android:layout_below="@+id/view_indent"
-        android:layout_toRightOf="@+id/icon_all_indent"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_10"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="￥49.00"
-        android:textSize="@dimen/sp_12"
-        android:textColor="#FF393A"
-        android:layout_below="@+id/icon_all_indent"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginLeft="@dimen/dp_20"
-        />
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="￥49.00"
-        android:textSize="@dimen/sp_12"
-        android:textColor="#FF393A"
-        android:layout_below="@+id/tv_descript"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_20"
-        />
-    <TextView
-        android:id="@+id/tv_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="x1"
-        android:textSize="@dimen/sp_12"
-        android:textColor="#CCCCCC"
-        android:layout_below="@+id/tv_price"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_20"
-        />
+        <TextView
+            android:id="@+id/tv_indent_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="订单编号:123123123123" />
 
-    <Button
-        android:id="@+id/btn_lookdeatil_indent"
-        android:layout_width="@dimen/dp_70"
-        android:layout_height="@dimen/dp_30"
-        android:text="查看详情"
-        android:textColor="@color/blue"
-        android:background="@drawable/shape_blue"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_100"
-        android:layout_marginBottom="@dimen/dp_5"
-        />
-    <Button
-        android:layout_width="@dimen/dp_70"
-        android:layout_height="@dimen/dp_30"
-        android:text="@string/text_rightpay"
-        android:textColor="#ffffff"
-        android:background="@drawable/renzheng_shape"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_5"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="25::35后自动关闭" />
 
-        />
+        <View
+            android:id="@+id/view_indent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_below="@+id/tv_indent_number"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="#CCCCCC" />
 
+        <ImageView
+            android:id="@+id/icon_all_indent"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_below="@+id/view_indent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_descript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_indent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_toRightOf="@+id/icon_all_indent"
+            android:text="卧室空调启动异常、不制冷，按遥控器无反应"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/icon_all_indent"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="￥49.00"
+            android:textColor="#FF393A"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_descript"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="￥49.00"
+            android:textColor="#FF393A"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_price"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="x1"
+            android:textColor="#CCCCCC"
+            android:textSize="@dimen/sp_12" />
+
+        <Button
+            android:id="@+id/btn_lookdeatil_indent"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp_100"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:background="@drawable/shape_blue"
+            android:text="查看详情"
+            android:textColor="@color/blue" />
+
+        <Button
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:background="@drawable/renzheng_shape"
+            android:text="@string/text_rightpay"
+            android:textColor="#ffffff" />
     </RelativeLayout>
-</LinearLayout>
+</android.support.v7.widget.CardView>
+
+

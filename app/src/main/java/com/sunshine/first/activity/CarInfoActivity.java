@@ -6,7 +6,6 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
@@ -21,16 +20,20 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CarInfoActivity extends BaseAppCompatActivity{
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
+
+/**
+ * 车辆管理
+ */
+public class CarInfoActivity extends BaseAppCompatActivity {
+
+
     @BindView(R.id.recycle_carinfo)
     RecyclerView recycleCarinfo;
     @BindView(R.id.btn_add_car_info)
     Button btnaAddCarInfo;
+
     private Intent intent;
     private String token;
     private Gson gson;
@@ -54,16 +57,18 @@ public class CarInfoActivity extends BaseAppCompatActivity{
         recycleCarinfo.setAdapter(getCarListAdapter);
 
         token = SharePreferenceHelper.getInstance(CarInfoActivity.this).getString("token", "");
-        Map<String,String> map = new HashMap<>();
-        map.put("token",token);
-        net(false,false).post(1,Api.GetCarList_URL,map);
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
+        net(false, false).post(1, Api.GetCarList_URL, map);
 
 
     }
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
+        setDefaultTitle("车辆列表");
+
+
     }
 
     @Override
@@ -71,12 +76,9 @@ public class CarInfoActivity extends BaseAppCompatActivity{
         return R.layout.layout_car_list;
     }
 
-    @OnClick({R.id.icon_back, R.id.btn_add_car_info})
+    @OnClick({R.id.btn_add_car_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.btn_add_car_info:
                 intent = new Intent(CarInfoActivity.this, AddCarInfoActivity.class);
                 startActivity(intent);
@@ -84,14 +86,15 @@ public class CarInfoActivity extends BaseAppCompatActivity{
         }
     }
 
+
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if(type==1){
+        if (type == 1) {
             gson = new Gson();
             getCarListBean = gson.fromJson(data, GetCarListBean.class);
             carListBeanData = getCarListBean.getData();
-            if (carListBeanData!=null){
+            if (carListBeanData != null) {
                 getCarListAdapter.setDataList(carListBeanData);
             }
         }

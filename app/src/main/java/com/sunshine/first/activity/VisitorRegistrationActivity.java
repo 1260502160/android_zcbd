@@ -56,16 +56,15 @@ import io.reactivex.functions.Consumer;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+/**
+ * 访客登记
+ */
 public class VisitorRegistrationActivity extends BaseAppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.icon_next)
     ImageView iconNext;
     @BindView(R.id.icon_head)
     ImageView iconHead;
-    @BindView(R.id.tv_visitor_record)
-    TextView tvVisitorRecord;
     @BindView(R.id.tv_commiunty_name)
     TextView tvCommiuntyName;
     @BindView(R.id.tv_time)
@@ -112,15 +111,34 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     private String iconTwo = "";
     private String file;
     private Gson gson;
-    private int community_id,building_id,unitdoor_id,floors_id,houses_id;
+    private int community_id, building_id, unitdoor_id, floors_id, houses_id;
     private List<HouseListBean.DataListBean> houseListBeanData;
 
 
     @Override
+    public int getLayoutId() {
+        return R.layout.layout_visitor_registration;
+    }
+
+    @Override
+    protected void initView() {
+
+        setDefaultTitle("访客登记");
+        setRightTitle("访客记录", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(VisitorRegistrationActivity.this, VisitorRecordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    @Override
     protected void initData() {
-        final int verify = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getInt("is_verify",-1);
-        Log.d("verify", "onViewClicked: " +verify);
-        if (verify == 0){
+        final int verify = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getInt("is_verify", -1);
+        Log.d("verify", "onViewClicked: " + verify);
+        if (verify == 0) {
             linearHomeRen.setVisibility(View.VISIBLE);
             linearHomeRen.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,12 +148,12 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 }
             });
 
-        }else if (verify== 1){
+        } else if (verify == 1) {
             linearHomeRen.setVisibility(View.GONE);
 
-        }else if (verify==2){
+        } else if (verify == 2) {
             // verity=2;
-        }else if (verify==3){
+        } else if (verify == 3) {
             //verity=3;
         }
 
@@ -144,8 +162,8 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
             public void onClick(View view) {
                 String token = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getString("token", "");
                 HashMap<String, String> map = new HashMap<>();
-                map.put("token",token);
-                map.put("type","1");
+                map.put("token", token);
+                map.put("type", "1");
                 net(false, false).post(1, Api.HousesList_URL, map);
             }
         });
@@ -169,7 +187,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 String careight = editCarEight.getText().toString();
                 String carnine = editCarNine.getText().toString();
 
-              /*  map.put("community_id",1+"");*/
+                /*  map.put("community_id",1+"");*/
                 //map.put("building_id",1+"");
                /* map.put("unitdoor_id",10+"");
                 map.put("floors_id",1+"");
@@ -182,13 +200,13 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 visitorBean.setUnitdoor_id("10");
                 visitorBean.setCommunity_id("1");
                 visitorBean.setVisi_imgs("http://47.93.50.224/storage/xier/ccb2eb682bccb871b2e704b8f9cccd972565.jpg");
-                visitorBean.setCar_num(carone+cartwo+carthree+carfour+carfive+carsix+carseven+careight+carnine);
+                visitorBean.setCar_num(carone + cartwo + carthree + carfour + carfive + carsix + carseven + careight + carnine);
                 visitorBean.setTime(time);
                 visitorBean.setVisi_name(name);
                 visitorBean.setVisi_mobile(phone);
 
                 RequestBody body = (RequestBody) buildRequestBody(visitorBean);
-                net(false,false).post(3,Api.VisitorAdd_URL,body);
+                net(false, false).post(3, Api.VisitorAdd_URL, body);
                 //net(false, false).post(3, Api.VisitorAdd_URL,map);
 
             }
@@ -216,13 +234,6 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
             }
         });
 
-        tvVisitorRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(VisitorRegistrationActivity.this, VisitorRecordActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     //弹出框的内容
@@ -300,27 +311,29 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonData);
         return body;
     }
+
     private void getUpdateImagePath(ImageView iconOne, int requestCode) {
         try {
             iconOne.setDrawingCacheEnabled(true);
-            Bitmap bitmap=iconOne.getDrawingCache();
+            Bitmap bitmap = iconOne.getDrawingCache();
             file = bitmapToBase64(bitmap);
             HashMap<String, String> map = new HashMap<>();
-            map.put("image",file);
-            map.put("folder","xier");
-            map.put("disk","xier");
-            map.put("isApp","1");
+            map.put("image", file);
+            map.put("folder", "xier");
+            map.put("disk", "xier");
+            map.put("isApp", "1");
 //                    ge(map);
             net(false, false).post(requestCode, Api.UploadImg, map);
 //                    iconHead.setDrawingCacheEnabled(false);
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
     /**
      * bitmap转为base64
+     *
      * @param bitmap
      * @return
      */
@@ -406,38 +419,16 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
 //                GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
                 iconHead.setImageURI(uri);
 //                iconOne = path;
-                getUpdateImagePath(iconHead,2);
+                getUpdateImagePath(iconHead, 2);
 
             }
         }
     }
-    @Override
-    protected void initView() {
-
-        ButterKnife.bind(this);
-
-        iconBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.layout_visitor_registration;
-    }
 
 
-    @OnClick({R.id.icon_back, R.id.tv_visitor_record, R.id.relative_visitor_time, R.id.relative_visitor_name, R.id.relative_visitor_phonenumber, R.id.relative_take_photo, R.id.btn_submit_visitor})
+    @OnClick({R.id.relative_visitor_time, R.id.relative_visitor_name, R.id.relative_visitor_phonenumber, R.id.relative_take_photo, R.id.btn_submit_visitor})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                break;
-            case R.id.tv_visitor_record:
-                break;
             case R.id.relative_visitor_time:
                 TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
                     @Override
@@ -445,8 +436,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                         tvTime.setText((getTime(date)));
 
                     }
-                })
-                        .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
+                }).setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
                         .setCancelText("取消")//取消按钮文字
                         .setSubmitText("确定")//确认按钮文字
 //                .setContentSize(18)//滚轮文字大小
@@ -461,7 +451,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
 //                .setBgColor(0xFF333333)//滚轮背景颜色 Night mode
 ////                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
 ////                .setRangDate(startDate,endDate)//起始终止年月日设定
-                        .setLabel("年","月","日","时","分","秒")
+                        .setLabel("年", "月", "日", "时", "分", "秒")
                         .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                         //.isDialog(true)//是否显示为对话框样式
                         .build();
@@ -492,13 +482,13 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
             Gson gson = new Gson();
             final HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
             houseListBeanData = houseListBean.getData().getList();
             ArrayList<String> list = new ArrayList<>();
             for (HouseListBean.DataListBean houseListBeanDatum : houseListBeanData) {
-                list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
+                list.add(houseListBeanDatum.getCommunity_name() + houseListBeanDatum.getBuilding_name() + houseListBeanDatum.getUnitdoor_name() + houseListBeanDatum.getFloors_name() + houseListBeanDatum.getHouses_number_name());
             }
 
             SinglePicker<String> picker = new SinglePicker<>(VisitorRegistrationActivity.this, list);
@@ -524,24 +514,24 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 public void onItemPicked(int index, String item) {
                     tvCommiuntyName.setText(item);
                     //楼号选择的忘了？
-                   community_id = houseListBean.getData().getList().get(index).getCommunity_id();
-                   //houseListBean.getData().get(index)
+                    community_id = houseListBean.getData().getList().get(index).getCommunity_id();
+                    //houseListBean.getData().get(index)
 
                 }
             });
             picker.show();
         }
-        if (type==2){
+        if (type == 2) {
             Gson gson = new Gson();
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
             iconTwo = uploadImgBean.getData().getImgUrl();
         }
-        if (type==3){
-            Log.i("VISITORREGISTRATION",data.toString());
+        if (type == 3) {
+            Log.i("VISITORREGISTRATION", data.toString());
             Gson gson = new Gson();
             VisitorAddBean visitorAddBean = gson.fromJson(data, VisitorAddBean.class);
-            Log.i("visitorAddBean",visitorAddBean.toString());
-            Toast.makeText(VisitorRegistrationActivity.this,visitorAddBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            Log.i("visitorAddBean", visitorAddBean.toString());
+            Toast.makeText(VisitorRegistrationActivity.this, visitorAddBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
 
         }
     }
