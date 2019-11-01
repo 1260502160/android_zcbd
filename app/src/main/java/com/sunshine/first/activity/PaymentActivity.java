@@ -1,6 +1,8 @@
 package com.sunshine.first.activity;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,9 +12,20 @@ import android.widget.TextView;
 
 import com.abner.ming.base.model.Api;
 import com.abner.ming.base.utils.Logger;
+import com.alipay.sdk.app.PayTask;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
+import com.sunshine.first.application.MyApplication;
 import com.sunshine.first.bean.PaymentBean;
+import com.sunshine.first.bean.WeChatPaymentBean;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -50,6 +63,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
     private int num = 1;
     private String retail_price, g_id;
     private double money;
+    private int pay_type;
 
     @Override
     public int getLayoutId() {
@@ -97,7 +111,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 hashMap.put("order_money", money + "");//订单金额\
                 // TODO: 2019/10/29 待定
                 hashMap.put("type", "1");//购买类型 1零售2批发
-                int pay_type = 1;
+                pay_type = 1;
                 if (zfpay_check_balance.isChecked()) {
                     pay_type = 2;
                 }
@@ -110,15 +124,108 @@ public class PaymentActivity extends BaseAppCompatActivity {
         }
     }
 
+    private final int SDK_PAY_FLAG = 666;
+    private Handler mHandler = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG: {
+//                    Result result = new PayResult((String) msg.obj);
+//                    Toast.makeText(DemoActivity.this, result.getResult(),
+//                            Toast.LENGTH_LONG).show();
+
+                    //这里接收支付宝的回调信息
+                    //需要注意的是，支付结果一定要调用自己的服务端来确定，不能通过支付宝的回调结果来判断
+                    hashMap.clear();
+                    hashMap.put("token", getToken());//用户标识
+                    net(true, false).post(3, Api.Alipaynotify_URL, hashMap);
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    };
+
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type == 1) {
+        if (type == 1) {//创建订单成功
             PaymentBean paymentBean = gson.fromJson(data, PaymentBean.class);
-            if (paymentBean != null) {
-                // TODO: 2019/10/29 跳转 支付宝 或者微信支付
+            if (paymentBean != null && paymentBean.getData() != null) {
+                hashMap.clear();
+                hashMap.put("token", getToken());//用户标识
+                hashMap.put("id", paymentBean.getData().getOrder_id());//
+                hashMap.put("type", paymentBean.getData().getType() + "");//
 
+                if (pay_type == 2) {//1微信2支付宝
+                    net(true, false).post(2, Api.Alipay_URL, hashMap);
+                } else {//微信支付
+                    net(true, false).post(3, Api.Wechat_URL, hashMap);
+                }
             }
+        }
+        if (type == 2) {//获取订单后支付宝支付
+            // TODO: 2019/10/29 跳转 支付宝 或者微信支付
+            final String orderInfo = data;   // 订单信息
+            Runnable payRunnable = new Runnable() {
+
+                @Override
+                public void run() {
+                    PayTask alipay = new PayTask(PaymentActivity.this);
+                    Map<String, String> result = alipay.payV2(orderInfo, true);
+
+                    Message msg = new Message();
+                    msg.what = SDK_PAY_FLAG;
+                    msg.obj = result;
+                    mHandler.sendMessage(msg);
+                }
+            };
+            // 必须异步调用
+            Thread payThread = new Thread(payRunnable);
+            payThread.start();
+
+        }
+        if (type == 3) {//获取订单后微信支付
+
+            String content = data;// (这个是服务端返回的订单信息)
+            WeChatPaymentBean weChatPaymentBean = gson.fromJson(data, WeChatPaymentBean.class);
+            if (weChatPaymentBean != null && weChatPaymentBean.getData() != null) {
+                WeChatPaymentBean.DataBeanX beanData = weChatPaymentBean.getData();
+                WeChatPaymentBean.DataBeanX.DataBean data1 = beanData.getData();
+                if (data1 != null) {
+
+//需要一个注册微信支付的APPID
+                    IWXAPI api = WXAPIFactory.createWXAPI(PaymentActivity.this, MyApplication.APP_ID);
+                    PayReq req = new PayReq();
+                    req.appId = data1.getAppid();
+                    req.partnerId = data1.getPartnerid();
+                    req.prepayId = data1.getPrepay_id();
+                    req.nonceStr = data1.getNoncestr();
+                    req.timeStamp = data1.getTimestamp() + "";
+                    req.packageValue = data1.getPackages();
+                    req.sign = data1.getSign();
+                    api.sendReq(req); //这里就发起调用微信支付了
+                }
+            }
+
+
+//            JSONObject json = null;
+//            try {
+//                json = new JSONObject(content);
+//                PayReq req = new PayReq();
+//                req.appId = json.getString("appid");
+//                req.partnerId = json.getString("partnerid");
+//                req.prepayId = json.getString("prepayid");
+//                req.nonceStr = json.getString("noncestr");
+//                req.timeStamp = json.getString("timestamp");
+//                req.packageValue = json.getString("package");
+//                req.sign = json.getString("sign");
+//                api.sendReq(req); //这里就发起调用微信支付了
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+
         }
     }
 

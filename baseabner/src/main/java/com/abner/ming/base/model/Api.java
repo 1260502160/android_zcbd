@@ -7,45 +7,46 @@ package com.abner.ming.base.model;
 public class Api {
     //接口
 //    public final static  String BASE_URL = "http://47.93.50.224/api/app/";
-    public final static  String BASE_URL = "http://zc.zhongchengbd.com/api/app/";
+    public final static String BASE_URL_ALL = "http://zc.zhongchengbd.com/";
+    public final static String BASE_URL = "http://zc.zhongchengbd.com/api/app/";
     //登录
-    public final static  String Login_URL = BASE_URL+"login";
+    public final static String Login_URL = BASE_URL + "login";
     //发送验证码
-    public final static  String SendSms_URL = BASE_URL+"sendSms";
+    public final static String SendSms_URL = BASE_URL + "sendSms";
     //忘记密码
-    public final static  String RePwd_URL = BASE_URL+"rePwd";
+    public final static String RePwd_URL = BASE_URL + "rePwd";
     //注册
-    public final static  String Register_URL = BASE_URL+"reg";
+    public final static String Register_URL = BASE_URL + "reg";
     //banner
-    public final static  String Xbanner_URL = BASE_URL+"bannerList";
+    public final static String Xbanner_URL = BASE_URL + "bannerList";
     //首页商品列表
-    public final static  String GoodsList_URL = BASE_URL+"getGoodsList";
+    public final static String GoodsList_URL = BASE_URL + "getGoodsList";
     //获取商品分类
-    public final static  String GetClaList_URL = BASE_URL+"getClaList";
+    public final static String GetClaList_URL = BASE_URL + "getClaList";
     //首页商品详情
-    public final static  String GoodsListDeatil_URL = BASE_URL+"getGoodsDetail";
+    public final static String GoodsListDeatil_URL = BASE_URL + "getGoodsDetail";
     //获取个人信息
-    public final static  String GetUserInfo_URL = BASE_URL+"getUserInfo";
+    public final static String GetUserInfo_URL = BASE_URL + "getUserInfo";
     //获取小区
-    public final static  String GetHosing_URL = BASE_URL+"getCommunity";
+    public final static String GetHosing_URL = BASE_URL + "getCommunity";
     //房屋认证
-    public final static  String OwnerVerify_URL = BASE_URL+"ownerVerify";
+    public final static String OwnerVerify_URL = BASE_URL + "ownerVerify";
     //获取车辆列表
-    public final static  String GetCarList_URL = BASE_URL+"getCarList";
+    public final static String GetCarList_URL = BASE_URL + "getCarList";
     //上传图片
-    public final static  String UploadImg = BASE_URL+"uploadImg";
+    public final static String UploadImg = BASE_URL + "uploadImg";
     //修改头像,昵称
-    public final static  String UpdateUserInfo_URL = BASE_URL+"updateUserInfo";
+    public final static String UpdateUserInfo_URL = BASE_URL + "updateUserInfo";
     //获取房屋列表
-        public final static  String HousesList_URL = BASE_URL+"housesList";
+    public final static String HousesList_URL = BASE_URL + "housesList";
     //访客登记
-    public final static  String VisitorAdd_URL = BASE_URL+"visitorAdd";
+    public final static String VisitorAdd_URL = BASE_URL + "visitorAdd";
     //获取访客授权记录列表
-    public final static  String VisitorRecord_URL = BASE_URL+"getAppVisitorList";
+    public final static String VisitorRecord_URL = BASE_URL + "getAppVisitorList";
     //获取住户列表
-    public final static  String GetResidentsList_URL = BASE_URL+"getResidentsList";
+    public final static String GetResidentsList_URL = BASE_URL + "getResidentsList";
     //添加意见反馈
-    public final static  String AddFeedback_URL = BASE_URL+"addFeedback";
+    public final static String AddFeedback_URL = BASE_URL + "addFeedback";
     //解除绑定手机号 更换手机号
     public final static String UPDATE_MOBILE_URL = BASE_URL + "updateMobile";
     //添加报修
@@ -80,13 +81,23 @@ public class Api {
     public final static String GetCityList_URL = BASE_URL + "getCityList";
 
     //添加住户
-    public  final static String Add_Residents = BASE_URL+"addResidents";
+    public final static String Add_Residents = BASE_URL + "addResidents";
     //删除住户
-    public  final static String Del_Residents = BASE_URL+"delResidents";
+    public final static String Del_Residents = BASE_URL + "delResidents";
     //审核住户
-    public  final static String Owner_Check = BASE_URL+"ownerCheck";
+    public final static String Owner_Check = BASE_URL + "ownerCheck";
     //生成商品订单接口
     public final static String CreateGoodsOrder_URL = BASE_URL + "createGoodsOrder";
+    //支付宝支付接口
+    public final static String Alipay_URL = BASE_URL_ALL + "api/admin/alipay";
+    //支付宝支付回调
+    public final static String Alipaynotify_URL = BASE_URL_ALL + "api/admin/alipaynotify";
+    //微信支付接口
+    public final static String Wechat_URL = BASE_URL_ALL + "api/admin/wechat";
+    //微信回调接口
+    public final static String Webchatnotify_URL = BASE_URL_ALL + "api/admin/webchatnotify";
+
+
     //获取订单详情
     public final static String GetGoodsOrderDetail_URL = BASE_URL + "getGoodsOrderDetail";
     //取消订单
