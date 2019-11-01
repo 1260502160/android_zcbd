@@ -47,8 +47,6 @@ import io.reactivex.functions.Consumer;
 
 public class PersonalActivity extends BaseAppCompatActivity{
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.relative_two)
     RelativeLayout relativeTwo;
     @BindView(R.id.relative_three)
@@ -305,6 +303,7 @@ public class PersonalActivity extends BaseAppCompatActivity{
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("个人资料");
     }
 
     @Override
@@ -312,12 +311,9 @@ public class PersonalActivity extends BaseAppCompatActivity{
         return R.layout.layout_personziliao;
     }
 
-    @OnClick({R.id.icon_back, R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_five})
+    @OnClick({R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_five})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.relative_two:
                 break;
             case R.id.relative_three:

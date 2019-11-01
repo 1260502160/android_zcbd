@@ -2,7 +2,6 @@
 <ScrollView xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCCCCC"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -39,10 +38,11 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/relative_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_345"
+        android:layout_height="@dimen/dp_225"
         android:background="@drawable/shape_white"
         android:layout_below="@+id/relative_change"
         android:layout_marginLeft="@dimen/dp_10"
@@ -52,7 +52,7 @@
     <RelativeLayout
         android:id="@+id/rel_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_55"
         >
 
         <TextView
@@ -60,8 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_name"
-            android:layout_toRightOf="@+id/icon_fangkejilu"
-            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_20"
             android:textColor="#333333"
             android:textSize="@dimen/sp_16"
@@ -75,8 +73,8 @@
             android:hint="请填写您的姓名"
             android:background="@null"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_10"
-            android:textColor="#333333"
+            android:layout_marginRight="@dimen/dp_13"
+            android:textColor="@color/grey"
             android:textSize="@dimen/sp_14"
             android:layout_centerVertical="true"
             />
@@ -94,7 +92,7 @@
     <RelativeLayout
         android:id="@+id/rel_sex"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_55"
         android:layout_below="@+id/view_my_fangkejilu"
         >
 
@@ -102,8 +100,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="性别"
-            android:layout_toRightOf="@+id/icon_fangkejilu"
-            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_20"
             android:textColor="#333333"
             android:textSize="@dimen/sp_16"
@@ -115,7 +111,7 @@
             android:layout_height="wrap_content"
             android:hint="请选择性别"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_39"
             android:textColor="#333333"
             android:textSize="@dimen/sp_14"
             android:background="@null"
@@ -126,7 +122,7 @@
             android:layout_height="@dimen/dp_20"
             android:src="@mipmap/next"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_13"
             android:layout_centerVertical="true"
             />
 
@@ -143,7 +139,7 @@
     <RelativeLayout
         android:id="@+id/rel_phone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_55"
         android:layout_below="@+id/view_zhurenzheng_two"
         >
 
@@ -151,7 +147,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_phone_num"
-            android:layout_toRightOf="@+id/icon_fangkejilu"
             android:layout_marginLeft="@dimen/dp_20"
             android:textColor="#333333"
             android:textSize="@dimen/sp_16"
@@ -164,8 +159,8 @@
             android:hint="请填写您的手机号码"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_10"
-            android:textColor="#333333"
+            android:layout_marginRight="@dimen/dp_13"
+            android:textColor="@color/grey"
             android:textSize="@dimen/sp_14"
             android:background="@null"
             android:layout_centerVertical="true"
@@ -235,7 +230,7 @@
     <RelativeLayout
         android:id="@+id/rel_ID_number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_55"
         android:layout_below="@+id/view_zhurenzheng_three"
         >
 
@@ -243,8 +238,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="身份证号"
-            android:layout_toRightOf="@+id/icon_fangkejilu"
-            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_20"
             android:textColor="#333333"
             android:textSize="@dimen/sp_16"
@@ -264,8 +257,8 @@
             android:layout_centerVertical="true"
             />
         <ImageView
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             android:src="@mipmap/ewm"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_8"
@@ -274,7 +267,7 @@
 
     </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/relative_two"
@@ -295,8 +288,8 @@
             android:text="上传照片"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
-            android:textColor="#000000"
-            android:textSize="@dimen/sp_12"
+            android:textColor="@color/blacks"
+            android:textSize="@dimen/sp_16"
             />
 
         <TextView
@@ -306,7 +299,7 @@
             android:text="本照片作为门禁使用，建议使用近期照片"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
-            android:textColor="@color/transparent"
+            android:textColor="@color/grey"
             android:textSize="@dimen/sp_12"
             android:layout_below="@+id/tv_photos"
             />
@@ -353,9 +346,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="@color/blacks"
             android:text="上传身份证照片"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_16"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_20"
             />
@@ -438,16 +431,16 @@
 
     <Button
         android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_width="@dimen/dp_345"
+        android:layout_height="@dimen/dp_45"
         android:layout_alignParentBottom="true"
         android:background="@drawable/renzheng_shape"
         android:text="@string/btn_submit"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_12"
+        android:textSize="@dimen/sp_16"
         android:layout_below="@+id/relative_two"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
         android:layout_marginBottom="@dimen/dp_40"
         />
 

@@ -63,6 +63,9 @@ dependencies {
 
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
+    //多图
+    implementation 'com.zhihu.android:matisse:$latest_version'
+
 
 }
 configurations.all {

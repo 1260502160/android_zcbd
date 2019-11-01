@@ -1,5 +1,7 @@
 package com.sunshine.first.activity;
 
+import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +45,7 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
     private String edit_sure_newpass;
     private ForgetPwdBean forgetPwdBean;
     private ForgetPwdBean.DataBean forgetPwdBeanData;
-
+    private CountDownTimer timer;
 
     @Override
     protected void initData() {
@@ -51,6 +53,26 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
         btnForgetYancode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                timer=new CountDownTimer(60000,1000){
+
+                    @Override
+                    public void onTick(long l) {
+                        btnForgetYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
+                        btnForgetYancode.setClickable(false);
+                        btnForgetYancode.setBackgroundResource(R.drawable.shape_line);
+                        btnForgetYancode.setText("("+l/1000+"s)");
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                        btnForgetYancode.setClickable(true);
+                        btnForgetYancode.setText("重新获取验证码");
+                        btnForgetYancode.setBackgroundColor(Color.parseColor("#06A0F0"));
+                    }
+                };
                 Map<String,String> map = new HashMap<>();
                 phone = editForgetNum.getText().toString();
                 map.put("phone",phone);
@@ -80,6 +102,7 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("忘记密码");
     }
 
     @Override
@@ -113,6 +136,7 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
         if (type==1){
             gson = new Gson();
             sendSmsBean = gson.fromJson(data, SendSmsBean.class);
+            timer.start();
             Toast.makeText(ForgetPassActivity.this,sendSmsBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
         }
 

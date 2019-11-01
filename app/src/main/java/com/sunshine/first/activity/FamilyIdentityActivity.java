@@ -94,7 +94,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
     @BindView(R.id.rel_ID_number)
     RelativeLayout relIDNumber;
     @BindView(R.id.relative_id)
-    RelativeLayout relativeId;
+    LinearLayout relativeId;
     @BindView(R.id.tv_photos)
     TextView tvPhotos;
     @BindView(R.id.tv_grey)

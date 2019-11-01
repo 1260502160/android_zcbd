@@ -2,6 +2,7 @@ package com.sunshine.first.activity;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.sunshine.first.BaseAppCompatActivity;
@@ -20,10 +21,6 @@ public class AddHoueseHoldActivity extends BaseAppCompatActivity{
     RelativeLayout relSex;
     @BindView(R.id.rel_phone)
     RelativeLayout relPhone;
-    @BindView(R.id.rel_ID)
-    RelativeLayout relID;
-    @BindView(R.id.rel_relationship)
-    RelativeLayout relRelationship;
     @BindView(R.id.rel_ID_number)
     RelativeLayout relIDNumber;
 
@@ -44,7 +41,7 @@ public class AddHoueseHoldActivity extends BaseAppCompatActivity{
         return R.layout.layout_family_identity;
     }
 
-    @OnClick({R.id.icon_back, R.id.rel_name, R.id.rel_sex, R.id.rel_phone, R.id.rel_ID, R.id.rel_relationship, R.id.rel_ID_number})
+    @OnClick({R.id.icon_back, R.id.rel_name, R.id.rel_sex, R.id.rel_phone,R.id.rel_ID_number})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.icon_back:
@@ -55,8 +52,6 @@ public class AddHoueseHoldActivity extends BaseAppCompatActivity{
             case R.id.rel_sex:
                 break;
             case R.id.rel_phone:
-                break;
-            case R.id.rel_ID:
                 break;
             case R.id.rel_relationship:
                 break;
