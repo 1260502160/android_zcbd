@@ -1,5 +1,7 @@
 package com.sunshine.first.activity;
 
+import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +13,7 @@ import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.RegisterBean;
+import com.sunshine.first.bean.SendSmsBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,14 +23,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends BaseAppCompatActivity{
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.edit_num)
     EditText editNum;
     @BindView(R.id.btn_yancode)
-    EditText btnYancode;
+    Button btnYancode;
     @BindView(R.id.edit_newpass)
     EditText editNewpass;
+    @BindView(R.id.edit_code)
+    EditText editCode;
     @BindView(R.id.edit_surenewpass)
     EditText editSurenewpass;
     @BindView(R.id.btn_register)
@@ -35,8 +38,8 @@ public class RegisterActivity extends BaseAppCompatActivity{
     private String code,phone;
     private String newpass;
     private String surepass;
-    private Gson gson;
     private RegisterBean registerBean;
+    private CountDownTimer timer;
     private Button btn_register;
 
 
@@ -47,7 +50,7 @@ public class RegisterActivity extends BaseAppCompatActivity{
             @Override
             public void onClick(View view) {
                 phone = editNum.getText().toString();
-                code = btnYancode.getText().toString();
+                code = editCode.getText().toString();
                 newpass = editNewpass.getText().toString();
                 surepass = editSurenewpass.getText().toString();
                 if (phone!=null&&code!=null&&newpass!=null&&surepass!=null){
@@ -67,6 +70,34 @@ public class RegisterActivity extends BaseAppCompatActivity{
         });
 
 
+        btnYancode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timer  = new CountDownTimer(60000,1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        btnYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
+                        btnYancode.setClickable(false);
+                        btnYancode.setBackgroundResource(R.drawable.shape_line);
+                        btnYancode.setText("("+millisUntilFinished / 1000 +"s)");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        btnYancode.setText("重新获取验证码");
+                        btnYancode.setClickable(true);
+                        btnYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
+                    }
+                };
+
+                Map<String,String> map = new HashMap<>();
+                phone = editNum.getText().toString();
+                map.put("phone",phone);
+                net(false,false).post(2,Api.SendSms_URL,map);
+
+
+            }
+        });
 
     }
 
@@ -74,7 +105,7 @@ public class RegisterActivity extends BaseAppCompatActivity{
     protected void initView() {
 
         btn_register = (Button) get(R.id.btn_register);
-        ButterKnife.bind(this);
+       setDefaultTitle("注册");
     }
 
     @Override
@@ -82,12 +113,9 @@ public class RegisterActivity extends BaseAppCompatActivity{
         return R.layout.layout_register;
     }
 
-    @OnClick({R.id.icon_back, R.id.edit_num, R.id.btn_yancode, R.id.edit_newpass, R.id.edit_surenewpass, R.id.btn_register})
+    @OnClick({R.id.edit_num, R.id.btn_yancode, R.id.edit_newpass, R.id.edit_surenewpass, R.id.btn_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.edit_num:
                 break;
             case R.id.btn_yancode:
@@ -113,6 +141,12 @@ public class RegisterActivity extends BaseAppCompatActivity{
                 Toast.makeText(RegisterActivity.this,registerBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
 
+        }
+        if (type==2){
+
+            SendSmsBean sendSmsBean = gson.fromJson(data, SendSmsBean.class);
+            Toast.makeText(RegisterActivity.this,sendSmsBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            timer.start();
         }
     }
 }

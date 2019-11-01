@@ -66,6 +66,9 @@ dependencies {
     implementation project(':baseabner')
 
 
+    //多图
+    implementation 'com.zhihu.android:matisse:$latest_version'
+
 
 }
 configurations.all {

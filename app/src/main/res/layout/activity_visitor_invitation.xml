@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/iv_back"
             android:layout_marginLeft="@dimen/dp_18"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/icon_back"
             android:layout_gravity="center_vertical"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
