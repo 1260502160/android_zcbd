@@ -36,8 +36,6 @@ public class LoginActivity extends BaseAppCompatActivity {
     TextView textForgetpass;
     @BindView(R.id.text_register)
     TextView textRegister;
-    @BindView(R.id.icon_wechat)
-    ImageView iconWechat;
     private Intent intent;
     private String editphone;
     private String editpassword;
@@ -118,7 +116,7 @@ public class LoginActivity extends BaseAppCompatActivity {
     }
 
 
-    @OnClick({R.id.edit_phone, R.id.edit_password, R.id.btn_login, R.id.text_forgetpass, R.id.text_register, R.id.icon_wechat})
+    @OnClick({R.id.edit_phone, R.id.edit_password, R.id.btn_login, R.id.text_forgetpass, R.id.text_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.edit_phone:
@@ -134,12 +132,6 @@ public class LoginActivity extends BaseAppCompatActivity {
             case R.id.text_register:
                 intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.icon_wechat:
-               /* SendAuth.Req req = new SendAuth.Req();
-                req.scope = "snsapi_userinfo";
-                req.state = "wechat_sdk_demo_test";
-                api.sendReq(req);*/
                 break;
         }
     }
