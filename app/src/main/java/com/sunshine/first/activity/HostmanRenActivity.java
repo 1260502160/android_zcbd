@@ -82,11 +82,11 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
     private String shenfen;
 
 
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_hostman_ren;
     }
+
     @Override
     protected void initView() {
         setDefaultTitle("房主认证");
@@ -108,7 +108,8 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
 
                 Map<String, String> map = new HashMap<>();
                 map.put("type", 2 + "");
-                map.put("id", extra.getId() + "");
+                if (extra != null)
+                    map.put("id", extra.getId() + "");
                 net(false, false).post(1, Api.GetHosing_URL, map);
 
             }
@@ -178,7 +179,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
     }
 
 
-    @OnClick({ R.id.rel_xiaoqu, R.id.rel_zhurenzheng_shenfen, R.id.rel_zhurenzheng_louhao, R.id.rel_zhurenzheng_danyuanhao, R.id.rel_zhurenzheng_menpaihao})
+    @OnClick({R.id.rel_xiaoqu, R.id.rel_zhurenzheng_shenfen, R.id.rel_zhurenzheng_louhao, R.id.rel_zhurenzheng_danyuanhao, R.id.rel_zhurenzheng_menpaihao})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rel_xiaoqu:

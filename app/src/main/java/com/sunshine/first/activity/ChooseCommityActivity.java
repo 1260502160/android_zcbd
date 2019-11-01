@@ -22,16 +22,19 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
+/**
+ * 选择小区
+ */
 public class ChooseCommityActivity extends BaseAppCompatActivity {
 
 
     @BindView(R.id.icon_back)
     ImageView iconBack;
     @BindView(R.id.s_main_spinner)
-    Spinner s_main_spinner ;
+    Spinner s_main_spinner;
     @BindView(R.id.s_main_spinnerTwo)
     Spinner s_main_spinnerTwo;
     @BindView(R.id.icon_search)
@@ -48,26 +51,38 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
     private String hosingname;
     private HashMap<String, String> map;
 
+
+    @Override
+    protected void initView() {
+        setToolbar();
+
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.layout_choose_hosing;
+    }
+
     @Override
     protected void initData() {
 
-
         //设置省份
-        final String provinces[]={"湖南省","河南省","海南省"};
+        final String provinces[] = {"湖南省", "河南省", "海南省"};
         //给省份设置图标
-        int images[]={R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+        int images[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
         //添加市
-        final Map<String,String[]> citys=new HashMap<String, String[]>();
-        citys.put("湖南省",new String[]{"长沙市","衡阳市","益阳市"});
-        citys.put("河南省",new String[]{"郑州市","许昌市","周口市"});
-        citys.put("海南省",new String[]{"海口市","三亚市","文昌市"});
+        final Map<String, String[]> citys = new HashMap<String, String[]>();
+        citys.put("湖南省", new String[]{"长沙市", "衡阳市", "益阳市"});
+        citys.put("河南省", new String[]{"郑州市", "许昌市", "周口市"});
+        citys.put("海南省", new String[]{"海口市", "三亚市", "文昌市"});
 
         //将图标添加进集合
-        List<Map<String,Object>> list=new ArrayList<>();
+        List<Map<String, Object>> list = new ArrayList<>();
         for (int i = 0; i < provinces.length; i++) {
-            Map<String,Object> map=new HashMap<>();
-            map.put("title",provinces[i]);
-            map.put("image",images[i]);
+            Map<String, Object> map = new HashMap<>();
+            map.put("title", provinces[i]);
+            map.put("image", images[i]);
             list.add(map);
         }
 
@@ -85,36 +100,25 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
             @Override
             public void OnItemClick(View view, int pos) {
                 Intent intent = new Intent(ChooseCommityActivity.this, HostmanRenActivity.class);
-                intent.putExtra("ss",getCommunityBeanData.get(pos));
+                intent.putExtra("ss", getCommunityBeanData.get(pos));
 
                 startActivity(intent);
             }
         });
         map = new HashMap<>();
-        map.put("type","1");
-        net(false,false).post(1,Api.GetHosing_URL,map);
+        map.put("type", "1");
+        net(false, false).post(1, Api.GetHosing_URL, map);
         iconSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 hosingname = editHosingname.getText().toString();
 
-                map.put("keyword",hosingname);
-                net(false,false).post(1,Api.GetHosing_URL,map);
-    }
-});
+                map.put("keyword", hosingname);
+                net(false, false).post(1, Api.GetHosing_URL, map);
+            }
+        });
 
-    }
-
-
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.layout_choose_hosing;
     }
 
 
@@ -132,11 +136,11 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
             gson = new Gson();
             getCommunityBean = gson.fromJson(data, GetCommunityBean.class);
             getCommunityBeanData = getCommunityBean.getData();
-            if (getCommunityBeanData!=null){
+            if (getCommunityBeanData != null) {
                 chooseCummintyAdapter.setDataList(getCommunityBeanData);
             }
 

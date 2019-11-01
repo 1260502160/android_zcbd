@@ -22,7 +22,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RepairRecordActivity extends BaseAppCompatActivity{
+/**
+ * 报修记录
+ */
+public class RepairRecordActivity extends BaseAppCompatActivity {
     @BindView(R.id.icon_back)
     ImageView iconBack;
     @BindView(R.id.tab_repair)
@@ -34,6 +37,17 @@ public class RepairRecordActivity extends BaseAppCompatActivity{
     //写一个List集合，把每个页面，也就是Fragment,存进去
     private List<Fragment> list;
     private ArrayList<String> title;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_repair_records;
+    }
+
+    @Override
+    protected void initView() {
+        setDefaultTitle("报修记录");
+
+    }
 
     @Override
     protected void initData() {
@@ -75,15 +89,6 @@ public class RepairRecordActivity extends BaseAppCompatActivity{
         tabRepair.setupWithViewPager(viewpagerRepair);
     }
 
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_repair_records;
-    }
 
     @OnClick(R.id.icon_back)
     public void onViewClicked() {
