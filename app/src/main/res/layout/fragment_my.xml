@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragment.MyFragment">
 
     <RelativeLayout
+        android:id="@+id/my_fragment_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_140"
         android:background="@drawable/gient_shape">
@@ -14,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_34"
             android:text="我的"
             android:textColor="#fff"
             android:textSize="@dimen/sp_16" />
@@ -25,9 +28,9 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_my_one"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_105"
+        android:layout_height="@dimen/dp_100"
         android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_70"
+        android:layout_marginTop="@dimen/dp_64"
         android:layout_marginRight="@dimen/dp_15"
         app:cardCornerRadius="12dp"
         app:cardElevation="12dp">
@@ -40,19 +43,20 @@
 
             <ImageView
                 android:id="@+id/icon_my"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_25"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/icon_head_default" />
 
             <TextView
                 android:id="@+id/text_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_70"
+                android:layout_marginLeft="@dimen/dp_5"
                 android:layout_marginTop="@dimen/dp_25"
+                android:layout_toRightOf="@+id/icon_my"
                 android:text="Admin"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_16" />
@@ -62,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_admin"
-                android:layout_marginLeft="@dimen/dp_70"
+                android:layout_alignLeft="@+id/text_admin"
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="房主"
                 android:textColor="#333333"
@@ -82,8 +86,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_40"
-                android:src="@mipmap/my_ewn"
-                android:visibility="gone" />
+                android:src="@mipmap/my_ewn" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
@@ -91,8 +94,8 @@
     <View
         android:id="@+id/view_my_one"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_5"
-        android:layout_below="@+id/card_my_one"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/my_fragment_rl"
         android:background="@color/line_color" />
 
     <LinearLayout
@@ -100,7 +103,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"
         android:layout_below="@+id/view_my_one"
-        android:layout_marginTop="@dimen/dp_5"
         android:background="@android:color/white"
         android:gravity="center"
         android:orientation="horizontal">
@@ -153,9 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/icon_carinfo"
@@ -176,7 +176,7 @@
     <View
         android:id="@+id/view_my_two"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_5"
+        android:layout_height="@dimen/dp_7"
         android:layout_below="@+id/relative_my_two"
         android:background="@color/line_color" />
 
@@ -195,15 +195,15 @@
                 android:id="@+id/icon_fangkejilu"
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_19"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
                 android:src="@mipmap/myindent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_25"
                 android:layout_toRightOf="@+id/icon_fangkejilu"
                 android:text="我的订单"
                 android:textColor="#333333"
@@ -238,15 +238,15 @@
                 android:id="@+id/icon_baoxiujilu"
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_19"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
                 android:src="@mipmap/visitorrecord" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_25"
                 android:layout_toRightOf="@+id/icon_baoxiujilu"
                 android:text="访客记录"
                 android:textColor="#333333"
@@ -256,7 +256,7 @@
                 android:layout_width="@dimen/dp_12"
                 android:layout_height="@dimen/dp_12"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_15"
                 android:src="@mipmap/next" />
         </RelativeLayout>
@@ -280,15 +280,15 @@
                 android:id="@+id/icon_jiaofeijilu"
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_19"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
                 android:src="@mipmap/repairrecord" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_25"
                 android:layout_toRightOf="@+id/icon_jiaofeijilu"
                 android:text="报修记录"
                 android:textColor="#333333"
@@ -298,7 +298,7 @@
                 android:layout_width="@dimen/dp_12"
                 android:layout_height="@dimen/dp_12"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_15"
                 android:src="@mipmap/next" />
 
@@ -325,15 +325,15 @@
                 android:id="@+id/icon_jfjl"
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_19"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
                 android:src="@mipmap/paymoneyrecord" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_25"
                 android:layout_toRightOf="@+id/icon_jfjl"
                 android:text="缴费记录"
                 android:textColor="#333333"
@@ -343,7 +343,7 @@
                 android:layout_width="@dimen/dp_12"
                 android:layout_height="@dimen/dp_12"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_15"
                 android:src="@mipmap/next" />
 
@@ -368,15 +368,15 @@
                 android:id="@+id/icon_yijianfankui"
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_19"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
                 android:src="@mipmap/feedback" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_25"
                 android:layout_toRightOf="@+id/icon_yijianfankui"
                 android:text="@string/text_yijianfankui"
                 android:textColor="#333333"
@@ -386,7 +386,7 @@
                 android:layout_width="@dimen/dp_12"
                 android:layout_height="@dimen/dp_12"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_15"
                 android:src="@mipmap/next" />
 
@@ -410,15 +410,15 @@
                 android:id="@+id/icon_lianxikefu"
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_19"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
                 android:src="@mipmap/coustomersevice" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_18"
-                android:layout_marginTop="@dimen/dp_25"
                 android:layout_toRightOf="@+id/icon_lianxikefu"
                 android:text="@string/text_lianxikefu"
                 android:textColor="#333333"
@@ -428,7 +428,7 @@
                 android:layout_width="@dimen/dp_12"
                 android:layout_height="@dimen/dp_12"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_15"
                 android:src="@mipmap/next" />
 

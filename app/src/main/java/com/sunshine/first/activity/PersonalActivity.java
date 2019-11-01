@@ -45,8 +45,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
-public class PersonalActivity extends BaseAppCompatActivity{
+/**
+ * 个人资料
+ */
+public class PersonalActivity extends BaseAppCompatActivity {
 
+    @BindView(R.id.icon_back)
+    ImageView iconBack;
     @BindView(R.id.relative_two)
     RelativeLayout relativeTwo;
     @BindView(R.id.relative_three)
@@ -59,8 +64,6 @@ public class PersonalActivity extends BaseAppCompatActivity{
     ImageView myIcon;
     @BindView(R.id.edit_myname)
     EditText editMyname;
-    @BindView(R.id.tv_submit)
-    TextView tvSubmit;
     @BindView(R.id.tv_phonenumber)
     TextView tvPhoneNumber;
 
@@ -71,6 +74,32 @@ public class PersonalActivity extends BaseAppCompatActivity{
     private boolean isImgOne = false;
     private String iconTwo = "";
     private String file;
+
+
+    @Override
+    protected void initView() {
+        setDefaultTitle("个人资料");
+        setRightTitle("完成", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String token = SharePreferenceHelper.getInstance(PersonalActivity.this).getString("token", "");
+                Map<String, String> map = new HashMap<>();
+                map.put("token", token);
+                map.put("photo", iconTwo);
+                String myname = editMyname.getText().toString();
+                map.put("nickname", myname);
+                net(false, false).post(1, Api.UpdateUserInfo_URL, map);
+                Log.i("bbb", "net" + map);
+            }
+        });
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.layout_personziliao;
+    }
+
 
     @Override
     protected void initData() {
@@ -95,20 +124,6 @@ public class PersonalActivity extends BaseAppCompatActivity{
                             }
                         });
 
-            }
-        });
-
-        tvSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String token = SharePreferenceHelper.getInstance(PersonalActivity.this).getString("token", "");
-                Map<String, String> map = new HashMap<>();
-                map.put("token", token);
-                map.put("photo",iconTwo);
-                String myname = editMyname.getText().toString();
-                map.put("nickname", myname);
-                net(false, false).post(1, Api.UpdateUserInfo_URL, map);
-                Log.i("bbb", "net"+map);
             }
         });
 
@@ -187,7 +202,6 @@ public class PersonalActivity extends BaseAppCompatActivity{
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -241,7 +255,7 @@ public class PersonalActivity extends BaseAppCompatActivity{
 //                GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
                 myIcon.setImageURI(uri);
 //                iconOne = path;
-                getUpdateImagePath(myIcon,2);
+                getUpdateImagePath(myIcon, 2);
 
             }
         }
@@ -251,24 +265,25 @@ public class PersonalActivity extends BaseAppCompatActivity{
     private void getUpdateImagePath(ImageView iconOne, int requestCode) {
         try {
             iconOne.setDrawingCacheEnabled(true);
-            Bitmap bitmap=iconOne.getDrawingCache();
+            Bitmap bitmap = iconOne.getDrawingCache();
             file = bitmapToBase64(bitmap);
             HashMap<String, String> map = new HashMap<>();
-            map.put("image",file);
-            map.put("folder","xier");
-            map.put("disk","xier");
-            map.put("isApp","1");
+            map.put("image", file);
+            map.put("folder", "xier");
+            map.put("disk", "xier");
+            map.put("isApp", "1");
 //                    ge(map);
             net(false, false).post(requestCode, Api.UploadImg, map);
 //                    iconHead.setDrawingCacheEnabled(false);
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
     /**
      * bitmap转为base64
+     *
      * @param bitmap
      * @return
      */
@@ -300,18 +315,8 @@ public class PersonalActivity extends BaseAppCompatActivity{
         }
         return result;
     }
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-        setDefaultTitle("个人资料");
-    }
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.layout_personziliao;
-    }
-
-    @OnClick({R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_five})
+    @OnClick({ R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_five})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relative_two:
@@ -329,29 +334,30 @@ public class PersonalActivity extends BaseAppCompatActivity{
 
     private void getImgPath() {
         File file = new File(path);
-        Toast.makeText(this,file.getAbsolutePath(),Toast.LENGTH_SHORT).show();
-        if (isImgOne == true){
+        Toast.makeText(this, file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        if (isImgOne == true) {
             myIcon.setBackground(Drawable.createFromPath(path));
-            Map<String,String> map = new HashMap<>();
-            map.put("isApp","1");
-            map.put("folder","xier");  //错误   这里传入的是楼号的id
-            map.put("disk","xier");  //错误   这里传入的是楼号的id
+            Map<String, String> map = new HashMap<>();
+            map.put("isApp", "1");
+            map.put("folder", "xier");  //错误   这里传入的是楼号的id
+            map.put("disk", "xier");  //错误   这里传入的是楼号的id
 
-            net(false,false).post(2,Api.UploadImg,map);
+            net(false, false).post(2, Api.UploadImg, map);
         }
     }
+
     @Override
     public void success(int type, String data) {
         super.success(type, data);
 
-        if (type==1){
+        if (type == 1) {
 
             Gson gson = new Gson();
             UpdateUserInfoBean updateUserInfoBean = gson.fromJson(data, UpdateUserInfoBean.class);
-            Toast.makeText(PersonalActivity.this,updateUserInfoBean.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(PersonalActivity.this, updateUserInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
-        if (type==2){
+        if (type == 2) {
             Gson gson = new Gson();
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
             iconTwo = uploadImgBean.getData().getImgUrl();

@@ -20,6 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--微信-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+
         <activity android:name=".activity.AddressListActivity" />
         <activity android:name=".activity.PaymentActivity" />
         <activity android:name=".activity.MerchantShopActivity" />
@@ -35,9 +41,9 @@
         </provider>
         -->
         <activity
-            android:theme="@style/NoActionBar"
             android:name=".MainActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@style/NoActionBar" />
         <activity android:name=".Select" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>

@@ -25,8 +25,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/*
-  全部订单
+/**
+ * 全部订单
  */
 public class AllIndentAdapter extends RecyclerView.Adapter<AllIndentAdapter.ViewHolder> {
     private Context context;
@@ -50,28 +50,36 @@ public class AllIndentAdapter extends RecyclerView.Adapter<AllIndentAdapter.View
     @Override
     public void onBindViewHolder(@NonNull AllIndentAdapter.ViewHolder viewHolder, int i) {
         final AllIndentBean.DataBean.ListBean listBean = list.get(i);
-        viewHolder.tvDescript.setText(listBean.getGoods_describe());
-        viewHolder.tvCount.setText(listBean.getGoods_num() + "");
-        viewHolder.tvPrice.setText(listBean.getMoney() + "");
-        Glide.with(context).load(listBean.getGoods_image()).into(viewHolder.iconAllIndent);
-        viewHolder.btnLookdeatilndent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String order_status = listBean.getOrder_status();
-                Intent intent;
-                if ("已关闭".equals(order_status)) {
-                    intent = new Intent(context, OrderCloseActivity.class);
-                } else if ("待付款".equals(order_status)) {
-                    intent = new Intent(context, IntentDetailActivity.class);
-                } else if ("退款".equals(order_status)) {
-                    intent = new Intent(context, OrderRefundActivity.class);
-                } else {//已付款
-                    intent = new Intent(context, OrderPaidActivity.class);
+        if (listBean != null) {
+            viewHolder.tvDescript.setText(listBean.getGoods_describe());
+            viewHolder.tvCount.setText(listBean.getGoods_num() + "");
+            viewHolder.tvPrice.setText(listBean.getMoney() + "");
+            Glide.with(context).load(listBean.getGoods_image()).into(viewHolder.iconAllIndent);
+            viewHolder.btnLookdeatilndent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String order_status = listBean.getOrder_status();
+                    Intent intent;
+                    if ("已关闭".equals(order_status)) {
+                        intent = new Intent(context, OrderCloseActivity.class);
+                    } else if ("待付款".equals(order_status)) {
+                        intent = new Intent(context, IntentDetailActivity.class);
+                    } else if ("退款".equals(order_status)) {
+                        intent = new Intent(context, OrderRefundActivity.class);
+                    } else {//已付款
+                        intent = new Intent(context, OrderPaidActivity.class);
+                    }
+                    intent.putExtra("id", listBean.getId());
+                    context.startActivity(intent);
                 }
-                intent.putExtra("id", listBean.getId());
-                context.startActivity(intent);
-            }
-        });
+            });
+            viewHolder.btn_all_indent_pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    context.startActivity(new Intent(context,));
+                }
+            });
+        }
     }
 
     @Override
@@ -90,6 +98,8 @@ public class AllIndentAdapter extends RecyclerView.Adapter<AllIndentAdapter.View
         ImageView iconAllIndent;
         @BindView(R.id.btn_lookdeatil_indent)
         Button btnLookdeatilndent;
+        @BindView(R.id.btn_all_indent_pay)
+        Button btn_all_indent_pay;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
