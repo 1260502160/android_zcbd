@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,13 +43,7 @@ import butterknife.Unbinder;
 
 public class MyFragment extends BaseFragment {
 
-    @BindView(R.id.icon_zhuhuguanli)
-    ImageView iconZhuhuguanli;
-    @BindView(R.id.icon_carinfo)
-    ImageView iconCarinfo;
 
-    @BindView(R.id.icon_fangzhurenzheng)
-    ImageView iconfangzhurenzheng;
     Unbinder unbinder;
     @BindView(R.id.rel_my_indent)
     RelativeLayout relmyindent;
@@ -70,11 +65,12 @@ public class MyFragment extends BaseFragment {
     TextView textAdmin;
     @BindView(R.id.tv_sf)
     TextView tvSf;
+    @BindView(R.id.linear_my_one)
+    LinearLayout linear_my_one;
+
+
     Unbinder unbinder1;
-    private View inflate;
     private Intent intent;
-    private PopupWindow pop;
-    private Button btn_yes, btn_no;
     private String token;
     private Gson gson;
     private MyInfomationBean myInfomationBean;
@@ -82,44 +78,6 @@ public class MyFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-        iconfangzhurenzheng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popwindow();
-                btn_yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
-                        if (is_verify == 0) {
-                            intent = new Intent(getActivity(), HostmanRenActivity.class);
-                            startActivity(intent);
-                        } else if (is_verify == 1) {
-                            intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
-                            startActivity(intent);
-                        }
-
-
-                    }
-                });
-
-                btn_no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        getActivity().finish();
-
-                    }
-                });
-            }
-        });
-
-        iconfangzhurenzheng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getActivity(), ZhuHuGuanLiActivity.class);
-                startActivity(intent);
-            }
-        });
 
         token = SharePreferenceHelper.getInstance(getContext()).getString("token", "");
         Map<String, String> map = new HashMap<>();
@@ -131,14 +89,6 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 intent = new Intent(getContext(), FeedbackActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        iconZhuhuguanli.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getContext(), UserMangerActivity.class);
                 startActivity(intent);
             }
         });
@@ -162,24 +112,27 @@ public class MyFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.icon_zhuhuguanli, R.id.icon_carinfo, R.id.icon_fangzhurenzheng, R.id.rel_my_indent, R.id.rel_repair_record, R.id.rel_jiaofeijilu, R.id.rel_my_yijianfankui, R.id.rel_my_lianxikefu, R.id.relative_my_one, R.id.rel_visitor_record})
+    @OnClick({R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_one, R.id.rel_my_indent, R.id.rel_repair_record, R.id.rel_jiaofeijilu, R.id.rel_my_yijianfankui, R.id.rel_my_lianxikefu, R.id.relative_my_one, R.id.rel_visitor_record})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_zhuhuguanli:
-
-                /*intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
-                startActivity(intent);*/
+            case R.id.linear_my_two:
+                intent = new Intent(getContext(), UserMangerActivity.class);
+                startActivity(intent);
+                break;
             case R.id.rel_visitor_record:
                 intent = new Intent(getContext(), VisitorRecordActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.icon_carinfo:
+            case R.id.linear_my_three:
                 intent = new Intent(getActivity(), CarInfoActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.icon_fangzhurenzheng:
-                /*intent = new Intent(getActivity(), HostmanRenActivity.class);
-                startActivity(intent);*/
+            case R.id.linear_my_one://房主认证
+                popwindow();
+
+
+//                Intent intent = new Intent(getActivity(), ZhuHuGuanLiActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.rel_my_indent:
                 intent = new Intent(getContext(), MyIndentActivity.class);
@@ -208,9 +161,10 @@ public class MyFragment extends BaseFragment {
     private void popwindow() {
 
         View bottomView = View.inflate(getActivity(), R.layout.dialog_authenticated, null);
-        btn_yes = bottomView.findViewById(R.id.btn_yes);
-        btn_no = bottomView.findViewById(R.id.btn_no);
-        pop = new PopupWindow(bottomView, -1, -2);
+        Button btn_yes = bottomView.findViewById(R.id.btn_yes);
+        Button btn_no = bottomView.findViewById(R.id.btn_no);
+
+        final PopupWindow pop = new PopupWindow(bottomView, -1, -2);
         pop.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         pop.setOutsideTouchable(false);
         pop.setFocusable(true);
@@ -226,8 +180,33 @@ public class MyFragment extends BaseFragment {
                 getActivity().getWindow().setAttributes(lp);
             }
         });
-        pop.setAnimationStyle(R.style.main_menu_photo_anim);
         pop.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
+                if (is_verify == 0) {
+                    intent = new Intent(getActivity(), HostmanRenActivity.class);
+                    startActivity(intent);
+                } else if (is_verify == 1) {
+                    intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
+                    startActivity(intent);
+                }
+                pop.dismiss();
+            }
+        });
+
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pop.dismiss();
+            }
+        });
+        pop.setTouchable(true);
+        pop.setFocusable(true);
+        pop.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
+        pop.showAtLocation(linear_my_one, Gravity.CENTER, 0, 0);
 
     }
 

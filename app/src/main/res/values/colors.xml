@@ -13,6 +13,7 @@
     <color name="blacks">#333</color>
     <color name="grey">#999</color>
     <color name="divider">#ffd2d2d2</color>
+    <color name="cc">#00000000</color>
 
 
 </resources>

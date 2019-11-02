@@ -60,12 +60,12 @@ public class UserMangerActivity extends BaseAppCompatActivity {
                 startActivity(intent);
             }
         });
-        setDefaultTitle("房屋列表");
+
     }
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
+        setDefaultTitle("房屋列表");
     }
 
     @Override

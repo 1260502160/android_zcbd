@@ -53,45 +53,6 @@ public class PayRecordActivity extends BaseAppCompatActivity {
     public void success(int type, String data) {
         super.success(type, data);
         if (type == 1) {
-            data = "{\n" +
-                    "    \"success\": true,\n" +
-                    "    \"error_code\": \"200\",\n" +
-                    "    \"message\": \"获取成功\",\n" +
-                    "    \"data\": {\n" +
-                    "        \"total\": 2,\n" +
-                    "        \"totalPage\": 1,\n" +
-                    "        \"list\": [\n" +
-                    "            {\n" +
-                    "                \"day\": \"09\",\n" +
-                    "                \"list\": [\n" +
-                    "                    {\n" +
-                    "                        \"id\": 1,\n" +
-                    "                        \"created_at\": \"2019-09-20\",\n" +
-                    "                        \"money\": \"112.35\",\n" +
-                    "                        \"order_type\": 1\n" +
-                    "                    },\n" +
-                    "                    {\n" +
-                    "                        \"id\": 3,\n" +
-                    "                        \"created_at\": \"2019-09-01\",\n" +
-                    "                        \"money\": \"280.23\",\n" +
-                    "                        \"order_type\": 1\n" +
-                    "                    }\n" +
-                    "                ]\n" +
-                    "            },\n" +
-                    "            {\n" +
-                    "                \"day\": \"08\",\n" +
-                    "                \"list\": [\n" +
-                    "                    {\n" +
-                    "                        \"id\": 2,\n" +
-                    "                        \"created_at\": \"2019-08-13\",\n" +
-                    "                        \"money\": \"37.30\",\n" +
-                    "                        \"order_type\": 1\n" +
-                    "                    }\n" +
-                    "                ]\n" +
-                    "            }\n" +
-                    "        ]\n" +
-                    "    }\n" +
-                    "}";
             PagRecordBean pagRecordBean = gson.fromJson(data, PagRecordBean.class);
             if (pagRecordBean != null && pagRecordBean.getData() != null) {
                 listBeanXList = pagRecordBean.getData().getList();
@@ -176,17 +137,20 @@ public class PayRecordActivity extends BaseAppCompatActivity {
             } else {
                 payChildHolder = (PayChildHolder) convertView.getTag();
             }
-            PagRecordBean.DataBean.ListBeanX.ListBean listBean = listBeanXList.get(groupPosition).getList().get(childPosition);
-            payChildHolder.tv_money_pay_record_child.setText(listBean.getMoney());
+            final PagRecordBean.DataBean.ListBeanX.ListBean listBean = listBeanXList.get(groupPosition).getList().get(childPosition);
+            if (listBean != null) {
+                payChildHolder.tv_money_pay_record_child.setText(listBean.getMoney());
 //            payChildHolder.tv_title_pay_record_child.setText(listBean.getCreated_at());
-            payChildHolder.tv_time_pay_record_child.setText(listBean.getCreated_at());
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(PayRecordActivity.this, PayDeatilActivity.class);
-                    startActivity(intent);
-                }
-            });
+                payChildHolder.tv_time_pay_record_child.setText(listBean.getCreated_at());
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PayRecordActivity.this, PayDeatilActivity.class);
+                        intent.putExtra("id", listBean.getId());
+                        startActivity(intent);
+                    }
+                });
+            }
             return convertView;
         }
 

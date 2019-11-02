@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_usemanger"
@@ -16,14 +15,13 @@
         android:id="@+id/btn_add_infomation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:background="@drawable/renzheng_shape"
-        android:text="添加住户信息"
-        android:textSize="@dimen/sp_12"
-        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dp_20"
-        />
+        android:background="@drawable/renzheng_shape"
+        android:text="添加住户信息"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/sp_12" />
 
 </RelativeLayout>

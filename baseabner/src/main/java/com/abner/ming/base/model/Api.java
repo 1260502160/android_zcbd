@@ -106,4 +106,6 @@ public class Api {
     public final static String ApplyRefund_URL = BASE_URL + "applyRefund";
     //缴费记录列表
     public final static String GetFinanceList_URL = BASE_URL + "getFinanceList";
+    //缴费记录详情
+    public final static String GetFinanceDetail_URL = BASE_URL + "getFinanceDetail";
 }
