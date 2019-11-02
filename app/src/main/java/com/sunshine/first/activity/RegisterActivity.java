@@ -2,12 +2,14 @@ package com.sunshine.first.activity;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
@@ -49,6 +51,22 @@ public class RegisterActivity extends BaseAppCompatActivity{
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.isEmpty(phone)){
+                    ToastManage.s(RegisterActivity.this,"手机号不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(code)){
+                    ToastManage.s(RegisterActivity.this,"验证码不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(newpass)){
+                    ToastManage.s(RegisterActivity.this,"新密码不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(surepass)){
+                    ToastManage.s(RegisterActivity.this,"请先确认新密码！");
+                    return;
+                }
                 phone = editNum.getText().toString();
                 code = editCode.getText().toString();
                 newpass = editNewpass.getText().toString();
