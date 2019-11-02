@@ -282,6 +282,6 @@
         android:text="再次购买"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
-        android:background="@drawable/shape_red"
+        android:background="@drawable/shape_red_new"
         />
 </RelativeLayout>

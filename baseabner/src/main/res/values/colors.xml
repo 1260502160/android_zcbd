@@ -20,4 +20,9 @@
     <color name="colore89">#e8e9e9</color>
     <color name="colorbdf">#BDF634</color>
     <color name="colorb99">#999999</color>
+
+
+
+    <color name="color_FF0000">#FF0000</color>
+    <color name="color_333333">#333333</color>
 </resources>

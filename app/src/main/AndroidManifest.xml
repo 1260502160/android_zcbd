@@ -100,7 +100,9 @@
         <activity android:name=".activity.ReceiveAddressActivity" />
         <activity android:name=".activity.AddReceviceAddressActivity" />
         <activity android:name=".activity.CarInfoActivity" />
-        <activity android:name=".activity.GoodsDetailActivity" />
+        <activity
+            android:name=".activity.GoodsDetailActivity"
+            android:theme="@style/NoActionBar" />
         <activity android:name=".activity.VisitorInvitationActivity" />
         <activity android:name=".activity.PayTypeActivity" />
         <activity android:name=".activity.FeedbackActivity" />

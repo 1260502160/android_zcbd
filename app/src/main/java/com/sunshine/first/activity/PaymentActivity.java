@@ -68,6 +68,10 @@ public class PaymentActivity extends BaseAppCompatActivity {
     private int pay_type;
     private IWXAPI api;
 
+
+    private int payType = 1; //1零售 2是批发购买
+    private int wholesale_num; //批发数量
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_payment;
@@ -76,12 +80,23 @@ public class PaymentActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         setDefaultTitle("支付");
-        tv_payment_num.setText(num + "");
+
+        wholesale_num = getIntent().getIntExtra("wholesale_num", 1);
+        payType = getIntent().getIntExtra("type", 1);
+        num = wholesale_num;//设置默认数量
+
         retail_price = getIntent().getStringExtra("retail_price");
+
         g_id = getIntent().getStringExtra("g_id");
+
+        tv_payment_num.setText(num + "");
+
         tv_price_payment.setText("¥" + retail_price);
 
+        setPaymentMoney();
+
         api = WXAPIFactory.createWXAPI(this, MyApplication.APP_ID);
+
     }
 
     @Override
@@ -102,10 +117,18 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 setPaymentMoney();
                 break;
             case R.id.tv_payment_jian_count://减数量
-                if (num > 1) {
-                    num--;
-                    tv_payment_num.setText(num + "");
-                    setPaymentMoney();
+                if (payType == 2) {
+                    if (num > wholesale_num) {
+                        num--;
+                        tv_payment_num.setText(num + "");
+                        setPaymentMoney();
+                    }
+                } else {
+                    if (num > 1) {
+                        num--;
+                        tv_payment_num.setText(num + "");
+                        setPaymentMoney();
+                    }
                 }
             case R.id.tv_pay_payment://支付
                 hashMap.clear();
@@ -114,8 +137,9 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 hashMap.put("a_id", addressId + "");//地址id
                 hashMap.put("g_num", num + "");//商品数量
                 hashMap.put("order_money", money + "");//订单金额\
-                // TODO: 2019/10/29 待定
-                hashMap.put("type", "1");//购买类型 1零售2批发
+
+                hashMap.put("type", payType + "");//购买类型 1零售2批发
+
                 pay_type = 1;
                 if (zfpay_check_balance.isChecked()) {
                     pay_type = 2;
