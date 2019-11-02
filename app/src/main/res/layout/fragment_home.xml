@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <com.stx.xhb.xbanner.XBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
@@ -141,13 +146,17 @@
         android:textColor="#FF0000"
         android:textSize="@dimen/sp_14" />
 
+    <RelativeLayout
+        android:layout_below="@+id/tv_hot_store"
+        android:layout_width="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_hot_store"
         android:layout_marginLeft="@dimen/dp_15" />
-
+    </RelativeLayout>
     <ImageView
         android:id="@+id/icon_owner_certification"
         android:layout_width="match_parent"
@@ -207,6 +216,6 @@
             android:layout_marginLeft="@dimen/dp_20"
             />
     </LinearLayout>-->
-
-
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
