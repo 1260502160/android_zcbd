@@ -96,7 +96,7 @@ public class WeChatPaymentBean {
             private String partnerid;
             @SerializedName("package")
             private String packageX;
-            private int timestamp;
+            private String timestamp;
             private String noncestr;
             private String sign;
             private String packages;
@@ -166,11 +166,11 @@ public class WeChatPaymentBean {
                 this.packageX = packageX;
             }
 
-            public int getTimestamp() {
+            public String getTimestamp() {
                 return timestamp;
             }
 
-            public void setTimestamp(int timestamp) {
+            public void setTimestamp(String timestamp) {
                 this.timestamp = timestamp;
             }
 
