@@ -11,7 +11,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abner.ming.base.AbnerApplication;
 import com.abner.ming.base.model.Api;
 import com.abner.ming.base.utils.Logger;
 import com.alipay.sdk.app.PayTask;
@@ -67,6 +66,11 @@ public class PaymentActivity extends BaseAppCompatActivity {
     private String retail_price, g_id;
     private double money;
     private int pay_type;
+    private IWXAPI api;
+
+
+    private int payType = 1; //1零售 2是批发购买
+    private int wholesale_num; //批发数量
 
     @Override
     public int getLayoutId() {
@@ -76,10 +80,23 @@ public class PaymentActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         setDefaultTitle("支付");
-        tv_payment_num.setText(num + "");
+
+        wholesale_num = getIntent().getIntExtra("wholesale_num", 1);
+        payType = getIntent().getIntExtra("type", 1);
+        num = wholesale_num;//设置默认数量
+
         retail_price = getIntent().getStringExtra("retail_price");
+
         g_id = getIntent().getStringExtra("g_id");
+
+        tv_payment_num.setText(num + "");
+
         tv_price_payment.setText("¥" + retail_price);
+
+        setPaymentMoney();
+
+        api = WXAPIFactory.createWXAPI(this, MyApplication.APP_ID);
+
     }
 
     @Override
@@ -100,10 +117,18 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 setPaymentMoney();
                 break;
             case R.id.tv_payment_jian_count://减数量
-                if (num > 1) {
-                    num--;
-                    tv_payment_num.setText(num + "");
-                    setPaymentMoney();
+                if (payType == 2) {
+                    if (num > wholesale_num) {
+                        num--;
+                        tv_payment_num.setText(num + "");
+                        setPaymentMoney();
+                    }
+                } else {
+                    if (num > 1) {
+                        num--;
+                        tv_payment_num.setText(num + "");
+                        setPaymentMoney();
+                    }
                 }
             case R.id.tv_pay_payment://支付
                 hashMap.clear();
@@ -112,8 +137,9 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 hashMap.put("a_id", addressId + "");//地址id
                 hashMap.put("g_num", num + "");//商品数量
                 hashMap.put("order_money", money + "");//订单金额\
-                // TODO: 2019/10/29 待定
-                hashMap.put("type", "1");//购买类型 1零售2批发
+
+                hashMap.put("type", payType + "");//购买类型 1零售2批发
+
                 pay_type = 1;
                 if (zfpay_check_balance.isChecked()) {
                     pay_type = 2;
@@ -206,63 +232,23 @@ public class PaymentActivity extends BaseAppCompatActivity {
                             //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
                             req.appId = json.getString("appid");
                             req.partnerId = json.getString("partnerid");
-                            req.prepayId = json.getString("prepay_id");
+                            req.prepayId = json.getString("prepayid");
                             req.nonceStr = json.getString("noncestr");
                             req.timeStamp = json.getString("timestamp");
-                            req.packageValue = json.getString("package");
+//                            req.packageValue = json.getString("package");
+                            req.packageValue = "Sign=WXPay";
                             req.sign = json.getString("sign");
-                            req.extData = "app data"; // optional
+//                            req.extData = "app data"; // optional
                             Toast.makeText(PaymentActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
                             // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                            MyApplication.mWxApi.sendReq(req);
+                            api.sendReq(req);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
-//                    //假装请求了服务端信息，并获取了appid、partnerId、prepayId
-//                    WXPayUtils.WXPayBuilder builder = new WXPayUtils.WXPayBuilder();
-//                    builder.setAppId("123")
-//                            .setPartnerId("213")
-//                            .setPrepayId("3213")
-//                            .setPackageValue("Sign=WXPay")
-//                            .build()
-//                            .toWXPayAndSign(PaymentActivity.this,"123","key");
-
-
-//需要一个注册微信支付的APPID
-////                    MyApplication.mWxApi = WXAPIFactory.createWXAPI(PaymentActivity.this, MyApplication.APP_ID);
-//                    PayReq req = new PayReq();
-//                    req.appId = MyApplication.APP_ID;
-////                    req.appId = data1.getAppid();
-//                    req.partnerId = data1.getPartnerid();
-//                    req.prepayId = data1.getPrepay_id();
-//                    req.nonceStr = data1.getNoncestr();
-//                    req.timeStamp = data1.getTimestamp() + "";
-//                    req.packageValue = data1.getPackages();
-//                    req.sign = data1.getSign();
-//                    MyApplication.mWxApi.sendReq(req); //这里就发起调用微信支付了
                 }
             }
-
-
-//            JSONObject json = null;
-//            try {
-//                json = new JSONObject(content);
-//                PayReq req = new PayReq();
-//                req.appId = json.getString("appid");
-//                req.partnerId = json.getString("partnerid");
-//                req.prepayId = json.getString("prepayid");
-//                req.nonceStr = json.getString("noncestr");
-//                req.timeStamp = json.getString("timestamp");
-//                req.packageValue = json.getString("package");
-//                req.sign = json.getString("sign");
-//                api.sendReq(req); //这里就发起调用微信支付了
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-
         }
     }
 

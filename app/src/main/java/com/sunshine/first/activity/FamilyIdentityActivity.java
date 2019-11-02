@@ -54,15 +54,12 @@ import io.reactivex.functions.Consumer;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+/**
+ * 身份认证
+ */
 public class FamilyIdentityActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
-    @BindView(R.id.text_forget)
-    TextView textForget;
-    @BindView(R.id.relative_change)
-    RelativeLayout relativeChange;
     @BindView(R.id.text_name)
     TextView textName;
     @BindView(R.id.tv_name)
@@ -139,87 +136,14 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
     private String relationship;
 
     @Override
-    protected void initData() {
-
-        btnSubmit.setOnClickListener(this);
-        relationship = getIntent().getStringExtra("relationship");
-        //tvChooseRelation.setText(relationship);
-        if ("房主".equals(relationship)) {
-
-            cc = 1;
-
-        } else if ("租客".equals(relationship)) {
-
-            cc = 2;
-        }
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_submit:
-                OwnerVerifyBean ownerVerifyBean = (OwnerVerifyBean) getIntent().getSerializableExtra("ownerVerifyBean");
-                int building_id = ownerVerifyBean.getBuilding_id();
-                int community_id = ownerVerifyBean.getCommunity_id();
-                int floors_id = ownerVerifyBean.getFloors_id();
-                int houses_id = ownerVerifyBean.getHouses_id();
-                int unitdoor_id = ownerVerifyBean.getUnitdoor_id();
-                String tokens = ownerVerifyBean.getToken();
-                String token = SharePreferenceHelper.getInstance(this).getString("token", "");
-                Log.i("tokens", token);
-
-                String name = tvName.getText().toString();
-                String sex = tvSex.getText().toString();
-
-                if (sex.equals("男")) {
-                    aa = 0;
-                } else if (sex.equals("女")) {
-                    aa = 1;
-                }
-                String phoneNumber = tvPhoneNumber.getText().toString();
-
-                String IDNumber = tvIDNumber.getText().toString();
-                CheckBean checkBean = new CheckBean();
-                checkBean.setBuilding_id(building_id + "");
-                checkBean.setCard_img_a(iconOne);
-                checkBean.setCard_img_b(iconTwo);
-                checkBean.setFace_recognition(iconThree);
-                checkBean.setIdentity_card_number(IDNumber);
-                checkBean.setResidents_mobile(phoneNumber);
-                checkBean.setResidents_name(name);
-                checkBean.setType(cc + "");
-                checkBean.setHouses_id(houses_id + "");
-                checkBean.setFloors_id(floors_id + "");
-                checkBean.setUnitdoor_id(unitdoor_id + "");
-                checkBean.setCommunity_id(community_id + "");
-                checkBean.setToken(token);
-                checkBean.setSex(aa + "");
-                RequestBody body = (RequestBody) buildRequestBody(checkBean);
-                if (cc == 2)
-                    net(false, false).post(4, Api.OwnerVerify_URL, body);
-                else
-                    net(false, false).post(5, Api.Add_Residents, body);
-                break;
-        }
-    }
-
-    public static RequestBody buildRequestBody(Object object) {
-        Gson gson = new Gson();
-        String jsonData = gson.toJson(object);
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonData);
-        return body;
+    public int getLayoutId() {
+        return R.layout.layout_family_identity;
     }
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
-        iconBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        setDefaultTitle("身份认证");
+
         relSex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -335,10 +259,80 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
 
     }
 
+
     @Override
-    public int getLayoutId() {
-        return R.layout.layout_family_identity;
+    protected void initData() {
+
+        btnSubmit.setOnClickListener(this);
+        relationship = getIntent().getStringExtra("relationship");
+        //tvChooseRelation.setText(relationship);
+        if ("房主".equals(relationship)) {
+
+            cc = 1;
+
+        } else if ("租客".equals(relationship)) {
+
+            cc = 2;
+        }
     }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_submit:
+                OwnerVerifyBean ownerVerifyBean = (OwnerVerifyBean) getIntent().getSerializableExtra("ownerVerifyBean");
+                int building_id = ownerVerifyBean.getBuilding_id();
+                int community_id = ownerVerifyBean.getCommunity_id();
+                int floors_id = ownerVerifyBean.getFloors_id();
+                int houses_id = ownerVerifyBean.getHouses_id();
+                int unitdoor_id = ownerVerifyBean.getUnitdoor_id();
+                String tokens = ownerVerifyBean.getToken();
+                String token = SharePreferenceHelper.getInstance(this).getString("token", "");
+                Log.i("tokens", token);
+
+                String name = tvName.getText().toString();
+                String sex = tvSex.getText().toString();
+
+                if (sex.equals("男")) {
+                    aa = 0;
+                } else if (sex.equals("女")) {
+                    aa = 1;
+                }
+                String phoneNumber = tvPhoneNumber.getText().toString();
+
+                String IDNumber = tvIDNumber.getText().toString();
+                CheckBean checkBean = new CheckBean();
+                checkBean.setBuilding_id(building_id + "");
+                checkBean.setCard_img_a(iconOne);
+                checkBean.setCard_img_b(iconTwo);
+                checkBean.setFace_recognition(iconThree);
+                checkBean.setIdentity_card_number(IDNumber);
+                checkBean.setResidents_mobile(phoneNumber);
+                checkBean.setResidents_name(name);
+                checkBean.setType(cc + "");
+                checkBean.setHouses_id(houses_id + "");
+                checkBean.setFloors_id(floors_id + "");
+                checkBean.setUnitdoor_id(unitdoor_id + "");
+                checkBean.setCommunity_id(community_id + "");
+                checkBean.setToken(token);
+                checkBean.setSex(aa + "");
+                RequestBody body = (RequestBody) buildRequestBody(checkBean);
+                if (cc == 2)
+                    net(false, false).post(4, Api.OwnerVerify_URL, body);
+                else
+                    net(false, false).post(5, Api.Add_Residents, body);
+                break;
+        }
+    }
+
+    public static RequestBody buildRequestBody(Object object) {
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(object);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonData);
+        return body;
+    }
+
 
     //弹出框的内容
     private void popwindow(final int pos) {

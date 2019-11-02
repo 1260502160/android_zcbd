@@ -48,10 +48,11 @@ import io.reactivex.functions.Consumer;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+/**
+ * 意见反馈
+ */
 public class FeedbackActivity extends BaseAppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.icon_feedback_add)
     ImageView iconFeedbackAdd;
     @BindView(R.id.text_feedback_number)
@@ -69,13 +70,17 @@ public class FeedbackActivity extends BaseAppCompatActivity {
     private String file;
 
     @Override
+    protected void initView() {
+        setDefaultTitle("意见反馈");
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_advice;
+    }
+
+    @Override
     protected void initData() {
-        iconBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         iconFeedbackAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,17 +311,6 @@ public class FeedbackActivity extends BaseAppCompatActivity {
         }
     }
 
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_advice;
-    }
-
 
     class TextWatcher implements android.text.TextWatcher {
 
@@ -346,11 +340,11 @@ public class FeedbackActivity extends BaseAppCompatActivity {
         } else if (type == 1) {
             Gson gson = new Gson();
             AddFeedBackBean addFeedBackBean = gson.fromJson(data, AddFeedBackBean.class);
-            if ("200".equals(addFeedBackBean.getError_code())){
+            if ("200".equals(addFeedBackBean.getError_code())) {
                 finish();
             }
             Toast.makeText(FeedbackActivity.this, addFeedBackBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
-        }else if (type == 2){
+        } else if (type == 2) {
             Gson gson = new Gson();
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
             iconTwo = uploadImgBean.getData().getImgUrl();

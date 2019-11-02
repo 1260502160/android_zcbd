@@ -92,7 +92,7 @@ public class WeChatPaymentBean {
             private String token;
             private String s;
             private String appid;
-            private String prepay_id;
+            private String prepayid;
             private String partnerid;
             @SerializedName("package")
             private String packageX;
@@ -143,11 +143,11 @@ public class WeChatPaymentBean {
             }
 
             public String getPrepay_id() {
-                return prepay_id;
+                return prepayid;
             }
 
             public void setPrepay_id(String prepay_id) {
-                this.prepay_id = prepay_id;
+                this.prepayid = prepay_id;
             }
 
             public String getPartnerid() {
