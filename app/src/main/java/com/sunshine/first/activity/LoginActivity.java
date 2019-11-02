@@ -10,13 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abner.ming.base.utils.Logger;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
 import com.sunshine.first.MainActivity;
 import com.sunshine.first.R;
+import com.sunshine.first.application.MyApplication;
 import com.sunshine.first.bean.LoginBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +56,6 @@ public class LoginActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
         btn_login = (Button) get(R.id.btn_login);
 
         if (!TextUtils.isEmpty(getToken())) {
@@ -136,10 +141,30 @@ public class LoginActivity extends BaseAppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.icon_wechat:
-               /* SendAuth.Req req = new SendAuth.Req();
-                req.scope = "snsapi_userinfo";
-                req.state = "wechat_sdk_demo_test";
-                api.sendReq(req);*/
+                if (MyApplication.mWxApi != null) {
+                    MyApplication.mWxApi = null;
+                }
+
+                MyApplication.mWxApi = WXAPIFactory.createWXAPI(this, MyApplication.APP_ID, true);
+                MyApplication.mWxApi.registerApp(MyApplication.APP_ID);
+
+                if (MyApplication.mWxApi.isWXAppInstalled()) {
+                    SendAuth.Req req = new SendAuth.Req();
+                    req.scope = "snsapi_userinfo";
+//                    req.state = "wechat_sdk_微信登录"
+                    req.state = "chenbund123";
+                    boolean result = MyApplication.mWxApi.sendReq(req);
+                    Logger.d("aaaa", result + "发起认证");
+                } else {
+                    ToastManage.s(this, "微信未安装");
+                }
+
+//                // 通过WXAPIFactory工厂，获取IWXAPI的实例
+//                IWXAPI api = WXAPIFactory.createWXAPI(this, MyApplication.APP_ID, true);
+//                SendAuth.Req req = new SendAuth.Req();
+//                req.scope = "snsapi_userinfo";
+//                req.state = "zhongchengbeidou111";
+//                api.sendReq(req);
                 break;
         }
     }

@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.abner.ming.base.AbnerApplication;
 import com.abner.ming.base.model.Api;
 import com.abner.ming.base.utils.Logger;
 import com.alipay.sdk.app.PayTask;
@@ -21,6 +23,7 @@ import com.sunshine.first.bean.WeChatPaymentBean;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -192,20 +195,54 @@ public class PaymentActivity extends BaseAppCompatActivity {
             WeChatPaymentBean weChatPaymentBean = gson.fromJson(data, WeChatPaymentBean.class);
             if (weChatPaymentBean != null && weChatPaymentBean.getData() != null) {
                 WeChatPaymentBean.DataBeanX beanData = weChatPaymentBean.getData();
-                WeChatPaymentBean.DataBeanX.DataBean data1 = beanData.getData();
-                if (data1 != null) {
+                WeChatPaymentBean.DataBeanX.DataBean dataData = beanData.getData();
+                String jsonWeChat = gson.toJson(dataData);
+                if (!TextUtils.isEmpty(jsonWeChat)) {
+                    JSONObject json = null;
+                    try {
+                        json = new JSONObject(jsonWeChat);
+                        if (null != json && !json.has("retcode")) {
+                            PayReq req = new PayReq();
+                            //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
+                            req.appId = json.getString("appid");
+                            req.partnerId = json.getString("partnerid");
+                            req.prepayId = json.getString("prepay_id");
+                            req.nonceStr = json.getString("noncestr");
+                            req.timeStamp = json.getString("timestamp");
+                            req.packageValue = json.getString("package");
+                            req.sign = json.getString("sign");
+                            req.extData = "app data"; // optional
+                            Toast.makeText(PaymentActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
+                            // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                            MyApplication.mWxApi.sendReq(req);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+//                    //假装请求了服务端信息，并获取了appid、partnerId、prepayId
+//                    WXPayUtils.WXPayBuilder builder = new WXPayUtils.WXPayBuilder();
+//                    builder.setAppId("123")
+//                            .setPartnerId("213")
+//                            .setPrepayId("3213")
+//                            .setPackageValue("Sign=WXPay")
+//                            .build()
+//                            .toWXPayAndSign(PaymentActivity.this,"123","key");
+
 
 //需要一个注册微信支付的APPID
-                    IWXAPI api = WXAPIFactory.createWXAPI(PaymentActivity.this, MyApplication.APP_ID);
-                    PayReq req = new PayReq();
-                    req.appId = data1.getAppid();
-                    req.partnerId = data1.getPartnerid();
-                    req.prepayId = data1.getPrepay_id();
-                    req.nonceStr = data1.getNoncestr();
-                    req.timeStamp = data1.getTimestamp() + "";
-                    req.packageValue = data1.getPackages();
-                    req.sign = data1.getSign();
-                    api.sendReq(req); //这里就发起调用微信支付了
+////                    MyApplication.mWxApi = WXAPIFactory.createWXAPI(PaymentActivity.this, MyApplication.APP_ID);
+//                    PayReq req = new PayReq();
+//                    req.appId = MyApplication.APP_ID;
+////                    req.appId = data1.getAppid();
+//                    req.partnerId = data1.getPartnerid();
+//                    req.prepayId = data1.getPrepay_id();
+//                    req.nonceStr = data1.getNoncestr();
+//                    req.timeStamp = data1.getTimestamp() + "";
+//                    req.packageValue = data1.getPackages();
+//                    req.sign = data1.getSign();
+//                    MyApplication.mWxApi.sendReq(req); //这里就发起调用微信支付了
                 }
             }
 
