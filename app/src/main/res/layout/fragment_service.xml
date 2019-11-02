@@ -79,7 +79,7 @@
                 <ImageView
                     android:id="@+id/icon_payment_center"
                     android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/icon_repair" />
 
                 <TextView

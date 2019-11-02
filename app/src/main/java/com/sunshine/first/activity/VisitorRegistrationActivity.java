@@ -20,7 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.bigkoo.pickerview.TimePickerView;
 import com.google.gson.Gson;
@@ -30,6 +29,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.HouseListBean;
 import com.sunshine.first.bean.UploadImgBean;
@@ -47,7 +47,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
@@ -193,13 +192,13 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 map.put("floors_id",1+"");
                 map.put("houses_id",27+"");*/
 
-                visitorBean.setToken("a597b578d3255c8cfdacbb061d229522");
-                visitorBean.setHouses_id("27");
-                visitorBean.setFloors_id("1");
-                visitorBean.setBuilding_id("1");
-                visitorBean.setUnitdoor_id("10");
-                visitorBean.setCommunity_id("1");
-                visitorBean.setVisi_imgs("http://47.93.50.224/storage/xier/ccb2eb682bccb871b2e704b8f9cccd972565.jpg");
+                visitorBean.setToken(token);
+                visitorBean.setHouses_id(houses_id+"");
+                visitorBean.setFloors_id(floors_id+"");
+                visitorBean.setBuilding_id(building_id+"");
+                visitorBean.setUnitdoor_id(unitdoor_id+"");
+                visitorBean.setCommunity_id(community_id+"");
+                visitorBean.setVisi_imgs(iconTwo);
                 visitorBean.setCar_num(carone + cartwo + carthree + carfour + carfive + carsix + carseven + careight + carnine);
                 visitorBean.setTime(time);
                 visitorBean.setVisi_name(name);
