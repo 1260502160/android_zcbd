@@ -42,8 +42,6 @@ public class LoginActivity extends BaseAppCompatActivity {
     TextView textForgetpass;
     @BindView(R.id.text_register)
     TextView textRegister;
-    @BindView(R.id.icon_wechat)
-    ImageView iconWechat;
     private Intent intent;
     private String editphone;
     private String editpassword;
