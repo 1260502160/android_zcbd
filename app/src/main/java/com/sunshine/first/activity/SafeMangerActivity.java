@@ -7,16 +7,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SafeMangerActivity extends AppCompatActivity {
+public class SafeMangerActivity extends BaseAppCompatActivity{
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.relative_phone_number)
     RelativeLayout relativephonenumber;
     @BindView(R.id.relative_safe_password)
@@ -24,18 +23,26 @@ public class SafeMangerActivity extends AppCompatActivity {
     private Intent intent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_safe_manger);
-        ButterKnife.bind(this);
+    public int getLayoutId() {
+        return R.layout.activity_safe_manger;
     }
 
-    @OnClick({R.id.icon_back, R.id.relative_phone_number, R.id.relative_safe_password})
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+        setDefaultTitle("安全");
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+
+    @OnClick({R.id.relative_phone_number, R.id.relative_safe_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
+
             case R.id.relative_phone_number:
                 intent = new Intent(SafeMangerActivity.this, PhoneNumeberActivity.class);
                 startActivity(intent);

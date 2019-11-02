@@ -104,15 +104,19 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
                 finish();
                 break;
             case R.id.btn_forget_yancode:
-                intent = new Intent(this, MerchantShopActivity.class);
-                intent.putExtra("m_id", goodsDeatilBean.getData().getM_id());
-                startActivity(intent);
+                if (goodsDeatilBean != null) {
+                    intent = new Intent(this, MerchantShopActivity.class);
+                    intent.putExtra("m_id", goodsDeatilBean.getData().getM_id());
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_singleton_goods_details:
-                intent = new Intent(this, PaymentActivity.class);
-                intent.putExtra("retail_price", goodsDeatilBean.getData().getRetail_price() + "");
-                intent.putExtra("g_id", goodsDeatilBean.getData().getId() + "");
-                startActivity(intent);
+                if (goodsDeatilBean != null) {
+                    intent = new Intent(this, PaymentActivity.class);
+                    intent.putExtra("retail_price", goodsDeatilBean.getData().getRetail_price() + "");
+                    intent.putExtra("g_id", goodsDeatilBean.getData().getId() + "");
+                    startActivity(intent);
+                }
                 break;
         }
     }

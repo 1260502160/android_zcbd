@@ -33,6 +33,7 @@ public class SubmitSuccActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("提交成功");
     }
 
     @Override
@@ -45,10 +46,9 @@ public class SubmitSuccActivity extends BaseAppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_lookdeail:
-
                 break;
             case R.id.btn_homeback:
-                finish();
+                 finish();
                 break;
         }
     }

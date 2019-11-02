@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sunshine.first.R;
+import com.sunshine.first.activity.BaoLookDeatilActivity;
+import com.sunshine.first.activity.RepairActivity;
 import com.sunshine.first.bean.GetRepairListBean;
 
 import java.util.List;
@@ -42,7 +44,7 @@ public class RepairAllAdapter extends RecyclerView.Adapter<RepairAllAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder,final int i) {
 
         final GetRepairListBean.DataBean.ListBean dataBean = repairListBeanData.get(i);
         if (dataBean!=null){
@@ -53,6 +55,23 @@ public class RepairAllAdapter extends RecyclerView.Adapter<RepairAllAdapter.View
                 @Override
                 public void onClick(View view) {
 
+                    Intent intent = new Intent(context, BaoLookDeatilActivity.class);
+                    intent.putExtra("id",dataBean.getId());
+                    intent.putExtra("descrip",dataBean.getExplain());
+                    intent.putExtra("time",dataBean.getRepair_time());
+                    intent.putExtra("image",dataBean.getImg_url());
+                    //intent.putExtra("name",dataBean.)
+                    //intent.putExtra("phone",dataBean.get)
+
+                    context.startActivity(intent);
+                }
+            });
+
+            viewHolder.btnAgainRepari.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, RepairActivity.class);
+                    context.startActivity(intent);
                 }
             });
 
@@ -75,9 +94,14 @@ public class RepairAllAdapter extends RecyclerView.Adapter<RepairAllAdapter.View
         ImageView iconAllIndent;
         @BindView(R.id.btn_lookdeatil)
         Button btnLookDeatil;
+        @BindView(R.id.btn_again_repari)
+        Button btnAgainRepari;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
+
+
 }

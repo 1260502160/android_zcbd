@@ -34,6 +34,7 @@ public class PropertyChargesActivity extends BaseAppCompatActivity{
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("物业费缴纳");
     }
 
     @Override

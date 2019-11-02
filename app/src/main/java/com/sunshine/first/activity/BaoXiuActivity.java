@@ -74,6 +74,8 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     RelativeLayout rePhone;
     @BindView(R.id.text_time)
     TextView text_time;
+    @BindView(R.id.text_repair_record)
+    TextView textRepairRecord;
     @BindView(R.id.tv_address)
     TextView tvAddress;
     @BindView(R.id.tv_times)
@@ -151,6 +153,13 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
         });
 
 
+        textRepairRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BaoXiuActivity.this, RepairRecordActivity.class);
+                startActivity(intent);
+            }
+        });
         btnbaoxiusubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

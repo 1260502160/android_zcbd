@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
+import com.sunshine.first.adapter.RepairAllAdapter;
 import com.sunshine.first.bean.CancelRepairBean;
 import com.sunshine.first.bean.ReapirDeatilBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
@@ -23,10 +24,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 报修订单详情
+ */
 public class BaoLookDeatilActivity extends BaseAppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.btn_cancel)
     Button btnCancel;
     @BindView(R.id.tv_repari_descrip)
@@ -45,10 +47,11 @@ public class BaoLookDeatilActivity extends BaseAppCompatActivity {
     @Override
     protected void initData() {
 
+        int id = getIntent().getIntExtra("id", -1);
         String token = SharePreferenceHelper.getInstance(BaoLookDeatilActivity.this).getString("token", "");
         HashMap<String, String> map = new HashMap<>();
         map.put("token", token);
-        map.put("id", "1");
+        map.put("id",id+"");
         net(false, false).post(1, Api.GetRepairDetail_URL, map);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,7 @@ public class BaoLookDeatilActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("报修订单详情");
     }
 
     @Override
@@ -73,12 +77,9 @@ public class BaoLookDeatilActivity extends BaseAppCompatActivity {
         return R.layout.activity_repairs_detail;
     }
 
-    @OnClick({R.id.icon_back, R.id.btn_cancel})
+    @OnClick({R.id.btn_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.btn_cancel:
 
                 break;

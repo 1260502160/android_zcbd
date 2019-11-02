@@ -144,13 +144,12 @@
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_15"
             android:textColor="#333333"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_16"
             />
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dizhi"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_55"
             android:textColor="#333333"
@@ -188,7 +187,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_16"
                 />
 
             <TextView
@@ -196,6 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="请选择"
+                android:textSize="@dimen/sp_16"
                 android:background="@null"
                 android:textColor="@color/grey"
                 android:layout_alignParentRight="true"
@@ -234,13 +234,12 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:textColor="#333333"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_16"
                 />
             <EditText
                 android:id="@+id/edit_names"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="丁一"
                 android:background="@null"
                 android:layout_marginLeft="@dimen/dp_55"
                 android:textColor="#333333"
@@ -286,7 +285,6 @@
                 android:id="@+id/edit_phones"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="13112341234"
                 android:background="@null"
                 android:layout_marginLeft="@dimen/dp_55"
                 android:textColor="#333333"
@@ -312,14 +310,14 @@
     <Button
         android:id="@+id/btn_baoxiu_submit"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
+        android:layout_height="@dimen/dp_45"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dp_10"
         android:background="@drawable/renzheng_shape"
         android:text="@string/btn_submit"
         android:textSize="@dimen/sp_12"
         android:textColor="#ffffff"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
         />
 </RelativeLayout>

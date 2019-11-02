@@ -8,16 +8,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+/*
+*设置
+ */
+public class SettingActivity extends BaseAppCompatActivity{
 
-public class SettingActivity extends AppCompatActivity {
-
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.btn_back)
     Button btnBack;
     @BindView(R.id.relative_setting_safe)
@@ -31,18 +32,25 @@ public class SettingActivity extends AppCompatActivity {
     private Intent intent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-        ButterKnife.bind(this);
+    public int getLayoutId() {
+        return R.layout.activity_setting;
     }
 
-    @OnClick({R.id.icon_back, R.id.relative_setting_safe, R.id.relative_setting_qchc, R.id.relative_setting_banbengengxin, R.id.relative_setting_aboutus, R.id.btn_back})
+    @Override
+    protected void initView() {
+        ButterKnife.bind(this);
+        setDefaultTitle("设置");
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+
+    @OnClick({R.id.relative_setting_safe, R.id.relative_setting_qchc, R.id.relative_setting_banbengengxin, R.id.relative_setting_aboutus, R.id.btn_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.btn_back:
                 finish();
                 break;
