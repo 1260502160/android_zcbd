@@ -23,15 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class StopCarPayTypeActivity extends BaseAppCompatActivity {
-
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
-    @BindView(R.id.text_forget)
-    TextView textForget;
-    @BindView(R.id.relative_change)
-    RelativeLayout relativeChange;
-    @BindView(R.id.view_fangzhurenzheng_one)
-    View viewFangzhurenzhengOne;
     @BindView(R.id.text_carnumber)
     TextView textCarnumber;
     @BindView(R.id.view_stopcar_one)
@@ -69,16 +60,11 @@ public class StopCarPayTypeActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("支付方式");
     }
 
     @Override
     protected void initData() {
-        iconBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         carnumber = getIntent().getIntExtra("carnumber", -1);
         cycle = getIntent().getIntExtra("cycle", -1);
         btnRightpay.setOnClickListener(new View.OnClickListener() {

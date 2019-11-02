@@ -1,5 +1,6 @@
 package com.sunshine.first.activity;
 
+import android.content.Intent;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
@@ -14,15 +15,11 @@ import com.sunshine.first.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 在线报修
+ */
 public class RepairActivity extends BaseAppCompatActivity {
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
-    @BindView(R.id.text_forget)
-    TextView textForget;
-    @BindView(R.id.text_repair_record)
-    TextView textRepairRecord;
-    @BindView(R.id.relative_change)
-    RelativeLayout relativeChange;
+
     @BindView(R.id.tv_descrip)
     TextView tvDescrip;
     @BindView(R.id.edit_descrip)
@@ -39,8 +36,6 @@ public class RepairActivity extends BaseAppCompatActivity {
     TextView textTime;
     @BindView(R.id.rela_time)
     RelativeLayout relaTime;
-    @BindView(R.id.view_lianxiren)
-    View viewLianxiren;
     @BindView(R.id.re_lianxiren)
     RelativeLayout reLianxiren;
     @BindView(R.id.icon_phone_next)
@@ -53,12 +48,6 @@ public class RepairActivity extends BaseAppCompatActivity {
     @Override
     protected void initData() {
 
-        iconBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         editDescrip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +62,14 @@ public class RepairActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("在线报修");
+        setRightTitle("报修记录", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RepairActivity.this, RepairRecordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -18,10 +18,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 更换手机号
+ */
 public class PhoneNumeberActivity extends BaseAppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.edit_new_phone)
     EditText editNewPhone;
     @BindView(R.id.edit_code)
@@ -41,6 +42,7 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
     protected void initView() {
 
         ButterKnife.bind(this);
+        setDefaultTitle("更换手机号");
     }
 
     @Override
@@ -48,12 +50,9 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
         return R.layout.layout_changephone;
     }
 
-    @OnClick({R.id.icon_back, R.id.edit_new_phone, R.id.edit_code, R.id.btn_huo_code, R.id.btn_submit})
+    @OnClick({R.id.edit_new_phone, R.id.edit_code, R.id.btn_huo_code, R.id.btn_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.edit_new_phone:
                 break;
             case R.id.edit_code:

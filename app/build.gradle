@@ -23,7 +23,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             signingConfig signingConfigs.debug
         }
     }
@@ -38,7 +38,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // 添加下面的内容 支付宝支付
-    implementation (name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
+    implementation(name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
 
     //微信支付SDK
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
@@ -76,7 +76,6 @@ dependencies {
     implementation 'com.android.support:cardview-v7:25.2.0'
     //框架
     implementation project(':baseabner')
-
 
     //多图
 //    implementation 'com.zhihu.android:matisse:$latest_version'

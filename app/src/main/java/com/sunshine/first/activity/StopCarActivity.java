@@ -1,57 +1,64 @@
 package com.sunshine.first.activity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.fragment.FixCarFragment;
 import com.sunshine.first.fragment.LinShiCarFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /*
 停车费
  */
-public class StopCarActivity extends AppCompatActivity {
-    private ViewPager viewPager;
-    private ImageView iconback,iv_line1,iv_line2;
-    private RadioGroup radiogroup;
-    private RadioButton circle_recommend,circle_attention;
+public class StopCarActivity extends BaseAppCompatActivity {
+    @BindView(R.id.tab_stopcar)
+    TabLayout tabStopcar;
+    @BindView(R.id.circle_fragment_viewpager)
+    ViewPager circleFragmentViewpager;
 
     //写一个List集合，把每个页面，也就是Fragment,存进去
     private List<Fragment> list;
+    private List<String> title;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stop_car);
-        //实例化
-        viewPager = (ViewPager) findViewById(R.id.circle_fragment_viewpager);
-        iconback = (ImageView) findViewById(R.id.icon_back);
-        radiogroup = (RadioGroup) findViewById(R.id.circle_radiogroup);
+    public int getLayoutId() {
+        return R.layout.activity_stop_car;
+    }
 
-        circle_recommend = findViewById(R.id.circle_recommend);
-        circle_attention = findViewById(R.id.circle_attention);
-        iv_line1=findViewById(R.id.iv_line1);
-        iv_line2=findViewById(R.id.iv_line2);
-        iconback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+    @Override
+    protected void initView() {
 
-        //页面，数据源，里面是创建的三个页面（Fragment）
+        ButterKnife.bind(this);
+        setDefaultTitle("停车费");
+    }
+
+    @Override
+    protected void initData() {
+        title = new ArrayList<>();
+        title.add("固定车位");
+        title.add("临时停车");
         list = new ArrayList<>();
         list.add(new FixCarFragment());
         list.add(new LinShiCarFragment());
-        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+        circleFragmentViewpager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
                 return list.get(i);
@@ -61,54 +68,21 @@ public class StopCarActivity extends AppCompatActivity {
             public int getCount() {
                 return list.size();
             }
-        });
-        viewPager.setCurrentItem(0);
-        onTabViewSelected(0  );
-        radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.circle_recommend:
-                        circle_recommend.setTextColor(getResources().getColor(R.color.black));
-                        circle_attention.setTextColor(getResources().getColor(R.color.transparent));
-                        viewPager.setCurrentItem(0);
-                        onTabViewSelected(0);
-                        break;
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                super.destroyItem(container, position, object);
+            }
 
-                    case R.id.circle_attention:
-                            circle_attention.setTextColor(getResources().getColor(R.color.colorAccent));
-                            circle_recommend.setTextColor(getResources().getColor(R.color.colorPrimary));
-                            viewPager.setCurrentItem(1);
-                            onTabViewSelected(1);
+            @Nullable
+            @Override
+            public CharSequence getPageTitle(int position) {
 
-                        break;
-                }
+                return title.get(position);
             }
         });
-    }
+        tabStopcar.setupWithViewPager(circleFragmentViewpager);
 
-    /**
-     * 改变底栏图标选择状态
-     * @param position
-     * */
-    private void onTabViewSelected(int position) {
-        if(position<0 || position>3) {
-            return;
-        }
-
-        iv_line1.setSelected(false);
-        iv_line2.setSelected(false);
-
-        switch (position) {
-            case 0:
-                iv_line1.setSelected(true);
-                break;
-            case 1:
-                iv_line2.setSelected(true);
-                break;
-            default:
-                break;
-        }
     }
 
 

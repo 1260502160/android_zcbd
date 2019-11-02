@@ -23,8 +23,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ForgetPassActivity extends BaseAppCompatActivity{
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.edit_forget_num)
     EditText editForgetNum;
     @BindView(R.id.btn_forget_yancode)
@@ -60,7 +58,7 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
                     public void onTick(long l) {
                         btnForgetYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
                         btnForgetYancode.setClickable(false);
-                        btnForgetYancode.setBackgroundResource(R.drawable.shape_line);
+                        btnForgetYancode.setBackgroundResource(R.drawable.shape_blue);
                         btnForgetYancode.setText("("+l/1000+"s)");
 
                     }
@@ -110,12 +108,9 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
         return R.layout.layout_forgetpass;
     }
 
-    @OnClick({R.id.icon_back, R.id.edit_forget_num, R.id.btn_forget_yancode, R.id.edit_forget_newpass, R.id.edit_surenewpass, R.id.btn_reg_sure})
+    @OnClick({R.id.edit_forget_num, R.id.btn_forget_yancode, R.id.edit_forget_newpass, R.id.edit_surenewpass, R.id.btn_reg_sure})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.edit_forget_num:
                 break;
             case R.id.btn_forget_yancode:

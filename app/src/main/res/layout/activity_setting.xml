@@ -156,7 +156,7 @@
     <Button
         android:id="@+id/btn_back"
         android:gravity="center"
-        android:textColor="@color/grey"
+        android:textColor="#B3B3B3"
         android:textStyle="bold"
         android:textSize="@dimen/sp_16"
         android:text="@string/text_back"
@@ -166,6 +166,6 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dp_20"
-        android:layout_height="@dimen/dp_50"/>
+        android:layout_height="@dimen/dp_45"/>
 
 </RelativeLayout>

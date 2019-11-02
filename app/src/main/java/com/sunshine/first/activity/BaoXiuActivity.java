@@ -56,10 +56,11 @@ import io.reactivex.functions.Consumer;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+/**
+ * 在线报修
+ */
 public class BaoXiuActivity extends BaseAppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.icon_add)
     ImageView iconAdd;
     @BindView(R.id.edit_descrip)
@@ -74,8 +75,6 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     RelativeLayout rePhone;
     @BindView(R.id.text_time)
     TextView text_time;
-    @BindView(R.id.text_repair_record)
-    TextView textRepairRecord;
     @BindView(R.id.tv_address)
     TextView tvAddress;
     @BindView(R.id.tv_times)
@@ -152,14 +151,6 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
             }
         });
 
-
-        textRepairRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(BaoXiuActivity.this, RepairRecordActivity.class);
-                startActivity(intent);
-            }
-        });
         btnbaoxiusubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -377,6 +368,14 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setDefaultTitle("在线报修");
+        setRightTitle("报修记录", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BaoXiuActivity.this, RepairRecordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -384,12 +383,9 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
         return R.layout.activity_repairs;
     }
 
-    @OnClick({R.id.icon_back, R.id.edit_descrip, R.id.re_add, R.id.rela_time, R.id.re_lianxiren, R.id.re_phone, R.id.text_time, R.id.textnumber, R.id.btn_baoxiu_submit})
+    @OnClick({R.id.edit_descrip, R.id.re_add, R.id.rela_time, R.id.re_lianxiren, R.id.re_phone, R.id.text_time, R.id.textnumber, R.id.btn_baoxiu_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.edit_descrip:
 
                 break;

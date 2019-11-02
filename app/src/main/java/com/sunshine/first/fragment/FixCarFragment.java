@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sunshine.first.BaseFragment;
@@ -33,6 +34,9 @@ public class FixCarFragment extends BaseFragment{
 
     @BindView(R.id.text_car_number)
     EditText textCarnumber;
+    @BindView(R.id.re_cycle)
+    RelativeLayout reCycle;
+
     @BindView(R.id.text_cycle)
     TextView textcycle;
     @BindView(R.id.icon_cycle)
@@ -71,12 +75,12 @@ public class FixCarFragment extends BaseFragment{
         });
     }
 
-    @OnClick({R.id.text_carnumber, R.id.icon_cycle, R.id.btn_right_pay})
+    @OnClick({R.id.text_carnumber, R.id.re_cycle, R.id.btn_right_pay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text_carnumber:
                 break;
-            case R.id.icon_cycle:
+            case R.id.re_cycle:
                 ArrayList<String> list = new ArrayList<>();
                 list.add("月");
                 list.add("季");
