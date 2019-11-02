@@ -26,8 +26,7 @@ import butterknife.OnClick;
  * 报修记录
  */
 public class RepairRecordActivity extends BaseAppCompatActivity {
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
+
     @BindView(R.id.tab_repair)
     TabLayout tabRepair;
 
@@ -89,10 +88,5 @@ public class RepairRecordActivity extends BaseAppCompatActivity {
         tabRepair.setupWithViewPager(viewpagerRepair);
     }
 
-
-    @OnClick(R.id.icon_back)
-    public void onViewClicked() {
-        finish();
-    }
 
 }

@@ -38,7 +38,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.functions.Consumer;
-
+/**
+ * 房主认证
+ */
 public class TenementActivity extends BaseAppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.icon_back)

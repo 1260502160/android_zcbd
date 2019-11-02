@@ -50,8 +50,6 @@ import io.reactivex.functions.Consumer;
  */
 public class PersonalActivity extends BaseAppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.relative_two)
     RelativeLayout relativeTwo;
     @BindView(R.id.relative_three)
