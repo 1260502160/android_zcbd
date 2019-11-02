@@ -209,7 +209,8 @@ public class PaymentActivity extends BaseAppCompatActivity {
                             req.prepayId = json.getString("prepay_id");
                             req.nonceStr = json.getString("noncestr");
                             req.timeStamp = json.getString("timestamp");
-                            req.packageValue = json.getString("package");
+//                            req.packageValue = json.getString("package");
+                            req.packageValue = "Sign=WXPay";
                             req.sign = json.getString("sign");
                             req.extData = "app data"; // optional
                             Toast.makeText(PaymentActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
