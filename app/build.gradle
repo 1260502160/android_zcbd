@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-            storeFile file('/D:/AndroidProject/app/Untitled')
+            storeFile file('/Users/wavewave/Desktop/zcbd/First/app/Untitled')
             storePassword 'zhongchengbeidou'
             keyPassword 'zhongchengbeidou'
             keyAlias = '中成北斗'
@@ -23,7 +23,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             signingConfig signingConfigs.debug
         }
     }
@@ -38,7 +38,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // 添加下面的内容 支付宝支付
-    implementation (name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
+    implementation(name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
 
     //微信支付SDK
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
