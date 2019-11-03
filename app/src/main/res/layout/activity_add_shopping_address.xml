@@ -57,10 +57,10 @@
             android:layout_centerVertical="true"
             android:drawableRight="@mipmap/next"
             android:gravity="center_vertical"
+            android:hint="请选择所在地区"
             android:paddingLeft="@dimen/dp_20"
             android:paddingRight="@dimen/dp_20"
-            android:text="请选择所在地区"
-            android:textColor="@color/color_999999"
+            android:textColor="@color/color_333333"
             android:textSize="@dimen/sp_16" />
 
         <View
