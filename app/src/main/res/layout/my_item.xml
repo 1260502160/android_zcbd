@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@mipmap/bd"
+    android:layout_marginLeft="@dimen/dp_15"
+    android:layout_marginRight="@dimen/dp_15"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginLeft="@dimen/dp_32"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小区名称:"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/sp_16"
+            />
+        <TextView
+            android:id="@+id/cummiunty_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="公祥街社区"
+            android:textColor="@color/blacks"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginLeft="@dimen/dp_5"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginLeft="@dimen/dp_32"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="房屋地址:"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/sp_16"
+            />
+        <TextView
+            android:id="@+id/home_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="公祥街社区"
+            android:textColor="@color/blacks"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginLeft="@dimen/dp_5"
+            />
+    </LinearLayout>
+</LinearLayout>

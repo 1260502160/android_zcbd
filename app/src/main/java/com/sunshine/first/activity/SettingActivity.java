@@ -59,12 +59,14 @@ public class SettingActivity extends BaseAppCompatActivity{
                 startActivity(intent);
                 break;
             case R.id.relative_setting_qchc:
+                Intent intent=new Intent(SettingActivity.this,UpdatePassActivity.class);
+                startActivity(intent);
                 break;
             case R.id.relative_setting_banbengengxin:
                 break;
             case R.id.relative_setting_aboutus:
-                Intent intent = new Intent(SettingActivity.this, AboutUsActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(SettingActivity.this, AboutUsActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

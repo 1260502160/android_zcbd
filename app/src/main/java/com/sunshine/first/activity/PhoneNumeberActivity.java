@@ -1,5 +1,7 @@
 package com.sunshine.first.activity;
 
+import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import com.abner.ming.base.model.Api;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.SendSmsBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +35,7 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
     @BindView(R.id.btn_submit)
     Button btnSubmit;
     private String phone;
-
+    private CountDownTimer timer;
     @Override
     protected void initData() {
 
@@ -58,6 +61,25 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
             case R.id.edit_code:
                 break;
             case R.id.btn_huo_code://获取验证码
+                timer=new CountDownTimer(60000,1000){
+
+                    @Override
+                    public void onTick(long l) {
+                        btnHuoCode.setBackgroundColor(Color.parseColor("#FB9EA7"));
+                        btnHuoCode.setClickable(false);
+                        btnHuoCode.setBackgroundResource(R.drawable.shape_blue);
+                        btnHuoCode.setText("("+l/1000+"s)");
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                        btnHuoCode.setClickable(true);
+                        btnHuoCode.setText("重新获取验证码");
+                        btnHuoCode.setBackgroundColor(Color.parseColor("#ffffff"));
+                    }
+                };
                 phone = editNewPhone.getText().toString();
                 if (!TextUtils.isEmpty(phone)) {
                     Map<String, String> map = new HashMap<>();
@@ -89,10 +111,11 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
         super.success(type, data);
 
         if (type == 1) {
-//            SendSmsBean sendSmsBean = gson.fromJson(data, SendSmsBean.class);
-//            if (sendSmsBean != null && sendSmsBean.isSuccess()) {
-//
-//            }
+            SendSmsBean sendSmsBean = gson.fromJson(data, SendSmsBean.class);
+           if (sendSmsBean != null && sendSmsBean.isSuccess()) {
+
+               ToastManage.s(PhoneNumeberActivity.this,sendSmsBean.getMessage().toString());
+            }
 
         }
 

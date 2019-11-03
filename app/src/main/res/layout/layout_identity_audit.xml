@@ -340,7 +340,7 @@
                     android:id="@+id/icon_head"
                     android:layout_width="@dimen/dp_10"
                     android:layout_height="@dimen/dp_10"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/icon_add"
                     android:layout_centerInParent="true"
                     />
                 <TextView
@@ -364,7 +364,7 @@
                     android:id="@+id/icon_china"
                     android:layout_width="@dimen/dp_10"
                     android:layout_height="@dimen/dp_10"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/icon_add"
                     android:layout_centerInParent="true"
                     />
                 <TextView
@@ -419,7 +419,7 @@
                 android:id="@+id/icon_home_zm"
                 android:layout_width="@dimen/dp_10"
                 android:layout_height="@dimen/dp_10"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/icon_add"
                 android:layout_centerInParent="true"
                 />
             <TextView
