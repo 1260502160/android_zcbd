@@ -114,7 +114,7 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
             case R.id.edit_forget_num:
                 break;
             case R.id.btn_forget_yancode:
-            
+
                 break;
             case R.id.edit_forget_newpass:
                 break;

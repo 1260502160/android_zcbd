@@ -39,6 +39,7 @@
                 android:hint="输入手机号"
                 android:inputType="phone"
                 android:maxLength="11"
+                android:paddingRight="@dimen/dp_18"
                 android:textColor="#999"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
@@ -74,6 +75,7 @@
                     android:layout_height="@dimen/dp_30"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_18"
                     android:background="@drawable/shape_blue"
                     android:text="获取验证码"
                     android:textColor="#06A0F0"
@@ -105,7 +107,6 @@
                 android:textSize="@dimen/sp_16" />
 
             <EditText
-                android:maxLength="6"
                 android:id="@+id/edit_code"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -114,6 +115,8 @@
                 android:gravity="right|center_vertical"
                 android:hint="输入验证码"
                 android:inputType="number"
+                android:maxLength="6"
+                android:paddingRight="@dimen/dp_18"
                 android:textColor="#999"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
@@ -147,6 +150,7 @@
                 android:background="@null"
                 android:gravity="right|center_vertical"
                 android:hint="输入新密码"
+                android:paddingRight="@dimen/dp_18"
                 android:textColor="#999"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
@@ -179,6 +183,7 @@
                 android:background="@null"
                 android:gravity="right|center_vertical"
                 android:hint="@string/text_sure_pass"
+                android:paddingRight="@dimen/dp_18"
                 android:textColor="#999"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>

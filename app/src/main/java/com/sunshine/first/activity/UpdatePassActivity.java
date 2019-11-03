@@ -24,6 +24,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 修改密码
+ */
 public class UpdatePassActivity extends BaseAppCompatActivity{
 
     @BindView(R.id.edit_forget_num)

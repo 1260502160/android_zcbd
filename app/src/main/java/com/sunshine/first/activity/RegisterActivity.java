@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseAppCompatActivity{
+public class RegisterActivity extends BaseAppCompatActivity {
     @BindView(R.id.edit_num)
     EditText editNum;
     @BindView(R.id.btn_yancode)
@@ -35,69 +35,27 @@ public class RegisterActivity extends BaseAppCompatActivity{
     EditText editCode;
     @BindView(R.id.edit_surenewpass)
     EditText editSurenewpass;
-    @BindView(R.id.btn_register)
-    Button btnRegister;
-    private String code,phone;
+    private String code, phone;
     private String newpass;
     private String surepass;
     private RegisterBean registerBean;
     private CountDownTimer timer;
-    private Button btn_register;
 
 
     @Override
     protected void initData() {
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(phone)){
-                    ToastManage.s(RegisterActivity.this,"手机号不能为空！");
-                    return;
-                }
-                if (TextUtils.isEmpty(code)){
-                    ToastManage.s(RegisterActivity.this,"验证码不能为空！");
-                    return;
-                }
-                if (TextUtils.isEmpty(newpass)){
-                    ToastManage.s(RegisterActivity.this,"新密码不能为空！");
-                    return;
-                }
-                if (TextUtils.isEmpty(surepass)){
-                    ToastManage.s(RegisterActivity.this,"请先确认新密码！");
-                    return;
-                }
-                phone = editNum.getText().toString();
-                code = editCode.getText().toString();
-                newpass = editNewpass.getText().toString();
-                surepass = editSurenewpass.getText().toString();
-                if (phone!=null&&code!=null&&newpass!=null&&surepass!=null){
-
-                    Map<String,String> map = new HashMap<>();
-                    map.put("mobile",phone);
-                    map.put("code",code);
-                    map.put("pwd",newpass);
-                    map.put("repwd",surepass);
-                    net(false,false).post(1,Api.Register_URL,map);
-
-                }else {
-                    Toast.makeText(RegisterActivity.this,"输入的内容不能为空！",Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
 
         btnYancode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timer  = new CountDownTimer(60000,1000) {
+                timer = new CountDownTimer(60000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         btnYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
                         btnYancode.setClickable(false);
                         btnYancode.setBackgroundResource(R.drawable.shape_line);
-                        btnYancode.setText("("+millisUntilFinished / 1000 +"s)");
+                        btnYancode.setText("(" + millisUntilFinished / 1000 + "s)");
                     }
 
                     @Override
@@ -108,10 +66,10 @@ public class RegisterActivity extends BaseAppCompatActivity{
                     }
                 };
 
-                Map<String,String> map = new HashMap<>();
+                Map<String, String> map = new HashMap<>();
                 phone = editNum.getText().toString();
-                map.put("phone",phone);
-                net(false,false).post(2,Api.SendSms_URL,map);
+                map.put("phone", phone);
+                net(false, false).post(2, Api.SendSms_URL, map);
 
 
             }
@@ -121,9 +79,8 @@ public class RegisterActivity extends BaseAppCompatActivity{
 
     @Override
     protected void initView() {
+        setDefaultTitle("注册");
 
-        btn_register = (Button) get(R.id.btn_register);
-       setDefaultTitle("注册");
     }
 
     @Override
@@ -143,6 +100,41 @@ public class RegisterActivity extends BaseAppCompatActivity{
             case R.id.edit_surenewpass:
                 break;
             case R.id.btn_register:
+
+                phone = editNum.getText().toString();
+                code = editCode.getText().toString();
+                newpass = editNewpass.getText().toString();
+                surepass = editSurenewpass.getText().toString();
+
+                if (TextUtils.isEmpty(phone)) {
+                    ToastManage.s(RegisterActivity.this, "手机号不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(code)) {
+                    ToastManage.s(RegisterActivity.this, "验证码不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(newpass)) {
+                    ToastManage.s(RegisterActivity.this, "新密码不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(surepass)) {
+                    ToastManage.s(RegisterActivity.this, "请先确认新密码！");
+                    return;
+                }
+                if (phone != null && code != null && newpass != null && surepass != null) {
+
+                    Map<String, String> map = new HashMap<>();
+                    map.put("mobile", phone);
+                    map.put("code", code);
+                    map.put("pwd", newpass);
+                    map.put("repwd", surepass);
+                    net(false, false).post(1, Api.Register_URL, map);
+
+                } else {
+                    Toast.makeText(RegisterActivity.this, "输入的内容不能为空！", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }
@@ -150,20 +142,20 @@ public class RegisterActivity extends BaseAppCompatActivity{
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
             gson = new Gson();
             registerBean = gson.fromJson(data, RegisterBean.class);
-            if (registerBean.isSuccess()){
-                Toast.makeText(RegisterActivity.this,registerBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(RegisterActivity.this,registerBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            if (registerBean.isSuccess()) {
+                Toast.makeText(RegisterActivity.this, registerBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(RegisterActivity.this, registerBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
 
         }
-        if (type==2){
+        if (type == 2) {
 
             SendSmsBean sendSmsBean = gson.fromJson(data, SendSmsBean.class);
-            Toast.makeText(RegisterActivity.this,sendSmsBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, sendSmsBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
             timer.start();
         }
     }
