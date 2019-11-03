@@ -36,7 +36,7 @@ public class PayRecordActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
-        setDefaultTitle("纳费记录");
+        setDefaultTitle("缴费记录");
         elv_pay_record.setGroupIndicator(null);
     }
 

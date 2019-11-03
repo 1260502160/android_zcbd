@@ -48,4 +48,10 @@
         <item name="tabSelectedTextColor">#3D87FB</item>
     </style>
 
+
+    <style name="picker_view_slide_anim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pickerview_slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/pickerview_slide_out_bottom</item>
+    </style>
+
 </resources>

@@ -92,6 +92,8 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     EditText editCarNine;
     @BindView(R.id.relative_visitor_time)
     RelativeLayout relativeVisitorTime;
+    @BindView(R.id.relative_home_ren)
+    RelativeLayout relativeHomeRen;
     @BindView(R.id.relative_visitor_name)
     RelativeLayout relativeVisitorName;
     @BindView(R.id.relative_visitor_phonenumber)
@@ -137,8 +139,13 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     protected void initData() {
         final int verify = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getInt("is_verify", -1);
         Log.d("verify", "onViewClicked: " + verify);
-        if (verify == 0) {
+        if (verify == 1) {
+
+            linearHomeRen.setVisibility(View.GONE);
+            relativeHomeRen.setVisibility(View.VISIBLE);
+        } else {
             linearHomeRen.setVisibility(View.VISIBLE);
+            relativeHomeRen.setVisibility(View.GONE);
             linearHomeRen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -146,16 +153,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                     startActivity(intent);
                 }
             });
-
-        } else if (verify == 1) {
-            linearHomeRen.setVisibility(View.GONE);
-
-        } else if (verify == 2) {
-            // verity=2;
-        } else if (verify == 3) {
-            //verity=3;
         }
-
         iconNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,11 +191,11 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 map.put("houses_id",27+"");*/
 
                 visitorBean.setToken(token);
-                visitorBean.setHouses_id(houses_id+"");
-                visitorBean.setFloors_id(floors_id+"");
-                visitorBean.setBuilding_id(building_id+"");
-                visitorBean.setUnitdoor_id(unitdoor_id+"");
-                visitorBean.setCommunity_id(community_id+"");
+                visitorBean.setHouses_id(houses_id + "");
+                visitorBean.setFloors_id(floors_id + "");
+                visitorBean.setBuilding_id(building_id + "");
+                visitorBean.setUnitdoor_id(unitdoor_id + "");
+                visitorBean.setCommunity_id(community_id + "");
                 visitorBean.setVisi_imgs(iconTwo);
                 visitorBean.setCar_num(carone + cartwo + carthree + carfour + carfive + carsix + carseven + careight + carnine);
                 visitorBean.setTime(time);

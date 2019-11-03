@@ -68,7 +68,7 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
 
                         btnForgetYancode.setClickable(true);
                         btnForgetYancode.setText("重新获取验证码");
-                        btnForgetYancode.setBackgroundColor(Color.parseColor("#06A0F0"));
+                        btnForgetYancode.setBackgroundColor(Color.parseColor("#ffffff"));
                     }
                 };
                 Map<String,String> map = new HashMap<>();

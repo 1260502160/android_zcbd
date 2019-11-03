@@ -96,6 +96,7 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
     private String file;
     private int community_id;
     private List<HouseListBean.DataListBean> houseListBeanData;
+    private TimePickerView pvTime;
 
 
     @Override
@@ -401,7 +402,7 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
 
                     }
                 })
-                        .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
+                        .setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
                         .setCancelText("取消")//取消按钮文字
                         .setSubmitText("确定")//确认按钮文字
 //                .setContentSize(18)//滚轮文字大小
@@ -436,7 +437,8 @@ public class BaoXiuActivity extends BaseAppCompatActivity {
 
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Log.d("getTime()", "choice date millis: " + date.getTime());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(date);
     }
 
