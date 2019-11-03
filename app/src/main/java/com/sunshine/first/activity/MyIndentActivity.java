@@ -43,6 +43,7 @@ public class MyIndentActivity extends BaseAppCompatActivity {
         title.add("代付款");
         title.add("已付款");
         title.add("退款");
+        title.add("已关闭");
         final ArrayList<Fragment> fragment = new ArrayList<>();
 
         for (int i = 0; i < title.size(); i++) {

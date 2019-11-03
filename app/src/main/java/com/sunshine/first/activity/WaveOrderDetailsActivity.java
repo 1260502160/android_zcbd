@@ -1,12 +1,13 @@
 package com.sunshine.first.activity;
 
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -19,12 +20,12 @@ import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.application.MyApplication;
-import com.sunshine.first.bean.PaymentBean;
+import com.sunshine.first.bean.AddAddressBean;
+import com.sunshine.first.bean.GoodsOrderDetailsBean;
 import com.sunshine.first.bean.WeChatPaymentBean;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,34 +35,35 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+
 /**
- * 购买支付页面
+ * 订单列表页面跳转过去详情
+ * 立即支付
  */
-public class PaymentActivity extends BaseAppCompatActivity {
+public class WaveOrderDetailsActivity extends BaseAppCompatActivity {
+
     @BindView(R.id.tv_address_name_phone_payment)
     TextView tv_address_name_phone_payment;
     @BindView(R.id.tv_address_address_content)
     TextView tv_address_address_content;
     @BindView(R.id.tv_address_title_payment)
     TextView tv_address_title_payment;
-
     @BindView(R.id.tv_content_payment)
     TextView tv_content_payment;
+    @BindView(R.id.tv_order_code_details)
+    TextView tv_order_code_details;
+    @BindView(R.id.tv_order_time_details)
+    TextView tv_order_time_details;
+    @BindView(R.id.tv_close_time_details)
+    TextView tv_close_time_details;
 
-    @BindView(R.id.tv_payment_jian_count)
-    TextView tv_payment_jian_count;
-    @BindView(R.id.tv_payment_add_count)
-    TextView tv_payment_add_count;
+
     @BindView(R.id.tv_payment_money)
     TextView tv_payment_money;
     @BindView(R.id.tv_payment_num)
     TextView tv_payment_num;
-    @BindView(R.id.tv_all_payment_money)
-    TextView tv_all_payment_money;
     @BindView(R.id.tv_price_payment)
     TextView tv_price_payment;
-    @BindView(R.id.et_remake_payment)
-    EditText et_remake_payment;
     @BindView(R.id.iv_img_payment)
     ImageView iv_img_payment;
 
@@ -69,108 +71,41 @@ public class PaymentActivity extends BaseAppCompatActivity {
     RadioButton zfpay_check_balance;
     @BindView(R.id.wexin_check_balance)
     RadioButton wexin_check_balance;
+    private GoodsOrderDetailsBean.DataBean godb;
 
-    private int addressId = -1;
-    private int num = 1;
-    private String retail_price, g_id, goods_image;
-    private double money;
-    private int pay_type;
     private IWXAPI api;
 
-
-    private int payType = 1; //1零售 2是批发购买
-    private int wholesale_num; //批发数量
+    /**
+     * @param activity
+     * @param order_id 订单id
+     */
+    public static void startWaveOrderDetailsActivity(Context activity, int order_id) {
+        Intent intent = new Intent(activity, WaveOrderDetailsActivity.class);
+        intent.putExtra("order_id", order_id);
+        activity.startActivity(intent);
+    }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_payment;
+        return R.layout.activity_wave_order_details;
     }
 
     @Override
     protected void initView() {
-        setDefaultTitle("支付");
-
-        wholesale_num = getIntent().getIntExtra("wholesale_num", 1);
-        payType = getIntent().getIntExtra("type", 1);
-        num = wholesale_num;//设置默认数量
-
-        retail_price = getIntent().getStringExtra("retail_price");
-        goods_image = getIntent().getStringExtra("goods_image");
-
-        g_id = getIntent().getStringExtra("g_id");
-        String goods_content = getIntent().getStringExtra("goods_content");
-
-        Glide.with(this).load(goods_image).into(iv_img_payment);
-
-        tv_content_payment.setText(goods_content + "");
-
-        tv_payment_num.setText(num + "");
-
-        tv_price_payment.setText("¥" + retail_price);
-
-        setPaymentMoney();
-
-        api = WXAPIFactory.createWXAPI(this, MyApplication.APP_ID);
-
+        setDefaultTitle("订单详情页面");
     }
 
     @Override
     protected void initData() {
-        setPaymentMoney();
-    }
 
-    @OnClick({R.id.rl_address, R.id.tv_payment_jian_count, R.id.tv_payment_add_count, R.id.tv_pay_payment})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rl_address://选择地址
-                Intent intent = new Intent(this, AddressListActivity.class);
-                startActivityForResult(intent, 100);
-                break;
-            case R.id.tv_payment_add_count://加数量
-                num++;
-                tv_payment_num.setText(num + "");
-                setPaymentMoney();
-                break;
-            case R.id.tv_payment_jian_count://减数量
-                if (payType == 2) {
-                    if (num > wholesale_num) {
-                        num--;
-                        tv_payment_num.setText(num + "");
-                        setPaymentMoney();
-                    }
-                } else {
-                    if (num > 1) {
-                        num--;
-                        tv_payment_num.setText(num + "");
-                        setPaymentMoney();
-                    }
-                }
-                break;
-            case R.id.tv_pay_payment://支付
-                if (addressId == -1) {
-                    ToastManage.s(this, "请选择收货地址！");
-                    return;
-                }
-                hashMap.clear();
-                hashMap.put("token", getToken());//用户标识
-                hashMap.put("g_id", g_id);//商品id
-                hashMap.put("a_id", addressId + "");//地址id
-                hashMap.put("g_num", num + "");//商品数量
-                hashMap.put("order_money", money + "");//订单金额\
+        api = WXAPIFactory.createWXAPI(this, MyApplication.APP_ID);
 
-                hashMap.put("type", payType + "");//购买类型 1零售2批发
+        int order_id = getIntent().getIntExtra("order_id", 0);
+        hashMap.clear();
+        hashMap.put("token", getToken());
+        hashMap.put("id", order_id + "");
+        net(true, false).post(1, Api.GetGoodsOrderDetail_URL, hashMap);
 
-                pay_type = 1;
-                if (zfpay_check_balance.isChecked()) {
-                    pay_type = 2;
-                }
-                hashMap.put("pay_type", pay_type + "");//支付方式1微信2支付宝
-
-                hashMap.put("note", et_remake_payment.getText().toString().trim() + "");//备注
-
-                net(true, false).post(1, Api.CreateGoodsOrder_URL, hashMap);
-                break;
-        }
     }
 
     private final int SDK_PAY_FLAG = 666;
@@ -196,26 +131,90 @@ public class PaymentActivity extends BaseAppCompatActivity {
         }
     };
 
-    /**
-     * @param type 1 创建订单 2 支付宝支付接口 3 支付宝验证是否支付完成接口 4 微信支付接口
-     * @param data
-     */
-    @Override
-    public void success(int type, String data) {
-        super.success(type, data);
-        if (type == 1) {//创建订单成功
-            PaymentBean paymentBean = gson.fromJson(data, PaymentBean.class);
-            if (paymentBean != null && paymentBean.getData() != null) {
+    private int num = 1;
+
+    private int pay_type;
+    private int payType = 1; //1零售 2是批发购买
+    private int wholesale_num; //批发数量
+    private String retail_price, g_id;//商品id
+    private String money;//总价格
+
+    @OnClick({R.id.rl_address, R.id.tv_payment_jian_count, R.id.tv_payment_add_count, R.id.tv_pay_payment,
+            R.id.tv_pay_close_payment})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rl_address://选择地址
+//                Intent intent = new Intent(this, AddressListActivity.class);
+//                startActivityForResult(intent, 100);
+                break;
+            case R.id.tv_payment_add_count://加数量
+//                num++;
+//                tv_payment_num.setText(num + "");
+//                setPaymentMoney();
+                break;
+            case R.id.tv_payment_jian_count://减数量
+//                if (payType == 2) {
+//                    if (num > wholesale_num) {
+//                        num--;
+//                        tv_payment_num.setText(num + "");
+//                        setPaymentMoney();
+//                    }
+//                } else {
+//                    if (num > 1) {
+//                        num--;
+//                        tv_payment_num.setText(num + "");
+//                        setPaymentMoney();
+//                    }
+//                }
+                break;
+            case R.id.tv_pay_payment://支付
+                pay_type = 1;
+                if (zfpay_check_balance.isChecked()) {
+                    pay_type = 2;
+                }
                 hashMap.clear();
                 hashMap.put("token", getToken());//用户标识
-                hashMap.put("id", paymentBean.getData().getOrder_id());//
-                hashMap.put("type", paymentBean.getData().getType() + "");//
+                hashMap.put("id", godb.getId() + "");//订单id
+                hashMap.put("type", "1");//
 
-                if (pay_type == 2) {//1微信  2支付宝
+                if (pay_type == 2) {//4微信  2支付宝
                     net(true, false).post(2, Api.Alipay_URL, hashMap);
                 } else {//微信支付
                     net(true, false).post(4, Api.Wechat_URL, hashMap);
                 }
+
+                break;
+            case R.id.tv_pay_close_payment://取消订单
+                hashMap.clear();
+                hashMap.put("token", getToken());//用户标识
+                hashMap.put("id", godb.getId() + "");//订单id
+                net(true, false).post(10, Api.CloseOrder_URL, hashMap);
+                break;
+        }
+    }
+
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (type == 1 && !TextUtils.isEmpty(data)) {
+            GoodsOrderDetailsBean goodsOrderDetailsBean = gson.fromJson(data, GoodsOrderDetailsBean.class);
+            if (goodsOrderDetailsBean != null && goodsOrderDetailsBean.getData() != null) {
+                godb = goodsOrderDetailsBean.getData();
+                tv_address_name_phone_payment.setText(godb.getAddress_name() + "  " + godb.getAddress_mobile());//名字和电话
+                tv_address_address_content.setText(godb.getAddress() + "");//收货地址
+                Glide.with(this).load(godb.getGoods_image()).into(iv_img_payment);//商品图片
+                tv_content_payment.setText(godb.getGoods_describe() + "");//商品描述
+                tv_price_payment.setText("¥" + godb.getMoney() + "");//商品单价
+                tv_order_code_details.setText("订单编号：" + godb.getOrder_no());
+                tv_order_time_details.setText("下单时间：" + godb.getCreated_at());
+                tv_payment_money.setText("¥" + godb.getOrder_money());
+                tv_close_time_details.setText(godb.getPay_end_time());//结束时间
+
+                g_id = godb.getGoods_id() + "";
+                num = godb.getGoods_num();
+                money = godb.getOrder_money();
+                retail_price = godb.getMoney();
+
             }
         }
         if (type == 2) {//获取订单后支付宝支付
@@ -225,7 +224,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
 
                 @Override
                 public void run() {
-                    PayTask alipay = new PayTask(PaymentActivity.this);
+                    PayTask alipay = new PayTask(WaveOrderDetailsActivity.this);
                     Map<String, String> result = alipay.payV2(orderInfo, true);
 
                     Message msg = new Message();
@@ -273,6 +272,15 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 }
             }
         }
+        if (type == 10) {//取消订单
+            AddAddressBean addAddressBean = gson.fromJson(data, AddAddressBean.class);
+            if (addAddressBean != null) {
+                ToastManage.s(this, addAddressBean.message + "");
+                if ("200".equals(addAddressBean.error_code)) {
+                    finish();
+                }
+            }
+        }
     }
 
     //设置总价格
@@ -280,15 +288,16 @@ public class PaymentActivity extends BaseAppCompatActivity {
         try {
             if (!TextUtils.isEmpty(retail_price)) {
                 Double aDouble = Double.valueOf(retail_price);
-                money = aDouble * num;
+                money = String.valueOf(aDouble * num);
                 tv_payment_money.setText("¥" + money);
-                tv_all_payment_money.setText("¥" + money);
             }
         } catch (Exception e) {
             Logger.e("setPaymentMoney", "e:" + e.toString());
         }
 
     }
+
+    private int addressId = -1;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
