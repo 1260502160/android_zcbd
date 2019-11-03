@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.GoodsDetailActivity;
+import com.sunshine.first.activity.OrderCloseActivity;
+import com.sunshine.first.activity.OrderPaidActivity;
+import com.sunshine.first.activity.OrderRefundActivity;
 import com.sunshine.first.activity.WaveOrderDetailsActivity;
 import com.sunshine.first.bean.AllIndentBean;
 
@@ -83,10 +86,23 @@ public class AllIndentAdapter extends RecyclerView.Adapter<AllIndentAdapter.View
             holder.btn_lookdeatil_indent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {//左边按钮点击 查看详情
+                    Intent intent;
+                    if ("已关闭".equals(order_status)) {
+                        intent = new Intent(context, OrderCloseActivity.class);
+                        intent.putExtra("id", listBean.getGoods_id());
+                        context.startActivity(intent);
+                    } else if ("待付款".equals(order_status)) {
+                        WaveOrderDetailsActivity.startWaveOrderDetailsActivity(context, listBean.getId());
 
-                    Intent intent = new Intent(context, GoodsDetailActivity.class);
-                    intent.putExtra("id", listBean.getGoods_id());
-                    context.startActivity(intent);
+                    } else if ("退款".equals(order_status)) {
+                        intent = new Intent(context, OrderRefundActivity.class);
+                        intent.putExtra("id", listBean.getGoods_id());
+                        context.startActivity(intent);
+                    } else {//已付款
+                        intent = new Intent(context, GoodsDetailActivity.class);
+                        intent.putExtra("id", listBean.getGoods_id());
+                        context.startActivity(intent);
+                    }
                 }
             });
 
@@ -101,10 +117,10 @@ public class AllIndentAdapter extends RecyclerView.Adapter<AllIndentAdapter.View
                     } else if ("待付款".equals(order_status)) {
                         WaveOrderDetailsActivity.startWaveOrderDetailsActivity(context, listBean.getId());
 
-                    } else if ("退款".equals(order_status)) {
+                    } else if ("退款".equals(order_status)) {//不显示
 
                     } else {//已付款
-                        intent = new Intent(context, GoodsDetailActivity.class);
+                        intent = new Intent(context, OrderPaidActivity.class);
                         intent.putExtra("id", listBean.getGoods_id());
                         context.startActivity(intent);
                     }
