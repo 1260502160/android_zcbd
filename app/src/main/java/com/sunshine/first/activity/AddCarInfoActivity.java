@@ -395,45 +395,49 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
     public void success(int type, String data) {
         super.success(type, data);
         if (type==3){
-
             Gson gson = new Gson();
             final HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
-            dataListBeans = houseListBean.getData().getList();
-            ArrayList<String> list = new ArrayList<>();
-            for (HouseListBean.DataListBean houseListBeanDatum : dataListBeans) {
-                list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
+            if(houseListBean!=null&&houseListBean.getData()!=null){
+                if(houseListBean.getData().getList()!=null&&houseListBean.getData().getList().size()>0){
+                    dataListBeans = houseListBean.getData().getList();
+                    ArrayList<String> list = new ArrayList<>();
+                    for (HouseListBean.DataListBean houseListBeanDatum : dataListBeans) {
+                        list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
+                    }
+
+                    SinglePicker<String> picker = new SinglePicker<>(AddCarInfoActivity.this, list);
+                    picker.setCanLoop(false);//不禁用循环
+                    picker.setLineVisible(true);
+                    picker.setTextSize(18);
+                    picker.setTitleText("房屋选择");
+                    picker.setSelectedIndex(8);
+                    picker.setWheelModeEnable(false);
+                    //启用权重 setWeightWidth 才起作用
+                    picker.setWeightEnable(true);
+                    picker.setWeightWidth(1);
+                    picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+                    picker.setUnSelectedTextColor(Color.GRAY);
+                    picker.setOnSingleWheelListener(new OnSingleWheelListener() {
+                        @Override
+                        public void onWheeled(int index, String item) {
+                            tvCommiuntyName.setText(item);
+                        }
+                    });
+                    picker.setOnItemPickListener(new OnItemPickListener<String>() {
+                        @Override
+                        public void onItemPicked(int index, String item) {
+                            tvCommiuntyName.setText(item);
+                            //楼号选择的忘了？
+                            community_id = houseListBean.getData().getList().get(index).getCommunity_id();
+                            //houseListBean.getData().get(index)
+
+                        }
+                    });
+                    picker.show();
+                }else{
+                    ToastManage.s(this,"很抱歉！您当前还未认证任何小区！");
+                }
             }
-
-            SinglePicker<String> picker = new SinglePicker<>(AddCarInfoActivity.this, list);
-            picker.setCanLoop(false);//不禁用循环
-            picker.setLineVisible(true);
-            picker.setTextSize(18);
-            picker.setTitleText("房屋选择");
-            picker.setSelectedIndex(8);
-            picker.setWheelModeEnable(false);
-            //启用权重 setWeightWidth 才起作用
-            picker.setWeightEnable(true);
-            picker.setWeightWidth(1);
-            picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
-            picker.setUnSelectedTextColor(Color.GRAY);
-            picker.setOnSingleWheelListener(new OnSingleWheelListener() {
-                @Override
-                public void onWheeled(int index, String item) {
-                    tvCommiuntyName.setText(item);
-                }
-            });
-            picker.setOnItemPickListener(new OnItemPickListener<String>() {
-                @Override
-                public void onItemPicked(int index, String item) {
-                    tvCommiuntyName.setText(item);
-                    //楼号选择的忘了？
-                    community_id = houseListBean.getData().getList().get(index).getCommunity_id();
-                    //houseListBean.getData().get(index)
-
-                }
-            });
-            picker.show();
-
         }
         if (type==2){
             Gson gson = new Gson();
