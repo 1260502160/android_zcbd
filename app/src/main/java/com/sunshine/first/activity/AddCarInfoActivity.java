@@ -479,6 +479,9 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
         if (type==4){
             Gson gson = new Gson();
             AddCarBean addCarBean = gson.fromJson(data, AddCarBean.class);
+            if("200".equals(addCarBean)){
+                finish();
+            }
             Toast.makeText(AddCarInfoActivity.this,addCarBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
 
         }
