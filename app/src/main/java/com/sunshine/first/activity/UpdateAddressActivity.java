@@ -14,8 +14,6 @@ import com.sunshine.first.R;
 import com.sunshine.first.bean.AddAddressBean;
 import com.sunshine.first.bean.AddressDetailBean;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,8 +29,8 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
     EditText et_phone_number;
     @BindView(R.id.et_shopping_addre)
     EditText et_shopping_addre;
-    @BindView(R.id.tv_details_address_details)
-    TextView tv_details_address_details;
+    @BindView(R.id.text_address_area)
+    TextView text_address_area;
 
     private int type;
     private AddressDetailBean.AddressDetailListBean addressDetailListBean;
@@ -56,13 +54,20 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
-        setDefaultTitle("编辑收货地址");
+        type = getIntent().getIntExtra("type", 0);
+        if (type == 1) {
+
+            setDefaultTitle("编辑收货地址");
+        } else {
+
+            setDefaultTitle("添加收货地址");
+        }
+
     }
 
     @Override
     protected void initData() {
-        type = getIntent().getIntExtra("type", 0);
-        if (type == 1) {
+        if (type == 1) {//编辑
             int id = getIntent().getIntExtra("id", 0);
             hashMap.clear();
             hashMap.put("token", getToken());
@@ -72,19 +77,16 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
 
     }
 
-    private List<String> list1 = new ArrayList<>();
-    private List<String> list2 = new ArrayList<>();
-    private List<String> list3 = new ArrayList<>();
     private int provinceId, cityId, areaId;
 
-    @OnClick({R.id.btn_save, R.id.relative_address})
+    @OnClick({R.id.btn_save, R.id.text_address_area})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.relative_address://选择地址
+            case R.id.text_address_area://选择地址
                 showProvince(new OnSelectIdName() {
                     @Override
                     public void onSelectIdName(int provinceId, String provinceName, int cityId, String cityName, int areaId, String areaName) {
-                        tv_details_address_details.setText(provinceName + cityName + areaName + "");
+                        text_address_area.setText(provinceName + cityName + areaName + "");
                         UpdateAddressActivity.this.provinceId = provinceId;
                         UpdateAddressActivity.this.cityId = cityId;
                         UpdateAddressActivity.this.areaId = areaId;
@@ -129,7 +131,8 @@ public class UpdateAddressActivity extends BaseAppCompatActivity {
                 UpdateAddressActivity.this.cityId = addressDetailListBean.city_id;
                 UpdateAddressActivity.this.areaId = addressDetailListBean.area_id;
                 addressId = addressDetailListBean.id;
-                tv_details_address_details.setText(addressDetailListBean.province_name + addressDetailListBean.city_name + addressDetailListBean.area_name + "");
+
+                text_address_area.setText(addressDetailListBean.province_name + addressDetailListBean.city_name + addressDetailListBean.area_name + "");
             }
         } else if (type == 2) {
             AddAddressBean addressBean = gson.fromJson(data, AddAddressBean.class);

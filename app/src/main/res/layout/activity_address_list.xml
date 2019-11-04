@@ -7,12 +7,34 @@
     android:orientation="vertical"
     tools:context=".activity.AddressListActivity">
 
-    <TextView
-        android:id="@+id/tv_add_address_list"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:gravity="center"
-        android:text="添加收货地址" />
+        android:layout_height="@dimen/dp_90"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_9"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_add_address_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/icon_add_icon"
+                android:drawablePadding="@dimen/dp_13"
+                android:gravity="center"
+                android:text="添加收货地址"
+                android:textColor="@color/color_06A0F0"
+                android:textSize="@dimen/sp_16" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_address_list"

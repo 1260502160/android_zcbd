@@ -145,19 +145,27 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
                 }
                 break;
             case R.id.ll_singleton_goods_details://单件购买
-                if (goodsDeatilBean != null) {
+                if (goodsDeatilBean != null && goodsDeatilBean.data != null) {
                     intent = new Intent(this, PaymentActivity.class);
                     intent.putExtra("retail_price", goodsDeatilBean.data.retail_price + "");//零售价格
                     intent.putExtra("g_id", goodsDeatilBean.data.id + "");
+                    intent.putExtra("goods_content", goodsDeatilBean.data.goods_describe + "");
+                    if (goodsDeatilBean.data.goods_images != null && goodsDeatilBean.data.goods_images.size() > 0) {
+                        intent.putExtra("goods_image", goodsDeatilBean.data.goods_images.get(0) + "");
+                    }
                     startActivity(intent);
                 }
                 break;
             case R.id.ll_wholesale_goods_details://批发购买
-                if (goodsDeatilBean != null) {
+                if (goodsDeatilBean != null&& goodsDeatilBean.data != null) {
                     intent = new Intent(this, PaymentActivity.class);
                     intent.putExtra("retail_price", goodsDeatilBean.data.wholesale_price + "");//批发价格
                     intent.putExtra("g_id", goodsDeatilBean.data.id + "");
+                    intent.putExtra("goods_content", goodsDeatilBean.data.goods_describe + "");
                     intent.putExtra("wholesale_num", goodsDeatilBean.data.wholesale_num);
+                    if (goodsDeatilBean.data.goods_images != null && goodsDeatilBean.data.goods_images.size() > 0) {
+                        intent.putExtra("goods_image", goodsDeatilBean.data.goods_images.get(0) + "");
+                    }
                     intent.putExtra("type", 1);
                     startActivity(intent);
                 }

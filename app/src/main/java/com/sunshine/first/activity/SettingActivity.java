@@ -10,14 +10,16 @@ import android.widget.RelativeLayout;
 
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
+import com.sunshine.first.utils.SharePreferenceHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 /*
-*设置
+ *设置
  */
-public class SettingActivity extends BaseAppCompatActivity{
+public class SettingActivity extends BaseAppCompatActivity {
 
     @BindView(R.id.btn_back)
     Button btnBack;
@@ -29,7 +31,6 @@ public class SettingActivity extends BaseAppCompatActivity{
     RelativeLayout relativeSettingBanbengengxin;
     @BindView(R.id.relative_setting_aboutus)
     RelativeLayout relativeSettingAboutus;
-    private Intent intent;
 
     @Override
     public int getLayoutId() {
@@ -50,16 +51,21 @@ public class SettingActivity extends BaseAppCompatActivity{
 
     @OnClick({R.id.relative_setting_safe, R.id.relative_setting_qchc, R.id.relative_setting_banbengengxin, R.id.relative_setting_aboutus, R.id.btn_back})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.btn_back:
-                finish();
+                //重新登录
+                SharePreferenceHelper.getInstance(this).put("token", "");
+                intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.relative_setting_safe:
                 intent = new Intent(SettingActivity.this, SafeMangerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.relative_setting_qchc:
-                Intent intent=new Intent(SettingActivity.this,UpdatePassActivity.class);
+                intent = new Intent(SettingActivity.this, UpdatePassActivity.class);
                 startActivity(intent);
                 break;
             case R.id.relative_setting_banbengengxin:

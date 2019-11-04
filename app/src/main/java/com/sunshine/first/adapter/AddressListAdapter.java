@@ -43,10 +43,13 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     public void onBindViewHolder(@NonNull AddressListHolder holder, int position) {
         final AddressListBean.ListAddressBean addressBean = data.get(position);
         if (addressBean != null) {
-            holder.tv_name.setText(addressBean.name);
-            holder.tv_phone_number.setText(addressBean.mobile);
+            if (position == 0) {
+                holder.tv_default.setVisibility(View.VISIBLE);
+            }
+            holder.tv_name.setText(addressBean.name+"");
+            holder.tv_phone_number.setText(addressBean.mobile+"");
             String address = addressBean.province_name + addressBean.city_name + addressBean.area_name + addressBean.detail + "";
-            holder.tv_address_details.setText(address);
+            holder.tv_address_details.setText(address+"");
             holder.tv_update_address.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

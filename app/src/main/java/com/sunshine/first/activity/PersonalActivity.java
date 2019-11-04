@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
@@ -33,6 +37,9 @@ import com.sunshine.first.bean.UpdateUserInfoBean;
 import com.sunshine.first.bean.UploadImgBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +51,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * 个人资料
@@ -127,6 +145,9 @@ public class PersonalActivity extends BaseAppCompatActivity {
 
         String phone = SharePreferenceHelper.getInstance(PersonalActivity.this).getString("phone", "");
         tvPhoneNumber.setText(phone);
+        hashMap.clear();
+        hashMap.put("token", getToken());
+        net(true, false).post(1, Api.GetUserInfo_URL, hashMap);
 
     }
 
@@ -253,7 +274,8 @@ public class PersonalActivity extends BaseAppCompatActivity {
 //                GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
                 myIcon.setImageURI(uri);
 //                iconOne = path;
-                getUpdateImagePath(myIcon, 2);
+                upLoad(path);
+//                getUpdateImagePath(myIcon, 2);
 
             }
         }
@@ -314,7 +336,7 @@ public class PersonalActivity extends BaseAppCompatActivity {
         return result;
     }
 
-    @OnClick({ R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_five})
+    @OnClick({R.id.relative_two, R.id.relative_three, R.id.relative_four, R.id.relative_five})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relative_two:
@@ -352,6 +374,11 @@ public class PersonalActivity extends BaseAppCompatActivity {
 
             Gson gson = new Gson();
             UpdateUserInfoBean updateUserInfoBean = gson.fromJson(data, UpdateUserInfoBean.class);
+            if (updateUserInfoBean != null && updateUserInfoBean.getData() != null) {
+                Glide.with(this).load(updateUserInfoBean.getData().getPhoto()).into(myIcon);
+                if (!TextUtils.isEmpty(updateUserInfoBean.getData().getNickname()))
+                    editMyname.setText(updateUserInfoBean.getData().getNickname() + "");
+            }
             Toast.makeText(PersonalActivity.this, updateUserInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
@@ -360,5 +387,105 @@ public class PersonalActivity extends BaseAppCompatActivity {
             UploadImgBean uploadImgBean = gson.fromJson(data, UploadImgBean.class);
             iconTwo = uploadImgBean.getData().getImgUrl();
         }
+    }
+
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+
+    private void upLoad(String path) {
+        if (!TextUtils.isEmpty(path)) {
+            Luban.with(this)
+                    .load(path)
+                    .ignoreBy(100)
+                    .setTargetDir(getPath())
+                    .filter(new CompressionPredicate() {
+                        @Override
+                        public boolean apply(String path) {
+                            return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                        }
+                    })
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+                            // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                        }
+
+                        @Override
+                        public void onSuccess(File file) {
+                            // TODO 压缩成功后调用，返回压缩后的图片文件
+                            OkHttpClient okHttpClient = new OkHttpClient();
+                            MultipartBody.Builder mbody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                            mbody.addFormDataPart("image", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
+//            mbody.addFormDataPart("isApp", "1");
+                            mbody.addFormDataPart("folder", "xier");
+                            mbody.addFormDataPart("disk", "xier");
+
+                            RequestBody requestBody = mbody.build();
+                            Request request = new Request.Builder()
+                                    .url(Api.UploadImg)
+                                    .post(requestBody)
+                                    .build();
+                            Call call = okHttpClient.newCall(request);
+                            call.enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    Log.e("TAG", "onFailure: " + e);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(PersonalActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    final String json = response.body().string();
+                                    Log.e("TAG", "成功" + json);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                UploadImgBean uploadImgBean = gson.fromJson(json, UploadImgBean.class);
+                                                iconTwo = uploadImgBean.getData().getImgUrl();
+
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                JSONObject jsonObject1 = jsonObject.optJSONObject("message");
+                                                if (jsonObject1 != null) {
+                                                    String message = jsonObject1.optString("message");
+                                                    int code = jsonObject1.optInt("error_code");
+                                                    if (0 == code) {
+
+                                                        finish();
+                                                    }
+                                                    Toast.makeText(PersonalActivity.this, message + "", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            // TODO 当压缩过程出现问题时调用
+                        }
+                    }).launch();
+
+        } else {
+            ToastManage.s(this, "请选择文件或者输入内容！");
+        }
+
+    }
+
+    private String getPath() {
+        String path = Environment.getExternalStorageDirectory() + "/Luban/image/";
+        File file = new File(path);
+        if (file.mkdirs()) {
+            return path;
+        }
+        return path;
     }
 }

@@ -40,19 +40,11 @@ import butterknife.Unbinder;
  * @Date：2019/3/5 19:27
  * @Description：描述信息
  */
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseFragment {
 
     public static final String AAAA = "aaaa";
     @BindView(R.id.banner)
     XBanner banner;
-   /* @BindView(R.id.icon_visitor_registration)
-    ImageView iconVisitorRegistration;*/
-    @BindView(R.id.icon_store)
-    ImageView iconStore;
-    @BindView(R.id.icon_payment_center)
-    ImageView iconPaymentCenter;
-    @BindView(R.id.icon_online_repair)
-    ImageView iconOnlineRepair;
     @BindView(R.id.tv_hot_store)
     TextView tvHotStore;
     @BindView(R.id.home_recycle)
@@ -61,7 +53,7 @@ public class HomeFragment extends BaseFragment{
     ImageView iconOwnerCertification;
 
     Unbinder unbinder;
-   /* *//* @BindView(R.id.icon_yezhurenzheng)
+    /* *//* @BindView(R.id.icon_yezhurenzheng)
         ImageView iconYezhurenzheng;
         @BindView(R.id.icon_shequstore)
         ImageView iconShequstore;
@@ -83,16 +75,16 @@ public class HomeFragment extends BaseFragment{
     private StoreAllAdapter storeAllAdapter;
     private GoodsListBean.DataBean goodsListBeanData;
     private String token;
-   // private int verity;
+    // private int verity;
 
 
     @Override
     protected void initData() {
 
-        net(false,false).get(1,Api.Xbanner_URL,null);
-        int verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify",-1);
-        Log.d("verify", "onViewClicked: " +verify);
-        if (verify == 0){
+        net(false, false).get(1, Api.Xbanner_URL, null);
+        int verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
+        Log.d("verify", "onViewClicked: " + verify);
+        if (verify == 0) {
             iconOwnerCertification.setVisibility(View.VISIBLE);
             iconOwnerCertification.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,16 +94,16 @@ public class HomeFragment extends BaseFragment{
                 }
             });
 
-        }else if (verify== 1){
+        } else if (verify == 1) {
             iconOwnerCertification.setVisibility(View.GONE);
-        }else if (verify==2){
+        } else if (verify == 2) {
             // verity=2;
-        }else if (verify==3){
+        } else if (verify == 3) {
             //verity=3;
         }
 
         //创建布局管理器
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         //设置布局管理器
         homeRecycle.setLayoutManager(layoutManager);
         //设置为垂直布局，这也是默认的
@@ -120,10 +112,10 @@ public class HomeFragment extends BaseFragment{
         //设置Adapter
         homeRecycle.setAdapter(storeAllAdapter);
         token = SharePreferenceHelper.getInstance(getContext()).getString("token", "");
-        Log.i("token",token.toString());
-        Map<String,String> map = new HashMap<>();
-        map.put("token",token);
-        net(false,false).post(2,Api.GoodsList_URL,map);
+        Log.i("token", token.toString());
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
+        net(false, false).post(2, Api.GoodsList_URL, map);
 
 
     }
@@ -146,24 +138,24 @@ public class HomeFragment extends BaseFragment{
 
     }
 
-    @OnClick({R.id.banner, R.id.icon_visitor_registration, R.id.icon_store, R.id.icon_payment_center, R.id.icon_online_repair, R.id.tv_hot_store, R.id.home_recycle})
+    @OnClick({R.id.banner, R.id.linear_my_one, R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_four, R.id.tv_hot_store, R.id.home_recycle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.banner:
                 break;
-            case R.id.icon_visitor_registration:
+            case R.id.linear_my_one:
                 /*intent = new Intent(getContext(), VisitorRegistrationActivity.class);
                 startActivity(intent);*/
                 break;
-            case R.id.icon_store:
+            case R.id.linear_my_two:
               /*  intent = new Intent(getContext(), OnlineStoreActivity.class);
                 startActivity(intent);*/
                 break;
-            case R.id.icon_payment_center:
+            case R.id.linear_my_three:
                 intent = new Intent(getContext(), VisitorRegistrationActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.icon_online_repair:
+            case R.id.linear_my_four://在线商城
                 intent = new Intent(getContext(), OnlineStoreActivity.class);
                 startActivity(intent);
                 break;
@@ -171,8 +163,8 @@ public class HomeFragment extends BaseFragment{
                 break;
             case R.id.home_recycle:
                 break;
-           case R.id.icon_owner_certification:
-               break;
+            case R.id.icon_owner_certification:
+                break;
         }
     }
 /*
@@ -206,7 +198,7 @@ public class HomeFragment extends BaseFragment{
     public void success(int type, String data) {
         super.success(type, data);
 
-        if (type==1){
+        if (type == 1) {
             gson = new Gson();
             xbannerBean = gson.fromJson(data, XbannerBean.class);
             xbannerBeanData = xbannerBean.getData();
@@ -228,14 +220,14 @@ public class HomeFragment extends BaseFragment{
             });
 
         }
-        if (type==2){
+        if (type == 2) {
             gson = new Gson();
-            Log.i(AAAA,data.toString());
+            Log.i(AAAA, data.toString());
             goodsListBean = gson.fromJson(data, GoodsListBean.class);
             goodsListBeanData = goodsListBean.getData();
             List<GoodsListBean.DataBean.ListBean> listbean = goodsListBeanData.getList();
-            if (listbean!=null){
-                Log.i(AAAA,listbean.toString());
+            if (listbean != null) {
+                Log.i(AAAA, listbean.toString());
                 storeAllAdapter.setDataList(listbean);
             }
 

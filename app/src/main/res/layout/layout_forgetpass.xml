@@ -2,46 +2,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/rela_regist"
         android:layout_width="@dimen/dp_345"
         android:layout_height="@dimen/dp_275"
-        android:background="@drawable/shape_white"
         android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginRight="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_9"
-        >
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@drawable/shape_white">
 
         <RelativeLayout
             android:id="@+id/r1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_55">
+
             <TextView
                 android:id="@+id/tv_forget_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/edit_phone"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-               android:layout_centerVertical="true"
-                android:textSize="@dimen/sp_16"
+                android:text="@string/edit_phone"
                 android:textColor="@color/blacks"
-                />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/edit_forget_num"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:hint="输入手机号"
-                android:background="@null"
-                android:textColorHint="@color/grey"
-                android:layout_marginTop="@dimen/dp_20"
-                android:textSize="@dimen/sp_14"
                 android:layout_marginRight="@dimen/dp_18"
-                />
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="输入手机号"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_14" />
 
         </RelativeLayout>
 
@@ -49,38 +46,36 @@
             android:id="@+id/view_reg_one"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/transparent"
             android:layout_below="@+id/r1"
-            />
+            android:background="@color/transparent" />
+
         <RelativeLayout
             android:id="@+id/r2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_55"
-            android:layout_below="@+id/view_reg_one"
-            >
+            android:layout_below="@+id/view_reg_one">
+
             <TextView
                 android:id="@+id/tv_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="获取验证码"
-                android:layout_marginLeft="@dimen/dp_20"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_20"
                 android:background="@null"
+                android:text="获取验证码"
                 android:textColor="@color/blacks"
-                />
+                android:textSize="@dimen/sp_16" />
 
             <Button
                 android:id="@+id/btn_forget_yancode"
                 android:layout_width="@dimen/dp_80"
                 android:layout_height="@dimen/dp_30"
                 android:layout_alignParentRight="true"
-                android:text="获取验证码"
-                android:textColor="@color/blue"
-                android:background="@drawable/shape_blue"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_18"
-                />
+                android:background="@drawable/shape_blue"
+                android:text="获取验证码"
+                android:textColor="@color/blue" />
 
 
         </RelativeLayout>
@@ -90,40 +85,38 @@
             android:id="@+id/view_reg_one_1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/transparent"
             android:layout_below="@+id/r2"
-            />
+            android:background="@color/transparent" />
 
 
         <RelativeLayout
             android:id="@+id/r22"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_55"
-            android:layout_below="@+id/view_reg_one_1"
-            >
+            android:layout_below="@+id/view_reg_one_1">
+
             <TextView
                 android:id="@+id/tv_btncode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="输入验证码"
-                android:layout_marginLeft="@dimen/dp_20"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_20"
                 android:background="@null"
+                android:text="输入验证码"
                 android:textColor="@color/blacks"
-                />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/edit_forget_passwords"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:hint="输入验证码"
-                android:background="@null"
-                android:textSize="@dimen/sp_14"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_18"
-                />
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="输入验证码"
+                android:textSize="@dimen/sp_14" />
 
         </RelativeLayout>
 
@@ -131,36 +124,37 @@
             android:id="@+id/view_reg_two"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/transparent"
             android:layout_below="@+id/r22"
-            />
+            android:background="@color/transparent" />
+
         <RelativeLayout
             android:id="@+id/r3"
-            android:layout_below="@+id/view_reg_two"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_55">
+            android:layout_height="@dimen/dp_55"
+            android:layout_below="@+id/view_reg_two">
+
             <TextView
                 android:id="@+id/edit_forget_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/text_new_pass"
-                android:layout_marginLeft="@dimen/dp_20"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:text="@string/text_new_pass"
                 android:textColor="@color/blacks"
-                />
+                android:textSize="@dimen/sp_16" />
+
             <EditText
                 android:id="@+id/edit_forget_newpass"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:hint="输入新密码"
-                android:background="@null"
-                android:textSize="@dimen/sp_14"
                 android:layout_centerVertical="true"
-                android:textColorHint="@color/grey"
                 android:layout_marginRight="@dimen/dp_18"
-                />
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="输入新密码"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_14" />
 
         </RelativeLayout>
 
@@ -168,38 +162,37 @@
             android:id="@+id/view_reg_three"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/transparent"
             android:layout_below="@+id/r3"
             android:layout_centerVertical="true"
-            />
+            android:background="@color/transparent" />
+
         <RelativeLayout
             android:id="@+id/r4"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_55"
-            android:layout_below="@+id/view_reg_three"
-            >
+            android:layout_below="@+id/view_reg_three">
+
             <TextView
                 android:id="@+id/edit_sure_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_sure_pass"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:textSize="@dimen/sp_16"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:text="@string/text_sure_pass"
                 android:textColor="@color/blacks"
-                />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/edit_surenewpass"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:hint="@string/text_sure_pass"
-                android:background="@null"
-                android:textSize="@dimen/sp_14"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_18"
-                />
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/text_sure_pass"
+                android:textSize="@dimen/sp_14" />
         </RelativeLayout>
 
 
@@ -210,13 +203,12 @@
         android:layout_width="@dimen/dp_345"
         android:layout_height="@dimen/dp_45"
         android:layout_below="@+id/rela_regist"
-        android:layout_marginTop="@dimen/dp_95"
         android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_95"
         android:layout_marginRight="@dimen/dp_15"
         android:background="@drawable/renzheng_shape"
         android:text="@string/text_sure"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_16"
-        />
+        android:textSize="@dimen/sp_16" />
 
 </RelativeLayout>

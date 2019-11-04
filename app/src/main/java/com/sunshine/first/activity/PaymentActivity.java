@@ -7,13 +7,15 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abner.ming.base.model.Api;
 import com.abner.ming.base.utils.Logger;
 import com.alipay.sdk.app.PayTask;
+import com.bumptech.glide.Glide;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.application.MyApplication;
@@ -40,6 +42,11 @@ public class PaymentActivity extends BaseAppCompatActivity {
     TextView tv_address_name_phone_payment;
     @BindView(R.id.tv_address_address_content)
     TextView tv_address_address_content;
+    @BindView(R.id.tv_address_title_payment)
+    TextView tv_address_title_payment;
+
+    @BindView(R.id.tv_content_payment)
+    TextView tv_content_payment;
 
     @BindView(R.id.tv_payment_jian_count)
     TextView tv_payment_jian_count;
@@ -55,15 +62,17 @@ public class PaymentActivity extends BaseAppCompatActivity {
     TextView tv_price_payment;
     @BindView(R.id.et_remake_payment)
     EditText et_remake_payment;
+    @BindView(R.id.iv_img_payment)
+    ImageView iv_img_payment;
 
     @BindView(R.id.zfpay_check_balance)
     RadioButton zfpay_check_balance;
     @BindView(R.id.wexin_check_balance)
     RadioButton wexin_check_balance;
 
-    private int addressId;
+    private int addressId = -1;
     private int num = 1;
-    private String retail_price, g_id;
+    private String retail_price, g_id, goods_image;
     private double money;
     private int pay_type;
     private IWXAPI api;
@@ -86,8 +95,14 @@ public class PaymentActivity extends BaseAppCompatActivity {
         num = wholesale_num;//设置默认数量
 
         retail_price = getIntent().getStringExtra("retail_price");
+        goods_image = getIntent().getStringExtra("goods_image");
 
         g_id = getIntent().getStringExtra("g_id");
+        String goods_content = getIntent().getStringExtra("goods_content");
+
+        Glide.with(this).load(goods_image).into(iv_img_payment);
+
+        tv_content_payment.setText(goods_content + "");
 
         tv_payment_num.setText(num + "");
 
@@ -130,7 +145,12 @@ public class PaymentActivity extends BaseAppCompatActivity {
                         setPaymentMoney();
                     }
                 }
+                break;
             case R.id.tv_pay_payment://支付
+                if (addressId == -1) {
+                    ToastManage.s(this, "请选择收货地址！");
+                    return;
+                }
                 hashMap.clear();
                 hashMap.put("token", getToken());//用户标识
                 hashMap.put("g_id", g_id);//商品id
@@ -176,6 +196,10 @@ public class PaymentActivity extends BaseAppCompatActivity {
         }
     };
 
+    /**
+     * @param type 1 创建订单 2 支付宝支付接口 3 支付宝验证是否支付完成接口 4 微信支付接口
+     * @param data
+     */
     @Override
     public void success(int type, String data) {
         super.success(type, data);
@@ -187,10 +211,10 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 hashMap.put("id", paymentBean.getData().getOrder_id());//
                 hashMap.put("type", paymentBean.getData().getType() + "");//
 
-                if (pay_type == 2) {//1微信2支付宝
+                if (pay_type == 2) {//1微信  2支付宝
                     net(true, false).post(2, Api.Alipay_URL, hashMap);
                 } else {//微信支付
-                    net(true, false).post(3, Api.Wechat_URL, hashMap);
+                    net(true, false).post(4, Api.Wechat_URL, hashMap);
                 }
             }
         }
@@ -215,7 +239,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
             payThread.start();
 
         }
-        if (type == 3) {//获取订单后微信支付
+        if (type == 4) {//获取订单后微信支付
 
             String content = data;// (这个是服务端返回的订单信息)
             WeChatPaymentBean weChatPaymentBean = gson.fromJson(data, WeChatPaymentBean.class);
@@ -239,7 +263,6 @@ public class PaymentActivity extends BaseAppCompatActivity {
                             req.packageValue = "Sign=WXPay";
                             req.sign = json.getString("sign");
 //                            req.extData = "app data"; // optional
-                            Toast.makeText(PaymentActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
                             // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
                             api.sendReq(req);
                         }
@@ -270,18 +293,25 @@ public class PaymentActivity extends BaseAppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null && requestCode == 100 && resultCode == 101) {
+        if (data != null && requestCode == 100 && resultCode == 101) {//选择收获地址
 //            "addressId", addre
 //            "name", addressBea
 //            "phoneNumber", add
 //            "addressDetails",
 //
-            addressId = data.getIntExtra("addressId", 0);
-            String name = data.getStringExtra("name");
-            String phoneNumber = data.getStringExtra("phoneNumber");
-            String addressDetails = data.getStringExtra("addressDetails");
-            tv_address_name_phone_payment.setText(name + "   " + phoneNumber);
-            tv_address_address_content.setText(addressDetails + "");
+            addressId = data.getIntExtra("addressId", -1);
+            if (addressId != -1) {
+                String name = data.getStringExtra("name");
+                String phoneNumber = data.getStringExtra("phoneNumber");
+                String addressDetails = data.getStringExtra("addressDetails");
+                tv_address_name_phone_payment.setText(name + "   " + phoneNumber);
+                tv_address_address_content.setText(addressDetails + "");
+
+                tv_address_title_payment.setVisibility(View.GONE);
+                tv_address_name_phone_payment.setVisibility(View.VISIBLE);
+                tv_address_address_content.setVisibility(View.VISIBLE);
+
+            }
         }
     }
 }

@@ -62,4 +62,12 @@
         <item name="android:windowBackground">@color/transparent60</item>
         <item name="android:background">@color/transparent60</item>
     </style>
+
+    <!-- 圆形图片 -->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
 </resources>

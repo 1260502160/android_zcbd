@@ -21,13 +21,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".activity.WaveOrderDetailsActivity"></activity>
         <!-- 微信 -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop" />
-        <!-- //这里也是一次检验的机会，注意自己这么写的时候是否报红 -->
+            android:launchMode="singleTop" /> <!-- //这里也是一次检验的机会，注意自己这么写的时候是否报红 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
@@ -124,7 +123,7 @@
         <activity android:name=".activity.OrderCloseActivity" />
         <activity android:name=".activity.OrderRefundActivity" />
         <activity android:name=".activity.OrderPaidActivity" />
-        <activity android:name=".activity.AboutUsActivity"></activity>
+        <activity android:name=".activity.AboutUsActivity" />
     </application>
 
 </manifest>
