@@ -216,7 +216,7 @@ public class MyFragment extends BaseFragment {
         if (type == 1) {
             gson = new Gson();
             myInfomationBean = gson.fromJson(data, MyInfomationBean.class);
-            Glide.with(getContext()).load(myInfomationBean.getData().getPhoto());
+            Glide.with(getContext()).load(myInfomationBean.getData().getPhoto()).into(iconMy);
             textAdmin.setText(myInfomationBean.getData().getNickname() + "");
             int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
             if (is_verify == 0) {

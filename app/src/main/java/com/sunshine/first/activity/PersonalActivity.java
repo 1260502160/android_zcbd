@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
@@ -144,6 +145,9 @@ public class PersonalActivity extends BaseAppCompatActivity {
 
         String phone = SharePreferenceHelper.getInstance(PersonalActivity.this).getString("phone", "");
         tvPhoneNumber.setText(phone);
+        hashMap.clear();
+        hashMap.put("token", getToken());
+        net(true, false).post(1, Api.GetUserInfo_URL, hashMap);
 
     }
 
@@ -370,6 +374,11 @@ public class PersonalActivity extends BaseAppCompatActivity {
 
             Gson gson = new Gson();
             UpdateUserInfoBean updateUserInfoBean = gson.fromJson(data, UpdateUserInfoBean.class);
+            if (updateUserInfoBean != null && updateUserInfoBean.getData() != null) {
+                Glide.with(this).load(updateUserInfoBean.getData().getPhoto()).into(myIcon);
+                if (!TextUtils.isEmpty(updateUserInfoBean.getData().getNickname()))
+                    editMyname.setText(updateUserInfoBean.getData().getNickname() + "");
+            }
             Toast.makeText(PersonalActivity.this, updateUserInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
@@ -443,7 +452,7 @@ public class PersonalActivity extends BaseAppCompatActivity {
                                                 JSONObject jsonObject1 = jsonObject.optJSONObject("message");
                                                 if (jsonObject1 != null) {
                                                     String message = jsonObject1.optString("message");
-                                                    int code = jsonObject1.optInt("code");
+                                                    int code = jsonObject1.optInt("error_code");
                                                     if (0 == code) {
 
                                                         finish();
