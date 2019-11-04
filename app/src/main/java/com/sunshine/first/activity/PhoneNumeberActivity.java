@@ -112,8 +112,8 @@ public class PhoneNumeberActivity extends BaseAppCompatActivity {
 
         if (type == 1) {
             SendSmsBean sendSmsBean = gson.fromJson(data, SendSmsBean.class);
+            timer.start();
            if (sendSmsBean != null && sendSmsBean.isSuccess()) {
-
                ToastManage.s(PhoneNumeberActivity.this,sendSmsBean.getMessage().toString());
             }
 

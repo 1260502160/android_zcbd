@@ -104,7 +104,7 @@ public class RegisterActivity extends BaseAppCompatActivity{
                     public void onFinish() {
                         btnYancode.setText("重新获取验证码");
                         btnYancode.setClickable(true);
-                        btnYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
+                        btnYancode.setBackgroundColor(Color.parseColor("#ffffff"));
                     }
                 };
 

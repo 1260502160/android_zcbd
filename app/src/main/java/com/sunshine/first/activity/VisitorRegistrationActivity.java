@@ -433,7 +433,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                         tvTime.setText((getTime(date)));
 
                     }
-                }).setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
+                }).setType(new boolean[]{true, true, true, true, true, true})// 默认全部显示
                         .setCancelText("取消")//取消按钮文字
                         .setSubmitText("确定")//确认按钮文字
 //                .setContentSize(18)//滚轮文字大小
@@ -472,7 +472,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     }
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         return format.format(date);
     }
 
