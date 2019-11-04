@@ -480,12 +480,5 @@ public class PersonalActivity extends BaseAppCompatActivity {
 
     }
 
-    private String getPath() {
-        String path = Environment.getExternalStorageDirectory() + "/Luban/image/";
-        File file = new File(path);
-        if (file.mkdirs()) {
-            return path;
-        }
-        return path;
-    }
+
 }

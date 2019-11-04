@@ -171,6 +171,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_add_one"
                 android:gravity="center"
                 android:layout_width="@dimen/dp_55"
                 android:layout_height="@dimen/dp_55"
@@ -268,6 +269,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_add_two"
                 android:gravity="center"
                 android:layout_width="@dimen/dp_55"
                 android:layout_height="@dimen/dp_55"

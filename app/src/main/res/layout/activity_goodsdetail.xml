@@ -176,18 +176,19 @@
         <TextView
             android:id="@+id/tv_dianpu"
             android:layout_width="@dimen/dp_50"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableTop="@mipmap/home_grey"
+            android:drawableTop="@drawable/icon_dianpu_icon"
             android:gravity="center"
             android:text="店铺" />
 
         <TextView
+            android:drawablePadding="@dimen/dp_5"
             android:id="@+id/icon_kefu"
             android:layout_width="@dimen/dp_50"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableTop="@mipmap/kefu"
+            android:drawableTop="@drawable/icon_kefu_icon"
             android:gravity="center"
             android:text="客服" />
 

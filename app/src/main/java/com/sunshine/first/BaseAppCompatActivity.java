@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,7 @@ import com.sunshine.first.utils.SystemBarTintManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -382,5 +384,12 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     public static interface OnSelectIdName {
         void onSelectIdName(int provinceId, String provinceName, int cityId, String cityName, int areaId, String areaName);
     }
-
+    protected String getPath() {
+        String path = Environment.getExternalStorageDirectory() + "/Luban/image/";
+        File file = new File(path);
+        if (file.mkdirs()) {
+            return path;
+        }
+        return path;
+    }
 }
