@@ -75,7 +75,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
     private HousenumberBean housenumberBean;
     private List<HousenumberBean.DataBean> housenumberBeanData;
 
-    private int louId, danyuanId, menId, loucengId = -1;
+    private int louId=-1, danyuanId=-1, menId=-1, loucengId = -1;
     private List<LouCengBean.DataBean> louCengBeanData;
     private String shenfen;
     private int TO_CHOOSE_COMMITY_ACTIVITY_REQUEST_CODE = 10001;
@@ -93,7 +93,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initData() {
-        //小区
+        //楼号
         relZhurenzhengShenfen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +112,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         });
 
         //单元号
-        textLouhao.setOnClickListener(new View.OnClickListener() {
+        relZhurenzhengLouhao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (louId == -1) {
@@ -130,31 +130,46 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         });
 
         //门牌号
-        textDanyuanhao.setOnClickListener(new View.OnClickListener() {
+        relZhurenzhengDanyuanhao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (danyuanId == -1) {
-                    Toast.makeText(HostmanRenActivity.this, "请先选择楼号", Toast.LENGTH_SHORT).show();
+                if (loucengId == -1) {
+                    Toast.makeText(HostmanRenActivity.this, "请先选择楼层", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Map<String, String> map = new HashMap<>();
                 map.put("type", 5 + "");
-                map.put("id", danyuanId + ""); //错误   这里传入的是单元号的id
+                map.put("id", loucengId + ""); //错误   这里传入的是楼层号的id
                 net(false, false).post(3, Api.GetHosing_URL, map);
             }
         });
 
+//        //楼号
+//        textShenfen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (louId == -1) {
+//                    Toast.makeText(HostmanRenActivity.this, "请先选择楼号", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                Map<String, String> map = new HashMap<>();
+//                map.put("type", 5 + "");
+//                map.put("id", danyuanId + ""); //错误   这里传入的是单元号的id
+//                net(false, false).post(3, Api.GetHosing_URL, map);
+//            }
+//        });
+
         //楼层
-        textlouCengId.setOnClickListener(new View.OnClickListener() {
+        relativeLouceng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (loucengId == -1) {
-                    Toast.makeText(HostmanRenActivity.this, "请先选择楼号", Toast.LENGTH_SHORT).show();
+                if (danyuanId == -1) {
+                    Toast.makeText(HostmanRenActivity.this, "请先选择单元", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Map<String, String> map = new HashMap<>();
                 map.put("type", 4 + "");
-                map.put("id", loucengId + ""); //错误   这里传入的是单元号的id
+                map.put("id", danyuanId + ""); //错误   这里传入的是单元号的id
                 net(false, false).post(4, Api.GetHosing_URL, map);
             }
         });

@@ -10,13 +10,13 @@
         android:id="@+id/view_fangzhurenzheng_one"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_2"
-        android:layout_below="@+id/relative_change"
+        android:layout_below="@id/relative_change"
         android:layout_marginTop="@dimen/dp_15" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view_fangzhurenzheng_one"
+        android:layout_below="@id/view_fangzhurenzheng_one"
         android:background="@drawable/shape_white">
 
         <RelativeLayout
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:layout_toRightOf="@id/icon_fangkejilu"
                 android:text="@string/text_xiaoqu"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_16" />
@@ -61,7 +61,7 @@
             android:id="@+id/view_my_fangkejilu"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/rel_xiaoqu"
+            android:layout_below="@id/rel_xiaoqu"
             android:background="@color/line_color" />
 
 
@@ -69,14 +69,14 @@
             android:id="@+id/rel_zhurenzheng_shenfen"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
-            android:layout_below="@+id/view_my_fangkejilu">
+            android:layout_below="@id/view_my_fangkejilu">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:layout_toRightOf="@id/icon_fangkejilu"
                 android:text="@string/text_louhao"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_16" />
@@ -106,7 +106,7 @@
             android:id="@+id/view_zhurenzheng_two"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/rel_zhurenzheng_shenfen"
+            android:layout_below="@id/rel_zhurenzheng_shenfen"
             android:background="@color/line_color" />
 
 
@@ -114,14 +114,14 @@
             android:id="@+id/relative_louceng"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
-            android:layout_below="@+id/view_zhurenzheng_two">
+            android:layout_below="@id/view_zhurenzheng_two">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:layout_toRightOf="@id/icon_fangkejilu"
                 android:text="楼层"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_16" />
@@ -151,7 +151,7 @@
             android:id="@+id/view_danyuanhao"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/relative_louceng"
+            android:layout_below="@id/relative_louceng"
             android:background="@color/line_color"
 
             />
@@ -160,14 +160,14 @@
             android:id="@+id/rel_zhurenzheng_louhao"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
-            android:layout_below="@+id/view_danyuanhao">
+            android:layout_below="@id/view_danyuanhao">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:layout_toRightOf="@id/icon_fangkejilu"
                 android:text="@string/text_danyuanhao"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_16" />
@@ -198,14 +198,14 @@
             android:id="@+id/view_zhurenzheng_three"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/rel_zhurenzheng_louhao"
+            android:layout_below="@id/rel_zhurenzheng_louhao"
             android:background="@color/line_color" />
 
         <RelativeLayout
             android:id="@+id/rel_zhurenzheng_danyuanhao"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
-            android:layout_below="@+id/view_zhurenzheng_three"
+            android:layout_below="@id/view_zhurenzheng_three"
             android:layout_alignParentStart="true"
             android:layout_marginTop="0dp">
 
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:layout_toRightOf="@id/icon_fangkejilu"
                 android:text="@string/text_menpaihao"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_16" />
@@ -244,7 +244,7 @@
             android:id="@+id/view_zhurenzheng_four"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/rel_zhurenzheng_danyuanhao"
+            android:layout_below="@id/rel_zhurenzheng_danyuanhao"
             android:background="@color/line_color" />
 
 
@@ -252,14 +252,14 @@
             android:id="@+id/rel_zhurenzheng_menpaihao"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
-            android:layout_below="@+id/view_zhurenzheng_four">
+            android:layout_below="@id/view_zhurenzheng_four">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_toRightOf="@+id/icon_fangkejilu"
+                android:layout_toRightOf="@id/icon_fangkejilu"
                 android:text="@string/text_shenfen"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_16" />

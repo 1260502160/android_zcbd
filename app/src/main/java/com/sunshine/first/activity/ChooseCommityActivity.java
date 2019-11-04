@@ -123,12 +123,9 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
     }
 
 
-    @OnClick({R.id.icon_back, R.id.recycle_choose_city})
+    @OnClick({R.id.recycle_choose_city})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.recycle_choose_city:
                 break;
         }
