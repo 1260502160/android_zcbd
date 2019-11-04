@@ -2,17 +2,18 @@ package com.sunshine.first.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
-import com.sunshine.first.bean.GetCommunityBean;
 import com.sunshine.first.bean.HousenumberBean;
 import com.sunshine.first.bean.LouCengBean;
 import com.sunshine.first.bean.LouHaoBean;
@@ -65,21 +66,19 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
     private ArrayList<String> list;
     private SinglePicker<String> picker, picker1, picker2, picker3, picker4;
     private Intent intent;
-    private int id;
-    private String name;
+    private int xiaoquId = -1;
     private Gson gson;
     private LouHaoBean louHaoBean;
     private List<LouHaoBean.DataBean> louHaoBeanData;
-    private String name1;
-    private GetCommunityBean.DataBean extra;
     private UnitNumber unitNumber;
     private List<UnitNumber.DataBean> unitNumberData;
     private HousenumberBean housenumberBean;
     private List<HousenumberBean.DataBean> housenumberBeanData;
 
-    private int louId, danyuanId, menId, getLouId, loucengId;
+    private int louId, danyuanId, menId, loucengId = -1;
     private List<LouCengBean.DataBean> louCengBeanData;
     private String shenfen;
+    private int TO_CHOOSE_COMMITY_ACTIVITY_REQUEST_CODE = 10001;
 
 
     @Override
@@ -94,13 +93,6 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initData() {
-        extra = (GetCommunityBean.DataBean) getIntent().getSerializableExtra("ss");
-        final String ss = getIntent().getStringExtra("ss");//id
-        final String ss1 = getIntent().getStringExtra("ss1");//name
-        id = getIntent().getIntExtra("id", -1);  //null
-        name = getIntent().getStringExtra("name");
-        if (extra != null && !extra.getName().isEmpty())
-            tvChooseXiaoqu.setText(extra.getName());
         //小区
         relZhurenzhengShenfen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +100,12 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
 
                 Map<String, String> map = new HashMap<>();
                 map.put("type", 2 + "");
-                if (extra != null)
-                    map.put("id", extra.getId() + "");
+                if (xiaoquId != -1)
+                    map.put("id", xiaoquId + "");
+                else {
+                    Toast.makeText(HostmanRenActivity.this, "请先选择小区", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 net(false, false).post(1, Api.GetHosing_URL, map);
 
             }
@@ -119,11 +115,15 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         textLouhao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (louId == -1) {
+                    Toast.makeText(HostmanRenActivity.this, "请先选择楼号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Map<String, String> map = new HashMap<>();
                 map.put("type", 3 + "");
                 // TODO: 2019-10-11 louid提醒后台更新   现有id为0   值为空数组
-                map.put("id", 10 + "");  //错误   这里传入的是楼号的id
+                map.put("id", louId + "");  //错误   这里传入的是楼号的id
                 //Log.i("www",extra.getId()+"");
                 net(false, false).post(2, Api.GetHosing_URL, map);
             }
@@ -133,10 +133,13 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         textDanyuanhao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (danyuanId == -1) {
+                    Toast.makeText(HostmanRenActivity.this, "请先选择楼号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Map<String, String> map = new HashMap<>();
                 map.put("type", 5 + "");
-                map.put("id", 17 + ""); //错误   这里传入的是单元号的id
+                map.put("id", danyuanId + ""); //错误   这里传入的是单元号的id
                 net(false, false).post(3, Api.GetHosing_URL, map);
             }
         });
@@ -145,9 +148,13 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         textlouCengId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (loucengId == -1) {
+                    Toast.makeText(HostmanRenActivity.this, "请先选择楼号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Map<String, String> map = new HashMap<>();
                 map.put("type", 4 + "");
-                map.put("id", 19 + ""); //错误   这里传入的是单元号的id
+                map.put("id", loucengId + ""); //错误   这里传入的是单元号的id
                 net(false, false).post(4, Api.GetHosing_URL, map);
             }
         });
@@ -155,10 +162,14 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (menId == -1 || xiaoquId == -1 ||louId == -1 ||danyuanId == -1 ||loucengId == -1 ||shenfen==null ||shenfen.isEmpty())  {
+                    Toast.makeText(HostmanRenActivity.this, "请将资料填写完整", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (textMenpaihao.getText().equals("租客")) {
                     OwnerVerifyBean ownerVerifyBean = new OwnerVerifyBean();
                     ownerVerifyBean.setBuilding_id(louId);
-                    ownerVerifyBean.setCommunity_id(extra.getId());
+                    ownerVerifyBean.setCommunity_id(xiaoquId);
                     ownerVerifyBean.setUnitdoor_id(danyuanId);
                     ownerVerifyBean.setFloors_id(loucengId);
                     ownerVerifyBean.setHouses_id(menId);
@@ -184,7 +195,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         switch (view.getId()) {
             case R.id.rel_xiaoqu:
                 intent = new Intent(HostmanRenActivity.this, ChooseCommityActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, TO_CHOOSE_COMMITY_ACTIVITY_REQUEST_CODE);
                 break;
             case R.id.rel_zhurenzheng_shenfen:
                 break;
@@ -391,5 +402,15 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == TO_CHOOSE_COMMITY_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bundle b = data.getExtras();
+            String string = b.getString("XIAO_QU_NAME");
+            xiaoquId = b.getInt("XIAO_QU_ID");
+            tvChooseXiaoqu.setText(string);
+        }
+    }
 }

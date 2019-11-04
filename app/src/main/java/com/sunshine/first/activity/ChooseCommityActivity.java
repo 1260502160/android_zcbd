@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.adapter.ChooseCummintyAdapter;
 import com.sunshine.first.bean.GetCommunityBean;
@@ -97,10 +97,14 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
         chooseCummintyAdapter.setOnItemClick(new ChooseCummintyAdapter.onClick() {
             @Override
             public void OnItemClick(View view, int pos) {
-                Intent intent = new Intent(ChooseCommityActivity.this, HostmanRenActivity.class);
-                intent.putExtra("ss", getCommunityBeanData.get(pos));
-                intent.putExtra("comm_id",getCommunityBeanData.get(pos).getId());
-                startActivity(intent);
+
+
+                Intent intent = getIntent();
+                intent.putExtra("XIAO_QU_NAME", String.valueOf(getCommunityBeanData.get(pos).getName()));
+                intent.putExtra("XIAO_QU_ID", getCommunityBeanData.get(pos).getId());
+
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
         map = new HashMap<>();
@@ -118,6 +122,17 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
 
     }
 
+
+    @OnClick({R.id.icon_back, R.id.recycle_choose_city})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.icon_back:
+                finish();
+                break;
+            case R.id.recycle_choose_city:
+                break;
+        }
+    }
 
     @Override
     public void success(int type, String data) {
