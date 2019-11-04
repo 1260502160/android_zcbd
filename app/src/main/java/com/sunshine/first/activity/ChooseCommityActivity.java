@@ -9,17 +9,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
+import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.adapter.ChooseCummintyAdapter;
 import com.sunshine.first.bean.GetCommunityBean;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -67,26 +65,6 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
     @Override
     protected void initData() {
 
-        //设置省份
-        final String provinces[] = {"湖南省", "河南省", "海南省"};
-        //给省份设置图标
-        int images[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
-        //添加市
-        final Map<String, String[]> citys = new HashMap<String, String[]>();
-        citys.put("湖南省", new String[]{"长沙市", "衡阳市", "益阳市"});
-        citys.put("河南省", new String[]{"郑州市", "许昌市", "周口市"});
-        citys.put("海南省", new String[]{"海口市", "三亚市", "文昌市"});
-
-        //将图标添加进集合
-        List<Map<String, Object>> list = new ArrayList<>();
-        for (int i = 0; i < provinces.length; i++) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("title", provinces[i]);
-            map.put("image", images[i]);
-            list.add(map);
-        }
-
-
         //创建布局管理器
         linearLayoutManager = new LinearLayoutManager(ChooseCommityActivity.this);
         //设置布局管理器
@@ -99,10 +77,14 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
         chooseCummintyAdapter.setOnItemClick(new ChooseCummintyAdapter.onClick() {
             @Override
             public void OnItemClick(View view, int pos) {
-                Intent intent = new Intent(ChooseCommityActivity.this, HostmanRenActivity.class);
-                intent.putExtra("ss", getCommunityBeanData.get(pos));
 
-                startActivity(intent);
+
+                Intent intent = getIntent();
+                intent.putExtra("XIAO_QU_NAME", String.valueOf(getCommunityBeanData.get(pos).getName()));
+                intent.putExtra("XIAO_QU_ID", getCommunityBeanData.get(pos).getId());
+
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
         map = new HashMap<>();

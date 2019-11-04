@@ -189,7 +189,7 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
-                if (is_verify == 0) {
+                    if (is_verify == 0) {
                     intent = new Intent(getActivity(), HostmanRenActivity.class);
                     startActivity(intent);
                 } else if (is_verify == 1) {
