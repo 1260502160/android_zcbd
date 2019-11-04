@@ -31,8 +31,6 @@ import butterknife.OnClick;
 public class ChooseCommityActivity extends BaseAppCompatActivity {
 
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.s_main_spinner)
     Spinner s_main_spinner;
     @BindView(R.id.s_main_spinnerTwo)
@@ -55,7 +53,7 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
     @Override
     protected void initView() {
         setToolbar();
-
+        setDefaultTitle("选择小区");
 
     }
 
@@ -101,7 +99,7 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
             public void OnItemClick(View view, int pos) {
                 Intent intent = new Intent(ChooseCommityActivity.this, HostmanRenActivity.class);
                 intent.putExtra("ss", getCommunityBeanData.get(pos));
-
+                intent.putExtra("comm_id",getCommunityBeanData.get(pos).getId());
                 startActivity(intent);
             }
         });
@@ -113,7 +111,6 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
             public void onClick(View view) {
 
                 hosingname = editHosingname.getText().toString();
-
                 map.put("keyword", hosingname);
                 net(false, false).post(1, Api.GetHosing_URL, map);
             }
@@ -121,17 +118,6 @@ public class ChooseCommityActivity extends BaseAppCompatActivity {
 
     }
 
-
-    @OnClick({R.id.icon_back, R.id.recycle_choose_city})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
-            case R.id.recycle_choose_city:
-                break;
-        }
-    }
 
     @Override
     public void success(int type, String data) {

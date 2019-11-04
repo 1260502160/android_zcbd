@@ -2,12 +2,14 @@ package com.sunshine.first.activity;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
@@ -81,11 +83,29 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
         btnRegSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String,String> map = new HashMap<>();
+
+
                 phone = editForgetNum.getText().toString();
                 edit_code = editForgetPasswords.getText().toString();
                 edit_new_pass = editForgetNewpass.getText().toString();
                 edit_sure_newpass = editSurenewpass.getText().toString();
+                if (TextUtils.isEmpty(phone)){
+                    ToastManage.s(ForgetPassActivity.this, "手机号不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(edit_code)){
+                    ToastManage.s(ForgetPassActivity.this, "验证码不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(edit_new_pass)){
+                    ToastManage.s(ForgetPassActivity.this, "新密码不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(edit_sure_newpass)){
+                    ToastManage.s(ForgetPassActivity.this, "确认密码不能为空！");
+                    return;
+                }
+                Map<String,String> map = new HashMap<>();
                 map.put("mobile",phone);
                 map.put("code",edit_code);
                 map.put("pwd",edit_new_pass);
@@ -139,7 +159,6 @@ public class ForgetPassActivity extends BaseAppCompatActivity{
             gson = new Gson();
             forgetPwdBean = gson.fromJson(data, ForgetPwdBean.class);
             Toast.makeText(ForgetPassActivity.this,forgetPwdBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
-
         }
     }
 }

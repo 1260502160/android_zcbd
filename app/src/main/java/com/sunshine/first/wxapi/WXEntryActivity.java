@@ -1,13 +1,22 @@
 package com.sunshine.first.wxapi;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.abner.ming.base.model.Api;
+import com.google.gson.Gson;
+import com.sunshine.first.BaseAppCompatActivity;
+import com.sunshine.first.MainActivity;
+import com.sunshine.first.activity.RegisterActivity;
 import com.sunshine.first.application.MyApplication;
+import com.sunshine.first.bean.WxLoginBean;
+import com.sunshine.first.utils.SharePreferenceHelper;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -22,6 +31,7 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -31,6 +41,10 @@ import okhttp3.Response;
  */
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
+    private static OkHttpClient okHttpClient;
+    private static FormBody build;
+    private static Gson gson;
+    private static WxLoginBean wxLoginBean;
     private ProgressDialog mProgressDialog;
     private IWXAPI mApi;
 
@@ -119,6 +133,9 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                     JSONObject jsonObject = new JSONObject(responseInfo);
                     access = jsonObject.getString("access_token");
                     openId = jsonObject.getString("openid");
+
+                    okHttpPost(Api.WXLOGIN_URL, openId);//                    net(false,fokHttpPostalse).post(1,Api.WXLOGIN_URL,hashMap);
+//
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -154,4 +171,59 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
             }
         });
     }
+
+    public void okHttpPost(String url, String id) {
+        //新建okhttp对象
+        okHttpClient = new OkHttpClient();
+        /**
+         * 通过体传值
+         */
+        build = new FormBody.Builder()
+                .add("wx_openid", id)
+                .build();
+        //创建request
+        Request request = new Request.Builder()
+                .url(url)
+                .post(WXEntryActivity.build)
+                .build();
+        //回调方法
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String json = response.body().string();
+                Log.d("onResponse", "onResponse: " + json);
+                gson = new Gson();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        wxLoginBean = gson.fromJson(json, WxLoginBean.class);
+                        if ("200".equals(wxLoginBean.error_code) && wxLoginBean.data != null) {
+                            if (wxLoginBean.data.type == 1) {
+                                Intent intent = new Intent(WXEntryActivity.this, RegisterActivity.class);
+                                startActivity(intent);
+                            } else if (!TextUtils.isEmpty(wxLoginBean.data.token)) {
+                                SharePreferenceHelper.getInstance(WXEntryActivity.this).put("token", wxLoginBean.data.token);
+                                SharePreferenceHelper.getInstance(WXEntryActivity.this).put("is_verify", wxLoginBean.data.is_verify);
+//                                SharePreferenceHelper.getInstance(WXEntryActivity.this).put("phone", phone);
+                                Intent intent = new Intent(WXEntryActivity.this, MainActivity.class);
+                                //intent.putExtra("phone",phone);
+                                startActivity(intent);
+                                finish();
+                            }
+
+
+                        }
+                    }
+                });
+
+
+            }
+        });
+    }
+
 }

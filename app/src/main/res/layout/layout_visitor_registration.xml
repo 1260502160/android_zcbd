@@ -153,8 +153,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_5"
                 android:layout_toRightOf="@+id/tv_visitor_time"
-                android:background="@null"
-                android:text="只限明天(2019-09-14)"
                 android:textColor="#333"
                 android:textSize="@dimen/sp_16" />
 
@@ -187,6 +185,7 @@
                 android:layout_marginLeft="@dimen/dp_20"
                 android:background="@null"
                 android:hint="请输入访客姓名"
+                android:inputType="text"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/sp_16" />
 
@@ -219,6 +218,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:background="@null"
+                android:inputType="phone"
+                android:maxLength="11"
                 android:hint="请输入访客手机号"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/sp_16" />
@@ -275,6 +276,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
                 android:gravity="center"
+                android:maxLength="1"
                 android:hint="省" />
 
             <EditText
@@ -282,6 +284,7 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
+                android:maxLength="1"
                 android:background="@drawable/shape_line"
                 android:gravity="center" />
 
@@ -290,6 +293,7 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
+                android:maxLength="1"
                 android:background="@drawable/shape_line"
                 android:gravity="center" />
 
@@ -298,6 +302,7 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
+                android:maxLength="1"
                 android:background="@drawable/shape_line"
                 android:gravity="center" />
 
@@ -306,6 +311,7 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
+                android:maxLength="1"
                 android:background="@drawable/shape_line"
                 android:gravity="center" />
 
@@ -314,6 +320,7 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
+                android:maxLength="1"
                 android:background="@drawable/shape_line" />
 
             <EditText
@@ -321,12 +328,14 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
+                android:maxLength="1"
                 android:background="@drawable/shape_line" />
 
             <EditText
                 android:id="@+id/edit_car_eight"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
+                android:maxLength="1"
                 android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_line"
                 android:gravity="center" />
@@ -352,6 +361,7 @@
                     android:background="@null"
                     android:gravity="center"
                     android:hint="新能源"
+                    android:maxLength="1"
                     android:textColorHint="#999"
                     android:textSize="@dimen/sp_8" />
 

@@ -4,41 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/transparent">
 
-    <RelativeLayout
-        android:id="@+id/relative_change"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_180"
-        android:background="#ffffff">
 
-        <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_30"
-            android:padding="@dimen/dp_10"
-            android:src="@mipmap/icon_back" />
-
-        <TextView
-            android:id="@+id/text_forget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_25"
-            android:text="@string/text_choose_hosing"
-            android:textSize="@dimen/sp_20" />
-
-        <View
-            android:id="@+id/view_choose_hosing"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:layout_below="@+id/text_forget"
-            android:layout_marginTop="@dimen/dp_15" />
 
         <LinearLayout
+            android:id="@+id/linear_rz_one"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_70"
-            android:layout_below="@+id/view_choose_hosing"
+            android:layout_height="@dimen/dp_55"
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_15"
@@ -62,12 +33,13 @@
                 android:hint="请输入小区名称" />
 
         </LinearLayout>
-    </RelativeLayout>
+
 
     <LinearLayout
+        android:id="@+id/relative_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relative_change"
+        android:layout_below="@+id/linear_rz_one"
         android:orientation="vertical">
 
         <Spinner
@@ -91,7 +63,7 @@
         android:id="@+id/recycle_choose_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relative_change"
+        android:layout_below="@+id/relative_in"
         android:layout_marginTop="@dimen/dp_40"
         android:background="#ffffff"></android.support.v7.widget.RecyclerView>
 

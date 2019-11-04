@@ -153,6 +153,7 @@ public class MyFragment extends BaseFragment {
 
                 break;
             case R.id.rel_my_lianxikefu:
+                ToastManage.s(getActivity(),"客服电话:12345678901");
                 break;
             case R.id.relative_my_one:
                 intent = new Intent(getContext(), PersonalActivity.class);
@@ -196,7 +197,7 @@ public class MyFragment extends BaseFragment {
                     intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
                     startActivity(intent);
                 }
-                pop.dismiss();
+
             }
         });
 

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -109,10 +110,14 @@ public class FeedbackActivity extends BaseAppCompatActivity {
         btnFeedbackSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String descrip = editFeedback.getText().toString();
+                if (TextUtils.isEmpty(descrip)){
+                    ToastManage.s(FeedbackActivity.this,"描述内容不能为空！");
+                }
                 String token = SharePreferenceHelper.getInstance(FeedbackActivity.this).getString("token", "");
                 Map<String, String> map = new HashMap<>();
                 map.put("token", token);
-                String descrip = editFeedback.getText().toString();
                 map.put("explain", descrip);
                 map.put("img_url", iconTwo);
                 net(false, false).post(1, Api.AddFeedback_URL, map);

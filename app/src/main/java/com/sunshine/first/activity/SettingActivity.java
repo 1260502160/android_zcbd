@@ -1,13 +1,23 @@
 package com.sunshine.first.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.utils.SharePreferenceHelper;
@@ -32,6 +42,7 @@ public class SettingActivity extends BaseAppCompatActivity {
     @BindView(R.id.relative_setting_aboutus)
     RelativeLayout relativeSettingAboutus;
 
+    private PopupWindow pop;
     @Override
     public int getLayoutId() {
         return R.layout.activity_setting;
@@ -69,6 +80,7 @@ public class SettingActivity extends BaseAppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.relative_setting_banbengengxin:
+               ToastManage.s(SettingActivity.this,"已是最新版本！");
                 break;
             case R.id.relative_setting_aboutus:
                 Intent intent1 = new Intent(SettingActivity.this, AboutUsActivity.class);

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abner.ming.base.utils.Logger;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.bumptech.glide.Glide;
@@ -38,6 +39,8 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
     TextView tvTradePrice;
     @BindView(R.id.icon_store)
     ImageView iconStore;
+    @BindView(R.id.icon_kefu)
+    TextView iconKefu;
     @BindView(R.id.tv_store_name)
     TextView tvStoreName;
     @BindView(R.id.tv_store_num)
@@ -46,7 +49,8 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
     Button btnForgetYancode;
     @BindView(R.id.tv_store_descrip)
     TextView tvStoreDescrip;
-
+    @BindView(R.id.tv_dianpu)
+    TextView tvDianpu;
     @BindView(R.id.rv_goods_details)
     RecyclerView rv_goods_details;
     @BindView(R.id.iv_goods_details_details)
@@ -130,12 +134,19 @@ public class GoodsDetailActivity extends BaseAppCompatActivity {
         }
     }
 
-    @OnClick({R.id.icon_back, R.id.btn_forget_yancode, R.id.ll_singleton_goods_details, R.id.ll_wholesale_goods_details})
+    @OnClick({R.id.icon_back, R.id.btn_forget_yancode,R.id.tv_dianpu, R.id.ll_singleton_goods_details, R.id.ll_wholesale_goods_details,R.id.icon_kefu})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.icon_back:
                 finish();
+                break;
+            case R.id.tv_dianpu:
+                Intent intent1 = new Intent(GoodsDetailActivity.this, MerchantShopActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.icon_kefu:
+                ToastManage.s(GoodsDetailActivity.this,"客服电话:12345678900");
                 break;
             case R.id.btn_forget_yancode:
                 if (goodsDeatilBean != null) {

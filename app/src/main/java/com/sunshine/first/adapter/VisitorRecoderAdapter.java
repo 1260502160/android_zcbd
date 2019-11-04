@@ -49,12 +49,12 @@ public class VisitorRecoderAdapter extends RecyclerView.Adapter<VisitorRecoderAd
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, VisitorInvitationActivity.class);
-                context.startActivity(intent);
+               /* Intent intent = new Intent(context, VisitorInvitationActivity.class);
+                context.startActivity(intent);*/
             }
         });
 
-        viewHolder.btn_ivtion.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btn_again_ivation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

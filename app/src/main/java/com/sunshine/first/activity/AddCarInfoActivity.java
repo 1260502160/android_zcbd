@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,6 +30,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.AddCarBean;
@@ -99,12 +101,23 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
         btnSureAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                token = SharePreferenceHelper.getInstance(AddCarInfoActivity.this).getString("token", "");
+
                 String cummiuntyname = tvCommiuntyName.getText().toString();
+
+                if (TextUtils.isEmpty(cummiuntyname)){
+                    ToastManage.s(AddCarInfoActivity.this,"请先选择您所在的小区");
+                    return;
+                }
                 String phonenumber = tvPhoneNumber.getText().toString();
+                if (TextUtils.isEmpty(phonenumber)){
+                    ToastManage.s(AddCarInfoActivity.this,"请先填写您的车牌号");
+                    return;
+                }
+                token = SharePreferenceHelper.getInstance(AddCarInfoActivity.this).getString("token", "");
+                //int id=getIntent().getIntExtra("comm_id",-1);
                 HashMap<String, String> map = new HashMap<>();
                 map.put("token",token);
-                map.put("comm_id",cummiuntyname);
+                map.put("comm_id",1+"");
                 map.put("plate_num",phonenumber);
                 map.put("license",iconOne);
                 map.put("car_photo",iconTwo);

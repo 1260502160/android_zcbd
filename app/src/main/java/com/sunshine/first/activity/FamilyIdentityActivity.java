@@ -69,7 +69,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
     @BindView(R.id.view_my_fangkejilu)
     View viewMyFangkejilu;
     @BindView(R.id.tv_sex)
-    EditText tvSex;
+    TextView tvSex;
     @BindView(R.id.rel_sex)
     RelativeLayout relSex;
     @BindView(R.id.view_zhurenzheng_two)
@@ -292,6 +292,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 Log.i("tokens", token);
 
                 String name = tvName.getText().toString();
+
                 String sex = tvSex.getText().toString();
 
                 if (sex.equals("男")) {

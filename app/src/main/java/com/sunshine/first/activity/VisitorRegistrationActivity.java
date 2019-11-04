@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,6 +30,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
 import com.sunshine.first.bean.HouseListBean;
@@ -183,6 +185,22 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 String carseven = editCarSeven.getText().toString();
                 String careight = editCarEight.getText().toString();
                 String carnine = editCarNine.getText().toString();
+                if (TextUtils.isEmpty(time)){
+                    ToastManage.s(VisitorRegistrationActivity.this,"受访时间不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(name)){
+                    ToastManage.s(VisitorRegistrationActivity.this,"受访姓名不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(phone)){
+                    ToastManage.s(VisitorRegistrationActivity.this,"受访手机号不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(carone)){
+                    ToastManage.s(VisitorRegistrationActivity.this,"车牌号不能为空！");
+                    return;
+                }
 
                 /*  map.put("community_id",1+"");*/
                 //map.put("building_id",1+"");
@@ -472,7 +490,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     }
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(date);
     }
 

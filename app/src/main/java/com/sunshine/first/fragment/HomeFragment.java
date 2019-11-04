@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseFragment;
 import com.abner.ming.base.model.Api;
 import com.bumptech.glide.Glide;
@@ -51,6 +52,10 @@ public class HomeFragment extends BaseFragment {
     RecyclerView homeRecycle;
     @BindView(R.id.icon_owner_certification)
     ImageView iconOwnerCertification;
+    @BindView(R.id.icon_visitor_registration)
+    ImageView iconVisitorRegistration;
+    @BindView(R.id.small_xiaofang)
+    ImageView smallXiaofang;
 
     Unbinder unbinder;
     /* *//* @BindView(R.id.icon_yezhurenzheng)
@@ -138,7 +143,7 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.banner, R.id.linear_my_one, R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_four, R.id.tv_hot_store, R.id.home_recycle})
+    @OnClick({R.id.banner, R.id.linear_my_one, R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_four, R.id.tv_hot_store, R.id.home_recycle,R.id.icon_visitor_registration,R.id.small_xiaofang})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.banner:
@@ -165,6 +170,13 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.icon_owner_certification:
                 break;
+            case R.id.icon_visitor_registration:
+                ToastManage.s(getActivity(),"暂未开通！");
+                break;
+            case R.id.small_xiaofang:
+                ToastManage.s(getActivity(),"暂未开通！");
+                break;
+
         }
     }
 /*

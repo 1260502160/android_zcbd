@@ -11,6 +11,8 @@ public class Api {
     public final static String BASE_URL = "http://zc.zhongchengbd.com/api/app/";
     //登录
     public final static String Login_URL = BASE_URL + "login";
+    //微信登录
+    public final static String WXLOGIN_URL = BASE_URL + "wxLogin";
     //发送验证码
     public final static String SendSms_URL = BASE_URL + "sendSms";
     //忘记密码
