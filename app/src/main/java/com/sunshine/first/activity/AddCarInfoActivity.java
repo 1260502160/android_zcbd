@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +39,9 @@ import com.sunshine.first.bean.HouseListBean;
 import com.sunshine.first.bean.UploadImgBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +56,17 @@ import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * 添加车辆信息
@@ -72,6 +87,11 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
     Button btnSureAdd;
     @BindView(R.id.tv_commiunty_name)
     TextView tvCommiuntyName;
+    @BindView(R.id.ll_add_one)
+    LinearLayout ll_add_one;
+    @BindView(R.id.ll_add_two)
+    LinearLayout ll_add_two;
+
     private PopupWindow pop;
     private int maxSelectNum = 1;
     private String path;
@@ -83,6 +103,8 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
     private List<HouseListBean.DataListBean> dataListBeans;
     private int community_id;
     private String token;
+    private int communityId;
+
 
     @Override
     public int getLayoutId() {
@@ -113,11 +135,10 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
                     ToastManage.s(AddCarInfoActivity.this,"请先填写您的车牌号");
                     return;
                 }
-                token = SharePreferenceHelper.getInstance(AddCarInfoActivity.this).getString("token", "");
                 //int id=getIntent().getIntExtra("comm_id",-1);
                 HashMap<String, String> map = new HashMap<>();
-                map.put("token",token);
-                map.put("comm_id",1+"");
+                map.put("token",getToken());
+                map.put("comm_id",communityId+"");
                 map.put("plate_num",phonenumber);
                 map.put("license",iconOne);
                 map.put("car_photo",iconTwo);
@@ -134,12 +155,12 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("token", token);
                 map.put("type", "1");
-                net(false, false).post(3, Api.HousesList_URL, map);
+                net(true, false).post(3, Api.HousesList_URL, map);
 
             }
         });
 
-        iconAddOne.setOnClickListener(new View.OnClickListener() {
+        ll_add_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RxPermissions rxPermission = new RxPermissions(AddCarInfoActivity.this);
@@ -164,7 +185,7 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
             }
         });
 
-        iconAddTwo.setOnClickListener(new View.OnClickListener() {
+        ll_add_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RxPermissions rxPermission = new RxPermissions(AddCarInfoActivity.this);
@@ -312,15 +333,19 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
                 // 图片选择结果回调
 //                GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
                 iconAddOne.setImageURI(uri);
+
+                upLoad(path,1);
 //                iconOne = path;
 
-                getUpdateImagePath(iconAddOne,requestCode);
+//                getUpdateImagePath(iconAddOne,requestCode);
 
             }else if (requestCode == 2){
 
                 iconAddTwo.setImageURI(uri);
+
+                upLoad(path,2);
 //                iconTwo = path;
-                getUpdateImagePath(iconAddTwo,requestCode);
+//                getUpdateImagePath(iconAddTwo,requestCode);
             }
         }
     }
@@ -395,45 +420,51 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
     public void success(int type, String data) {
         super.success(type, data);
         if (type==3){
-
             Gson gson = new Gson();
             final HouseListBean houseListBean = gson.fromJson(data, HouseListBean.class);
-            dataListBeans = houseListBean.getData().getList();
-            ArrayList<String> list = new ArrayList<>();
-            for (HouseListBean.DataListBean houseListBeanDatum : dataListBeans) {
-                list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
+            if(houseListBean!=null&&houseListBean.getData()!=null){
+                if(houseListBean.getData().getList()!=null&&houseListBean.getData().getList().size()>0){
+                    dataListBeans = houseListBean.getData().getList();
+                    ArrayList<String> list = new ArrayList<>();
+                    for (HouseListBean.DataListBean houseListBeanDatum : dataListBeans) {
+                        list.add(houseListBeanDatum.getCommunity_name()+houseListBeanDatum.getBuilding_name()+houseListBeanDatum.getUnitdoor_name()+houseListBeanDatum.getFloors_name()+houseListBeanDatum.getHouses_number_name());
+                    }
+
+                    SinglePicker<String> picker = new SinglePicker<>(AddCarInfoActivity.this, list);
+                    picker.setCanLoop(false);//不禁用循环
+                    picker.setLineVisible(true);
+                    picker.setTextSize(18);
+                    picker.setTitleText("房屋选择");
+                    picker.setSelectedIndex(8);
+                    picker.setWheelModeEnable(false);
+                    //启用权重 setWeightWidth 才起作用
+                    picker.setWeightEnable(true);
+                    picker.setWeightWidth(1);
+                    picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+                    picker.setUnSelectedTextColor(Color.GRAY);
+                    picker.setOnSingleWheelListener(new OnSingleWheelListener() {
+                        @Override
+                        public void onWheeled(int index, String item) {
+                            tvCommiuntyName.setText(item);
+                            HouseListBean.DataListBean dataListBean = dataListBeans.get(index);
+                            communityId = dataListBean.getId();
+                        }
+                    });
+                    picker.setOnItemPickListener(new OnItemPickListener<String>() {
+                        @Override
+                        public void onItemPicked(int index, String item) {
+                            tvCommiuntyName.setText(item);
+                            //楼号选择的忘了？
+                            community_id = houseListBean.getData().getList().get(index).getCommunity_id();
+                            //houseListBean.getData().get(index)
+
+                        }
+                    });
+                    picker.show();
+                }else{
+                    ToastManage.s(this,"很抱歉！您当前还未认证任何小区！");
+                }
             }
-
-            SinglePicker<String> picker = new SinglePicker<>(AddCarInfoActivity.this, list);
-            picker.setCanLoop(false);//不禁用循环
-            picker.setLineVisible(true);
-            picker.setTextSize(18);
-            picker.setTitleText("房屋选择");
-            picker.setSelectedIndex(8);
-            picker.setWheelModeEnable(false);
-            //启用权重 setWeightWidth 才起作用
-            picker.setWeightEnable(true);
-            picker.setWeightWidth(1);
-            picker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
-            picker.setUnSelectedTextColor(Color.GRAY);
-            picker.setOnSingleWheelListener(new OnSingleWheelListener() {
-                @Override
-                public void onWheeled(int index, String item) {
-                    tvCommiuntyName.setText(item);
-                }
-            });
-            picker.setOnItemPickListener(new OnItemPickListener<String>() {
-                @Override
-                public void onItemPicked(int index, String item) {
-                    tvCommiuntyName.setText(item);
-                    //楼号选择的忘了？
-                    community_id = houseListBean.getData().getList().get(index).getCommunity_id();
-                    //houseListBean.getData().get(index)
-
-                }
-            });
-            picker.show();
-
         }
         if (type==2){
             Gson gson = new Gson();
@@ -448,9 +479,110 @@ public class AddCarInfoActivity extends BaseAppCompatActivity {
         if (type==4){
             Gson gson = new Gson();
             AddCarBean addCarBean = gson.fromJson(data, AddCarBean.class);
+            if("200".equals(addCarBean)){
+                finish();
+            }
             Toast.makeText(AddCarInfoActivity.this,addCarBean.getMessage().toString(),Toast.LENGTH_SHORT).show();
 
         }
 
     }
+
+
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+
+    private void upLoad(String path,final  int type) {
+        if (!TextUtils.isEmpty(path)) {
+            Luban.with(this)
+                    .load(path)
+                    .ignoreBy(100)
+                    .setTargetDir(getPath())
+                    .filter(new CompressionPredicate() {
+                        @Override
+                        public boolean apply(String path) {
+                            return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                        }
+                    })
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+                            // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                        }
+
+                        @Override
+                        public void onSuccess(File file) {
+                            // TODO 压缩成功后调用，返回压缩后的图片文件
+                            OkHttpClient okHttpClient = new OkHttpClient();
+                            MultipartBody.Builder mbody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                            mbody.addFormDataPart("image", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
+//            mbody.addFormDataPart("isApp", "1");
+                            mbody.addFormDataPart("folder", "xier");
+                            mbody.addFormDataPart("disk", "xier");
+
+                            RequestBody requestBody = mbody.build();
+                            Request request = new Request.Builder()
+                                    .url(Api.UploadImg)
+                                    .post(requestBody)
+                                    .build();
+                            Call call = okHttpClient.newCall(request);
+                            call.enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    Log.e("TAG", "onFailure: " + e);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(AddCarInfoActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    final String json = response.body().string();
+                                    Log.e("TAG", "成功" + json);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                UploadImgBean uploadImgBean = gson.fromJson(json, UploadImgBean.class);
+                                                if(type==1)
+                                                iconOne = uploadImgBean.getData().getImgUrl();
+                                                else
+                                                iconTwo = uploadImgBean.getData().getImgUrl();
+
+
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                JSONObject jsonObject1 = jsonObject.optJSONObject("message");
+                                                if (jsonObject1 != null) {
+                                                    String message = jsonObject1.optString("message");
+                                                    int code = jsonObject1.optInt("error_code");
+                                                    if (0 == code) {
+
+                                                        finish();
+                                                    }
+                                                    Toast.makeText(AddCarInfoActivity.this, message + "", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            // TODO 当压缩过程出现问题时调用
+                        }
+                    }).launch();
+
+        } else {
+            ToastManage.s(this, "请选择文件或者输入内容！");
+        }
+
+    }
+
+
 }

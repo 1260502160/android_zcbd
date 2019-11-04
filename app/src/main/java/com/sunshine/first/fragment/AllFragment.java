@@ -47,7 +47,7 @@ public class AllFragment extends BaseFragment {
         hashMap.put("token", getToken());
         hashMap.put("status", status + "");//订单状态0全部1待付款2已付款3退款4已关闭
         hashMap.put("page", page + "");//订单状态0全部1待付款2已付款3退款4已关闭
-        hashMap.put("perpage", perpage + "");//订单状态0全部1待付款2已付款3退款4已关闭
+        hashMap.put("perpage", 30 + "");//订单状态0全部1待付款2已付款3退款4已关闭
         net(false, false).post(2, Api.GetGoodsOrderList_URL, hashMap);
     }
 

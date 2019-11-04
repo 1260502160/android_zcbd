@@ -1,6 +1,7 @@
 package com.abner.ming.base.dialog;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import com.abner.ming.base.R;
  * 菊花加载框
  */
 
-public class DialogLoading extends AlertDialog {
+public class DialogLoading extends Dialog {
     private RelativeLayout alertLayout;
     protected DialogLoading(Context context){
         super(context);
