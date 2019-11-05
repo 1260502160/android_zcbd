@@ -281,14 +281,24 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_submit:
-                OwnerVerifyBean ownerVerifyBean = (OwnerVerifyBean) getIntent().getSerializableExtra("ownerVerifyBean");
-                int building_id = ownerVerifyBean.getBuilding_id();
-                int community_id = ownerVerifyBean.getCommunity_id();
-                int floors_id = ownerVerifyBean.getFloors_id();
-                int houses_id = ownerVerifyBean.getHouses_id();
-                int unitdoor_id = ownerVerifyBean.getUnitdoor_id();
-                String tokens = ownerVerifyBean.getToken();
-                String token = SharePreferenceHelper.getInstance(this).getString("token", "");
+                CheckBean checkBean = new CheckBean();
+                if (cc == 2){
+                    OwnerVerifyBean ownerVerifyBean = (OwnerVerifyBean) getIntent().getSerializableExtra("ownerVerifyBean");
+                    int building_id = ownerVerifyBean.getBuilding_id();
+                    int community_id = ownerVerifyBean.getCommunity_id();
+                    int floors_id = ownerVerifyBean.getFloors_id();
+                    int houses_id = ownerVerifyBean.getHouses_id();
+                    int unitdoor_id = ownerVerifyBean.getUnitdoor_id();
+
+
+                    checkBean.setHouses_id(houses_id + "");
+                    checkBean.setBuilding_id(building_id + "");
+                    checkBean.setFloors_id(floors_id + "");
+                    checkBean.setUnitdoor_id(unitdoor_id + "");
+                    checkBean.setCommunity_id(community_id + "");
+                }
+                    String token = SharePreferenceHelper.getInstance(this).getString("token", "");
+
                 Log.i("tokens", token);
 
                 String name = tvName.getText().toString();
@@ -303,8 +313,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 String phoneNumber = tvPhoneNumber.getText().toString();
 
                 String IDNumber = tvIDNumber.getText().toString();
-                CheckBean checkBean = new CheckBean();
-                checkBean.setBuilding_id(building_id + "");
+
                 checkBean.setCard_img_a(iconOne);
                 checkBean.setCard_img_b(iconTwo);
                 checkBean.setFace_recognition(iconThree);
@@ -312,10 +321,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 checkBean.setResidents_mobile(phoneNumber);
                 checkBean.setResidents_name(name);
                 checkBean.setType(cc + "");
-                checkBean.setHouses_id(houses_id + "");
-                checkBean.setFloors_id(floors_id + "");
-                checkBean.setUnitdoor_id(unitdoor_id + "");
-                checkBean.setCommunity_id(community_id + "");
+                //checkBean.getHouses_id();
                 checkBean.setToken(token);
                 checkBean.setSex(aa + "");
                 RequestBody body = (RequestBody) buildRequestBody(checkBean);

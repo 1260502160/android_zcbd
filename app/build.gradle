@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('/Users/wavewave/Desktop/zcbd/First/app/Untitled')
-            storePassword 'zhongchengbeidou'
-            keyPassword 'zhongchengbeidou'
-            keyAlias = '中成北斗'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('/Users/wavewave/Desktop/zcbd/First/app/Untitled')
+//            storePassword 'zhongchengbeidou'
+//            keyPassword 'zhongchengbeidou'
+//            keyAlias = '中成北斗'
+//        }
+//    }
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.sunshine.first"
