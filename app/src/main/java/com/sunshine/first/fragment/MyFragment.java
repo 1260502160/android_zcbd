@@ -168,7 +168,7 @@ public class MyFragment extends BaseFragment {
         Button btn_yes = bottomView.findViewById(R.id.btn_yes);
         Button btn_no = bottomView.findViewById(R.id.btn_no);
 
-        final PopupWindow pop = new PopupWindow(bottomView, -1, -2);
+        final PopupWindow pop = new PopupWindow(bottomView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         pop.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         pop.setOutsideTouchable(false);
         pop.setFocusable(true);
