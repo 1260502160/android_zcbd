@@ -3,6 +3,8 @@ package com.sunshine.first.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
@@ -22,7 +24,8 @@ import butterknife.BindView;
  * 访客记录
  */
 public class VisitorRecordActivity extends BaseAppCompatActivity {
-
+    @BindView(R.id.empty_fl)
+    FrameLayout empty_fl;
     @BindView(R.id.recycle_visitor_record)
     RecyclerView recycleVisitorRecord;
 
@@ -73,6 +76,8 @@ public class VisitorRecordActivity extends BaseAppCompatActivity {
 
                 visitorRecoderAdapter.setDataList(list);
 
+            } else {
+                empty_fl.setVisibility(View.VISIBLE);
             }
         }
     }

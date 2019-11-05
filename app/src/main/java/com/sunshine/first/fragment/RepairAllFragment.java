@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.abner.ming.base.model.Api;
 import com.google.gson.Gson;
@@ -27,7 +28,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class RepairAllFragment extends BaseFragment {
-
+    @BindView(R.id.empty_fl)
+    FrameLayout empty_fl;
 
     @BindView(R.id.recycle_repair_all)
     RecyclerView recycleRepairAll;
@@ -67,8 +69,10 @@ public class RepairAllFragment extends BaseFragment {
             Gson gson = new Gson();
             GetRepairListBean getRepairListBean = gson.fromJson(data, GetRepairListBean.class);
             List<GetRepairListBean.DataBean.ListBean> list = getRepairListBean.getData().getList();
-            if (list!=null){
+            if (list!=null&&list.size()>0){
                 repairAllAdapter.setData(list);
+            }else{
+                empty_fl.setVisibility(View.VISIBLE);
             }
 
         }

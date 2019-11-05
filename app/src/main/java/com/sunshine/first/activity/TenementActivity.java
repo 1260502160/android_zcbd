@@ -43,10 +43,6 @@ import io.reactivex.functions.Consumer;
  */
 public class TenementActivity extends BaseAppCompatActivity implements View.OnClickListener{
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
-    @BindView(R.id.text_forget)
-    TextView textForget;
     @BindView(R.id.view_fangzhurenzheng_one)
     View viewFangzhurenzhengOne;
     @BindView(R.id.text_name)
@@ -100,7 +96,6 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
     @Override
     protected void initData() {
 
-        iconBack.setOnClickListener(this);
         tvName.setOnClickListener(this);
         tvSex.setOnClickListener(this);
         tvPhoneNumber.setOnClickListener(this);
@@ -125,7 +120,7 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
+        setDefaultTitle("房主认证");
     }
 
     @Override
@@ -136,9 +131,6 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.tv_name:
 
                 break;

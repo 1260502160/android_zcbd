@@ -3,9 +3,9 @@ package com.sunshine.first.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.abner.ming.base.model.Api;
 import com.sunshine.first.BaseFragment;
@@ -24,6 +24,9 @@ public class GoodsFragment extends BaseFragment {
 
     private String mParam1;
     private String mParam2;
+
+    @BindView(R.id.empty_fl)
+    FrameLayout empty_fl;
     @BindView(R.id.rv_f_goods)
     RecyclerView rv_f_goods;
     private GoodsAdapter goodsAdapter;
@@ -80,6 +83,8 @@ public class GoodsFragment extends BaseFragment {
                 GoodsListBean.DataBean listBeanData = goodsListBean.getData();
                 if (listBeanData.getList() != null && listBeanData.getList().size() > 0) {
                     goodsAdapter.addData(listBeanData.getList());
+                } else {
+                    empty_fl.setVisibility(View.VISIBLE);
                 }
             }
         }

@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".fragment.GoodsFragment">
 
+    <include layout="@layout/layout_empty" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_f_goods"
         android:layout_width="match_parent"

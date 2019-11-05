@@ -3,6 +3,7 @@ package com.sunshine.first.fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.abner.ming.base.model.Api;
 import com.sunshine.first.BaseFragment;
@@ -19,6 +20,9 @@ import butterknife.Unbinder;
  * 全部订单
  */
 public class AllFragment extends BaseFragment {
+    @BindView(R.id.empty_fl)
+    FrameLayout empty_fl;//空页面
+
     @BindView(R.id.reclcle_all_indent)
     RecyclerView reclcleAllIndent;
     Unbinder unbinder;
@@ -56,8 +60,10 @@ public class AllFragment extends BaseFragment {
         super.success(type, data);
         if (type == 2) {
             AllIndentBean allIndentBean = gson.fromJson(data, AllIndentBean.class);
-            if (allIndentBean.getData() != null && allIndentBean.getData().getList() != null) {
+            if (allIndentBean.getData() != null && allIndentBean.getData().getList() != null && allIndentBean.getData().getList().size() > 0) {
                 allIndentAdapter.setDataList(allIndentBean.getData().getList());
+            } else {
+                empty_fl.setVisibility(View.VISIBLE);
             }
         }
     }

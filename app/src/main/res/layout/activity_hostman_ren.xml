@@ -40,6 +40,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_40"
+                android:gravity="right"
                 android:hint="请选择您的小区"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14" />
@@ -85,6 +86,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_40"
+                android:gravity="right"
                 android:hint="请选择您的楼号"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14" />
@@ -128,6 +130,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_40"
+                android:gravity="right"
                 android:hint="请选择您的楼层"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14" />
@@ -164,6 +167,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_40"
+                android:gravity="right"
                 android:hint="请选择您的单元号"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14" />
@@ -186,7 +190,6 @@
             android:background="@color/line_color"
 
             />
-
 
 
         <View
@@ -220,6 +223,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_40"
+                android:gravity="right"
                 android:hint="请选择您的门牌号"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14" />
@@ -264,6 +268,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_40"
+                android:gravity="right"
                 android:hint="请选择您的身份"
                 android:textColor="#333333"
                 android:textSize="@dimen/sp_14" />
