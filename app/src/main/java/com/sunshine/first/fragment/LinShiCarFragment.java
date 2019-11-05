@@ -16,8 +16,12 @@ import com.sunshine.first.activity.StopCarPayTypeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
+/**
+ * 临时车
+ */
 public class LinShiCarFragment extends BaseFragment {
     @BindView(R.id.icon_smallerror)
     ImageView iconSmallerror;
@@ -47,6 +51,10 @@ public class LinShiCarFragment extends BaseFragment {
     RelativeLayout relativeLinMoney;
     @BindView(R.id.btn_right_pay)
     Button btnRightPay;
+    @BindView(R.id.tv_car_number_inshicar)
+    TextView tv_car_number_inshicar;
+
+
     Unbinder unbinder;
 
     @Override
@@ -69,6 +77,17 @@ public class LinShiCarFragment extends BaseFragment {
             }
         });
 
+    }
+
+    @OnClick({R.id.icon_smallerror, R.id.btn_right_pay})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.icon_smallerror:
+                tv_car_number_inshicar.setText("");
+                break;
+            case R.id.btn_right_pay://生成临时停车订单
+                break;
+        }
     }
 
 
