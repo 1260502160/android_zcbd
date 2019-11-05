@@ -6,6 +6,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.abner.ming.base.model.Api;
@@ -15,22 +16,20 @@ import com.sunshine.first.R;
 import com.sunshine.first.adapter.UserManagerAdapter;
 import com.sunshine.first.bean.HouseListBean;
 import com.sunshine.first.bean.ShowOwnerVerifyBean;
-import com.sunshine.first.utils.SharePreferenceHelper;
 
 import java.util.HashMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class UserMangerActivity extends BaseAppCompatActivity {
-
+    @BindView(R.id.empty_fl)
+    FrameLayout empty_fl;
     @BindView(R.id.recycle_usemanger)
     RecyclerView recycleUsemanger;
     @BindView(R.id.btn_add_infomation)
     Button btnAddInfomation;
     private UserManagerAdapter userManagerAdapter;
     private HouseListBean houseListBean;
-    private String token;
 
     @Override
     protected void initData() {
@@ -46,11 +45,11 @@ public class UserMangerActivity extends BaseAppCompatActivity {
         //设置Adapter
         recycleUsemanger.setAdapter(userManagerAdapter);
 
-        token = SharePreferenceHelper.getInstance(UserMangerActivity.this).getString("token", "");
-        HashMap<String, String> map = new HashMap<>();
-        map.put("token", token);
-        map.put("type", "1");
-        net(false, false).post(1, Api.HousesList_URL, map);
+//        token = SharePreferenceHelper.getInstance(UserMangerActivity.this).getString("token", "");
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put("token", token);
+//        map.put("type", "1");
+//        net(false, false).post(1, Api.HousesList_URL, map);
 
         btnAddInfomation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +59,16 @@ public class UserMangerActivity extends BaseAppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("token", getToken());
+        map.put("type", "1");
+        net(false, false).post(1, Api.HousesList_URL, map);
 
     }
 
@@ -82,6 +91,8 @@ public class UserMangerActivity extends BaseAppCompatActivity {
             houseListBean = gson.fromJson(data, HouseListBean.class);
             if (houseListBean.getData() != null && houseListBean.getData().getList() != null && houseListBean.getData().getList().size() > 0) {
                 userManagerAdapter.setData(houseListBean.getData().getList());
+            } else {
+                empty_fl.setVisibility(View.VISIBLE);
             }
         }
 
@@ -99,7 +110,7 @@ public class UserMangerActivity extends BaseAppCompatActivity {
      */
     public void deleUserInfo(int index) {
         HashMap<String, String> map = new HashMap<>();
-        map.put("token", token);
+        map.put("token", getToken());
         map.put("id", houseListBean.getData().getList().get(index).getId() + "");
         net(false, false).post(2, Api.Del_Residents, map);
     }

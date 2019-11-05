@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,9 @@ import butterknife.BindView;
  * 纳费记录页面
  */
 public class PayRecordActivity extends BaseAppCompatActivity {
+    @BindView(R.id.empty_fl)
+    FrameLayout empty_fl;
+
     @BindView(R.id.elv_pay_record)
     ExpandableListView elv_pay_record;
     private List<PagRecordBean.DataBean.ListBeanX> listBeanXList;
@@ -54,9 +58,12 @@ public class PayRecordActivity extends BaseAppCompatActivity {
         super.success(type, data);
         if (type == 1) {
             PagRecordBean pagRecordBean = gson.fromJson(data, PagRecordBean.class);
-            if (pagRecordBean != null && pagRecordBean.getData() != null) {
+            if (pagRecordBean != null && pagRecordBean.getData() != null &&
+                    pagRecordBean.getData().getList() != null && pagRecordBean.getData().getList().size() > 0) {
                 listBeanXList = pagRecordBean.getData().getList();
                 elv_pay_record.setAdapter(new PayRecordAdapter());
+            } else {
+                empty_fl.setVisibility(View.VISIBLE);
             }
         }
     }

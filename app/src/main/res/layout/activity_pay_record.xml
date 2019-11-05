@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".activity.PayRecordActivity">
 
+    <include layout="@layout/layout_empty" />
+
     <ExpandableListView
         android:id="@+id/elv_pay_record"
         android:layout_width="match_parent"

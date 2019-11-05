@@ -3,6 +3,7 @@ package com.sunshine.first.fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.abner.ming.base.model.Api;
 import com.sunshine.first.BaseFragment;
@@ -15,6 +16,9 @@ import java.util.List;
 import butterknife.BindView;
 
 public class WaitPayFragment extends BaseFragment {
+    @BindView(R.id.empty_fl)
+    FrameLayout empty_fl;
+
     @BindView(R.id.recycle_repair_waitpay)
     RecyclerView recycleRepairWaitpay;
     private RepairPayAdapter repairPayAdapter;
@@ -47,8 +51,10 @@ public class WaitPayFragment extends BaseFragment {
         if (type == 1) {
             GetRepairListBean getRepairListBean = gson.fromJson(data, GetRepairListBean.class);
             List<GetRepairListBean.DataBean.ListBean> list = getRepairListBean.getData().getList();
-            if (list != null) {
+            if (list != null&list.size()>0) {
                 repairPayAdapter.setData(list);
+            }else{
+                empty_fl.setVisibility(View.VISIBLE);
             }
         }
     }
