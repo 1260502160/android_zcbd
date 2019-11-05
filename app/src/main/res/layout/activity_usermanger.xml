@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.UserMangerActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.UserMangerActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
     <Button
         android:id="@+id/btn_add_infomation"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
+        android:layout_height="@dimen/dp_50"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"

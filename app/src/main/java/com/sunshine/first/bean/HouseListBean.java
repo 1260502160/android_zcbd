@@ -3,6 +3,9 @@ package com.sunshine.first.bean;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 房屋列表
+ */
 public class HouseListBean implements Serializable {
 
 

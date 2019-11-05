@@ -2,22 +2,21 @@ package com.sunshine.first.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.util.Base64;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.abner.ming.base.model.Api;
 import com.luck.picture.lib.PictureSelector;
@@ -27,100 +26,80 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.UploadImgBean;
 
-import java.io.ByteArrayOutputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.addapp.pickers.listeners.OnItemPickListener;
+import cn.addapp.pickers.listeners.OnSingleWheelListener;
+import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
-/**
- * 房主认证
- */
-public class TenementActivity extends BaseAppCompatActivity implements View.OnClickListener{
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
-    @BindView(R.id.view_fangzhurenzheng_one)
-    View viewFangzhurenzhengOne;
-    @BindView(R.id.text_name)
-    TextView textName;
-    @BindView(R.id.tv_name)
-    EditText tvName;
-    @BindView(R.id.view_my_fangkejilu)
-    View viewMyFangkejilu;
-    @BindView(R.id.tv_sex)
-    TextView tvSex;
-    @BindView(R.id.view_zhurenzheng_two)
-    View viewZhurenzhengTwo;
-    @BindView(R.id.tv_phone_number)
-    EditText tvPhoneNumber;
-    @BindView(R.id.view_zhurenzheng_three)
-    View viewZhurenzhengThree;
+/**
+ * 租客身份认证
+ */
+public class TenementActivity extends BaseAppCompatActivity implements View.OnClickListener {
+
+    @BindView(R.id.et_name_tenement)
+    EditText et_name_tenement;//名字
+    @BindView(R.id.tv_phone_number_tenement)
+    EditText tv_phone_number_tenement;//手机号码
+    @BindView(R.id.tv_ID_number_tenement)
+    EditText tv_ID_number_tenement;//身份证号码
+    @BindView(R.id.tv_sex_tenement)
+    TextView tv_sex_tenement;//
     @BindView(R.id.tv_choose_relation)
-    TextView tvChooseRelation;
-    @BindView(R.id.view_zhurenzheng_four)
-    View viewZhurenzhengFour;
-    @BindView(R.id.tv_ID_number)
-    EditText tvIDNumber;
-    @BindView(R.id.view_family_two)
-    View viewFamilyTwo;
-    @BindView(R.id.icon_head)
-    ImageView iconHead;
-    @BindView(R.id.icon_china)
-    ImageView iconChina;
-    @BindView(R.id.icon_tenement)
-    ImageView iconTenement;
-    @BindView(R.id.icon_house_prove)
-    ImageView iconHouseProve;
-    @BindView(R.id.btn_submit)
-    Button btnSubmit;
+    TextView tv_choose_relation;//
+
+    @BindView(R.id.icon_head_one_tenement)
+    ImageView icon_head_one_tenement;//头像页面
+    @BindView(R.id.icon_china_tenement)
+    ImageView icon_china_tenement;//国徽页面
+
+    @BindView(R.id.icon_tenement_tenement)
+    ImageView icon_tenement_tenement;//房本1
+    @BindView(R.id.icon_house_prove_tenement)
+    ImageView icon_house_prove_tenement;//房本2
+
 
     private PopupWindow pop;
     private int maxSelectNum = 1;
     private String path;
-    private  int bb;
-    private boolean isImgOne = false;
-    private boolean isImgTwo = false;
-    private boolean isImgThree = false;
-    private String iconOne = "";
-    private String iconTwo = "";
-    private String iconThree = "";
-    private String iconFour = "";
+
+
+    private int sex = 0;//性别0男1女
+    private int tenementType = 1;//认证类型1房主2租客
     private RxPermissions rxPermissions;
-    private String relationship;
-    private int dd;
+    private String head_one, head_two;
+    private String house_one, house_two;
 
     @Override
     protected void initData() {
-
-        tvName.setOnClickListener(this);
-        tvSex.setOnClickListener(this);
-        tvPhoneNumber.setOnClickListener(this);
-        tvChooseRelation.setOnClickListener(this);
-        tvIDNumber.setOnClickListener(this);
-        iconHead.setOnClickListener(this);
-        iconChina.setOnClickListener(this);
-        iconTenement.setOnClickListener(this);
-        iconHouseProve.setOnClickListener(this);
-        btnSubmit.setOnClickListener(this);
-        relationship = getIntent().getStringExtra("relationship");
-        tvChooseRelation.setText(relationship);
-        if (tvChooseRelation.equals("房主")){
-            dd=1;
-
-        }else if (tvChooseRelation.equals("租客")){
-            dd=2;
-        }
-
 
     }
 
     @Override
     protected void initView() {
-        setDefaultTitle("房主认证");
+        setDefaultTitle("身份认证");
     }
 
     @Override
@@ -128,76 +107,73 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
         return R.layout.layout_tenement;
     }
 
+    private SinglePicker<String> sexPicker;//选择性别
+    private SinglePicker<String> hostPicker;//选择租客或者房主
+
+    @OnClick({R.id.rel_sex_tenement, R.id.rel_relationship_tenement, R.id.rl_head_one_tenement, R.id.rl_head_two_tenement,
+            R.id.rl_houses_photo_tenement, R.id.rl_houses_photo_two_tenement, R.id.btn_submit_tenement})
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tv_name:
+        switch (view.getId()) {
+            case R.id.btn_submit_tenement://提交
+                String phoneNumber = tv_phone_number_tenement.getText().toString().trim();
+                String name = et_name_tenement.getText().toString().trim();
+                String idNumber = tv_ID_number_tenement.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    ToastManage.s(this, "请输入姓名！");
+                    return;
+                }
+                if (TextUtils.isEmpty(phoneNumber)) {
+                    ToastManage.s(this, "请输入手机号码！");
+                    return;
+                }
+                if (TextUtils.isEmpty(idNumber)) {
+                    ToastManage.s(this, "请输入身份证号码！");
+                    return;
+                }
 
-                break;
-            case R.id.tv_sex:
-                break;
-            case R.id.tv_phone_number:
-                break;
-            case R.id.tv_choose_relation:
+                hashMap.clear();
+                hashMap.put("token", getToken());
+                hashMap.put("community_id", getIntent().getIntExtra("community_id", 0) + "");//小区id
 
-                break;
-            case R.id.tv_ID_number:
-                break;
-            case R.id.icon_head:
-                RxPermissions rxPermission = new RxPermissions(TenementActivity.this);
-                rxPermission.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .subscribe(new Consumer<Permission>() {
-                            @Override
-                            public void accept(Permission permission) {
-                                if (permission.granted) {// 用户已经同意该权限
-                                    //第一种方式，弹出选择和拍照的dialog
-                                    popwindow(1);
+                hashMap.put("building_id", getIntent().getIntExtra("building_id", 0) + "");//楼号id
 
-                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
-//                                showAlbum();
-                                } else {
-                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                break;
-            case R.id.icon_china:
-                rxPermissions = new RxPermissions(TenementActivity.this);
-                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .subscribe(new Consumer<Permission>() {
-                            @Override
-                            public void accept(Permission permission) {
-                                if (permission.granted) {// 用户已经同意该权限
-                                    //第一种方式，弹出选择和拍照的dialog
-                                    popwindow(2);
+                hashMap.put("unitdoor_id", getIntent().getIntExtra("unitdoor_id", 0) + "");//单元id
 
-                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
-//                                showAlbum();
-                                } else {
-                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                break;
-            case R.id.icon_tenement:
-                rxPermissions = new RxPermissions(TenementActivity.this);
-                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .subscribe(new Consumer<Permission>() {
-                            @Override
-                            public void accept(Permission permission) {
-                                if (permission.granted) {// 用户已经同意该权限
-                                    //第一种方式，弹出选择和拍照的dialog
-                                    popwindow(3);
+                hashMap.put("floors_id", getIntent().getIntExtra("floors_id", 0) + "");//楼层id
 
-                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
-//                                showAlbum();
-                                } else {
-                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                hashMap.put("houses_id", getIntent().getIntExtra("houses_id", 0) + "");//门牌号id
+
+                hashMap.put("residents_name", name);//姓名
+
+                hashMap.put("residents_mobile", phoneNumber);//手机号
+
+                hashMap.put("type", "2");//认证类型1房主2租客
+
+                hashMap.put("identity_card_number", idNumber);//身份证号码
+
+                hashMap.put("sex", sex + "");//性别0男1女
+
+//                hashMap.put("face_recognition", );//人脸识别图片
+
+                hashMap.put("card_img_a", head_one);//身份证正面
+
+                hashMap.put("card_img_b", head_two);//身份证反面
+                String photoUrl = "";
+                if (!TextUtils.isEmpty(house_one)) {
+                    photoUrl = house_one;
+                }
+                if (!TextUtils.isEmpty(house_two)) {
+                    if (!TextUtils.isEmpty(photoUrl)) {
+                        photoUrl = photoUrl + ",";
+                    }
+                    photoUrl += house_two;
+                }
+                hashMap.put("contract", photoUrl);//租房合同图片多个以逗号隔开
+
+                net(true, false).post(11, Api.OwnerVerify_URL, hashMap);
                 break;
-            case R.id.icon_house_prove:
+            case R.id.rl_houses_photo_two_tenement://房屋证明第二个照片
                 rxPermissions = new RxPermissions(TenementActivity.this);
                 rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(new Consumer<Permission>() {
@@ -215,26 +191,139 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
                             }
                         });
                 break;
-            case R.id.btn_submit:
+            case R.id.rl_houses_photo_tenement://房屋证明第一个照片
+                rxPermissions = new RxPermissions(TenementActivity.this);
+                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(new Consumer<Permission>() {
+                            @Override
+                            public void accept(Permission permission) {
+                                if (permission.granted) {// 用户已经同意该权限
+                                    //第一种方式，弹出选择和拍照的dialog
+                                    popwindow(3);
 
-                String name = tvName.getText().toString();
-                String sex =tvSex.getText().toString();
-
-                if (sex.equals("男")){
-                    bb=0;
-                }else if(sex.equals("女")){
-                    bb=1;
-                }
-                String phonenumber = tvPhoneNumber.getText().toString();
-                String relation = tvChooseRelation.getText().toString();
-                String idnumber = tvIDNumber.getText().toString();
-                Map<String,String> map = new HashMap<>();
-                map.put("residents_name",name);
-                map.put("sex",sex);
-                map.put("residents_mobile",phonenumber);
-                map.put("type",1+"");
-                map.put("identity_card_number",idnumber);
+                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
+//                                showAlbum();
+                                } else {
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                 break;
+            case R.id.rl_head_two_tenement://身份证照片第二个
+                rxPermissions = new RxPermissions(TenementActivity.this);
+                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(new Consumer<Permission>() {
+                            @Override
+                            public void accept(Permission permission) {
+                                if (permission.granted) {// 用户已经同意该权限
+                                    //第一种方式，弹出选择和拍照的dialog
+                                    popwindow(2);
+
+                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
+//                                showAlbum();
+                                } else {
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
+            case R.id.rl_head_one_tenement://身份证照片第一个
+                rxPermissions = new RxPermissions(TenementActivity.this);
+                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(new Consumer<Permission>() {
+                            @Override
+                            public void accept(Permission permission) {
+                                if (permission.granted) {// 用户已经同意该权限
+                                    //第一种方式，弹出选择和拍照的dialog
+                                    popwindow(1);
+
+                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
+//                                showAlbum();
+                                } else {
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
+            case R.id.rel_sex_tenement://性别
+                if (sexPicker == null) {
+                    ArrayList sexList = new ArrayList<>();
+                    sexList.clear();
+                    sexList.add("男");
+                    sexList.add("女");
+                    sexPicker = new SinglePicker<>(this, sexList);
+                    sexPicker.setCanLoop(false);//不禁用循环
+                    sexPicker.setLineVisible(true);
+                    sexPicker.setTextSize(18);
+                    sexPicker.setTitleText("性别");
+                    sexPicker.setSelectedIndex(8);
+                    sexPicker.setWheelModeEnable(false);
+                    //启用权重 setWeightWidth 才起作用
+                    sexPicker.setWeightEnable(true);
+                    sexPicker.setWeightWidth(1);
+                    sexPicker.setSelectedTextColor(Color.BLACK);//前四位值是透明度
+                    sexPicker.setUnSelectedTextColor(Color.GRAY);
+                    sexPicker.setOnSingleWheelListener(new OnSingleWheelListener() {
+                        @Override
+                        public void onWheeled(int index, String item) {
+//                        tvSex.setText(item);
+                        }
+                    });
+                    sexPicker.setOnItemPickListener(new OnItemPickListener<String>() {
+                        @Override
+                        public void onItemPicked(int index, String item) {
+                            tv_sex_tenement.setText(item);
+                            sex = index;
+                        }
+                    });
+                }
+                sexPicker.show();
+
+                break;
+            case R.id.rel_relationship_tenement://与房主关系
+                if (hostPicker == null) {
+                    ArrayList list = new ArrayList<>();
+                    list.add("房主");
+                    list.add("租客");
+                    hostPicker = new SinglePicker<>(this, list);
+                    hostPicker.setCanLoop(false);//不禁用循环
+                    hostPicker.setLineVisible(true);
+                    hostPicker.setTextSize(18);
+                    hostPicker.setTitleText("身份选择");
+                    hostPicker.setSelectedIndex(8);
+                    hostPicker.setWheelModeEnable(false);
+                    //启用权重 setWeightWidth 才起作用
+                    hostPicker.setWeightEnable(true);
+                    hostPicker.setWeightWidth(1);
+                    hostPicker.setSelectedTextColor(Color.BLUE);//前四位值是透明度
+                    hostPicker.setUnSelectedTextColor(Color.GRAY);
+                    hostPicker.setOnSingleWheelListener(new OnSingleWheelListener() {
+                        @Override
+                        public void onWheeled(int index, String item) {
+
+
+                        }
+                    });
+                    hostPicker.setOnItemPickListener(new OnItemPickListener<String>() {
+                        @Override
+                        public void onItemPicked(int index, String item) {
+                            tv_choose_relation.setText(item);
+                            tenementType = (index + 1);
+                        }
+                    });
+                }
+
+                hostPicker.show();
+
+                break;
+        }
+    }
+
+    @Override
+    public void success(int type, String data) {
+        super.success(type, data);
+        if (11 == type) {//提交
+
 
         }
     }
@@ -285,7 +374,6 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
                         PictureSelector.create(TenementActivity.this)
                                 .openCamera(PictureMimeType.ofImage())
                                 .forResult(pos);
-                        // .forResult(PictureConfig.CHOOSE_REQUEST);
                         break;
                     case R.id.tv_cancel:
                         //取消
@@ -341,97 +429,136 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
             if (media.isCut()) {
                 Log.i("裁剪地址::", media.getCutPath());
             }
-            long duration = media.getDuration();
-//                getImgPath();
-//                okHttpUpload("file", path, new UploadCallback() {
-//                    @Override
-//                    public void onResponse(Call call, Response response) {
-//                        String str = response.body().toString();
-//                        Log.i("lfq", response.message() + " , body " + str);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call call, IOException e) {
-//                        Log.i("IOException",e.getMessage());
-//                    }
-//                });
+
             Uri uri = Uri.parse(path);
             if (requestCode == 1) {
-                // 图片选择结果回调
-//                GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
-                iconHead.setImageURI(uri);
-                iconOne = path;
+
+                icon_head_one_tenement.setImageURI(uri);
+
+                upLoad(path, 1);
 
 
-                try {
-                    iconHead.setDrawingCacheEnabled(true);
-                    Log.e("bitmap","bitmap 1");
-                    Bitmap bitmap=iconHead.getDrawingCache();
-                    Log.e("bitmap","bitmap 2"+bitmap);
+            } else if (requestCode == 2) {
 
+                icon_china_tenement.setImageURI(uri);
 
-//                    Bitmap bitmap = getBitmapFormUri(this,uri);
-//                    GlideUtils.loadRoundImg(FamilyIdentityActivity.this,path,iconHead);
-//                    iconHead.setImageBitmap(bitmap);
-                    String file = bitmapToBase64(bitmap);
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("image",file);
-                    map.put("folder","xier");
-                    map.put("disk","xier");
-                    map.put("isApp","1");
-//                    ge(map);
-                    net(false, false).post(2, Api.UploadImg, map);
-//                    iconHead.setDrawingCacheEnabled(false);
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+                upLoad(path, 2);
 
-            }else if (requestCode == 2){
+            } else if (requestCode == 3) {
 
-                iconChina.setImageURI(uri);
-                iconTwo = path;
+                icon_tenement_tenement.setImageURI(uri);
 
-            }else if (requestCode == 3){
+                upLoad(path, 3);
 
-                iconTenement.setImageURI(uri);
-                iconThree = path;
+            } else if (requestCode == 4) {
 
-            }else if (requestCode == 4){
+                icon_house_prove_tenement.setImageURI(uri);
 
-                iconHouseProve.setImageURI(uri);
-                iconFour = path;
+                upLoad(path, 4);
 
             }
         }
     }
 
-    public String bitmapToBase64(Bitmap bitmap) {
-        String result = null;
-        ByteArrayOutputStream baos = null;
-        try {
-            if (bitmap != null) {
-                baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
-                baos.flush();
-                baos.close();
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
-                byte[] bitmapBytes = baos.toByteArray();
-                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (baos != null) {
-                    baos.flush();
-                    baos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    private void upLoad(String path, final int type) {
+        if (!TextUtils.isEmpty(path)) {
+            Luban.with(this)
+                    .load(path)
+                    .ignoreBy(100)
+                    .setTargetDir(getPath())
+                    .filter(new CompressionPredicate() {
+                        @Override
+                        public boolean apply(String path) {
+                            return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                        }
+                    })
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+                            // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                        }
+
+                        @Override
+                        public void onSuccess(File file) {
+                            // TODO 压缩成功后调用，返回压缩后的图片文件
+                            OkHttpClient okHttpClient = new OkHttpClient();
+                            MultipartBody.Builder mbody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                            mbody.addFormDataPart("image", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
+//            mbody.addFormDataPart("isApp", "1");
+                            mbody.addFormDataPart("folder", "xier");
+                            mbody.addFormDataPart("disk", "xier");
+
+                            RequestBody requestBody = mbody.build();
+                            Request request = new Request.Builder()
+                                    .url(Api.UploadImg)
+                                    .post(requestBody)
+                                    .build();
+                            Call call = okHttpClient.newCall(request);
+                            call.enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    Log.e("TAG", "onFailure: " + e);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(TenementActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    final String json = response.body().string();
+                                    Log.e("TAG", "成功" + json);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                UploadImgBean uploadImgBean = gson.fromJson(json, UploadImgBean.class);
+                                                if (type == 1) {
+                                                    head_one = uploadImgBean.getData().getImgUrl();
+                                                    head_one = uploadImgBean.getData().getImgUrl();
+                                                } else if (type == 2) {
+                                                    head_two = uploadImgBean.getData().getImgUrl();
+                                                } else if (type == 3) {
+                                                    house_one = uploadImgBean.getData().getImgUrl();
+                                                } else {
+                                                    house_two = uploadImgBean.getData().getImgUrl();
+                                                }
+
+
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                JSONObject jsonObject1 = jsonObject.optJSONObject("message");
+                                                if (jsonObject1 != null) {
+                                                    String message = jsonObject1.optString("message");
+                                                    int code = jsonObject1.optInt("error_code");
+                                                    if (0 == code) {
+
+                                                        finish();
+                                                    }
+                                                    Toast.makeText(TenementActivity.this, message + "", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            // TODO 当压缩过程出现问题时调用
+                        }
+                    }).launch();
+
+        } else {
+            ToastManage.s(this, "请选择文件或者输入内容！");
         }
-        return result;
+
     }
 }

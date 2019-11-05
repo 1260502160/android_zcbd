@@ -102,7 +102,7 @@
                     android:id="@+id/icon_owner_certification"
                     android:layout_width="@dimen/dp_30"
                     android:layout_height="@dimen/dp_30"
-                    android:src="@mipmap/yezhurenzheng" />
+                    android:src="@drawable/icon_owner_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"

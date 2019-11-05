@@ -6,13 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".activity.ZhuHuGuanLiActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/reclcle_home_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_15">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-    </android.support.v7.widget.RecyclerView>
+        <include layout="@layout/layout_empty" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reclcle_home_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/btn_add_household_info"
@@ -21,10 +31,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_100"
+        android:layout_marginBottom="@dimen/dp_20"
         android:background="@drawable/renzheng_shape"
         android:text="添加房屋认证"
-        android:textColor="@color/white"
+        android:textColor="#ffffff"
         android:textSize="@dimen/sp_12" />
-
 </RelativeLayout>
