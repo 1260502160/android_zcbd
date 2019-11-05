@@ -131,8 +131,16 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.linear_my_one://房主认证
-                popwindow();
+//                popwindow();
 
+                int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
+                if (is_verify == 0) {
+                    intent = new Intent(getActivity(), HostmanRenActivity.class);
+                    startActivity(intent);
+                } else if (is_verify == 1) {
+                    intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
+                    startActivity(intent);
+                }
 
 //                Intent intent = new Intent(getActivity(), ZhuHuGuanLiActivity.class);
 //                startActivity(intent);
@@ -168,7 +176,7 @@ public class MyFragment extends BaseFragment {
         Button btn_yes = bottomView.findViewById(R.id.btn_yes);
         Button btn_no = bottomView.findViewById(R.id.btn_no);
 
-        final PopupWindow pop = new PopupWindow(bottomView, -1, -2);
+        final PopupWindow pop = new PopupWindow(bottomView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         pop.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         pop.setOutsideTouchable(false);
         pop.setFocusable(true);

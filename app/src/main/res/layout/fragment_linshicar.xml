@@ -23,9 +23,10 @@
             android:layout_marginLeft="@dimen/dp_20"
             />
         <TextView
+            android:id="@+id/tv_car_number_inshicar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="京Q123123"
+            android:hint="请输入车牌号码"
             android:background="@null"
             android:textColor="@color/blacks"
             android:layout_alignParentRight="true"

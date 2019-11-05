@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.luck.picture.lib.tools.ToastManage;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.PropertyChargesActivity;
 import com.sunshine.first.activity.StopCarActivity;
@@ -28,16 +29,21 @@ import java.util.List;
 public class GrideAdapter extends RecyclerView.Adapter<GrideAdapter.ViewHolder> {
     private Context context;
     private List<GrideBean> list = new ArrayList<>();
+    private int comm_id;
 
     public GrideAdapter(Context context, List<GrideBean> list) {
         this.context = context;
-        this.list=list;
+        this.list = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new GrideAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_gride_item, viewGroup, false));
+    }
+
+    public void setData(int comm_id) {
+        this.comm_id = comm_id;
     }
 
     @Override
@@ -49,14 +55,18 @@ public class GrideAdapter extends RecyclerView.Adapter<GrideAdapter.ViewHolder> 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (list.get(i).name.equals("停车费")){
-                        Intent intent=new Intent(context,StopCarActivity.class);
-                        context.startActivity(intent);
-                    }else if (list.get(i).name.equals("物业费")){
-                        Intent intent=new Intent(context,PropertyChargesActivity.class);
-                        context.startActivity(intent);
+                    if (comm_id > 0) {
+                        if (list.get(i).name.equals("停车费")) {
+                            Intent intent = new Intent(context, StopCarActivity.class);
+                            intent.putExtra("comm_id", comm_id);
+                            context.startActivity(intent);
+                        } else if (list.get(i).name.equals("物业费")) {
+                            Intent intent = new Intent(context, PropertyChargesActivity.class);
+                            context.startActivity(intent);
+                        }
+                    } else {
+                        ToastManage.s(context, "请选择社区!");
                     }
-
                 }
             });
 
@@ -72,8 +82,8 @@ public class GrideAdapter extends RecyclerView.Adapter<GrideAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
-       ImageView icon_water;
-       TextView text_money;
+        ImageView icon_water;
+        TextView text_money;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
