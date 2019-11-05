@@ -26,6 +26,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.Permission;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.sunshine.first.R;
+import com.sunshine.first.bean.AddAddressBean;
 import com.sunshine.first.bean.UploadImgBean;
 
 import org.json.JSONException;
@@ -81,6 +82,10 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
     ImageView icon_house_prove_tenement;//房本2
 
 
+    @BindView(R.id.icon_face_tenement)
+    ImageView icon_face_tenement;//人脸
+
+
     private PopupWindow pop;
     private int maxSelectNum = 1;
     private String path;
@@ -91,6 +96,7 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
     private RxPermissions rxPermissions;
     private String head_one, head_two;
     private String house_one, house_two;
+    private String faceImage;
 
     @Override
     protected void initData() {
@@ -111,10 +117,28 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
     private SinglePicker<String> hostPicker;//选择租客或者房主
 
     @OnClick({R.id.rel_sex_tenement, R.id.rel_relationship_tenement, R.id.rl_head_one_tenement, R.id.rl_head_two_tenement,
-            R.id.rl_houses_photo_tenement, R.id.rl_houses_photo_two_tenement, R.id.btn_submit_tenement})
+            R.id.rl_houses_photo_tenement, R.id.rl_houses_photo_two_tenement, R.id.btn_submit_tenement, R.id.rl_face_photo_tenement})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.rl_face_photo_tenement://人脸识别
+                rxPermissions = new RxPermissions(TenementActivity.this);
+                rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(new Consumer<Permission>() {
+                            @Override
+                            public void accept(Permission permission) {
+                                if (permission.granted) {// 用户已经同意该权限
+                                    //第一种方式，弹出选择和拍照的dialog
+                                    popwindow(10);
+
+                                    //第二种方式，直接进入相册，但是 是有拍照得按钮的
+//                                showAlbum();
+                                } else {
+                                    Toast.makeText(TenementActivity.this, "拒绝", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
             case R.id.btn_submit_tenement://提交
                 String phoneNumber = tv_phone_number_tenement.getText().toString().trim();
                 String name = et_name_tenement.getText().toString().trim();
@@ -129,6 +153,10 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
                 }
                 if (TextUtils.isEmpty(idNumber)) {
                     ToastManage.s(this, "请输入身份证号码！");
+                    return;
+                }
+                if (TextUtils.isEmpty(faceImage)) {
+                    ToastManage.s(this, "人脸识别照片必须上传！");
                     return;
                 }
 
@@ -154,11 +182,11 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
 
                 hashMap.put("sex", sex + "");//性别0男1女
 
-//                hashMap.put("face_recognition", );//人脸识别图片
-
-                hashMap.put("card_img_a", head_one);//身份证正面
-
-                hashMap.put("card_img_b", head_two);//身份证反面
+                hashMap.put("face_recognition", faceImage);//人脸识别图片
+                if (!TextUtils.isEmpty(head_one))
+                    hashMap.put("card_img_a", head_one);//身份证正面
+                if (!TextUtils.isEmpty(head_two))
+                    hashMap.put("card_img_b", head_two);//身份证反面
                 String photoUrl = "";
                 if (!TextUtils.isEmpty(house_one)) {
                     photoUrl = house_one;
@@ -169,7 +197,8 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
                     }
                     photoUrl += house_two;
                 }
-                hashMap.put("contract", photoUrl);//租房合同图片多个以逗号隔开
+                if (!TextUtils.isEmpty(photoUrl))
+                    hashMap.put("contract", photoUrl);//租房合同图片多个以逗号隔开
 
                 net(true, false).post(11, Api.OwnerVerify_URL, hashMap);
                 break;
@@ -323,8 +352,13 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
     public void success(int type, String data) {
         super.success(type, data);
         if (11 == type) {//提交
-
-
+            AddAddressBean addAddressBean = gson.fromJson(data, AddAddressBean.class);
+            if (addAddressBean != null) {
+                ToastManage.s(this, addAddressBean.message + "");
+                if ("200".equals(addAddressBean.error_code)) {
+                    finish();
+                }
+            }
         }
     }
 
@@ -456,6 +490,11 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
 
                 upLoad(path, 4);
 
+            } else if (requestCode == 10) {//人脸的
+                icon_face_tenement.setImageURI(uri);
+
+                upLoad(path, 10);
+
             }
         }
     }
@@ -525,6 +564,8 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
                                                     head_two = uploadImgBean.getData().getImgUrl();
                                                 } else if (type == 3) {
                                                     house_one = uploadImgBean.getData().getImgUrl();
+                                                } else if (type == 10) {
+                                                    faceImage = uploadImgBean.getData().getImgUrl();
                                                 } else {
                                                     house_two = uploadImgBean.getData().getImgUrl();
                                                 }

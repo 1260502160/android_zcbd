@@ -106,18 +106,19 @@
                 android:background="#ececec" />
 
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rel_sex_tenement"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_55"
-                android:layout_below="@+id/view_my_fangkejilu">
+                android:layout_below="@+id/view_my_fangkejilu"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_30"
                     android:layout_toRightOf="@+id/icon_fangkejilu"
                     android:text="性别"
                     android:textColor="#333333"
@@ -126,10 +127,12 @@
                 <TextView
                     android:id="@+id/tv_sex_tenement"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_40"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
                     android:hint="请选择性别"
                     android:textColor="#333333"
                     android:textSize="@dimen/sp_14" />
@@ -138,11 +141,10 @@
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginRight="@dimen/dp_8"
                     android:src="@mipmap/next" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:id="@+id/view_zhurenzheng_two"
@@ -197,11 +199,12 @@
                 android:background="#ececec" />
 
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rel_relationship_tenement"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_55"
-                android:layout_below="@+id/view_zhurenzheng_three">
+                android:layout_below="@+id/view_zhurenzheng_three"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,11 +218,13 @@
 
                 <TextView
                     android:id="@+id/tv_choose_relation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_40"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:gravity="right|center"
                     android:text="请选择"
                     android:textColor="#333333"
                     android:textSize="@dimen/sp_14" />
@@ -228,10 +233,9 @@
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginRight="@dimen/dp_8"
                     android:src="@mipmap/next" />
-            </RelativeLayout>
+            </LinearLayout>
 
 
             <View
@@ -297,6 +301,59 @@
             android:background="@drawable/shape_login"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="上传人脸照片"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/sp_12" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="(必填)"
+                    android:textColor="#B3B3B3"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20">
+
+                <RelativeLayout
+                    android:id="@+id/rl_face_photo_tenement"
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_90"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:background="@drawable/shape_grey">
+
+                    <ImageView
+                        android:id="@+id/icon_face_tenement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_add" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/icon_face_tenement"
+                        android:layout_centerInParent="true"
+                        android:text="人脸照片" />
+
+                </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
