@@ -112,7 +112,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         });
 
         //单元号
-        relZhurenzhengLouhao.setOnClickListener(new View.OnClickListener() {
+        relativeLouceng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (louId == -1) {
@@ -160,7 +160,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
 //        });
 
         //楼层
-        relativeLouceng.setOnClickListener(new View.OnClickListener() {
+        relZhurenzhengLouhao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (danyuanId == -1) {
@@ -289,7 +289,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
                 public void onItemPicked(int index, String item) {
                     textShenfen.setText(item);
                     //  设置成员变量  保存 楼号的louId    = index
-                    louId = index;
+                    louId = louHaoBeanData.get(index).getId();
                 }
             });
             picker1.show();
@@ -322,15 +322,15 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
             picker2.setOnSingleWheelListener(new OnSingleWheelListener() {
                 @Override
                 public void onWheeled(int index, String item) {
-                    textLouhao.setText(item);
+                    textlouCengId.setText(item);
                 }
             });
             picker2.setOnItemPickListener(new OnItemPickListener<String>() {
                 @Override
                 public void onItemPicked(int index, String item) {
-                    textLouhao.setText(item);
+                    textlouCengId.setText(item);
                     //  设置成员变量  保存 单元号的danyuanId    = index
-                    danyuanId = index;
+                    danyuanId = unitNumberData.get(index).getId();
                 }
             });
             picker2.show();
@@ -371,7 +371,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
                 public void onItemPicked(int index, String item) {
                     textDanyuanhao.setText(item);
                     //  设置成员变量  保存 门牌号的menId    = index
-                    menId = index;
+                    menId = housenumberBeanData.get(index).getId();
                 }
             });
             picker3.show();
@@ -401,15 +401,15 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
             picker4.setOnSingleWheelListener(new OnSingleWheelListener() {
                 @Override
                 public void onWheeled(int index, String item) {
-                    textlouCengId.setText(item);
+                    textLouhao.setText(item);
                 }
             });
             picker4.setOnItemPickListener(new OnItemPickListener<String>() {
                 @Override
                 public void onItemPicked(int index, String item) {
-                    textlouCengId.setText(item);
+                    textLouhao.setText(item);
                     //  设置成员变量  保存 楼号的louId    = index
-                    loucengId = index;
+                    loucengId = louCengBeanData.get(index).getId();
                 }
             });
             picker4.show();
