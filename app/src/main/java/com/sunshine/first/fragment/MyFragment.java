@@ -137,7 +137,7 @@ public class MyFragment extends BaseFragment {
                 if (is_verify == 0) {
                     intent = new Intent(getActivity(), HostmanRenActivity.class);
                     startActivity(intent);
-                } else if (is_verify == 1) {
+                } else  {
                     intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
                     startActivity(intent);
                 }
