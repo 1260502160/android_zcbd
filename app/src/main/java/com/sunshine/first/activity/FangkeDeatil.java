@@ -1,12 +1,9 @@
 package com.sunshine.first.activity;
 
-import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abner.ming.base.model.Api;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.sunshine.first.BaseAppCompatActivity;
 import com.sunshine.first.R;
@@ -17,10 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-/*
-访客详情
+/**
+ * 访客详情
  */
 public class FangkeDeatil extends BaseAppCompatActivity {
 
@@ -34,8 +30,6 @@ public class FangkeDeatil extends BaseAppCompatActivity {
     TextView tvIdnumber;
     @BindView(R.id.icon_head)
     ImageView iconHead;
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.icon_china)
     ImageView iconChina;
     @BindView(R.id.icon_home_zm)
@@ -50,43 +44,37 @@ public class FangkeDeatil extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
-        ButterKnife.bind(this);
+        setDefaultTitle("住户信息");
     }
 
     @Override
     protected void initData() {
-        iconBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         String token = SharePreferenceHelper.getInstance(FangkeDeatil.this).getString("token", "");
-        Map<String,String> map = new HashMap<>();
-        map.put("token",token);
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
         int id = getIntent().getIntExtra("id", -1);
-        map.put("id",id+"");
-        net(false,false).post(1,Api.GetResidentsDetail_URL,map);
+        map.put("id", id + "");
+        net(false, false).post(1, Api.GetResidentsDetail_URL, map);
 
     }
 
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if(type==1){
+        if (type == 1) {
             Gson gson = new Gson();
             GetResidentsDetailBean getResidentsDetailBean = gson.fromJson(data, GetResidentsDetailBean.class);
             getResidentsDetailBeanData = getResidentsDetailBean.getData();
             tvName.setText(getResidentsDetailBeanData.getResidents_name());
             tvSex.setText(getResidentsDetailBeanData.getSex());
             sex = getResidentsDetailBeanData.getSex();
-            if (sex==0){
+            if (sex == 0) {
                 tvSex.setText("男");
-            }else if (sex==1){
+            } else if (sex == 1) {
                 tvSex.setText("女");
             }
-            tvPhoneNumber.setText(getResidentsDetailBeanData.getResidents_mobile()+"");
-            tvIdnumber.setText(getResidentsDetailBeanData.getIdentity_card_number()+"");
+            tvPhoneNumber.setText(getResidentsDetailBeanData.getResidents_mobile() + "");
+            tvIdnumber.setText(getResidentsDetailBeanData.getIdentity_card_number() + "");
 
         }
     }
