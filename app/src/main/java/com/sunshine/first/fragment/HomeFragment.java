@@ -131,6 +131,23 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    /**
+     * 为了更好的体验效果建议在下面两个生命周期中调用下面的方法
+     **/
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (banner != null)
+            banner.startAutoPlay();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (banner != null)
+            banner.stopAutoPlay();
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home;
@@ -143,7 +160,7 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.banner, R.id.linear_my_one, R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_four, R.id.tv_hot_store, R.id.home_recycle,R.id.icon_visitor_registration,R.id.small_xiaofang})
+    @OnClick({R.id.banner, R.id.linear_my_one, R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_four, R.id.tv_hot_store, R.id.home_recycle, R.id.icon_visitor_registration, R.id.small_xiaofang})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.banner:
@@ -171,10 +188,10 @@ public class HomeFragment extends BaseFragment {
             case R.id.icon_owner_certification:
                 break;
             case R.id.icon_visitor_registration:
-                ToastManage.s(getActivity(),"暂未开通！");
+                ToastManage.s(getActivity(), "暂未开通！");
                 break;
             case R.id.small_xiaofang:
-                ToastManage.s(getActivity(),"暂未开通！");
+                ToastManage.s(getActivity(), "暂未开通！");
                 break;
 
         }

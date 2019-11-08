@@ -133,14 +133,14 @@ public class MyFragment extends BaseFragment {
             case R.id.linear_my_one://房主认证
 //                popwindow();
 
-                int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
-                if (is_verify == 0) {
-                    intent = new Intent(getActivity(), HostmanRenActivity.class);
-                    startActivity(intent);
-                } else  {
+//                int is_verify = SharePreferenceHelper.getInstance(getContext()).getInt("is_verify", -1);
+//                if (is_verify == 0) {
+//                    intent = new Intent(getActivity(), HostmanRenActivity.class);
+//                    startActivity(intent);
+//                } else  {
                     intent = new Intent(getContext(), ZhuHuGuanLiActivity.class);
                     startActivity(intent);
-                }
+//                }
 
 //                Intent intent = new Intent(getActivity(), ZhuHuGuanLiActivity.class);
 //                startActivity(intent);

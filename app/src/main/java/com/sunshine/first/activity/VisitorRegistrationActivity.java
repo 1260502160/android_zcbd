@@ -102,8 +102,6 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
     RelativeLayout relativeVisitorPhonenumber;
     @BindView(R.id.relative_take_photo)
     RelativeLayout relativeTakePhoto;
-    @BindView(R.id.btn_submit_visitor)
-    Button btnSubmitVisitor;
     @BindView(R.id.linear_home_ren)
     LinearLayout linearHomeRen;
     private View iconback;
@@ -150,9 +148,9 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
             relativeHomeRen.setVisibility(View.GONE);
             linearHomeRen.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(VisitorRegistrationActivity.this, YeZhuRenZhengActivity.class);
-                    startActivity(intent);
+                public void onClick(View view) {//房屋认证
+                    Intent intent = new Intent(VisitorRegistrationActivity.this, HostmanRenActivity.class);
+                    startActivityForResult(intent,89);
                 }
             });
         }
@@ -167,65 +165,6 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
             }
         });
 
-        btnSubmitVisitor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                VisitorBean visitorBean = new VisitorBean();
-                String token = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getString("token", "");
-                String time = tvTime.getText().toString();
-                String name = editIvationame.getText().toString();
-                String phone = editIvphone.getText().toString();
-                String carone = editCarOne.getText().toString();
-                String cartwo = editCarTwo.getText().toString();
-                String carthree = editCarThree.getText().toString();
-                String carfour = editCarFour.getText().toString();
-                String carfive = editCarFive.getText().toString();
-                String carsix = editCarSix.getText().toString();
-                String carseven = editCarSeven.getText().toString();
-                String careight = editCarEight.getText().toString();
-                String carnine = editCarNine.getText().toString();
-                if (TextUtils.isEmpty(time)){
-                    ToastManage.s(VisitorRegistrationActivity.this,"受访时间不能为空！");
-                    return;
-                }
-                if (TextUtils.isEmpty(name)){
-                    ToastManage.s(VisitorRegistrationActivity.this,"受访姓名不能为空！");
-                    return;
-                }
-                if (TextUtils.isEmpty(phone)){
-                    ToastManage.s(VisitorRegistrationActivity.this,"受访手机号不能为空！");
-                    return;
-                }
-                if (TextUtils.isEmpty(carone)){
-                    ToastManage.s(VisitorRegistrationActivity.this,"车牌号不能为空！");
-                    return;
-                }
-
-                /*  map.put("community_id",1+"");*/
-                //map.put("building_id",1+"");
-               /* map.put("unitdoor_id",10+"");
-                map.put("floors_id",1+"");
-                map.put("houses_id",27+"");*/
-
-                visitorBean.setToken(token);
-                visitorBean.setHouses_id(houses_id + "");
-                visitorBean.setFloors_id(floors_id + "");
-                visitorBean.setBuilding_id(building_id + "");
-                visitorBean.setUnitdoor_id(unitdoor_id + "");
-                visitorBean.setCommunity_id(community_id + "");
-                visitorBean.setVisi_imgs(iconTwo);
-                visitorBean.setCar_num(carone + cartwo + carthree + carfour + carfive + carsix + carseven + careight + carnine);
-                visitorBean.setTime(time);
-                visitorBean.setVisi_name(name);
-                visitorBean.setVisi_mobile(phone);
-
-                RequestBody body = (RequestBody) buildRequestBody(visitorBean);
-                net(false, false).post(3, Api.VisitorAdd_URL, body);
-                //net(false, false).post(3, Api.VisitorAdd_URL,map);
-
-            }
-        });
 
         iconHead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -438,6 +377,11 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
 
             }
         }
+
+        if(requestCode==89){//回来请求房屋列表
+            // TODO: 2019-11-05
+
+        }
     }
 
 
@@ -482,7 +426,61 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
             case R.id.icon_next:
                 break;
 
-            case R.id.btn_submit_visitor:
+            case R.id.btn_submit_visitor://受访  提交
+                VisitorBean visitorBean = new VisitorBean();
+                String token = SharePreferenceHelper.getInstance(VisitorRegistrationActivity.this).getString("token", "");
+                String time = tvTime.getText().toString();
+                String name = editIvationame.getText().toString();
+                String phone = editIvphone.getText().toString();
+                String carone = editCarOne.getText().toString();
+                String cartwo = editCarTwo.getText().toString();
+                String carthree = editCarThree.getText().toString();
+                String carfour = editCarFour.getText().toString();
+                String carfive = editCarFive.getText().toString();
+                String carsix = editCarSix.getText().toString();
+                String carseven = editCarSeven.getText().toString();
+                String careight = editCarEight.getText().toString();
+                String carnine = editCarNine.getText().toString();
+                if (TextUtils.isEmpty(time)) {
+                    ToastManage.s(VisitorRegistrationActivity.this, "受访时间不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(name)) {
+                    ToastManage.s(VisitorRegistrationActivity.this, "受访姓名不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(phone)) {
+                    ToastManage.s(VisitorRegistrationActivity.this, "受访手机号不能为空！");
+                    return;
+                }
+                if (TextUtils.isEmpty(carone)) {
+                    ToastManage.s(VisitorRegistrationActivity.this, "车牌号不能为空！");
+                    return;
+                }
+
+                /*  map.put("community_id",1+"");*/
+                //map.put("building_id",1+"");
+               /* map.put("unitdoor_id",10+"");
+                map.put("floors_id",1+"");
+                map.put("houses_id",27+"");*/
+
+                visitorBean.setToken(token);
+                visitorBean.setHouses_id(houses_id + "");
+                visitorBean.setFloors_id(floors_id + "");
+                visitorBean.setBuilding_id(building_id + "");
+                visitorBean.setUnitdoor_id(unitdoor_id + "");
+                visitorBean.setCommunity_id(community_id + "");
+                visitorBean.setVisi_imgs(iconTwo);
+                visitorBean.setCar_num(carone + cartwo + carthree + carfour + carfive + carsix + carseven + careight + carnine);
+                visitorBean.setTime(time);
+                visitorBean.setVisi_name(name);
+                visitorBean.setVisi_mobile(phone);
+
+                RequestBody body = (RequestBody) buildRequestBody(visitorBean);
+                net(false, false).post(3, Api.VisitorAdd_URL, body);
+                //net(false, false).post(3, Api.VisitorAdd_URL,map);
+
+
                 break;
         }
 

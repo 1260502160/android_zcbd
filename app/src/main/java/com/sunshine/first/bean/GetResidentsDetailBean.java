@@ -49,7 +49,7 @@ public class GetResidentsDetailBean implements Serializable{
     }
 
     public static class DataBean {
-        /**
+          /**
          * id : 2
          * residents_name : 张四
          * residents_mobile : 15236554686

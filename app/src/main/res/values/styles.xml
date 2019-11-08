@@ -33,6 +33,7 @@
         <item name="windowActionBar">false</item>
             //隐藏标题栏
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
             //状态栏透明色<!--API最少19-->
         <item name="android:windowTranslucentStatus">true</item>
     </style>

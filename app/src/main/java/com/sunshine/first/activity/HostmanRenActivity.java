@@ -75,7 +75,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
     private HousenumberBean housenumberBean;
     private List<HousenumberBean.DataBean> housenumberBeanData;
 
-    private int louId=-1, danyuanId=-1, menId=-1, loucengId = -1;
+    private int louId = -1, danyuanId = -1, menId = -1, loucengId = -1;
     private List<LouCengBean.DataBean> louCengBeanData;
     private String shenfen;
     private int TO_CHOOSE_COMMITY_ACTIVITY_REQUEST_CODE = 10001;
@@ -88,6 +88,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
+
         setDefaultTitle("房主认证");
     }
 
@@ -177,11 +178,11 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (menId == -1 || xiaoquId == -1 ||louId == -1 ||danyuanId == -1 ||loucengId == -1 ||shenfen==null ||shenfen.isEmpty())  {
+                if (menId == -1 || xiaoquId == -1 || louId == -1 || danyuanId == -1 || loucengId == -1 || shenfen == null || shenfen.isEmpty()) {
                     Toast.makeText(HostmanRenActivity.this, "请将资料填写完整", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (textMenpaihao.getText().equals("租客")) {
+                if (textMenpaihao.getText().equals("房主")) {
                     OwnerVerifyBean ownerVerifyBean = new OwnerVerifyBean();
                     ownerVerifyBean.setBuilding_id(louId);
                     ownerVerifyBean.setCommunity_id(xiaoquId);
@@ -194,8 +195,13 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
                     intent.putExtra("ownerVerifyBean", ownerVerifyBean);
                     intent.putExtra("relationship", shenfen);
                     startActivity(intent);
-                } else if (textMenpaihao.getText().equals("房主")) {
+                } else if (textMenpaihao.getText().equals("租客")) {
                     Intent intent = new Intent(HostmanRenActivity.this, TenementActivity.class);
+                    intent.putExtra("community_id", xiaoquId);//小区id
+                    intent.putExtra("building_id", louId);//楼号i
+                    intent.putExtra("unitdoor_id", danyuanId);//单元id
+                    intent.putExtra("floors_id", loucengId);//楼层id
+                    intent.putExtra("houses_id", menId);//门牌号id
                     startActivity(intent);
                 }
 

@@ -45,6 +45,7 @@
             android:drawableLeft="@mipmap/my"
             android:drawablePadding="@dimen/dp_12"
             android:hint="@string/edit_account_number"
+            android:inputType="phone"
             android:textColorHint="#999999"
             android:textSize="@dimen/sp_14" />
 
@@ -66,6 +67,7 @@
             android:drawableLeft="@mipmap/lock"
             android:drawablePadding="@dimen/dp_12"
             android:hint="@string/edit_pass"
+            android:inputType="textPassword"
             android:textColorHint="#999999"
             android:textSize="@dimen/sp_14" />
 

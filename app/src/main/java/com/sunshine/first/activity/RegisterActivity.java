@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.luck.picture.lib.tools.ToastManage;
@@ -21,10 +20,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 注册页面
+ */
 public class RegisterActivity extends BaseAppCompatActivity {
+
     @BindView(R.id.edit_num)
     EditText editNum;
     @BindView(R.id.btn_yancode)
@@ -35,6 +37,7 @@ public class RegisterActivity extends BaseAppCompatActivity {
     EditText editCode;
     @BindView(R.id.edit_surenewpass)
     EditText editSurenewpass;
+
     private String code, phone;
     private String newpass;
     private String surepass;
@@ -44,36 +47,6 @@ public class RegisterActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initData() {
-
-
-        btnYancode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                timer = new CountDownTimer(60000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        btnYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
-                        btnYancode.setClickable(false);
-                        btnYancode.setBackgroundResource(R.drawable.shape_line);
-                        btnYancode.setText("(" + millisUntilFinished / 1000 + "s)");
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        btnYancode.setText("重新获取验证码");
-                        btnYancode.setClickable(true);
-                        btnYancode.setBackgroundColor(Color.parseColor("#ffffff"));
-                    }
-                };
-
-                Map<String, String> map = new HashMap<>();
-                phone = editNum.getText().toString();
-                map.put("phone", phone);
-                net(false, false).post(2, Api.SendSms_URL, map);
-
-
-            }
-        });
 
     }
 
@@ -88,19 +61,39 @@ public class RegisterActivity extends BaseAppCompatActivity {
         return R.layout.layout_register;
     }
 
-    @OnClick({R.id.edit_num, R.id.btn_yancode, R.id.edit_newpass, R.id.edit_surenewpass, R.id.btn_register})
+    @OnClick({R.id.btn_yancode, R.id.btn_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.edit_num:
-                break;
-            case R.id.btn_yancode:
-                break;
-            case R.id.edit_newpass:
-                break;
-            case R.id.edit_surenewpass:
-                break;
-            case R.id.btn_register:
+            case R.id.btn_yancode://获取验证码
+                phone = editNum.getText().toString();
+                if (TextUtils.isEmpty(phone)) {
+                    ToastManage.s(this, "手机号不可为空！");
+                    return;
+                }
+                timer = new CountDownTimer(60000, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        btnYancode.setBackgroundColor(Color.parseColor("#FB9EA7"));
+                        btnYancode.setClickable(false);
+                        btnYancode.setBackgroundResource(R.drawable.shape_line);
+                        btnYancode.setText("(" + millisUntilFinished / 1000 + "s)");
+                    }
 
+                    @Override
+                    public void onFinish() {
+                        btnYancode.setBackgroundResource(R.drawable.shape_blue);
+                        btnYancode.setText("重新获取验证码");
+                        btnYancode.setClickable(true);
+                        btnYancode.setBackgroundColor(Color.parseColor("#ffffff"));
+                    }
+                };
+
+                Map<String, String> map = new HashMap<>();
+                phone = editNum.getText().toString();
+                map.put("phone", phone);
+                net(false, false).post(2, Api.SendSms_URL, map);
+                break;
+            case R.id.btn_register://注册
                 phone = editNum.getText().toString();
                 code = editCode.getText().toString();
                 newpass = editNewpass.getText().toString();
@@ -124,12 +117,12 @@ public class RegisterActivity extends BaseAppCompatActivity {
                 }
                 if (phone != null && code != null && newpass != null && surepass != null) {
 
-                    Map<String, String> map = new HashMap<>();
-                    map.put("mobile", phone);
-                    map.put("code", code);
-                    map.put("pwd", newpass);
-                    map.put("repwd", surepass);
-                    net(false, false).post(1, Api.Register_URL, map);
+                    hashMap.clear();
+                    hashMap.put("mobile", phone);
+                    hashMap.put("code", code);
+                    hashMap.put("pwd", newpass);
+                    hashMap.put("repwd", surepass);
+                    net(false, false).post(1, Api.Register_URL, hashMap);
 
                 } else {
                     Toast.makeText(RegisterActivity.this, "输入的内容不能为空！", Toast.LENGTH_SHORT).show();
@@ -145,10 +138,9 @@ public class RegisterActivity extends BaseAppCompatActivity {
         if (type == 1) {
             gson = new Gson();
             registerBean = gson.fromJson(data, RegisterBean.class);
-            if (registerBean.isSuccess()) {
-                Toast.makeText(RegisterActivity.this, registerBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(RegisterActivity.this, registerBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, registerBean.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            if ("200".equals(registerBean.getError_code())) {
+                finish();
             }
 
         }

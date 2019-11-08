@@ -71,12 +71,14 @@
 
                 <Button
                     android:id="@+id/btn_yancode"
-                    android:layout_width="@dimen/dp_80"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_30"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp_18"
                     android:background="@drawable/shape_blue"
+                    android:paddingLeft="@dimen/dp_3"
+                    android:paddingRight="@dimen/dp_3"
                     android:text="获取验证码"
                     android:textColor="#06A0F0"
                     android:textSize="@dimen/sp_12" />
@@ -150,6 +152,7 @@
                 android:background="@null"
                 android:gravity="right|center_vertical"
                 android:hint="输入新密码"
+                android:inputType="textPassword"
                 android:paddingRight="@dimen/dp_18"
                 android:textColor="#999"
                 android:textSize="@dimen/sp_16" />
@@ -183,6 +186,7 @@
                 android:background="@null"
                 android:gravity="right|center_vertical"
                 android:hint="@string/text_sure_pass"
+                android:inputType="textPassword"
                 android:paddingRight="@dimen/dp_18"
                 android:textColor="#999"
                 android:textSize="@dimen/sp_16" />

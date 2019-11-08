@@ -179,10 +179,11 @@
 
             <EditText
                 android:id="@+id/edit_ivationame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
+                android:layout_toLeftOf="@+id/edit_phone"
                 android:background="@null"
                 android:hint="请输入访客姓名"
                 android:inputType="text"
@@ -213,14 +214,14 @@
 
             <EditText
                 android:id="@+id/edit_ivphone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:background="@null"
+                android:hint="请输入访客手机号"
                 android:inputType="phone"
                 android:maxLength="11"
-                android:hint="请输入访客手机号"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/sp_16" />
 
@@ -276,69 +277,69 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/shape_line"
                 android:gravity="center"
-                android:maxLength="1"
-                android:hint="省" />
+                android:hint="省"
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/edit_car_two"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:maxLength="1"
                 android:background="@drawable/shape_line"
-                android:gravity="center" />
+                android:gravity="center"
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/edit_car_three"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:maxLength="1"
                 android:background="@drawable/shape_line"
-                android:gravity="center" />
+                android:gravity="center"
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/edit_car_four"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:maxLength="1"
                 android:background="@drawable/shape_line"
-                android:gravity="center" />
+                android:gravity="center"
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/edit_car_five"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:maxLength="1"
                 android:background="@drawable/shape_line"
-                android:gravity="center" />
+                android:gravity="center"
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/edit_car_six"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:maxLength="1"
-                android:background="@drawable/shape_line" />
+                android:background="@drawable/shape_line"
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/edit_car_seven"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
-                android:maxLength="1"
-                android:background="@drawable/shape_line" />
+                android:background="@drawable/shape_line"
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/edit_car_eight"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_40"
-                android:maxLength="1"
                 android:layout_marginLeft="@dimen/dp_6"
                 android:background="@drawable/shape_line"
-                android:gravity="center" />
+                android:gravity="center"
+                android:maxLength="1" />
 
 
             <LinearLayout

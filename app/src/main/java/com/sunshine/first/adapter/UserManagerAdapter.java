@@ -2,11 +2,13 @@ package com.sunshine.first.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunshine.first.R;
@@ -25,9 +27,15 @@ import butterknife.ButterKnife;
  */
 public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.UserManagerViewHolder> {
     private Context context;
+    private int state = 0;
     private List<HouseListBean.DataListBean> houseListBeanData;
 
     public UserManagerAdapter(Context context) {
+        this.context = context;
+    }
+
+    public UserManagerAdapter(Context context, int state) {
+        this.state = state;
         this.context = context;
     }
 
@@ -51,24 +59,32 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
             holder.tv_address_home_list.setText(dataBean.getBuilding_name() + dataBean.getUnitdoor_name() + dataBean.getFloors_name() + "");
 
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (state == 1) {
+            holder.iv_right_home_list.setVisibility(View.GONE);
+            holder.tv_right_home_list.setVisibility(View.VISIBLE);
+        } else {
+            holder.iv_right_home_list.setVisibility(View.VISIBLE);
+            holder.tv_right_home_list.setVisibility(View.GONE);
 
-                int type = dataBean.getType();
-                if (1 == type) {//房主
-                    Intent intent = new Intent(context, HouseHoldIdentity.class);
-                    intent.putExtra("id", houseListBeanData.get(position).getId());
-                    context.startActivity(intent);
-                } else {//房客
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                    Intent intent = new Intent(context, FangkeActivity.class);
-                    intent.putExtra("id", houseListBeanData.get(position).getId());
-                    context.startActivity(intent);
+                    int type = dataBean.getType();
+                    if (1 == type) {//房主
+                        Intent intent = new Intent(context, HouseHoldIdentity.class);
+                        intent.putExtra("id", houseListBeanData.get(position).getId());
+                        context.startActivity(intent);
+                    } else {//房客
+                        Intent intent = new Intent(context, FangkeActivity.class);
+                        intent.putExtra("id", houseListBeanData.get(position).getId());
+                        context.startActivity(intent);
+                    }
+
                 }
+            });
+        }
 
-            }
-        });
     }
 
     @Override
@@ -81,6 +97,11 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
         TextView tv_name_home_list;
         @BindView(R.id.tv_address_home_list)
         TextView tv_address_home_list;
+
+        @BindView(R.id.tv_right_home_list)
+        TextView tv_right_home_list;
+        @BindView(R.id.iv_right_home_list)
+        ImageView iv_right_home_list;
 
         public UserManagerViewHolder(@NonNull View itemView) {
             super(itemView);
