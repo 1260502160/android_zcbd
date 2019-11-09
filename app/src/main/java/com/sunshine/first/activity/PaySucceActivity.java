@@ -14,8 +14,6 @@ import butterknife.OnClick;
 
 public class PaySucceActivity extends AppCompatActivity {
 
-    @BindView(R.id.icon_back)
-    ImageView iconBack;
     @BindView(R.id.btn_lookdeail)
     Button btnLookdeail;
     @BindView(R.id.btn_homeback)
@@ -28,12 +26,9 @@ public class PaySucceActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.icon_back, R.id.btn_lookdeail, R.id.btn_homeback})
+    @OnClick({R.id.btn_lookdeail, R.id.btn_homeback})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.icon_back:
-                finish();
-                break;
             case R.id.btn_lookdeail:
                 break;
             case R.id.btn_homeback:

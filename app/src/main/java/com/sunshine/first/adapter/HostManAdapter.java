@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sunshine.first.R;
+import com.sunshine.first.activity.HouseHoldIdentity;
 import com.sunshine.first.activity.UserMangerActivity;
 import com.sunshine.first.bean.GetResidentsListBean;
+import com.sunshine.first.fragment.WaitApproveFragment;
 
 import java.util.List;
 
@@ -21,9 +24,15 @@ import butterknife.ButterKnife;
 public class HostManAdapter extends RecyclerView.Adapter<HostManAdapter.Viewholder> {
     private Context context;
     private List<GetResidentsListBean.DataBean> residentsListBeanData;
+    private WaitApproveFragment waitApproveFragment;
 
     public HostManAdapter(Context context) {
         this.context = context;
+    }
+
+    public HostManAdapter(Context context, WaitApproveFragment waitApproveFragment) {
+        this.context = context;
+        this.waitApproveFragment = waitApproveFragment;
     }
 
     public void setData(List<GetResidentsListBean.DataBean> residentsListBeanData) {
@@ -45,6 +54,7 @@ public class HostManAdapter extends RecyclerView.Adapter<HostManAdapter.Viewhold
 
             viewholder.textName.setText(dataBean.getResidents_name());
             viewholder.tvPhone.setText(dataBean.getResidents_mobile() + "");
+            Glide.with(context).load(dataBean.getFace_recognition()).into(viewholder.iconAuthenticaed);
             viewholder.iconDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -53,6 +63,9 @@ public class HostManAdapter extends RecyclerView.Adapter<HostManAdapter.Viewhold
                     if (context instanceof UserMangerActivity) {
                         UserMangerActivity userMangerActivity = (UserMangerActivity) context;
                         userMangerActivity.deleUserInfo(i);
+                    }
+                    if (waitApproveFragment != null) {
+                        waitApproveFragment.deleUserInfo(i);
                     }
                 }
             });

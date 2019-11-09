@@ -117,10 +117,11 @@ public class HouseHoldIdentity extends BaseAppCompatActivity {
         });
 
         String token = SharePreferenceHelper.getInstance(this).getString("token", "");
+        int id = getIntent().getIntExtra("id", -1);
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
-        map.put("id", "1");
-        map.put("status", "1");
+        map.put("id", id + "");
+        map.put("status", 1 + "");
         net(false, false).post(1, Api.GetResidentsList_URL, map);
 
 
@@ -197,4 +198,6 @@ public class HouseHoldIdentity extends BaseAppCompatActivity {
         }
 
     }
+
+
 }

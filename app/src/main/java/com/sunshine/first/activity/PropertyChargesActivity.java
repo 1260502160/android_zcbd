@@ -51,6 +51,7 @@ public class PropertyChargesActivity extends BaseAppCompatActivity{
             case R.id.zfpay_check_balance:
                 break;
             case R.id.btn_rightpay:
+
                 intent = new Intent(PropertyChargesActivity.this, PaySucceActivity.class);
                 startActivity(intent);
                 break;

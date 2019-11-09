@@ -26,6 +26,7 @@ public class WaitApproveFragment extends BaseFragment {
     RecyclerView recycleFangzhu;
     Unbinder unbinder;
     private HostManAdapter hostManAdapter;
+    private List<GetResidentsListBean.DataBean> getResidentsListBeanData;
 
     @Override
     public int getLayoutId() {
@@ -42,26 +43,39 @@ public class WaitApproveFragment extends BaseFragment {
         //设置布局管理器
         recycleFangzhu.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        hostManAdapter = new HostManAdapter(getActivity());
+        hostManAdapter = new HostManAdapter(getActivity(), this);
         //设置Adapter
         recycleFangzhu.setAdapter(hostManAdapter);
 
         int id = getActivity().getIntent().getIntExtra("id", -1);
-        Map<String,String> map = new HashMap<>();
-        map.put("token",getToken());
-        map.put("id",id+"");
-        map.put("status",2+"");
-        net(false,false).post(1,Api.GetResidentsList_URL,map);
+        Map<String, String> map = new HashMap<>();
+        map.put("token", getToken());
+        map.put("id", id + "");
+        map.put("status", 2 + "");
+        net(false, false).post(1, Api.GetResidentsList_URL, map);
     }
 
     @Override
     public void success(int type, String data) {
         super.success(type, data);
-        if (type==1){
+        if (type == 1) {
 
             GetResidentsListBean getResidentsListBean = gson.fromJson(data, GetResidentsListBean.class);
-            List<GetResidentsListBean.DataBean> getResidentsListBeanData = getResidentsListBean.getData();
+            getResidentsListBeanData = getResidentsListBean.getData();
             hostManAdapter.setData(getResidentsListBeanData);
+        }
+    }
+
+    /**
+     * 在list的Item点击事件中传入item的索引  通过索引获取到当天item对应的user的id 然后请求接口执行删除操作
+     */
+    public void deleUserInfo(int index) {
+        if (getResidentsListBeanData != null && index < getResidentsListBeanData.size()) {
+
+            HashMap<String, String> map = new HashMap<>();
+            map.put("token", getToken());
+            map.put("id", getResidentsListBeanData.get(index).getId() + "");
+            net(false, false).post(2, Api.Del_Residents, map);
         }
     }
 }

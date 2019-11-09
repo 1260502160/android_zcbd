@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -56,7 +57,7 @@ public class LinShiCarFragment extends BaseFragment {
     @BindView(R.id.btn_right_pay)
     Button btnRightPay;
     @BindView(R.id.tv_car_number_inshicar)
-    TextView tv_car_number_inshicar;
+    EditText tv_car_number_inshicar;
 
 
     Unbinder unbinder;

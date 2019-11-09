@@ -36,6 +36,7 @@ public class BianMinJiaoFeiActivity extends BaseAppCompatActivity {
     private TextAdapter textAdapter;
     private GridLayoutManager gridLayoutManager;
     private GrideAdapter grideAdapter;
+    private int community_id;
 
     @Override
     public int getLayoutId() {
@@ -56,6 +57,7 @@ public class BianMinJiaoFeiActivity extends BaseAppCompatActivity {
             @Override
             public void onClick(View view) {
                 intent = new Intent(BianMinJiaoFeiActivity.this, PayRecordActivity.class);
+
                 startActivity(intent);
             }
         });
@@ -131,6 +133,11 @@ public class BianMinJiaoFeiActivity extends BaseAppCompatActivity {
             houseListBean = gson.fromJson(data, HouseListBean.class);
             if (houseListBean.getData() != null && houseListBean.getData().getList() != null && houseListBean.getData().getList().size() > 0) {
                 textAdapter.setData(houseListBean.getData().getList());
+                community_id = houseListBean.getData().getList().get(0).getCommunity_id();
+                if (grideAdapter!=null){
+                    grideAdapter.setData(community_id);
+                }
+
 
             }
         }
