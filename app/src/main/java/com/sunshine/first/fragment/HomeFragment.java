@@ -56,6 +56,8 @@ public class HomeFragment extends BaseFragment {
     ImageView iconVisitorRegistration;
     @BindView(R.id.small_xiaofang)
     ImageView smallXiaofang;
+    @BindView(R.id.text_more_store)
+    TextView text_more_store;
 
     Unbinder unbinder;
     /* *//* @BindView(R.id.icon_yezhurenzheng)
@@ -160,7 +162,7 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.banner, R.id.linear_my_one, R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_four, R.id.tv_hot_store, R.id.home_recycle, R.id.icon_visitor_registration, R.id.small_xiaofang})
+    @OnClick({R.id.banner, R.id.linear_my_one, R.id.linear_my_two, R.id.linear_my_three, R.id.linear_my_four, R.id.tv_hot_store, R.id.home_recycle, R.id.icon_visitor_registration, R.id.small_xiaofang,R.id.text_more_store})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.banner:
@@ -184,6 +186,10 @@ public class HomeFragment extends BaseFragment {
             case R.id.tv_hot_store:
                 break;
             case R.id.home_recycle:
+                break;
+            case R.id.text_more_store:
+                Intent intent = new Intent(getActivity(), OnlineStoreActivity.class);
+                startActivity(intent);
                 break;
             case R.id.icon_owner_certification:
                 break;

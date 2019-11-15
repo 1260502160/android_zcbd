@@ -55,7 +55,7 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.GoodsViewHol
         if (listBean != null) {
             holder.tv_store_name.setText(listBean.getGoods_describe());
             holder.tv_store_price.setText(listBean.getWholesale_price());
-            holder.tv_trade_price.setText(listBean.getRetail_price());
+            holder.tv_trade_price.setText("批发价:"+listBean.getRetail_price());
             Glide.with(mContext).load(listBean.getGoods_image()).into(holder.icon_goods);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {

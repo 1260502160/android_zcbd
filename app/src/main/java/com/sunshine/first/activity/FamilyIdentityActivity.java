@@ -321,7 +321,7 @@ public class FamilyIdentityActivity extends BaseAppCompatActivity implements Vie
                 checkBean.setResidents_mobile(phoneNumber);
                 checkBean.setResidents_name(name);
                 checkBean.setType(cc + "");
-                //checkBean.getHouses_id();
+               // checkBean.setHouses_id(houses_id+"");
                 checkBean.setToken(token);
                 checkBean.setSex(aa + "");
                 RequestBody body = (RequestBody) buildRequestBody(checkBean);

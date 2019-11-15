@@ -42,7 +42,7 @@ public class StoreAllAdapter extends RecyclerView.Adapter<StoreAllAdapter.Viewho
         Glide.with(context).load(list.get(i).getGoods_image()).into(viewholder.icongoods);
         viewholder.tv_store_name.setText(list.get(i).getGoods_describe());
         viewholder.tv_store_price.setText(list.get(i).getRetail_price()+"");
-        viewholder.tv_trade_price.setText(list.get(i).getRetail_price()+"");
+        viewholder.tv_trade_price.setText("批发价:"+list.get(i).getRetail_price()+"");
 
         viewholder.linea_goods.setOnClickListener(new View.OnClickListener() {
             @Override

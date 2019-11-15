@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sunshine.first.R;
 import com.sunshine.first.activity.BaoLookDeatilActivity;
+import com.sunshine.first.activity.BaoXiuActivity;
 import com.sunshine.first.activity.RepairActivity;
 import com.sunshine.first.bean.GetRepairListBean;
 
@@ -70,7 +71,7 @@ public class RepairAllAdapter extends RecyclerView.Adapter<RepairAllAdapter.View
             viewHolder.btnAgainRepari.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, RepairActivity.class);
+                    Intent intent = new Intent(context, BaoXiuActivity.class);
                     context.startActivity(intent);
                 }
             });

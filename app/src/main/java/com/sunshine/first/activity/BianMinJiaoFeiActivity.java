@@ -53,7 +53,7 @@ public class BianMinJiaoFeiActivity extends BaseAppCompatActivity {
         textAdapter = new TextAdapter(BianMinJiaoFeiActivity.this);
         recycleChooseHome.setAdapter(textAdapter);
         setDefaultTitle("缴费中心");
-        setRightTitle("缴费中心", new View.OnClickListener() {
+        setRightTitle("缴费记录", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(BianMinJiaoFeiActivity.this, PayRecordActivity.class);
