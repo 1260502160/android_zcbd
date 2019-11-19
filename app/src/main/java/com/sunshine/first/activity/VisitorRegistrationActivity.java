@@ -39,6 +39,9 @@ import com.sunshine.first.bean.VisitorAddBean;
 import com.sunshine.first.bean.VisitorBean;
 import com.sunshine.first.utils.SharePreferenceHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -54,8 +57,17 @@ import cn.addapp.pickers.listeners.OnItemPickListener;
 import cn.addapp.pickers.listeners.OnSingleWheelListener;
 import cn.addapp.pickers.picker.SinglePicker;
 import io.reactivex.functions.Consumer;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * 访客登记
@@ -374,6 +386,7 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
                 iconHead.setImageURI(uri);
 //                iconOne = path;
                 getUpdateImagePath(iconHead, 2);
+                upLoad(path, requestCode);
 
             }
         }
@@ -549,5 +562,96 @@ public class VisitorRegistrationActivity extends BaseAppCompatActivity {
         }
     }
 
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
+    private void upLoad(String path, final int requestCode) {
+        if (!TextUtils.isEmpty(path)) {
+            Luban.with(this)
+                    .load(path)
+                    .ignoreBy(100)
+                    .setTargetDir(getPath())
+                    .filter(new CompressionPredicate() {
+                        @Override
+                        public boolean apply(String path) {
+                            return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                        }
+                    })
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+                            // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                        }
+
+                        @Override
+                        public void onSuccess(File file) {
+                            // TODO 压缩成功后调用，返回压缩后的图片文件
+                            OkHttpClient okHttpClient = new OkHttpClient();
+                            MultipartBody.Builder mbody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                            mbody.addFormDataPart("image", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
+//            mbody.addFormDataPart("isApp", "1");
+                            mbody.addFormDataPart("folder", "xier");
+                            mbody.addFormDataPart("disk", "xier");
+
+                            RequestBody requestBody = mbody.build();
+                            final Request request = new Request.Builder()
+                                    .url(Api.UploadImg)
+                                    .post(requestBody)
+                                    .build();
+                            Call call = okHttpClient.newCall(request);
+                            call.enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    Log.e("TAG", "onFailure: " + e);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(VisitorRegistrationActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    final String json = response.body().string();
+                                    Log.e("TAG", "成功" + json);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                 gson = new Gson();
+                                                UploadImgBean uploadImgBean = VisitorRegistrationActivity.this.gson.fromJson(json, UploadImgBean.class);
+                                                if (requestCode == 1) {
+                                                    iconTwo = uploadImgBean.getData().getImgUrl();
+                                                }
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                JSONObject jsonObject1 = jsonObject.optJSONObject("message");
+                                                if (jsonObject1 != null) {
+                                                    String message = jsonObject1.optString("message");
+                                                    int code = jsonObject1.optInt("error_code");
+                                                    if (0 == code) {
+
+//                                                        finish();
+                                                    }
+                                                    Toast.makeText(VisitorRegistrationActivity.this, message + "", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            // TODO 当压缩过程出现问题时调用
+                        }
+                    }).launch();
+
+        } else {
+            ToastManage.s(this, "请选择文件或者输入内容！");
+        }
+
+    }
 }

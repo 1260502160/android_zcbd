@@ -194,7 +194,7 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
                     Intent intent = new Intent(HostmanRenActivity.this, FamilyIdentityActivity.class);
                     intent.putExtra("ownerVerifyBean", ownerVerifyBean);
                     intent.putExtra("relationship", shenfen);
-                    startActivity(intent);
+                    startActivityForResult(intent,444);
                 } else if (textMenpaihao.getText().equals("租客")) {
                     Intent intent = new Intent(HostmanRenActivity.this, TenementActivity.class);
                     intent.putExtra("community_id", xiaoquId);//小区id
@@ -432,6 +432,9 @@ public class HostmanRenActivity extends BaseAppCompatActivity {
             String string = b.getString("XIAO_QU_NAME");
             xiaoquId = b.getInt("XIAO_QU_ID");
             tvChooseXiaoqu.setText(string);
+        }
+        if(requestCode==444&&resultCode==444){
+            finish();
         }
     }
 }

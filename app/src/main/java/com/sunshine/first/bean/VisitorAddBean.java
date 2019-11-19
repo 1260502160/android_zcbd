@@ -15,7 +15,7 @@ public class VisitorAddBean implements Serializable{
     private boolean success;
     private String error_code;
     private String message;
-    private List<?> data;
+   // private List<?> data;
 
     public boolean isSuccess() {
         return success;
@@ -41,11 +41,11 @@ public class VisitorAddBean implements Serializable{
         this.message = message;
     }
 
-    public List<?> getData() {
+    /*public List<?> getData() {
         return data;
     }
-
-    public void setData(List<?> data) {
+*/
+   /* public void setData(List<?> data) {
         this.data = data;
-    }
+    }*/
 }

@@ -357,6 +357,7 @@ public class TenementActivity extends BaseAppCompatActivity implements View.OnCl
                 ToastManage.s(this, addAddressBean.message + "");
                 if ("200".equals(addAddressBean.error_code)) {
                     finish();
+
                 }
             }
         }

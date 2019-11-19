@@ -52,6 +52,7 @@ public class FangKeAdapter extends RecyclerView.Adapter<FangKeAdapter.ViewHolder
 
             viewHolder.textName.setText(dataBean.getResidents_name());
             viewHolder.tvPhone.setText(dataBean.getResidents_mobile()+"");
+            Glide.with(context).load(residentsListBeanData.get(i).getFace_recognition()).into(viewHolder.iconAuthenticaed);
 
             type = dataBean.getType();
             if (type==1){
